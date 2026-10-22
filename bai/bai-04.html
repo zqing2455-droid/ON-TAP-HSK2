@@ -1,0 +1,863 @@
+<title>Ôn tập HSK2 Bài 4</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,800;1,400&family=Noto+Serif+SC:wght@400;600;900&display=swap">
+<style>
+:root{
+  --paper:#FAF7F1; --card:#FFFFFF; --ink:#22282E; --ink-2:#4A5560;
+  --muted:#8A8578; --line:#E4DED1; --line-2:#EFEAE0;
+  --cin:#B33A2B; --cin-soft:#FBEDEA; --jade:#1F6F5C; --jade-soft:#EAF3EF;
+  --gold:#C8963E; --gold-soft:#FDF4E4; --blue:#2C5F8A; --blue-soft:#ECF2F7;
+  --shadow:0 1px 2px rgba(34,40,46,.05),0 8px 22px -14px rgba(34,40,46,.22);
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --paper:#15191D; --card:#1C2126; --ink:#ECE7DC; --ink-2:#B6BDC4;
+  --muted:#8E8878; --line:#2E353C; --line-2:#262C32;
+  --cin:#E0725F; --cin-soft:#2A1E1B; --jade:#5FB79E; --jade-soft:#16241F;
+  --gold:#DFAF5F; --gold-soft:#2A2114; --blue:#77A8CE; --blue-soft:#171F26;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 26px -16px rgba(0,0,0,.7);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#15191D; --card:#1C2126; --ink:#ECE7DC; --ink-2:#B6BDC4;
+  --muted:#8E8878; --line:#2E353C; --line-2:#262C32;
+  --cin:#E0725F; --cin-soft:#2A1E1B; --jade:#5FB79E; --jade-soft:#16241F;
+  --gold:#DFAF5F; --gold-soft:#2A2114; --blue:#77A8CE; --blue-soft:#171F26;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 26px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Be Vietnam Pro',system-ui,sans-serif; font-size:15px; line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.zh{font-family:'Noto Serif SC','KaiTi','STKaiti',serif; font-size:1.18em; line-height:1.5}
+.py{font-family:'Noto Serif SC',serif; color:var(--muted); font-size:.82em; font-style:italic}
+.wrap{max-width:820px; margin:0 auto; padding-inline:16px; padding-block:0 64px}
+
+/* ── thanh tầng dính trên ── */
+.rail{position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+  background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.rail-in{max-width:820px; margin:0 auto; padding:9px 16px; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.rail a{
+  display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--ink-2);
+  font-size:12.5px; font-weight:600; padding:4px 9px; border-radius:99px; border:1px solid transparent;
+}
+.rail a:hover,.rail a:focus-visible{border-color:var(--line); color:var(--ink); background:var(--card)}
+.rail a .num{font-family:'Noto Serif SC',serif; color:var(--cin); font-weight:600}
+.meter{margin-left:auto; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted)}
+.bar{width:92px; height:5px; border-radius:99px; background:var(--line); overflow:hidden}
+.bar i{display:block; height:100%; width:0%; background:var(--jade); transition:width .35s ease}
+
+/* ── đầu trang ── */
+header.top{padding-block:30px 8px}
+.eyebrow{font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--cin)}
+h1{font-size:clamp(27px,5.4vw,40px); line-height:1.12; font-weight:800; margin:.32em 0 .1em; text-wrap:balance}
+h1 .zh{font-weight:900; font-size:1em}
+.sub{color:var(--ink-2); max-width:62ch; margin:.55em 0 0}
+.facts{display:flex; gap:7px; flex-wrap:wrap; margin-top:18px}
+.fact{font-size:12px; font-weight:600; padding:4px 10px; border-radius:99px;
+  background:var(--card); border:1px solid var(--line); color:var(--ink-2)}
+
+/* ── tầng ── */
+.tier{margin-top:44px; scroll-margin-top:72px}
+.tier-h{display:flex; gap:14px; align-items:flex-start; position:relative; padding-bottom:14px;
+  border-bottom:2px solid var(--ink)}
+.seal{flex:none; width:46px; height:46px; border-radius:7px; background:var(--cin); color:#fff;
+  display:grid; place-items:center; font-family:'Noto Serif SC',serif; font-size:23px; font-weight:600;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.55), inset 0 0 0 3px var(--cin)}
+.tier-h h2{margin:0; font-size:20px; font-weight:800; line-height:1.25}
+.tier-h p{margin:2px 0 0; font-size:13px; color:var(--muted)}
+.tier-h .kind{font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--cin)}
+
+/* ── thẻ bài tập ── */
+.q{background:var(--card); border:1px solid var(--line); border-left:3px solid var(--ink);
+  border-radius:var(--r); padding:16px 18px; margin-top:14px; box-shadow:var(--shadow)}
+.q.done{border-left-color:var(--jade)}
+.q-h{display:flex; gap:10px; align-items:baseline; margin-bottom:9px}
+.q-n{flex:none; font-size:12px; font-weight:800; color:var(--cin); font-variant-numeric:tabular-nums}
+.q-t{font-weight:600; font-size:14.5px; line-height:1.45}
+.sit{background:var(--gold-soft); border-left:3px solid var(--gold); border-radius:6px;
+  padding:9px 12px; margin:10px 0; font-size:13.5px; color:var(--ink-2)}
+.sit b{color:var(--ink)}
+
+/* ── kéo thả sắp câu ── */
+.line{min-height:56px; border:1.5px dashed var(--line); border-radius:8px; padding:8px;
+  display:flex; flex-wrap:wrap; gap:7px; align-items:center; align-content:flex-start;
+  background:var(--paper);
+  transition:border-color .15s,background-color .15s}
+.line.over{border-color:var(--cin); background-color:var(--cin-soft)}
+.line:empty::before{content:attr(data-ph); color:var(--muted); font-size:13px; padding:4px 6px}
+.tray{display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; min-height:38px}
+.chip{font-family:'Noto Serif SC','KaiTi',serif; font-size:19px; line-height:1;
+  padding:9px 12px; border-radius:7px; background:var(--card); color:var(--ink);
+  border:1px solid var(--line); box-shadow:0 1px 0 var(--line);
+  cursor:grab; user-select:none; touch-action:none; transition:transform .12s,box-shadow .12s}
+.chip:hover{transform:translateY(-1px); box-shadow:0 3px 8px -3px rgba(34,40,46,.3)}
+.chip.ghost{position:fixed; z-index:99; pointer-events:none; opacity:.92; cursor:grabbing;
+  box-shadow:0 10px 24px -8px rgba(34,40,46,.5); transform:scale(1.04)}
+.chip.taken{opacity:.28; pointer-events:none}
+.line .chip{background:var(--jade-soft); border-color:var(--jade)}
+
+/* ── tìm lỗi ── */
+.tok-row{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:4px 0 2px}
+.tok{font-family:'Noto Serif SC','KaiTi',serif; font-size:20px; padding:6px 8px; border-radius:6px;
+  border:1px solid transparent; cursor:pointer; transition:background .15s,border-color .15s}
+.tok:hover{background:var(--cin-soft); border-color:var(--line)}
+.tok.bad{background:var(--cin); color:#fff; border-color:var(--cin)}
+.tok.ok{background:var(--jade-soft); border-color:var(--jade)}
+.tok.flat{cursor:default; font-size:20px}
+.tok.flat:not(.bad):not(.fine):hover{background:transparent; border-color:transparent}
+.tok.bad, .tok.bad:hover{background:var(--cin); color:#fff; border-color:var(--cin)}
+
+/* ── phương án ── */
+.opts{display:flex; flex-direction:column; gap:8px; margin-top:10px}
+.opt{display:flex; gap:10px; align-items:flex-start; text-align:left; width:100%;
+  background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 12px;
+  font:inherit; color:inherit; cursor:pointer; transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--ink-2)}
+.opt .k{flex:none; width:21px; height:21px; border-radius:5px; background:var(--line-2); color:var(--ink-2);
+  display:grid; place-items:center; font-size:11.5px; font-weight:800}
+.opt .txt{flex:1}
+.opt.right{border-color:var(--jade); background:var(--jade-soft)}
+.opt.right .k{background:var(--jade); color:#fff}
+.opt.wrong{border-color:var(--cin); background:var(--cin-soft)}
+.opt.wrong .k{background:var(--cin); color:#fff}
+.opt[disabled]{cursor:default}
+.why{font-size:13px; line-height:1.5; margin-top:7px; padding-left:31px; color:var(--ink-2); display:none}
+.opt.shown + .why{display:block}
+.why b{color:var(--ink)}
+
+/* ── phản hồi ── */
+.fb{display:none; margin-top:11px; border-radius:8px; padding:10px 13px; font-size:13.5px; line-height:1.55}
+.fb.on{display:block}
+.fb.good{background:var(--jade-soft); border-left:3px solid var(--jade)}
+.fb.bad{background:var(--cin-soft); border-left:3px solid var(--cin)}
+.fb .lead{font-weight:700; display:block; margin-bottom:2px}
+.fb.good .lead{color:var(--jade)} .fb.bad .lead{color:var(--cin)}
+
+/* ── nút ── */
+.btns{display:flex; gap:8px; flex-wrap:wrap; margin-top:11px}
+button.act{font:inherit; font-size:13px; font-weight:600; padding:7px 14px; border-radius:7px;
+  border:1px solid var(--ink); background:var(--ink); color:var(--paper); cursor:pointer}
+button.act.ghost{background:transparent; color:var(--ink-2); border-color:var(--line)}
+button.act:hover{opacity:.88}
+button.act:disabled{opacity:.4; cursor:default}
+
+/* ── hội thoại rẽ nhánh ── */
+.chat{display:flex; flex-direction:column; gap:9px; margin-top:10px}
+.bub{max-width:88%; padding:9px 13px; border-radius:13px; font-size:14px; line-height:1.5}
+.bub .zh{font-size:1.14em}
+.bub.them{align-self:flex-start; background:var(--line-2); border-bottom-left-radius:4px}
+.bub.me{align-self:flex-end; background:var(--blue-soft); border:1px solid var(--blue);
+  border-bottom-right-radius:4px}
+.bub .who{display:block; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:3px}
+.note{align-self:stretch; font-size:12.5px; color:var(--ink-2); border-left:3px solid var(--gold);
+  background:var(--gold-soft); border-radius:6px; padding:7px 11px}
+.note.warn{border-left-color:var(--cin); background:var(--cin-soft)}
+.branch{display:flex; flex-direction:column; gap:7px; margin-top:4px}
+.pick{font:inherit; font-size:14px; text-align:left; background:var(--card); border:1px solid var(--blue);
+  color:var(--ink); border-radius:9px; padding:9px 13px; cursor:pointer}
+.pick:hover{background:var(--blue-soft)}
+.end{font-size:13px; font-weight:700; color:var(--jade); margin-top:4px}
+
+/* ── nghe viết lại ── */
+.dict-audio{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:10px 0 4px}
+.dict-audio audio{height:36px; flex:1 1 220px; min-width:200px}
+.speedrow{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.speedrow span{font-size:11.5px; color:var(--muted); margin-right:2px}
+.spd{font:inherit; font-size:12px; font-weight:700; padding:5px 10px; border-radius:99px;
+  border:1px solid var(--line); background:var(--card); color:var(--ink-2); cursor:pointer}
+.spd:hover{border-color:var(--ink-2); color:var(--ink)}
+.spd.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+textarea.ta-dict{width:100%; min-height:64px; resize:vertical; font-family:'Noto Serif SC','KaiTi',serif;
+  font-size:20px; line-height:1.6; color:var(--ink); background:var(--paper);
+  border:1.5px solid var(--line); border-radius:8px; padding:10px 12px; margin-top:10px}
+textarea.ta-dict:focus{outline:none; border-color:var(--blue)}
+.dict-ans{margin-top:9px; font-size:13.5px; padding:10px 13px; border-radius:8px;
+  background:var(--blue-soft); border-left:3px solid var(--blue); display:none}
+.dict-ans.on{display:block}
+.dict-ans .zh{font-size:1.3em; display:block; margin-bottom:4px}
+.dict-ans .py{display:block; margin-bottom:3px}
+.dict-ans .on-tag{color:var(--jade); font-weight:700}
+
+/* ── tìm lỗi: nhãn loại lỗi & câu chốt ── */
+.kind-tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
+  padding:4px 10px; border-radius:99px; background:var(--cin-soft); color:var(--cin);
+  border:1px solid var(--cin); margin-bottom:9px}
+.pair{margin-top:9px; font-size:14px; display:grid; gap:4px}
+.pair div{display:flex; gap:8px; align-items:baseline}
+.pair .m{flex:none; font-weight:800; width:14px}
+.pair .wrong-line{color:var(--cin)} .pair .wrong-line .m{color:var(--cin)}
+.pair .right-line{color:var(--jade)} .pair .right-line .m{color:var(--jade)}
+.tok.fine{background:var(--jade-soft); border-color:var(--jade)}
+
+/* ── tự gõ tiếng Trung ── */
+.ask{font-size:17px; margin:2px 0 9px}
+.need{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px}
+.need i{font-style:normal; font-size:12px; font-weight:700; padding:4px 9px; border-radius:99px;
+  background:var(--line-2); color:var(--ink-2); border:1px solid var(--line)}
+.need i.hit{background:var(--jade-soft); color:var(--jade); border-color:var(--jade)}
+.need i.miss{background:var(--cin-soft); color:var(--cin); border-color:var(--cin)}
+textarea.ta{width:100%; min-height:76px; resize:vertical; font-family:'Noto Serif SC','KaiTi',serif;
+  font-size:21px; line-height:1.6; color:var(--ink); background:var(--paper);
+  border:1.5px solid var(--line); border-radius:8px; padding:10px 12px}
+textarea.ta:focus{outline:none; border-color:var(--blue)}
+.model{margin-top:9px; font-size:13.5px; padding:10px 13px; border-radius:8px;
+  background:var(--blue-soft); border-left:3px solid var(--blue); display:none}
+.model.on{display:block}
+.model b{color:var(--ink)}
+
+footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
+  font-size:12.5px; color:var(--muted); display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+@media (max-width:430px){
+  .tier-h{gap:10px} .seal{width:38px;height:38px;font-size:19px}
+  .q{padding:14px 14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<nav class="rail" aria-label="Năm tầng ôn tập">
+  <div class="rail-in">
+    <a href="#t1"><span class="num">一</span> Củng cố</a>
+    <a href="#t1b"><span class="num">二</span> Nghe viết lại</a>
+    <a href="#t2"><span class="num">三</span> Phân biệt</a>
+    <a href="#t3"><span class="num">四</span> Vận dụng</a>
+    <a href="#t4"><span class="num">五</span> Tự viết</a>
+    <span class="meter"><span class="bar"><i id="pbar"></i></span><span id="pnum">0/20</span></span>
+  </div>
+</nav>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">《新 HSK 教程 2》· 第四课</div>
+  <h1>Ôn tập <span class="zh">你穿红色的很好看</span></h1>
+  <p class="sub">20 bài, năm tầng: xếp câu → nghe viết lại → phân biệt → hội thoại → tự viết. Ngữ liệu hoàn toàn mới, không lặp câu đã học trên lớp — và mỗi bài đều cài lại từ cũ của HSK1 để em ôn luôn vốn đã có.</p>
+  <div class="facts">
+    <span class="fact">16 từ mới</span>
+    <span class="fact">动态助词 过</span>
+    <span class="fact">因为……，所以……</span>
+    <span class="fact">"的"字短语 · 更</span>
+    <span class="fact">Ôn lại 40+ từ HSK1</span>
+  </div>
+</header>
+
+<!-- ══════════ TẦNG 1 ══════════ -->
+<section class="tier" id="t1">
+  <div class="tier-h">
+    <div class="seal">一</div>
+    <div>
+      <div class="kind">Tầng 1 · Củng cố</div>
+      <h2>Xếp câu</h2>
+      <p>Bài 1–2. Kéo hoặc chạm từng ô chữ để xếp thành câu đúng.</p>
+    </div>
+  </div>
+  <div id="w1"></div>
+</section>
+
+<!-- ══════════ TẦNG NGHE VIẾT LẠI ══════════ -->
+<section class="tier" id="t1b">
+  <div class="tier-h">
+    <div class="seal">二</div>
+    <div>
+      <div class="kind">Tầng 2 · Nghe viết lại</div>
+      <h2>Nghe và viết lại bằng chữ Hán</h2>
+      <p>Bài 3–7. Bấm nghe (trình duyệt đọc bằng giọng tiếng Trung), chỉnh tốc độ nếu cần, viết lại nguyên câu rồi kiểm tra. Nghe lại bao nhiêu lần tuỳ ý.</p>
+    </div>
+  </div>
+  <div id="wd"></div>
+</section>
+
+<!-- ══════════ TẦNG 2 ══════════ -->
+<section class="tier" id="t2">
+  <div class="tier-h">
+    <div class="seal">三</div>
+    <div>
+      <div class="kind">Tầng 3 · Phân biệt</div>
+      <h2>Chọn cách nói hợp tình huống</h2>
+      <p>Bài 8–13. Chọn xong, đọc cả lời giải của phương án sai.</p>
+    </div>
+  </div>
+  <div id="w2"></div>
+</section>
+
+<!-- ══════════ TẦNG 3 ══════════ -->
+<section class="tier" id="t3">
+  <div class="tier-h">
+    <div class="seal">四</div>
+    <div>
+      <div class="kind">Tầng 4 · Vận dụng</div>
+      <h2>Hội thoại rẽ nhánh</h2>
+      <p>Bài 14–17. Câu em chọn sẽ đổi câu người kia đáp lại.</p>
+    </div>
+  </div>
+  <div id="w3"></div>
+</section>
+
+<!-- ══════════ TẦNG 4 ══════════ -->
+<section class="tier" id="t4">
+  <div class="tier-h">
+    <div class="seal">五</div>
+    <div>
+      <div class="kind">Tầng 5 · Tự viết</div>
+      <h2>Tự gõ tiếng Trung</h2>
+      <p>Bài 18–20. Máy soát thành phần bắt buộc, nhiều cách viết đều được.</p>
+    </div>
+  </div>
+  <div id="w4"></div>
+</section>
+
+<footer>
+  <span>《新 HSK 教程 2》· 第四课 你穿红色的很好看 — bản ôn tập tương tác</span>
+  <button class="act ghost" id="reset" type="button" style="margin-left:auto">Xoá hết và làm lại</button>
+</footer>
+</div>
+
+<script>
+/* ═══════════ DỮ LIỆU 20 BÀI ═══════════ */
+
+/* Tầng 1 — xếp câu */
+const SORT = [
+ {n:1, t:'Em kể với bạn rằng mình chưa bao giờ mặc đồ màu đỏ. Xếp lại câu.',
+  sit:'<b>没 + động từ + 过</b> — thể phủ định của 过. Giữ nguyên 过, KHÔNG thêm 了. Câu bắt đầu bằng <b>我</b>.',
+  words:['我','没','穿','过','红色','的','衣服'], ans:['我没穿过红色的衣服。'],
+  why:'Khuôn cố định: <b>没 + 穿 + 过 + tân ngữ</b>. 没 đứng TRƯỚC động từ, 过 dán SÁT sau 穿, tân ngữ 红色的衣服 ra sau cùng. Thể phủ định thì BỎ 了 (✗我没穿过了红色的衣服).<br><br>Từ HSK1 gặp lại trong câu này: <b>穿 · 衣服 · 的</b>.'},
+ {n:2, t:'Em giải thích vì sao mình mua cái quần đó. Xếp lại câu.',
+  sit:'<b>因为 + nguyên nhân，所以 + kết quả</b>. Tiếng Trung đặt NGUYÊN NHÂN ra trước.',
+  words:['因为','这','条','裤子','很','便宜','所以','我','买','了'],
+  ans:['因为这条裤子很便宜，所以我买了。'],
+  why:'因为 mở vế lý do, 所以 mở vế kết quả — không đảo ngược như tiếng Việt “Tôi mua vì nó rẻ”. Lượng từ của 裤子 là <b>条</b> (vật DÀI), không phải 件.<br><br>Từ HSK1 gặp lại trong câu này: <b>这 · 很 · 便宜 · 买 · 了</b>.'}
+];
+
+/* Tầng 2 — nghe và viết lại */
+const DICTATE = [
+ {n:3, zh:'我去过那家新开的商场。',
+  py:'Wǒ qù guo nà jiā xīn kāi de shāngchǎng.',
+  vn:'Tôi đã từng đến trung tâm thương mại mới mở kia.',
+  audio:'audio-bai-04/d3.mp3', on:'过 (kinh nghiệm) · 商场 — HSK1 gặp lại: 去 · 那 · 新'},
+ {n:4, zh:'这条黑色的裤子太贵了，我不想买。',
+  py:'Zhè tiáo hēisè de kùzi tài guì le, wǒ bù xiǎng mǎi.',
+  vn:'Cái quần đen này đắt quá, tôi không muốn mua.',
+  audio:'audio-bai-04/d4.mp3', on:'条 · 黑色 · 的字短语 — HSK1 gặp lại: 太……了 · 贵 · 想 · 买'},
+ {n:5, zh:'因为今天下雨，所以我没去商店。',
+  py:'Yīnwèi jīntiān xià yǔ, suǒyǐ wǒ méi qù shāngdiàn.',
+  vn:'Vì hôm nay trời mưa nên tôi không đi cửa hàng.',
+  audio:'audio-bai-04/d5.mp3', on:'因为……，所以…… — HSK1 gặp lại: 今天 · 下雨 · 商店 · 没'},
+ {n:6, zh:'这两个书包，我觉得绿色的更好看。',
+  py:'Zhè liǎng ge shūbāo, wǒ juéde lǜsè de gèng hǎokàn.',
+  vn:'Hai cái cặp này, tôi thấy cái màu xanh lá đẹp hơn.',
+  audio:'audio-bai-04/d6.mp3', on:'书包 · 绿色 · 更 · 的字短语 — HSK1 gặp lại: 两 · 个 · 觉得 · 好看'},
+ {n:7, zh:'你试试这件白色的吧，真漂亮！',
+  py:'Nǐ shìshi zhè jiàn báisè de ba, zhēn piàoliang!',
+  vn:'Bạn thử cái màu trắng này đi, đẹp thật đấy!',
+  audio:'audio-bai-04/d7.mp3', on:'试 · 白色 · 的字短语 — Bài 3 gặp lại: động từ lặp 试试 — HSK1: 件 · 真 · 漂亮 · 吧'}
+];
+
+/* Tầng 3 — phân biệt */
+const PICKQ = [
+ {n:8, t:'Em muốn nói mình chưa từng đến trung tâm thương mại này.',
+  sit:'Thể phủ định của <b>过</b> là <b>没</b>, và vẫn giữ nguyên 过.',
+  opts:[
+   {z:'我不来过这家商场。',   ok:false, w:'Sai ở 不. 过 nói về KINH NGHIỆM đã qua, phủ định phải dùng 没: 我没来过. Tiếng Việt chỉ có một chữ “không” nên đây là chỗ nhầm nặng nhất của cả bài.'},
+   {z:'我没来过这家商场。',   ok:true,  w:'Đúng. 没 + 来 + 过, giữ nguyên 过 và không thêm 了. Đây đúng là câu mẹ con 刘小雪 nói ở bài khoá 1.'},
+   {z:'我没来过了这家商场。', ok:false, w:'Thừa 了. Có 没 thì BỎ 了 — hai thứ không bao giờ đi cùng nhau.'}
+  ]},
+ {n:9, t:'Em kể: hồi trước em từng mua một cái cặp màu xanh lá, bây giờ không dùng nữa.',
+  sit:'<b>了</b> = việc ĐÃ xảy ra, kết quả có thể còn · <b>过</b> = KINH NGHIỆM từng có, nay không còn.',
+  opts:[
+   {z:'我买过一个绿色的书包。',   ok:true,  w:'Đúng. Cái cặp đó giờ không dùng nữa, em chỉ kể lại kinh nghiệm từng có → 过.'},
+   {z:'我买了一个绿色的书包。',   ok:false, w:'Câu này đúng ngữ pháp nhưng NGHĨA khác: 了 cho hiểu cái cặp vừa mua và vẫn đang dùng. Muốn kể chuyện đã qua thì dùng 过.'},
+   {z:'我买过了一个绿色的书包。', ok:false, w:'过 và 了 không chồng lên nhau trong câu kể kinh nghiệm. Chọn một: 买过 (từng mua) hoặc 买了 (đã mua).'}
+  ]},
+ {n:10, t:'Trời mưa nên em không đi trung tâm thương mại. Em kể lại cho bạn.',
+  sit:'Tiếng Trung đặt <b>NGUYÊN NHÂN TRƯỚC</b>, kết quả sau. Vế sau dùng 所以, không dùng 但是.',
+  opts:[
+   {z:'所以我没去商场，因为下雨了。',   ok:false, w:'Đảo ngược. Tiếng Việt nói “Tôi không đi, vì trời mưa” được, tiếng Trung thì vế nguyên nhân phải ra TRƯỚC: 因为下雨了，所以我没去商场.'},
+   {z:'因为下雨了，但是我没去商场。',   ok:false, w:'Lẫn 但是 (Bài 2). 但是 nối hai vế TRÁI NGƯỢC nhau; đây là quan hệ nhân quả nên phải dùng 所以.'},
+   {z:'因为下雨了，所以我没去商场。',   ok:true,  w:'Đúng. 因为 mở vế lý do, 所以 mở vế kết quả, đúng thứ tự của tiếng Trung.'}
+  ]},
+ {n:11, t:'Người bán đưa ra hai cái quần, em nói mình chọn cái màu đỏ.',
+  sit:'Danh từ đã nhắc rồi thì lược bỏ, nhưng <b>的 phải giữ lại</b>.',
+  opts:[
+   {z:'我要红色。',   ok:false, w:'Thiếu 的. 红色 đứng một mình chỉ là TÊN MÀU, không thay được cho cái quần. Phải nói 我要红色的.'},
+   {z:'我要红色的。', ok:true,  w:'Đúng. 红色的 ở đây = 红色的裤子 — giữ 的 lại thì cụm mới thay được cho danh từ đã nhắc, khỏi lặp 裤子.'},
+   {z:'我要的红色。', ok:false, w:'Sai trật tự. 的 phải đứng SAU phần bổ nghĩa: 红色 + 的, không phải 的 + 红色.'}
+  ]},
+ {n:12, t:'Em và mẹ đang đứng ở CỬA trung tâm thương mại, em rủ mẹ vào trong.',
+  sit:'<b>进去</b> = đi vào BÊN TRONG · <b>过去</b> = đi SANG chỗ khác gần đó · <b>回去</b> = QUAY VỀ nơi mình đã ở.',
+  opts:[
+   {z:'妈妈，我们进去看看吧。', ok:true,  w:'Đúng. Hai mẹ con đang ở ngoài cửa, đi VÀO trong → 进去. Đây đúng là câu trong bài khoá 1.'},
+   {z:'妈妈，我们过去看看吧。', ok:false, w:'过去 là đi SANG một chỗ khác ở gần, ví dụ 那边卖书包，我们过去看看. Còn từ ngoài cửa đi vào trong thì phải là 进去.'},
+   {z:'妈妈，我们回去看看吧。', ok:false, w:'回去 (Bài 3) là QUAY VỀ nơi mình đã ở. Em mới tới cửa, chưa vào, nên không dùng 回去.'}
+  ]},
+ {n:13, t:'Mẹ hỏi em thích cái cặp nào hơn. Em nói mình thích cái màu xanh lá hơn.',
+  sit:'<b>更</b> là phó từ, đứng NGAY TRƯỚC động từ hoặc tính từ — không chen vào giữa động từ và tân ngữ.',
+  opts:[
+   {z:'我喜欢更绿色的。',   ok:false, w:'Sai chỗ 更. 更 phải đứng trước ĐỘNG TỪ 喜欢, không chen vào giữa 喜欢 và tân ngữ: ✓我更喜欢绿色的.'},
+   {z:'我更喜欢绿色的。',   ok:true,  w:'Đúng. 更 + 喜欢. Còn một cách nói nữa là đặt 更 trước tính từ: 我觉得绿色的更好看.'},
+   {z:'我很更喜欢绿色的。', ok:false, w:'很 và 更 không đi cùng nhau. Chọn một: 我很喜欢 (rất thích) hoặc 我更喜欢 (thích hơn).'}
+  ]}
+];
+
+/* Tầng 4 — hội thoại rẽ nhánh */
+const CHATS = [
+ {n:14, title:'Ở cửa trung tâm thương mại', who:'妈妈',
+  sit:'Em và mẹ đứng trước một trung tâm thương mại mới mở. <b>Từ cần dùng: 过 · 进去 · 条 · 裤子</b>',
+  start:'a',
+  nodes:{
+   a:{them:'我们来过这家商场吗？', picks:[
+     {z:'没来过，这是新开的。',   ok:true,  note:'Đúng. 没 + 来过, bỏ 了. HSK1 gặp lại: 新 · 这是…… .', to:'b'},
+     {z:'不来过，这是新开的。',   ok:false, note:'Phủ định của 过 là 没, không phải 不.', to:'b'},
+     {z:'没来过了，这是新开的。', ok:false, note:'Có 没 thì bỏ 了: 没来过.', to:'b'}]},
+   b:{them:'那我们进去看看吧。你想买点儿什么？', picks:[
+     {z:'我想买条裤子。', ok:true,  note:'Đúng. Lượng từ của 裤子 là 条 (vật dài). Trong khẩu ngữ 一条 hay rút gọn còn 条.', to:'c'},
+     {z:'我想买件裤子。', ok:false, note:'件 (HSK1) dùng cho 衣服, còn 裤子 dài nên đi với 条.', to:'c'},
+     {z:'我想买个裤子。', ok:false, note:'个 là lượng từ chung, nhưng quần đã có lượng từ riêng — người bản ngữ luôn nói 一条裤子.', to:'c'}]},
+   c:{them:'好啊。你穿过红色的裤子吗？', picks:[
+     {z:'没穿过，红色的好看吗？', ok:true,  note:'Đúng cả hai chỗ: 没穿过 giữ nguyên 过, và 红色的 (= 红色的裤子) khỏi phải lặp lại 裤子.', to:null},
+     {z:'没穿过，红色好看吗？',   ok:false, note:'Thiếu 的. 红色 một mình là tên màu; muốn thay cho cái quần thì phải nói 红色的.', to:null}]}
+  },
+  done:'Xong. Ba lượt vừa rồi đi trọn một lần vào cửa hàng: phủ định 过 → chọn đúng lượng từ 条 → dùng 的字短语 để khỏi lặp 裤子.'},
+
+ {n:15, title:'Thử quần ở cửa hàng', who:'售货员',
+  sit:'Người bán mời em thử đồ. <b>Từ cần dùng: 试 · 因为……，所以…… · 白色 · 颜色 · 更</b>',
+  start:'a',
+  nodes:{
+   a:{them:'您好，您想买什么颜色的衣服？', picks:[
+     {z:'我喜欢白色，想看看白色的。', ok:true,  note:'Đúng. Chữ 白色 đầu nói về MÀU nên không cần 的; chữ sau thay cho món đồ nên phải có 的. HSK1 gặp lại: 喜欢 · 看看.', to:'b'},
+     {z:'我喜欢白色，想看看白色。',   ok:false, note:'Chỗ thứ hai thiếu 的 — ở đó 白色的 đang thay cho món đồ, không phải đang nói về màu.', to:'b'}]},
+   b:{them:'这条白色的有点儿贵，那条红色的更便宜。', picks:[
+     {z:'因为我没穿过红色的，所以我想试试。',   ok:true,  note:'Đúng. Nguyên nhân trước, kết quả sau; 试试 là động từ lặp của Bài 3, nghe nhẹ nhàng hơn 试.', to:'c'},
+     {z:'所以我想试试，因为我没穿过红色的。',   ok:false, note:'Đảo ngược. Tiếng Trung đặt vế 因为 ra TRƯỚC vế 所以.', to:'c'},
+     {z:'因为我没穿过了红色的，所以我想试试。', ok:false, note:'没 đi với 过 thì bỏ 了: 没穿过.', to:'c'}]},
+   c:{them:'您试一下吧。怎么样？', picks:[
+     {z:'不错，我觉得红色的更好看。', ok:true,  note:'Đúng. 更 đứng ngay trước tính từ 好看. 不错 là từ Bài 3, HSK1 gặp lại: 觉得 · 好看.', to:null},
+     {z:'不错，我觉得更红色的好看。', ok:false, note:'Sai chỗ 更. 更 đứng ngay trước tính từ: 红色的更好看.', to:null}]}
+  },
+  done:'Xong. Ba lượt vừa rồi dùng đủ: khi nào cần 的 khi nào không, 因为……，所以…… đúng thứ tự, và vị trí của 更.'},
+
+ {n:16, title:'Chọn cặp sách', who:'妈妈',
+  sit:'Hai mẹ con đã ở trong trung tâm thương mại, đi sang quầy cặp sách. <b>Từ cần dùng: 过去 · 书包 · 绿色 · 黑色 · 更</b>',
+  start:'a',
+  nodes:{
+   a:{them:'那边卖书包，我们过去看看吧。', picks:[
+     {z:'好，我想买个新书包。',     ok:true,  note:'Đúng. 过去 = đi sang chỗ kia, vẫn trong cùng một mặt bằng. HSK1 gặp lại: 新 · 个 · 卖.', to:'b'},
+     {z:'好，我想进去买个新书包。', ok:false, note:'进去 là đi vào BÊN TRONG một không gian. Hai mẹ con đã ở trong trung tâm thương mại rồi, chỉ đi SANG quầy khác → 过去.', to:'b'}]},
+   b:{them:'红色的、绿色的、黑色的，你想买哪个？', picks:[
+     {z:'绿色的吧。', ok:true,  note:'Đúng. Mẹ đã nhắc 书包 rồi nên em chỉ cần nói 绿色的. HSK1 gặp lại: 哪个 · 吧.', to:'c'},
+     {z:'绿色吧。',   ok:false, note:'Thiếu 的. Em đang chọn một CÁI CẶP chứ không phải nói về màu, nên phải là 绿色的.', to:'c'}]},
+   c:{them:'不错，我也觉得绿色的更好看。黑色的呢？', picks:[
+     {z:'黑色的也不错，但是我更喜欢绿色的。', ok:true,  note:'Đúng. 更 trước động từ 喜欢, và cả hai vế đều dùng 的字短语. 但是 là từ Bài 2, 也 là HSK1.', to:null},
+     {z:'黑色的也不错，但是我喜欢更绿色的。', ok:false, note:'Sai chỗ 更: 更 đứng trước động từ 喜欢 → 我更喜欢绿色的.', to:null}]}
+  },
+  done:'Xong. Ba lượt vừa rồi phân biệt được 过去 ↔ 进去, và dùng 的字短语 ba lần liền mà không phải lặp chữ 书包.'},
+
+ {n:17, title:'Kể lại hôm đi mua sắm', who:'同学',
+  sit:'Hôm sau bạn hỏi em hôm qua đi đâu. <b>Từ cần dùng: 过 ↔ 了 · 因为……，所以…… · 的字短语</b>',
+  start:'a',
+  nodes:{
+   a:{them:'昨天你去哪儿了？', picks:[
+     {z:'我和妈妈去了一家新开的商场。', ok:true,  note:'Đúng. Em đang kể một LẦN cụ thể gắn với 昨天 → dùng 了. HSK1 gặp lại: 昨天 · 和 · 去.', to:'b'},
+     {z:'我和妈妈去过一家新开的商场。', ok:false, note:'过 kể KINH NGHIỆM từng có, không gắn với một ngày cụ thể. Đã có 昨天 thì phải dùng 了.', to:'b'}]},
+   b:{them:'买什么了？', picks:[
+     {z:'因为东西很便宜，所以我买了一条红色的裤子。', ok:true,  note:'Đúng. Nguyên nhân trước, kết quả sau. HSK1 gặp lại: 东西 · 便宜 · 买.', to:'c'},
+     {z:'因为东西很便宜，但是我买了一条红色的裤子。', ok:false, note:'Lẫn 但是. Hai vế này là nhân quả nên phải dùng 所以.', to:'c'}]},
+   c:{them:'红色？好看吗？', picks:[
+     {z:'我没穿过红色的，妈妈让我试了试。', ok:true,  note:'Đúng. 没穿过 + 的字短语, và 试了试 là động từ lặp của việc ĐÃ xảy ra (Bài 3). 让 là từ Bài 1.', to:null},
+     {z:'我没穿过红色的，妈妈让我试试了。', ok:false, note:'Sai chỗ 了. Việc đã xảy ra thì 了 chen vào GIỮA hai chữ lặp: 试了试.', to:null}]}
+  },
+  done:'Xong. Ba lượt vừa rồi gom cả bài: phân biệt 了 ↔ 过, nói lý do bằng 因为……，所以……, và dùng 的字短语 thay cho 裤子.'}
+];
+
+/* Tầng 5 — tự gõ tiếng Trung */
+const TYPE = [
+ {n:18, t:'Trả lời bằng một câu tiếng Trung hoàn chỉnh.',
+  sit:'Nói về KINH NGHIỆM: <b>V + 过</b> nếu từng làm, <b>没 + V + 过</b> nếu chưa — và BỎ 了.',
+  ask:'你买过红色的衣服吗？',
+  need:[
+   {lbl:'过', any:['过'], tip:'Bài này luyện 过: 买过 (từng mua) hoặc 没买过 (chưa từng mua). Không có 过 thì câu chưa nói được ý “đã từng”.'},
+   {lbl:'một màu đã học (红色 · 白色 · 绿色 · 黑色)', any:['红色','白色','绿色','黑色','颜色'], tip:'Nói rõ màu em đang nhắc tới: 红色 · 白色 · 绿色 · 黑色.'}],
+  model:'我买过一件红色的衣服，我觉得红色很好看。',
+  why:'过 dán SÁT sau động từ, tân ngữ ra sau: 买过 + 一件红色的衣服. Nếu chưa từng mua thì đổi sang 没买过 và bỏ 了. Câu thứ hai nêu thêm cảm nhận bằng từ HSK1 đã quen: 觉得 · 很 · 好看.',
+  more:'Cách nói khác: 我没买过红色的，因为我更喜欢白色的。',
+  avoid:[{z:'不买过',   w:'Phủ định của 过 là 没, không dùng 不: 没买过.'},
+         {z:'没买过了', w:'Có 没 thì BỎ 了: 没买过.'},
+         {z:'买了过',   w:'了 và 过 không đi liền nhau. Chọn một: 买了 (đã mua) hoặc 买过 (từng mua).'}]},
+
+ {n:19, t:'Trả lời bằng một câu tiếng Trung hoàn chỉnh.',
+  sit:'Nêu LÝ DO bằng <b>因为……，所以……</b>. Vế nguyên nhân đi TRƯỚC.',
+  ask:'你为什么喜欢这个颜色？',
+  need:[
+   {lbl:'因为', any:['因为'], tip:'Mở vế lý do bằng 因为: 因为我觉得…… · 因为这个颜色……'},
+   {lbl:'một màu hoặc món đồ đã học', any:['红色','白色','绿色','黑色','颜色','衣服','裤子','书包'], tip:'Nói rõ em đang nói về màu nào hoặc món đồ nào: 白色 · 绿色的书包 · 红色的裤子…'}],
+  order:['因为','所以','Đủ thành phần nhưng sai trật tự: vế <b>因为</b> (nguyên nhân) phải đứng TRƯỚC vế <b>所以</b> (kết quả).'],
+  model:'因为我觉得白色很好看，所以我买了很多白色的衣服。',
+  why:'Trả lời câu hỏi 为什么 thì chỉ cần vế 因为…… là đã đủ; thêm vế 所以…… thì câu tròn hơn. Chú ý không đổi 所以 thành 但是 — 但是 nối hai vế trái ngược, còn đây là nhân quả.',
+  more:'Cách nói khác: 因为绿色的更好看，所以我想买绿色的书包。',
+  avoid:[{z:'因为所以', w:'Giữa 因为 và 所以 phải có vế nguyên nhân: 因为 + lý do，所以 + kết quả.'},
+         {z:'为什么因为', w:'Khi TRẢ LỜI thì không nhắc lại 为什么 nữa, mở thẳng bằng 因为……'}]},
+
+ {n:20, t:'Trả lời bằng ít nhất hai câu tiếng Trung.',
+  sit:'Câu hỏi mở — không có đáp án duy nhất. Chọn bằng <b>的字短语</b> (khỏi lặp 书包), rồi nêu lý do bằng <b>因为</b> hoặc so sánh bằng <b>更</b>.',
+  ask:'这两个书包，一个绿色的，一个黑色的，你想买哪个？为什么？',
+  need:[
+   {lbl:'một cụm có 的 (绿色的 · 黑色的)', any:['绿色的','黑色的','红色的','白色的'], tip:'Chọn bằng cụm có 的: 我想买绿色的 — không nói trống 我想买绿色.'},
+   {lbl:'更 hoặc 因为', any:['更','因为'], tip:'Nêu lý do bằng 因为……, hoặc so sánh bằng 更: 绿色的更好看.'}],
+  model:'我想买绿色的。因为我没有绿色的书包，我也觉得绿色的更好看。',
+  why:'Không cần giống câu mẫu. Cấu trúc nên có: cái em chọn (một cụm 的字短语) + một đến hai lý do ngắn. Mỗi lý do dùng cụm đã quen của HSK1: 很 + tính từ · 我觉得…… · 我没有…… .',
+  more:'Cách nói khác: 我想买黑色的，因为黑色的更便宜，我的钱不多。',
+  avoid:[{z:'喜欢更', w:'Sai chỗ 更: 更 đứng TRƯỚC động từ — 我更喜欢绿色的.'},
+         {z:'很更',   w:'很 và 更 không đi cùng nhau. Chọn một: 很好看 hoặc 更好看.'}]}
+];
+</script>
+
+<script>
+/* ═══════════ TIẾN ĐỘ ═══════════ */
+const TOTAL = 20;                       // cả 20 bài đều chấm được
+const state = new Set();
+const KEY = 'hsk2b4-ontap';
+function load(){ try{ (JSON.parse(localStorage.getItem(KEY)||'[]')).forEach(v=>state.add(v)); }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify([...state])); }catch(e){} }
+function mark(n){ state.add(n); save(); paint(); }
+function paint(){
+  const d = [...state].filter(v=>typeof v==='number').length;
+  document.getElementById('pbar').style.width = Math.round(d/TOTAL*100)+'%';
+  document.getElementById('pnum').textContent = d+'/'+TOTAL;
+}
+const el=(t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e;};
+function card(n,title,sit){
+  const q=el('div','q'); q.dataset.n=n;
+  const h=el('div','q-h'); h.append(el('span','q-n',String(n).padStart(2,'0')), el('span','q-t',title));
+  q.append(h);
+  if(sit) q.append(el('div','sit',sit));
+  return q;
+}
+function feedback(q){ const f=el('div','fb'); q.append(f); return f; }
+function say(f,good,lead,body){ f.className='fb on '+(good?'good':'bad');
+  f.innerHTML='<span class="lead">'+lead+'</span>'+body; }
+
+/* ═══════════ TẦNG 1A · KÉO THẢ XẾP CÂU ═══════════ */
+function buildSort(d, host){
+  const q=card(d.n, d.t, d.sit);
+  const line=el('div','line'); line.dataset.ph='Kéo hoặc chạm từng ô chữ vào đây';
+  const tray=el('div','tray');
+  const shuffled=[...d.words].map((w,i)=>({w,i})).sort(()=>Math.random()-.5);
+  shuffled.forEach(({w})=>{ const c=el('div','chip',w); c.tabIndex=0; tray.append(c); });
+  q.append(line,tray);
+  const btns=el('div','btns');
+  const bChk=el('button','act','Kiểm tra'); bChk.type='button';
+  const bClr=el('button','act ghost','Trả lại ô chữ'); bClr.type='button';
+  btns.append(bChk,bClr); q.append(btns);
+  const fb=feedback(q);
+
+  const cur=()=>[...line.querySelectorAll('.chip')].map(c=>c.textContent).join('');
+  function place(chip,target,before){
+    if(before) target.insertBefore(chip,before); else target.append(chip);
+  }
+  /* chạm để xếp */
+  function tap(chip){ place(chip, chip.parentElement===line?tray:line); }
+  /* kéo bằng pointer (chạy được cả chuột lẫn cảm ứng) */
+  let drag=null;
+  function onDown(e){
+    const chip=e.target.closest('.chip'); if(!chip||e.button>0) return;
+    const r=chip.getBoundingClientRect();
+    drag={chip, dx:e.clientX-r.left, dy:e.clientY-r.top, x0:e.clientX, y0:e.clientY, moved:false,
+          ghost:null, w:r.width, h:r.height};
+    chip.setPointerCapture(e.pointerId);
+  }
+  function onMove(e){
+    if(!drag) return;
+    if(!drag.moved && Math.hypot(e.clientX-drag.x0, e.clientY-drag.y0) < 6) return;
+    if(!drag.moved){
+      drag.moved=true;
+      const g=drag.chip.cloneNode(true); g.classList.add('ghost');
+      g.style.width=drag.w+'px'; g.style.height=drag.h+'px';
+      document.body.append(g); drag.ghost=g; drag.chip.classList.add('taken');
+    }
+    drag.ghost.style.left=(e.clientX-drag.dx)+'px';
+    drag.ghost.style.top =(e.clientY-drag.dy)+'px';
+    const over=hit(e.clientX,e.clientY);
+    line.classList.toggle('over', over===line);
+  }
+  function hit(x,y){
+    for(const z of [line,tray]){ const r=z.getBoundingClientRect();
+      if(x>=r.left-6&&x<=r.right+6&&y>=r.top-6&&y<=r.bottom+6) return z; }
+    return null;
+  }
+  function onUp(e){
+    if(!drag) return;
+    const {chip,moved,ghost}=drag;
+    line.classList.remove('over');
+    if(ghost) ghost.remove();
+    chip.classList.remove('taken');
+    if(!moved){ tap(chip); }
+    else{
+      const zone=hit(e.clientX,e.clientY);
+      if(zone){
+        let before=null;
+        if(zone===line){
+          for(const c of zone.querySelectorAll('.chip')){
+            if(c===chip) continue;
+            const r=c.getBoundingClientRect();
+            if(e.clientX < r.left + r.width/2 && e.clientY < r.bottom){ before=c; break; }
+          }
+        }
+        place(chip,zone,before);
+      }
+    }
+    drag=null;
+  }
+  q.addEventListener('pointerdown',onDown);
+  q.addEventListener('pointermove',onMove);
+  q.addEventListener('pointerup',onUp);
+  q.addEventListener('pointercancel',onUp);
+  q.addEventListener('keydown',e=>{ const c=e.target.closest('.chip');
+    if(c&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); tap(c); } });
+
+  bChk.onclick=()=>{
+    const got=cur();
+    const wants=d.ans.map(x=>x.replace(/[。？！，]/g,''));
+    const hit=wants.indexOf(got);
+    if(hit>-1){
+      const all = d.ans.length>1
+        ? d.ans.map((x,i)=>(i===hit?'<b>'+x+'</b>':x)).join('  ·  ')
+        : d.ans[0];
+      say(fb,true, d.ans.length>1 ? 'Đúng rồi — và đây là một trong hai cách đúng.' : 'Đúng rồi.',
+        '<span class="zh">'+all+'</span><br>'+d.why);
+      q.classList.add('done'); mark(d.n);
+    }
+    else if(!got){ say(fb,false,'Chưa xếp gì cả.','Chạm hoặc kéo từng ô chữ lên dòng phía trên.'); }
+    else{ say(fb,false,'Chưa đúng.','Em đang xếp: <span class="zh">'+got+'</span><br>'+
+      'Gợi ý — '+d.why.replace(/<[^>]+>/g,'').split('.')[0]+'.'); }
+  };
+  bClr.onclick=()=>{ [...line.querySelectorAll('.chip')].forEach(c=>tray.append(c)); fb.className='fb'; };
+  host.append(q);
+}
+
+/* ═══════════ TẦNG 1B · TÌM LỖI ═══════════ */
+function buildFind(d, host){
+  const q=card(d.n, d.t);
+  q.append(el('div','kind-tag','◆ '+d.kind));
+  if(d.hint) q.append(el('div','sit','Gợi ý thu hẹp: '+d.hint));
+  const row=el('div','tok-row');
+  d.toks.forEach((t,i)=>{ const s=el('span','tok',t); s.tabIndex=0; s.dataset.i=i; row.append(s); });
+  q.append(row);
+  const fb=feedback(q);
+  let locked=false;
+  function choose(s){
+    if(locked) return;
+    const i=+s.dataset.i;
+    if(i===d.bad){
+      locked=true;
+      row.querySelectorAll('.tok').forEach(t=>{ t.classList.add('flat'); t.classList.remove('fine'); });
+      s.classList.add('bad');
+      say(fb,true,'Đúng chỗ rồi.', d.why);
+      const pr=el('div','pair');
+      pr.append(el('div','wrong-line','<span class="m">✗</span><span class="zh">'+d.wrong+'</span>'),
+                el('div','right-line','<span class="m">✓</span><span class="zh">'+d.fix+'</span>'));
+      q.append(pr);
+      q.classList.add('done'); mark(d.n);
+    }else{
+      s.classList.add('fine');
+      say(fb,false,'Chữ này không sai — loại được một chỗ.',
+        (d.tokwhy[i]||'Chữ này dùng đúng.')+'<br><br>Còn lại '+
+        (d.toks.length-1-row.querySelectorAll('.tok.fine').length)+' chỗ chưa loại. Nhớ loại lỗi: <b>'+
+        d.kind.split(' —')[0]+'</b>.');
+    }
+  }
+  row.addEventListener('click',e=>{ const s=e.target.closest('.tok'); if(s) choose(s); });
+  row.addEventListener('keydown',e=>{ const s=e.target.closest('.tok');
+    if(s&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); choose(s); } });
+  host.append(q);
+}
+
+/* ═══════════ TẦNG NGHE VIẾT LẠI ═══════════ */
+function buildDictate(d, host){
+  const q=card(d.n, 'Nghe và viết lại câu em nghe được bằng chữ Hán.');
+  const box=el('div','dict-audio');
+  let rate=1, audio=null;
+  const canTTS = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance!=='undefined';
+  if(d.audio){                       // có file mp3 thì dùng file, nếu không dùng giọng máy
+    audio=document.createElement('audio');
+    audio.controls=true; audio.preload='none'; audio.src=d.audio; box.append(audio);
+  }
+  {
+    const play=el('button','act','▶ Nghe câu'); play.type='button';
+    if(!audio && !canTTS){ play.disabled=true; play.textContent='Trình duyệt chưa hỗ trợ giọng đọc'; }
+    play.onclick=()=>{
+      if(audio){ audio.playbackRate=rate; audio.currentTime=0; audio.play(); return; }
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(d.zh); u.lang='zh-CN'; u.rate=rate;
+      const v=speechSynthesis.getVoices().find(v=>/^zh/i.test(v.lang)); if(v) u.voice=v;
+      speechSynthesis.speak(u);
+    };
+    box.prepend(play);
+  }
+  const srow=el('div','speedrow'); srow.append(el('span',null,'Tốc độ:'));
+  [0.5,0.75,1,1.25].forEach(r=>{
+    const b=el('button','spd'+(r===1?' on':''), r+'x'); b.type='button';
+    b.onclick=()=>{ rate=r; if(audio) audio.playbackRate=r;
+      srow.querySelectorAll('.spd').forEach(x=>x.classList.remove('on')); b.classList.add('on'); };
+    srow.append(b);
+  });
+  box.append(srow);
+  q.append(box);
+  const ta=document.createElement('textarea');
+  ta.className='ta-dict'; ta.lang='zh'; ta.rows=2;
+  ta.placeholder='Nghe rồi viết lại nguyên câu bằng chữ Hán…';
+  q.append(ta);
+  const btns=el('div','btns');
+  const bChk=el('button','act','Kiểm tra'); bChk.type='button';
+  const bAns=el('button','act ghost','Xem đáp án'); bAns.type='button';
+  btns.append(bChk,bAns); q.append(btns);
+  const fb=feedback(q);
+  const ans=el('div','dict-ans');
+  ans.innerHTML='<span class="zh">'+d.zh+'</span><span class="py">'+d.py+'</span>'+d.vn+
+    '<br><span class="on-tag">Ôn từ/ngữ pháp: '+d.on+'</span>';
+  q.append(ans);
+
+  function reveal(){ ans.classList.add('on'); q.classList.add('done'); mark(d.n); }
+  bAns.onclick=reveal;
+  bChk.onclick=()=>{
+    const raw=ta.value.trim();
+    if(!raw){ say(fb,false,'Chưa viết gì cả.','Bấm nghe (chọn tốc độ chậm hơn nếu cần) rồi viết lại câu bằng chữ Hán vào ô trên.'); return; }
+    const got=norm(raw), want=norm(d.zh);
+    if(got===want){ say(fb,true,'Đúng, khớp hoàn toàn.','Đúng là câu em vừa nghe.'); }
+    else{
+      let k=0; while(k<got.length && k<want.length && got[k]===want[k]) k++;
+      say(fb,false,'Chưa khớp hoàn toàn.','Câu em viết: <span class="zh">'+raw+'</span><br>Em viết đúng '+k+' chữ đầu. Nghe lại (thử tốc độ 0.75x hoặc 0.5x) rồi sửa, hoặc bấm "Xem đáp án".');
+    }
+    reveal();
+  };
+  host.append(q);
+}
+
+/* ═══════════ TẦNG 2 · PHÂN BIỆT ═══════════ */
+function buildPick(d, host){
+  const q=card(d.n, d.t, d.sit);
+  const box=el('div','opts');
+  d.opts.forEach((o,i)=>{
+    const b=el('button','opt'); b.type='button';
+    b.append(el('span','k','ABC'[i]), el('span','txt','<span class="zh">'+o.z+'</span>'));
+    const why=el('div','why', o.w);
+    box.append(b,why);
+    b.onclick=()=>{
+      if(box.dataset.done) return;
+      box.dataset.done='1';
+      [...box.querySelectorAll('.opt')].forEach((btn,j)=>{
+        btn.disabled=true; btn.classList.add('shown');
+        btn.classList.add(d.opts[j].ok?'right':'wrong');
+      });
+      q.classList.add('done'); mark(d.n);
+      const fb=feedback(q);
+      if(o.ok) say(fb,true,'Chọn đúng.','Đọc thêm lời giải của hai phương án kia — chỗ sai của chúng mới là chỗ em hay vấp.');
+      else say(fb,false,'Chưa đúng.','Phương án đúng đã được tô xanh. Đọc kỹ lời giải ngay dưới phương án em vừa chọn.');
+    };
+  });
+  q.append(box);
+  host.append(q);
+}
+
+/* ═══════════ TẦNG 3 · HỘI THOẠI RẼ NHÁNH ═══════════ */
+function buildChat(d, host){
+  const q=card(d.n, d.title, d.sit);
+  const chat=el('div','chat'); q.append(chat);
+  const btns=el('div','btns');
+  const again=el('button','act ghost','Làm lại hội thoại này'); again.type='button';
+  btns.append(again); q.append(btns);
+
+  function bub(who,txt,me){ const b=el('div','bub '+(me?'me':'them'));
+    b.innerHTML='<span class="who">'+who+'</span><span class="zh">'+txt+'</span>'; chat.append(b); }
+  function step(key){
+    const node=d.nodes[key]; if(!node) return;
+    bub(d.who, node.them, false);
+    const br=el('div','branch');
+    node.picks.forEach(p=>{
+      const b=el('button','pick'); b.type='button';
+      b.innerHTML='<span class="zh">'+p.z+'</span>';
+      b.onclick=()=>{
+        br.remove();
+        bub('Em', p.z, true);
+        chat.append(el('div','note'+(p.ok?'':' warn'), (p.ok?'✓ ':'⚠ ')+p.note));
+        if(p.to) step(p.to);
+        else{ chat.append(el('div','end','— '+d.done)); q.classList.add('done'); mark(d.n); }
+        chat.lastElementChild.scrollIntoView({block:'nearest',behavior:'smooth'});
+      };
+      br.append(b);
+    });
+    chat.append(br);
+  }
+  again.onclick=()=>{ chat.innerHTML=''; step(d.start); };
+  step(d.start);
+  host.append(q);
+}
+
+/* ═══════════ TẦNG 4 · TỰ GÕ TIẾNG TRUNG ═══════════ */
+const norm = s => s.replace(/[\s。，、？！；：,.?!"'“”‘’()（）]/g,'');
+function buildType(d, host){
+  const q=card(d.n, d.t, d.sit);
+  q.append(el('div','ask','<span class="zh">'+d.ask+'</span>'));
+  const need=el('div','need');
+  d.need.forEach(r=>need.append(el('i',null,r.lbl)));
+  q.append(need);
+  const ta=document.createElement('textarea');
+  ta.className='ta'; ta.lang='zh'; ta.rows=2;
+  ta.placeholder='Gõ câu trả lời của em bằng tiếng Trung…';
+  q.append(ta);
+  const btns=el('div','btns');
+  const bChk=el('button','act','Soát câu của em'); bChk.type='button';
+  const bMod=el('button','act ghost','Xem câu mẫu'); bMod.type='button';
+  btns.append(bChk,bMod); q.append(btns);
+  const fb=feedback(q);
+  const mod=el('div','model'); q.append(mod);
+
+  function showModel(){
+    mod.className='model on';
+    mod.innerHTML='<b>Câu mẫu:</b> <span class="zh">'+d.model+'</span><br>'+d.why
+      + (d.more ? '<br><br>'+d.more : '');
+  }
+  bMod.onclick=()=>{ showModel(); mark(d.n); };
+
+  bChk.onclick=()=>{
+    const raw=ta.value.trim(), s=norm(raw);
+    if(!s){ say(fb,false,'Chưa có câu nào.','Gõ ít nhất một câu tiếng Trung rồi bấm soát. Máy chỉ kiểm tra các thành phần bắt buộc ở trên, không bắt em viết giống câu mẫu.'); return; }
+    const miss=[];
+    d.need.forEach((r,i)=>{
+      const ok=r.any.some(a=>s.includes(a));
+      need.children[i].className = ok?'hit':'miss';
+      if(!ok) miss.push(r);
+    });
+    const bad=(d.avoid||[]).find(a=>s.includes(norm(a.z)));
+    if(bad){ say(fb,false,'Gần đúng, nhưng có một chỗ phải sửa.', bad.w); return; }
+    if(miss.length){
+      say(fb,false,'Còn thiếu thành phần.',
+        'Câu của em chưa có: <b>'+miss.map(m=>m.lbl).join('</b> · <b>')+'</b><br>'+miss[0].tip);
+      return;
+    }
+    if(d.order){
+      const a=s.indexOf(d.order[0]), b=s.indexOf(d.order[1]);
+      if(a>-1 && b>-1 && a>b){ say(fb,false,'Đủ thành phần nhưng sai trật tự.', d.order[2]); return; }
+    }
+    say(fb,true,'Được rồi.','<span class="zh">'+raw+'</span><br>Câu của em có đủ thành phần bắt buộc. So thêm với câu mẫu bên dưới để xem còn cách diễn đạt nào tự nhiên hơn.');
+    showModel(); q.classList.add('done'); mark(d.n);
+  };
+  host.append(q);
+}
+
+/* ═══════════ DỰNG TRANG ═══════════ */
+load();
+const w1=document.getElementById('w1');
+SORT.forEach(d=>buildSort(d,w1));
+DICTATE.forEach(d=>buildDictate(d,document.getElementById('wd')));
+PICKQ.forEach(d=>buildPick(d,document.getElementById('w2')));
+CHATS.forEach(d=>buildChat(d,document.getElementById('w3')));
+TYPE.forEach(d=>buildType(d,document.getElementById('w4')));
+paint();
+document.getElementById('reset').onclick=()=>{
+  state.clear(); save(); location.reload();
+};
+</script>
+
