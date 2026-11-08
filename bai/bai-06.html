@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài tập Bài 6 · 生日快乐</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Quicksand:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F4EC; --ink:#26221A; --soft:#7A6E64;
+  --accent:#E3963B; --rose:#C2697A; --green:#4F7E62; --blue:#4A7398;
+  --card:#FFFDF7; --line:#E4DCCB;
+  --mint:#E4F1EC; --cream:#F7E9C9; --blush:#FBE5E4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Quicksand',sans-serif;
+     font-weight:600;padding:18px 14px 120px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:880px;margin:0 auto}
+.han{font-family:'Noto Serif SC',serif;font-size:1.1em}
+.py{font-family:'Space Mono',monospace;font-size:.8em;color:var(--soft)}
+.vi{color:var(--soft);font-size:.9rem}
+
+header{text-align:center;margin-bottom:6px}
+header h1{font-size:1.4rem;letter-spacing:.3px}
+header h1 .han{color:var(--rose)}
+header p{color:var(--soft);font-size:.86rem;margin-top:4px}
+
+.tabs{display:flex;gap:7px;justify-content:center;margin:16px 0 18px;flex-wrap:wrap}
+.tab{font:inherit;font-size:.86rem;padding:9px 15px;border-radius:999px;position:relative;
+     border:2px solid var(--line);background:var(--card);color:var(--soft);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+          background:var(--line);margin-left:6px;vertical-align:1px}
+.tab.done .dot{background:var(--green)}
+
+.panel{display:none}
+.panel.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;
+      padding:18px 16px;box-shadow:0 2px 0 var(--line);margin-bottom:16px}
+.kicker{font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;
+        color:var(--accent);font-weight:800;margin-bottom:6px}
+h2.sec{font-size:1.1rem;margin-bottom:4px}
+.lead{color:var(--soft);font-size:.88rem;margin-bottom:14px}
+.qno{display:inline-block;background:var(--ink);color:var(--paper);border-radius:999px;
+     font-size:.74rem;padding:2px 10px;margin-bottom:8px}
+
+/* ---- sắp xếp ---- */
+.pool{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.tile{text-align:left;font:inherit;background:var(--paper);border:2px solid var(--line);
+      border-radius:13px;padding:11px 13px;cursor:pointer}
+.tile:hover{border-color:var(--accent)}
+.tile.used{opacity:.3;pointer-events:none}
+.slots{display:flex;flex-direction:column;gap:8px;margin:10px 0;min-height:40px}
+.slot{display:flex;gap:9px;align-items:flex-start;background:var(--mint);
+      border:2px solid var(--line);border-radius:13px;padding:11px 13px;cursor:pointer}
+.slot .n{flex:0 0 auto;background:var(--green);color:#fff;border-radius:999px;
+         font-size:.72rem;padding:1px 8px;margin-top:3px}
+.empty{color:var(--soft);font-size:.85rem;font-style:italic}
+
+/* ---- nghe ---- */
+.audio{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--cream);
+       border:2px solid var(--line);border-radius:13px;padding:11px 13px;margin:6px 0 12px}
+audio{height:36px;max-width:100%}
+.nofile{font-size:.84rem;color:var(--rose)}
+
+textarea{width:100%;font:inherit;font-family:'Noto Serif SC',serif;font-size:1.02rem;
+         background:var(--paper);border:2px solid var(--line);border-radius:13px;
+         padding:11px 13px;resize:vertical;color:var(--ink)}
+textarea:focus{outline:none;border-color:var(--accent)}
+.counter{font-size:.78rem;color:var(--soft);text-align:right;margin-top:4px}
+
+/* ---- đọc ---- */
+.passage{background:var(--paper);border:2px solid var(--line);border-radius:13px;padding:14px}
+.passage p{font-family:'Noto Serif SC',serif;font-size:1.06rem;line-height:2;margin-bottom:10px}
+.passage p:last-child{margin-bottom:0}
+
+/* ---- chat ---- */
+.thread{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}
+.bub{max-width:88%;padding:10px 13px;border-radius:15px;font-size:.98rem}
+.bub.them{background:var(--paper);border:2px solid var(--line);border-top-left-radius:4px;align-self:flex-start}
+.bub.me{background:var(--mint);border:2px solid var(--line);border-top-right-radius:4px;align-self:flex-end}
+.bub .han{display:block}
+.bub .vi{display:block;margin-top:3px;font-size:.82rem}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;font:inherit;background:var(--card);border:2px solid var(--line);
+     border-radius:13px;padding:10px 13px;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.bad{background:var(--blush);border-color:var(--rose);opacity:.65;pointer-events:none}
+
+/* ---- phản hồi / đáp án ---- */
+.fb{margin-top:9px;border-radius:13px;padding:11px 13px;font-size:.89rem;line-height:1.6}
+.fb.ok{background:var(--mint);border:2px solid #C9DED6}
+.fb.no{background:var(--blush);border:2px solid #EBCBC8}
+.ans{margin-top:10px;background:var(--mint);border:2px solid #C9DED6;
+     border-radius:13px;padding:12px 14px;font-size:.89rem;line-height:1.65;display:none}
+.ans.on{display:block}
+.ans .lab{font-size:.7rem;letter-spacing:1.3px;text-transform:uppercase;
+          color:var(--green);font-weight:800;display:block;margin-bottom:5px}
+.ans .model{font-family:'Noto Serif SC',serif;font-size:1.05rem;color:var(--ink);display:block}
+.warn{color:var(--rose);font-weight:800}
+
+.gloss{margin-top:10px;background:var(--paper);border:1px dashed var(--line);
+       border-radius:11px;padding:9px 12px;font-size:.82rem;color:var(--soft)}
+.gloss b{color:var(--ink);font-family:'Noto Serif SC',serif}
+
+/* ---- nút ---- */
+.btn{font:inherit;font-size:.92rem;font-weight:700;padding:11px 20px;border-radius:999px;
+     border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--card);
+        border-top:2px solid var(--line);padding:11px 14px;z-index:9}
+.sticky .wrap{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.sticky .st{font-size:.84rem;color:var(--soft)}
+
+/* ---- kết quả ---- */
+.score{text-align:center;padding:10px 0 2px}
+.score .big{font-size:3rem;font-weight:800;color:var(--rose);line-height:1.1;
+            font-family:'Space Mono',monospace}
+.score .sub{color:var(--soft);font-size:.9rem}
+.bars{margin-top:14px;display:flex;flex-direction:column;gap:9px}
+.barrow{display:grid;grid-template-columns:120px 1fr 44px;gap:9px;align-items:center;font-size:.85rem}
+.bar{height:10px;background:var(--paper);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green)}
+@media(max-width:520px){
+  .barrow{grid-template-columns:96px 1fr 40px;font-size:.8rem}
+  .bub{max-width:95%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Bài tập Bài 6 · <span class="han">生日快乐</span></h1>
+  <p>《新HSK教程2》 · Chúc mừng sinh nhật Tiểu Tuyết — 5 phần · 13 câu chấm điểm</p>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<!-- ══════════ PHẦN 1 ══════════ -->
+<section class="panel on" id="p1">
+  <div class="card">
+    <div class="kicker">Phần 1 · 3 câu</div>
+    <h2 class="sec">Sắp xếp thành một đoạn có nghĩa</h2>
+    <p class="lead">Bấm lần lượt vào các câu theo đúng thứ tự. Bấm vào câu đã chọn để bỏ ra.</p>
+  </div>
+  <div id="sortBox"></div>
+</section>
+
+<!-- ══════════ PHẦN 2 ══════════ -->
+<section class="panel" id="p2">
+  <div class="card">
+    <div class="kicker">Phần 2 · 3 câu</div>
+    <h2 class="sec">Nghe đoạn văn rồi gõ câu trả lời</h2>
+    <p class="lead">Mỗi đoạn nghe được hai lần, trả lời bằng chữ Hán. Viết thành câu hoàn chỉnh, đừng trả lời cụt một hai chữ.</p>
+  </div>
+  <div id="listenBox"></div>
+</section>
+
+<!-- ══════════ PHẦN 3 ══════════ -->
+<section class="panel" id="p3">
+  <div class="card">
+    <div class="kicker">Phần 3 · 2 câu</div>
+    <h2 class="sec">Đọc hiểu</h2>
+    <p class="lead">Đọc bài văn rồi trả lời hai câu hỏi bằng chữ Hán.</p>
+  </div>
+  <div id="readBox"></div>
+</section>
+
+<!-- ══════════ PHẦN 4 ══════════ -->
+<section class="panel" id="p4">
+  <div class="card">
+    <div class="kicker">Phần 4 · 5 lượt</div>
+    <h2 class="sec">Nhắn tin với Tiểu Tuyết</h2>
+    <p class="lead">Chọn câu trả lời phù hợp nhất. Chọn sai vẫn được chọn lại, nhưng chỉ lần chọn đầu tiên mới được tính điểm.</p>
+  </div>
+  <div class="card">
+    <div class="thread" id="thread"></div>
+    <div class="opts" id="opts"></div>
+    <div id="chatFb"></div>
+    <div class="ans" id="chatAns"></div>
+  </div>
+</section>
+
+<!-- ══════════ PHẦN 5 ══════════ -->
+<section class="panel" id="p5">
+  <div class="card">
+    <div class="kicker">Phần 5 · Bài viết</div>
+    <h2 class="sec">Viết tối thiểu 40 chữ</h2>
+    <p class="lead">Đề bài được bốc ngẫu nhiên. Phần này cô chấm tay, không tính vào 13 câu ở trên.</p>
+    <div class="ans on" style="background:var(--cream);border-color:#E8D7AE">
+      <span class="lab" style="color:var(--accent)">Đề của em</span>
+      <span class="model" id="wTopic"></span>
+      <span class="vi" id="wTopicVi" style="display:block;margin-top:5px"></span>
+    </div>
+    <div class="gloss" style="margin-top:12px">
+      <b>Yêu cầu:</b> ít nhất 40 chữ Hán · dùng ít nhất <b>1</b> tính từ láy (大大的 · 高高兴兴的) ·
+      dùng ít nhất <b>1</b> câu có <b>地</b> đứng trước động từ.
+    </div>
+  </div>
+  <div class="card">
+    <textarea id="wText" rows="9" placeholder="写在这里……"></textarea>
+    <div class="counter"><span id="wCount">0</span> chữ Hán · <span id="wCheck"></span></div>
+    <div class="btnrow">
+      <input id="wName" placeholder="Họ và tên của em" style="font:inherit;flex:1;min-width:180px;
+        background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
+      <button class="btn" id="wSend">Gửi bài cho cô</button>
+      <button class="btn ghost" id="wCopy">Sao chép bài</button>
+    </div>
+    <div id="wFb"></div>
+    <div class="ans" id="wModel">
+      <span class="lab">Bài mẫu tham khảo</span>
+      <span class="model" id="wModelHan"></span>
+      <span class="vi" id="wModelVi" style="display:block;margin-top:7px"></span>
+      <div style="margin-top:9px;font-size:.87rem">Đọc bài mẫu xong hãy soát lại bài của em ba chỗ:
+      đủ 40 chữ chưa · có tính từ láy chưa · chữ <b class="han">地</b> đã đứng ngay trước động từ chưa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ KẾT QUẢ ══════════ -->
+<section class="panel" id="p6">
+  <div class="card">
+    <div class="kicker">Kết quả</div>
+    <div class="score">
+      <div class="big"><span id="sNum">–</span><span style="font-size:1.4rem;color:var(--soft)">/13</span></div>
+      <div class="sub" id="sMsg">Em chưa nộp bài.</div>
+    </div>
+    <div class="bars" id="bars"></div>
+    <div class="btnrow" style="justify-content:center">
+      <button class="btn ghost" id="again">Làm lại từ đầu</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="kicker">Sau khi nộp</div>
+    <p class="lead" style="margin:0">Quay lại từng phần để xem đáp án và phần giải thích vì sao —
+    ô màu xanh bạc hà nằm ngay dưới mỗi câu.</p>
+  </div>
+</section>
+
+<div class="sticky"><div class="wrap">
+  <span class="st" id="stat">Đã làm 0/13 câu</span>
+  <button class="btn" id="submit">NỘP BÀI</button>
+</div></div>
+
+</div>
+
+<script>
+// Nội dung bài tập Bài 6 — tách riêng để dễ soát từ vựng
+const DATA = {
+
+// ───────────────────────── PHẦN 1 · SẮP XẾP CÂU ─────────────────────────
+sort: [
+ {
+  id:'s1',
+  sents:[
+   {k:'A', han:'昨天是小雪的生日。', vi:'Hôm qua là sinh nhật của Tiểu Tuyết.'},
+   {k:'B', han:'她请我们去她家玩儿。', vi:'Cậu ấy mời chúng tôi đến nhà chơi.'},
+   {k:'C', han:'我们先吃了长长的面条儿，然后打开了礼物。', vi:'Chúng tôi ăn mì sợi dài dài trước, sau đó mở quà.'}
+  ],
+  show:['C','A','B'],
+  answer:['A','B','C'],
+  why:'<b>A đứng đầu</b> vì chỉ câu này nêu được MỐC THỜI GIAN và nhân vật (昨天 · 小雪) — hai câu kia đều dùng 她, phải có 小雪 xuất hiện trước thì 她 mới có chỗ bám.<br><b>B đứng giữa</b>: 请我们去她家 là lời mời, phải có trước thì mới có chuyện “chúng tôi” ăn mì và mở quà ở nhà cậu ấy.<br><b>C đứng cuối</b> vì có cặp 先……然后…… — đây là lời kể lại việc đã xảy ra TẠI buổi tiệc, nên không thể đứng trước lời mời.'
+ },
+ {
+  id:'s2',
+  sents:[
+   {k:'A', han:'我想给妈妈买一个生日礼物。', vi:'Mình muốn mua cho mẹ một món quà sinh nhật.'},
+   {k:'B', han:'可是我的钱不多。', vi:'Nhưng mình không có nhiều tiền.'},
+   {k:'C', han:'所以我自己画了一张画儿。', vi:'Nên mình tự vẽ một bức tranh.'}
+  ],
+  show:['C','A','B'],
+  answer:['A','B','C'],
+  why:'Đoạn này đi theo chuỗi <b>MUỐN → TRỞ NGẠI → CÁCH GIẢI QUYẾT</b>, và hai từ nối đã chỉ sẵn chỗ đứng:<br>• 可是 (nhưng) luôn đứng ở câu THỨ HAI — nó phủ lại điều vừa nói ở câu trước, nên B không thể mở đầu.<br>• 所以 (nên) luôn đứng ở câu CUỐI của chuỗi nguyên nhân – kết quả.<br>Còn lại chỉ có A mở đầu được, vì nó nêu ý định — thứ mà 可是 và 所以 phải bám vào.'
+ },
+ {
+  id:'s3',
+  sents:[
+   {k:'A', han:'昨天下午我和朋友去商店了。', vi:'Chiều hôm qua mình và bạn đi siêu thị.'},
+   {k:'B', han:'我们买了一个小小的蛋糕和两个杯子。', vi:'Chúng mình mua một cái bánh kem nho nhỏ và hai cái cốc.'},
+   {k:'C', han:'回家以后，我们高高兴兴地吃了蛋糕。', vi:'Sau khi về nhà, chúng mình vui vẻ ăn bánh.'}
+  ],
+  show:['B','C','A'],
+  answer:['A','B','C'],
+  why:'<b>A đứng đầu</b>: 去商店了 là việc phải xảy ra trước thì mới mua được đồ.<br><b>B đứng giữa</b>: 买了…蛋糕 — có mua bánh rồi mới có bánh để ăn ở câu C.<br><b>C đứng cuối</b> vì mở đầu bằng 回家以后 — chữ 以后 ở đây buộc phải có một việc xảy ra TRƯỚC (đi siêu thị, mua đồ) thì mới nói “sau khi về nhà” được.<br>Mẹo chung: câu nào mở đầu bằng 回家以后 · 然后 · 所以 · 可是 thì gần như chắc chắn KHÔNG phải câu đầu tiên.'
+ }
+],
+
+// ───────────────────────── PHẦN 2 · NGHE ─────────────────────────
+listen: [
+ {
+  id:'l1',
+  file:'audio-bai-06/nghe-1.mp3',
+  text:'明天是我姐姐的生日。今天下午妈妈想买一个大大的蛋糕，可是姐姐不喜欢吃蛋糕，所以我们没有买，我们买了鱼和肉。',
+  vi:'Ngày mai là sinh nhật chị mình. Chiều nay mẹ định mua một cái bánh kem thật to, nhưng chị không thích ăn bánh kem nên nhà mình không mua, nhà mình mua cá và thịt.',
+  q:'他们为什么没有买蛋糕？',
+  qvi:'Vì sao họ không mua bánh kem?',
+  model:'因为姐姐不喜欢吃蛋糕。',
+  modelvi:'Vì chị gái không thích ăn bánh kem.',
+  keys:[['不喜欢','蛋糕']],
+  why:'Chỗ cho đáp án nằm ở câu: 妈妈想买一个大大的蛋糕，<b>可是姐姐不喜欢吃蛋糕，所以我们没有买</b>。<br>Nghe câu hỏi 为什么 thì phải tìm chữ <b>因为</b> hoặc chữ <b>所以</b> trong đoạn — ở đây là 所以. Nguyên nhân luôn nằm ở vế TRƯỚC chữ 所以.<br>Khi trả lời, đưa nguyên nhân ấy ra và đóng khung lại bằng 因为…… cho thành một câu hoàn chỉnh.<br><span class="warn">Bẫy:</span> nhiều bạn nghe thấy 妈妈想买…蛋糕 rồi trả lời “妈妈想买蛋糕” — đó là điều mẹ MUỐN, không phải lý do KHÔNG mua.'
+ },
+ {
+  id:'l2',
+  file:'audio-bai-06/nghe-2.mp3',
+  text:'昨天晚上，小雪的朋友们都来她家了。她们先一起吃了长长的面条儿。吃了面条儿以后，小雪打开了朋友们送的礼物。',
+  vi:'Tối hôm qua, các bạn của Tiểu Tuyết đều đến nhà cậu ấy. Các bạn cùng nhau ăn mì sợi dài dài trước. Ăn mì xong, Tiểu Tuyết mở những món quà các bạn tặng.',
+  q:'吃了面条儿以后，小雪做了什么？',
+  qvi:'Sau khi ăn mì, Tiểu Tuyết đã làm gì?',
+  model:'她打开了朋友们送的礼物。',
+  modelvi:'Cậu ấy mở những món quà các bạn tặng.',
+  keys:[['打开','礼物']],
+  why:'Câu hỏi hỏi 做了什么 — tức là hỏi MỘT HÀNH ĐỘNG, nên đáp án phải là một động từ, không phải một đồ vật.<br>Mốc thời gian 吃了面条儿以后 trong câu hỏi lặp lại y nguyên một cụm trong đoạn: <b>吃了面条儿以后，小雪打开了朋友们送的礼物</b>。 Nghe thấy cụm lặp lại đó là biết đáp án nằm ngay sau nó.<br><span class="warn">Bẫy:</span> trả lời “礼物” là kể ĐỒ VẬT, không trả lời được chữ 做. Đáp án bắt buộc phải có động từ 打开.'
+ },
+ {
+  id:'l3',
+  file:'audio-bai-06/nghe-3.mp3',
+  text:'上个星期六是安妮的生日，可是那天我没有去她家。因为那天早上我不太舒服，妈妈让我在床上休息。我给她打了电话，说了生日快乐。',
+  vi:'Thứ Bảy tuần trước là sinh nhật Annie, nhưng hôm đó mình không đến nhà cậu ấy được. Vì sáng hôm đó mình thấy không khoẻ, mẹ bắt mình nằm nghỉ trên giường. Mình gọi điện cho cậu ấy, chúc sinh nhật vui vẻ.',
+  q:'安妮过生日那天，"我"为什么没有去她家？',
+  qvi:'Hôm sinh nhật Annie, vì sao "mình" không đến nhà cậu ấy?',
+  model:'因为那天早上"我"不太舒服，妈妈让"我"在床上休息。',
+  modelvi:'Vì sáng hôm đó "mình" thấy không khoẻ, mẹ bắt "mình" nằm nghỉ trên giường.',
+  keys:[['不太舒服'],['不舒服']],
+  why:'Đoạn nói thẳng: 可是那天我没有去她家。<b>因为那天早上我不太舒服，妈妈让我在床上休息</b>。 Câu có chữ 因为 đứng ngay sau câu 没有去 chính là lý do.<br>Chỉ cần chép lại vế 不太舒服 là đã đủ ý; thêm 妈妈让我在床上休息 thì câu trả lời đầy đủ hơn.<br><span class="warn">Bẫy:</span> đoạn có hai mốc thời gian — 上个星期六 (sinh nhật) và 那天早上 (bị mệt). Lý do nằm ở mốc 那天早上; bám nhầm sang việc 打电话 ở cuối đoạn thì lạc câu hỏi, vì gọi điện là việc “mình” ĐÃ làm, không phải lý do không đến.'
+ }
+],
+
+// ───────────────────────── PHẦN 3 · ĐỌC ─────────────────────────
+read: {
+ title:'给爸爸的礼物',
+ titlevi:'Món quà cho bố',
+ text:[
+  '下个月三号是我爸爸的生日。爸爸每天都很忙，早上很早就出门，晚上很晚才回家，所以我们很少一起吃饭。今年我给他画了一张画儿，因为爸爸最喜欢看我画的画儿。'
+ ],
+ vi:[
+  'Ngày mùng 3 tháng sau là sinh nhật bố mình. Bố ngày nào cũng rất bận, sáng đi rất sớm, tối về rất muộn, nên cả nhà rất ít khi được ăn cơm cùng nhau. Năm nay mình vẽ tặng bố một bức tranh, vì bố thích nhất là ngắm tranh mình vẽ.'
+ ],
+ qs:[
+  {
+   id:'r1',
+   q:'"我"家为什么很少一起吃饭？',
+   qvi:'Vì sao nhà "mình" rất ít khi ăn cơm cùng nhau?',
+   model:'因为爸爸每天都很忙，早上很早就出门，晚上很晚才回家。',
+   modelvi:'Vì bố ngày nào cũng rất bận, sáng đi rất sớm, tối về rất muộn.',
+   keys:[['忙'],['很早','很晚']],
+   why:'Đáp án nằm ngay trong câu thứ hai của bài: 爸爸每天都很忙，早上很早就出门，晚上很晚才回家，<b>所以我们很少一起吃饭</b>。<br>Chữ 所以 cắt câu làm hai: phần SAU 所以 chính là câu hỏi đang hỏi, nên phần TRƯỚC 所以 chính là đáp án. Gặp câu hỏi 为什么, việc đầu tiên là đi tìm 所以 hoặc 因为 trong bài.<br>Hai chữ 就 và 才 ở đây nói lên thái độ: 很早<b>就</b>出门 = sớm đến mức ấy đã đi rồi; 很晚<b>才</b>回家 = muộn đến thế mới về. Cả hai cùng nhấn vào một ý: bố ở nhà rất ít.'
+  },
+  {
+   id:'r2',
+   q:'"我"想送爸爸什么礼物？为什么送这个？',
+   qvi:'"Mình" định tặng bố món quà gì? Vì sao lại tặng món đó?',
+   model:'送爸爸一张自己画的画儿，因为爸爸最喜欢看"我"画的画儿。',
+   modelvi:'Tặng bố một bức tranh tự vẽ, vì bố thích nhất là ngắm tranh "mình" vẽ.',
+   keys:[['画儿','喜欢'],['画','最喜欢'],['画儿','因为']],
+   why:'Câu hỏi có HAI vế nên đáp án cũng phải có hai vế — thiếu một vế là mất điểm.<br>• Vế “tặng gì”: 今年我给他<b>画了一张画儿</b> → món quà là một bức tranh tự vẽ.<br>• Vế “vì sao”: ngay sau đó là chữ 因为 — <b>因为爸爸最喜欢看我画的画儿</b>。<br>Cả hai vế nằm trong cùng MỘT câu, nối với nhau bằng 因为. Gặp câu hỏi hai vế, hãy tìm câu nào trong bài chứa đủ cả hành động lẫn chữ 因为.'
+  }
+ ]
+},
+
+// ───────────────────────── PHẦN 4 · NHẮN TIN ─────────────────────────
+chat: [
+ {
+  from:'小雪：这个星期六是我的生日，你能来我家吗？',
+  fromvi:'Thứ Bảy này là sinh nhật mình, cậu đến nhà mình được không?',
+  opts:[
+   {han:'太好了！我一定去。生日快乐！', ok:true,
+    fb:'Chuẩn. Được mời thì trả lời CÓ/KHÔNG trước đã, rồi mới chúc. 一定 (nhất định) làm lời nhận lời chắc chắn và thân tình hơn hẳn “我去”.'},
+   {han:'你家在哪儿？', ok:false,
+    fb:'Câu này đúng ngữ pháp nhưng SAI THỨ TỰ: bạn vừa được mời mà chưa nhận lời đã hỏi địa chỉ, nghe như đang cân nhắc. Nhận lời trước, hỏi đường sau.'},
+   {han:'我很忙，不能去。', ok:false,
+    fb:'Từ chối thẳng mà không có một chữ nào làm mềm. Người Trung Quốc thường nói 真不好意思，那天我有事儿…… rồi mới từ chối. Ở bài này ta chọn hướng nhận lời.'}
+  ]
+ },
+ {
+  from:'小雪：谢谢你！下午四点，可以吗？',
+  fromvi:'Cảm ơn cậu! Bốn giờ chiều nhé, được không?',
+  opts:[
+   {han:'可以，我四点就到。', ok:true,
+    fb:'就 ở đây nghĩa là “đúng giờ ấy là đã tới rồi”, nghe rất chắc chắn. Đây đúng là chữ 就 đã học ở Bài 1.'},
+   {han:'可以，我四点才到。', ok:false,
+    fb:'才 mang nghĩa MUỘN hơn mong đợi — “mãi bốn giờ mới tới”. Dùng ở đây thành ra than phiền. 就 mới là chữ cần dùng.'},
+   {han:'我不知道。', ok:false,
+    fb:'Người ta hỏi một giờ cụ thể, trả lời “không biết” là bỏ lửng cuộc hẹn. Nếu thật sự chưa chắc thì nói 我看一下时间，晚上告诉你，好吗？'}
+  ]
+ },
+ {
+  from:'小雪：不用买礼物，你来就好了。',
+  fromvi:'Không cần mua quà đâu, cậu đến là được rồi.',
+  opts:[
+   {han:'我还是给你买一个小小的蛋糕吧。', ok:true,
+    fb:'Hai điểm của bài nằm gọn trong câu này: 还是……吧 (Bài 2) để đưa ra lựa chọn cuối cùng, và 小小的 — tính từ láy làm giọng mềm đi, nghe như “một cái bánh bé bé thôi”, không nặng nề.'},
+   {han:'好，我不买。', ok:false,
+    fb:'Đúng ngữ pháp nhưng hơi phũ. Khi chủ nhà nói 不用, người Trung Quốc vẫn thường mang một thứ nhỏ — câu từ chối thẳng làm mất đi phép lịch sự đó.'},
+   {han:'我买一个蛋糕小小的。', ok:false,
+    fb:'Sai trật tự. Tính từ láy + 的 phải đứng TRƯỚC danh từ: 一个<b>小小的</b>蛋糕. Không bao giờ đặt sau danh từ như tiếng Việt “cái bánh nho nhỏ”.'}
+  ]
+ },
+ {
+  from:'小雪：太好了！我妈妈会做长长的面条儿。',
+  fromvi:'Thích quá! Mẹ mình sẽ làm mì sợi dài dài.',
+  opts:[
+   {han:'真的吗？我没吃过长寿面。', ok:true,
+    fb:'过 ở đây là trợ từ chỉ KINH NGHIỆM đã học ở Bài 4, đứng ngay sau động từ: 吃<b>过</b>. Câu phủ định dùng 没 chứ không dùng 不.'},
+   {han:'真的吗？我没吃长寿面过。', ok:false,
+    fb:'Sai vị trí. 过 phải dính liền sau ĐỘNG TỪ (吃过), không được đẩy xuống cuối câu. Đây là lỗi người Việt hay mắc vì tiếng Việt nói “ăn mì trường thọ bao giờ chưa”.'},
+   {han:'真的吗？我不吃过长寿面。', ok:false,
+    fb:'Phủ định của 过 luôn là 没, không bao giờ là 不. 不吃 nghĩa là “không ăn (vì không muốn)”, khác hẳn “chưa từng ăn”.'}
+  ]
+ },
+ {
+  from:'小雪：那星期六见！',
+  fromvi:'Vậy thứ Bảy gặp nhé!',
+  opts:[
+   {han:'星期六见！我们一定要高高兴兴地过这个生日。', ok:true,
+    fb:'Đúng trọng tâm Bài 6: tính từ láy + <b>地</b> + động từ. 高高兴兴地过 = tổ chức/trải qua một cách thật vui vẻ.'},
+   {han:'星期六见！我们一定要高高兴兴过这个生日。', ok:false,
+    fb:'Thiếu chữ 地. Khi tính từ láy bổ nghĩa cho ĐỘNG TỪ thì bắt buộc có 地 nối ở giữa. Đây là lỗi bị trừ điểm nhiều nhất của bài này.'},
+   {han:'星期六见！我们一定要过高高兴兴地这个生日。', ok:false,
+    fb:'Sai vị trí hẳn. Cụm 高高兴兴地 phải đứng TRƯỚC động từ 过, không được chen vào giữa động từ và tân ngữ.'}
+  ]
+ }
+],
+
+// ───────────────────────── PHẦN 5 · VIẾT ─────────────────────────
+write: [
+ {
+  topic:'说说你的生日。那天你做了什么？吃了什么？',
+  topicvi:'Kể về sinh nhật của bạn. Hôm đó bạn đã làm gì? Ăn gì?',
+  model:'我的生日是五月十号。今年我没有去饭店，就在家里过生日。早上妈妈做了一个大大的蛋糕，下午我的朋友们都来了。我们高高兴兴地吃了蛋糕，还一起看了电影。晚上爸爸回家以后，我们还吃了长长的面条儿。那天我真的很快乐。',
+  modelvi:'Sinh nhật mình là ngày 10 tháng 5. Năm nay mình không ra quán, chỉ tổ chức ở nhà. Buổi sáng mẹ làm một cái bánh kem thật to, buổi chiều các bạn mình đều đến. Chúng mình vui vẻ ăn bánh, còn cùng nhau xem phim. Buổi tối sau khi bố về nhà, cả nhà lại ăn mì sợi dài dài. Hôm đó mình thực sự rất vui.'
+ }
+]
+};
+
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   CẤU HÌNH GỬI BÀI VIẾT VỀ GOOGLE FORM
+   Xem hướng dẫn 5 bước trong file "Huong-dan-thu-bai-viet.docx".
+   Chưa điền thì nút "Gửi bài cho cô" sẽ tự chuyển thành nút sao chép.
+   ═══════════════════════════════════════════════════════════════════ */
+const FORM = {
+  action : '',   // vd: https://docs.google.com/forms/d/e/FORM_ID/formResponse
+  name   : '',   // vd: entry.1234567890   ← ô Họ và tên
+  topic  : '',   // vd: entry.1234567891   ← ô Đề bài
+  text   : '',   // vd: entry.1234567892   ← ô Bài viết
+  score  : ''    // vd: entry.1234567893   ← ô Điểm 4 phần đầu (có thể bỏ trống)
+};
+/* ═══════════════════════════════════════════════════════════════════ */
+
+const $  = s => document.querySelector(s);
+const el = (t,c,h) => { const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e; };
+const LS = 'hsk2-bai06-v1';
+let submitted = false;
+let turn = 0;
+const chatFirst = [];
+const wIdx = 0;
+
+/* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
+const clean = s => (s||'').replace(/[\s，。、？！；：""''（）()"'.,?!;:]/g,'');
+const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
+const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
+
+/* ═══════════ PHẦN 1 ═══════════ */
+const picked = {};
+DATA.sort.forEach((it,i)=>{
+  picked[it.id]=[];
+  const c = el('div','card');
+  c.innerHTML = '<span class="qno">Câu '+(i+1)+'</span>';
+  const slots = el('div','slots'); slots.id='sl-'+it.id;
+  const pool  = el('div','pool');  pool.id ='po-'+it.id;
+  c.append(slots, pool);
+  const ans = el('div','ans'); ans.id='an-'+it.id;
+  c.append(ans);
+  $('#sortBox').append(c);
+
+  it.show.forEach(k=>{
+    const s = it.sents.find(x=>x.k===k);
+    const b = el('button','tile','<span class="han">'+s.han+'</span>');
+    b.dataset.k = k;
+    b.onclick = ()=>{ if(submitted) return; picked[it.id].push(k); draw(it); save(); };
+    pool.append(b);
+  });
+  draw(it);
+});
+function draw(it){
+  const slots=$('#sl-'+it.id), pool=$('#po-'+it.id);
+  slots.innerHTML='';
+  if(!picked[it.id].length) slots.append(el('div','empty','Bấm vào câu bên dưới để xếp…'));
+  picked[it.id].forEach((k,n)=>{
+    const s=it.sents.find(x=>x.k===k);
+    const d=el('div','slot','<span class="n">'+(n+1)+'</span><span class="han">'+s.han+'</span>');
+    d.onclick=()=>{ if(submitted) return; picked[it.id].splice(n,1); draw(it); save(); };
+    slots.append(d);
+  });
+  [...pool.children].forEach(b=> b.classList.toggle('used', picked[it.id].includes(b.dataset.k)));
+  tick();
+}
+
+/* ═══════════ PHẦN 2 ═══════════ */
+DATA.listen.forEach((it,i)=>{
+  const c = el('div','card');
+  c.innerHTML = '<span class="qno">Đoạn '+(i+1)+'</span>';
+  const au = el('div','audio');
+  au.innerHTML = '<audio controls preload="metadata"></audio>';
+  const warn = el('span','nofile',''); warn.style.display='none';
+  const hint = el('span','', '<span class="vi" style="font-size:.76rem"></span>');
+  au.append(warn, hint);
+  // Tên file có thể là nghe-1.mp3 hoặc "nghe 1.mp3" — thử lần lượt cho tới khi được
+  const cands = [...new Set([it.file, it.file.replace(/nghe-(\d)/,'nghe $1'),
+                             it.file.replace(/nghe (\d)/,'nghe-$1')])].map(encodeURI);
+  const a = au.querySelector('audio');
+  let ci = 0;
+  a.onerror = ()=>{
+    if(++ci < cands.length){ a.src = cands[ci]; a.load(); return; }
+    warn.innerHTML = 'Chưa đọc được file âm thanh. Trang đã thử: '
+      + cands.map(c=>'<b>'+decodeURI(c)+'</b>').join(' · ');
+    warn.style.display='inline';
+    hint.innerHTML = '';
+  };
+  a.onloadedmetadata = ()=>{
+    warn.style.display='none';
+    hint.innerHTML = '<span class="vi" style="font-size:.76rem">'+decodeURI(cands[ci])+'</span>';
+  };
+  a.src = cands[0];
+  const q = el('div','', '<div class="han" style="font-size:1.08rem;margin:4px 0 9px">'+it.q+'</div>');
+  const ta = el('textarea'); ta.rows=3; ta.id='ta-'+it.id; ta.placeholder='用中文回答……';
+  ta.oninput = ()=>{ save(); tick(); };
+  c.append(au,q,ta);
+  const ans = el('div','ans'); ans.id='an-'+it.id;
+  c.append(ans);
+  $('#listenBox').append(c);
+});
+
+/* ═══════════ PHẦN 3 ═══════════ */
+(function(){
+  const r = DATA.read;
+  const c = el('div','card');
+  c.innerHTML = '<div class="kicker">阅读 · Bài đọc</div><h2 class="sec"><span class="han">'+r.title+'</span> · '+r.titlevi+'</h2>';
+  const p = el('div','passage');
+  r.text.forEach(t=> p.append(el('p','han',t)));
+  c.append(p);
+  const vi = el('div','ans'); vi.id='an-readvi';
+  vi.innerHTML = '<span class="lab">Bản dịch</span>' + r.vi.map(t=>'<div style="margin-bottom:6px">'+t+'</div>').join('');
+  c.append(vi);
+  $('#readBox').append(c);
+
+  r.qs.forEach((q,i)=>{
+    const d = el('div','card');
+    d.innerHTML = '<span class="qno">Câu '+(i+1)+'</span>'
+      + '<div class="han" style="font-size:1.08rem;margin:4px 0 2px">'+q.q+'</div>'
+      + '<div class="vi" style="margin-bottom:9px">'+q.qvi+'</div>';
+    const ta = el('textarea'); ta.rows=3; ta.id='ta-'+q.id; ta.placeholder='用中文回答……';
+    ta.oninput = ()=>{ save(); tick(); };
+    const ans = el('div','ans'); ans.id='an-'+q.id;
+    d.append(ta, ans);
+    $('#readBox').append(d);
+  });
+})();
+
+/* ═══════════ PHẦN 4 ═══════════ */
+function chatDraw(){
+  const th = $('#thread'), op = $('#opts');
+  if(turn >= DATA.chat.length){
+    op.innerHTML='';
+    $('#chatFb').innerHTML = '<div class="fb ok">Xong đoạn chat. Em chọn đúng ngay lần đầu <b>'
+      + chatFirst.filter(Boolean).length + '/' + DATA.chat.length + '</b> lượt.</div>';
+    tick(); return;
+  }
+  const t = DATA.chat[turn];
+  th.append(el('div','bub them','<span class="han">'+t.from+'</span>'));
+  op.innerHTML='';
+  $('#chatFb').innerHTML='';
+  t.opts.forEach(o=>{
+    const b = el('button','opt','<span class="han">'+o.han+'</span>');
+    b.onclick = ()=>{
+      if(chatFirst[turn]===undefined) chatFirst[turn] = !!o.ok;
+      if(o.ok){
+        th.append(el('div','bub me','<span class="han">'+o.han+'</span>'));
+        $('#chatFb').innerHTML = '<div class="fb ok"><b>Chuẩn rồi.</b> '+o.fb+'</div>';
+        turn++;
+        setTimeout(()=>{ chatDraw(); save(); }, 650);
+      }else{
+        b.classList.add('bad');
+        $('#chatFb').innerHTML = '<div class="fb no"><b>Chưa hợp.</b> '+o.fb+'</div>';
+        save();
+      }
+      tick();
+    };
+    op.append(b);
+  });
+}
+chatDraw();
+
+/* ═══════════ PHẦN 5 ═══════════ */
+function wDraw(){
+  $('#wTopic').textContent  = DATA.write[wIdx].topic;
+  $('#wTopicVi').textContent= DATA.write[wIdx].topicvi;
+  $('#wModelHan').textContent = DATA.write[wIdx].model;
+  $('#wModelVi').textContent  = DATA.write[wIdx].modelvi;
+}
+wDraw();
+$('#wText').oninput = ()=>{
+  const t=$('#wText').value, n=hanCount(t);
+  $('#wCount').textContent = n;
+  const die = /(.)\1的|(..)\2的|(.)\1(.)\2/.test(t);
+  const de  = t.includes('地');
+  $('#wCheck').innerHTML =
+    (n>=40 ? '✓ đủ số chữ' : '· còn thiếu '+(40-n)+' chữ') + ' &nbsp;·&nbsp; ' +
+    (die ? '✓ có từ láy' : '· chưa thấy từ láy') + ' &nbsp;·&nbsp; ' +
+    (de  ? '✓ có 地' : '· chưa có 地');
+  save();
+};
+
+function wPayload(){
+  return { name:$('#wName').value.trim(), topic:DATA.write[wIdx].topic,
+           text:$('#wText').value.trim(), score:(submitted? $('#sNum').textContent+'/13' : 'chưa nộp') };
+}
+function copyText(str){
+  let ok=false;
+  const ta=el('textarea');
+  ta.value=str; ta.setAttribute('readonly','');
+  ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';
+  document.body.append(ta);
+  try{ ta.focus(); ta.select(); ta.setSelectionRange(0,str.length); ok=document.execCommand('copy'); }catch(e){}
+  ta.remove();
+  if(ok) return Promise.resolve(true);
+  if(navigator.clipboard && navigator.clipboard.writeText)
+    return navigator.clipboard.writeText(str).then(()=>true,()=>false);
+  return Promise.resolve(false);
+}
+$('#wCopy').onclick = async ()=>{
+  const p = wPayload();
+  const s = 'Bài 6 · '+(p.name||'(chưa điền tên)')+'\nĐề: '+p.topic+'\n\n'+p.text;
+  if(await copyText(s)){
+    $('#wFb').innerHTML='<div class="fb ok">Đã sao chép. Em dán vào Zalo gửi cô nhé.</div>';
+  }else{
+    const t=$('#wText'); t.focus(); t.select(); t.setSelectionRange(0,t.value.length);
+    $('#wFb').innerHTML='<div class="fb no">Em đã được bôi đen sẵn bài viết ở ô trên — '
+      +'bấm <b>Ctrl+C</b> (máy Mac: <b>Cmd+C</b>), hoặc trên điện thoại thì giữ vào chỗ bôi đen rồi chọn Sao chép.</div>';
+  }
+};
+$('#wSend').onclick = ()=>{
+  const p = wPayload();
+  if(hanCount(p.text) < 40){ $('#wFb').innerHTML='<div class="fb no">Bài còn dưới 40 chữ Hán, em viết thêm rồi gửi nhé.</div>'; return; }
+  if(!p.name){ $('#wFb').innerHTML='<div class="fb no">Em điền họ tên trước khi gửi nhé.</div>'; return; }
+  if(!FORM.action || !FORM.text){ $('#wCopy').click(); return; }
+  let f = document.getElementById('gform');
+  if(!f){
+    const ifr = el('iframe'); ifr.name='gsink'; ifr.style.display='none'; document.body.append(ifr);
+    f = el('form'); f.id='gform'; f.target='gsink'; f.method='POST'; f.style.display='none'; document.body.append(f);
+  }
+  f.action = FORM.action; f.innerHTML='';
+  const add=(k,v)=>{ if(!k) return; const i=el('input'); i.name=k; i.value=v; f.append(i); };
+  add(FORM.name,p.name); add(FORM.topic,p.topic); add(FORM.text,p.text); add(FORM.score,p.score);
+  f.submit();
+  $('#wFb').innerHTML='<div class="fb ok">Đã gửi bài cho cô. Em vẫn nên bấm “Sao chép bài” để giữ một bản nhé.</div>';
+};
+
+/* ═══════════ ĐẾM TIẾN ĐỘ ═══════════ */
+function tick(){
+  if(!window.__ready) return;
+  let done=0;
+  DATA.sort.forEach(it=>{ if(picked[it.id].length===3) done++; });
+  DATA.listen.forEach(it=>{ if(hanCount(($('#ta-'+it.id)||{}).value)>0) done++; });
+  DATA.read.qs.forEach(q=>{ if(hanCount(($('#ta-'+q.id)||{}).value)>0) done++; });
+  done += chatFirst.filter(x=>x!==undefined).length;
+  $('#stat').textContent = submitted ? 'Đã nộp bài' : 'Đã làm '+done+'/13 câu';
+  const d=[
+    DATA.sort.every(it=>picked[it.id].length===3),
+    DATA.listen.every(it=>hanCount(($('#ta-'+it.id)||{}).value)>0),
+    DATA.read.qs.every(q=>hanCount(($('#ta-'+q.id)||{}).value)>0),
+    turn>=DATA.chat.length,
+    hanCount($('#wText').value)>=40
+  ];
+  document.querySelectorAll('#tabs .tab').forEach((t,i)=>{ if(i<5) t.classList.toggle('done', d[i]); });
+}
+
+/* ═══════════ NỘP BÀI ═══════════ */
+$('#submit').onclick = ()=>{
+  if(submitted){ go(5); return; }
+  submitted = true;
+  const per = {};
+
+  per['Sắp xếp'] = [0, DATA.sort.length];
+  DATA.sort.forEach((it,i)=>{
+    const ok = picked[it.id].join('')===it.answer.join('');
+    if(ok) per['Sắp xếp'][0]++;
+    const a=$('#an-'+it.id); a.classList.add('on');
+    a.innerHTML = '<span class="lab">'+(ok?'✓ Đúng':'✗ Chưa đúng')+' · thứ tự đúng là '
+      + it.answer.join(' → ')+'</span>'
+      + it.answer.map((k,n)=>{ const t=it.sents.find(x=>x.k===k);
+          return '<span class="model">'+(n+1)+'. '+t.han+'</span>'
+               + '<span class="vi" style="display:block;margin:0 0 6px 14px">'+t.vi+'</span>'; }).join('')
+      + '<div style="margin-top:9px">'+it.why+'</div>';
+    $('#po-'+it.id).style.display='none';
+  });
+
+  per['Nghe'] = [0, DATA.listen.length];
+  DATA.listen.forEach(it=>{
+    const v = ($('#ta-'+it.id)||{}).value||'';
+    const ok = match(v, it.keys);
+    if(ok) per['Nghe'][0]++;
+    $('#ta-'+it.id).readOnly = true;
+    const a=$('#an-'+it.id); a.classList.add('on');
+    a.innerHTML = '<span class="lab">'+(ok?'✓ Đúng ý':'✗ Chưa đúng ý')+' · '+it.qvi+'</span>'
+      + '<span class="model">'+it.model+'</span>'
+      + '<span class="vi" style="display:block;margin-top:4px">'+it.modelvi+'</span>'
+      + '<div style="margin-top:9px">'+it.why+'</div>'
+      + '<div class="gloss"><b>原文 · nguyên văn đoạn nghe</b><br><span class="han">'+it.text+'</span>'
+      + '<br><span style="display:block;margin-top:6px">'+it.vi+'</span></div>';
+  });
+
+  per['Đọc'] = [0, DATA.read.qs.length];
+  DATA.read.qs.forEach(q=>{
+    const v = ($('#ta-'+q.id)||{}).value||'';
+    const ok = match(v, q.keys);
+    if(ok) per['Đọc'][0]++;
+    $('#ta-'+q.id).readOnly = true;
+    const a=$('#an-'+q.id); a.classList.add('on');
+    a.innerHTML = '<span class="lab">'+(ok?'✓ Đúng ý':'✗ Chưa đúng ý')+' · đáp án tham khảo</span>'
+      + '<span class="model">'+q.model+'</span>'
+      + '<span class="vi" style="display:block;margin-top:4px">'+q.modelvi+'</span>'
+      + '<div style="margin-top:9px">'+q.why+'</div>';
+  });
+  $('#an-readvi').classList.add('on');
+
+  per['Nhắn tin'] = [chatFirst.filter(Boolean).length, DATA.chat.length];
+  $('#opts').innerHTML=''; $('#chatFb').innerHTML='';
+  const ca=$('#chatAns'); ca.classList.add('on');
+  ca.innerHTML = '<span class="lab">Vì sao chọn như vậy — cả 5 lượt</span>' + DATA.chat.map((t,i)=>{
+    const r = chatFirst[i];
+    const head = '<div style="margin:12px 0 5px"><b>Lượt '+(i+1)+'</b> · '
+      + (r===true?'<span style="color:var(--green)">em chọn đúng ngay</span>'
+        : r===false?'<span class="warn">em chọn sai lần đầu</span>'
+        : '<span class="warn">em chưa làm tới</span>')
+      + '<br><span class="han">'+t.from+'</span>'
+      + '<br><span class="vi">'+t.fromvi+'</span></div>';
+    const body = t.opts.map(o=>'<div style="margin:5px 0 5px 10px">'
+      + (o.ok?'✓ ':'✗ ') + '<span class="han">'+o.han+'</span><br>'
+      + '<span style="font-size:.86rem;color:'+(o.ok?'var(--green)':'var(--soft)')+'">'+o.fb+'</span></div>').join('');
+    return head + body;
+  }).join('<hr style="border:none;border-top:1px dashed var(--line);margin:10px 0">');
+  $('#wModel').classList.add('on');
+
+  const tot = Object.values(per).reduce((s,x)=>s+x[0],0);
+  const max = Object.values(per).reduce((s,x)=>s+x[1],0);
+  $('#sNum').textContent = tot;
+  $('#sMsg').innerHTML = tot===max ? 'Tuyệt đối. Đọc kỹ phần giải thích rồi làm nốt bài viết nhé.'
+    : tot>=max*0.7 ? 'Khá tốt. Xem lại '+(max-tot)+' câu còn sai ở các phần nhé.'
+    : 'Em xem lại phần giải thích của từng câu, rồi nghe/đọc lại một lượt nữa.';
+  $('#bars').innerHTML = Object.entries(per).map(([k,[a,b]])=>
+     '<div class="barrow"><span>'+k+'</span><span class="bar"><i style="width:'+(a/b*100)+'%"></i></span><span>'+a+'/'+b+'</span></div>').join('');
+  $('#submit').textContent='XEM KẾT QUẢ';
+  tick(); save(); go(5);
+};
+
+$('#again').onclick = ()=>{ localStorage.removeItem(LS); location.reload(); };
+
+/* ═══════════ TAB ═══════════ */
+const NAMES=['Phần 1','Phần 2','Phần 3','Phần 4','Phần 5','Kết quả'];
+NAMES.forEach((n,i)=>{
+  const b=el('button','tab', n + (i<5?'<span class="dot"></span>':''));
+  b.onclick=()=>go(i); $('#tabs').append(b);
+});
+function go(i){
+  document.querySelectorAll('.panel').forEach((p,n)=>p.classList.toggle('on', n===i));
+  document.querySelectorAll('#tabs .tab').forEach((t,n)=>t.setAttribute('aria-selected', n===i));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+go(0);
+window.__ready = true;
+
+/* ═══════════ LƯU TẠM TRONG MÁY ═══════════ */
+function save(){
+  try{
+    const o={picked, turn, chatFirst, submitted,
+      ta:{}, name:$('#wName').value, wText:$('#wText').value};
+    DATA.listen.forEach(it=> o.ta[it.id]=($('#ta-'+it.id)||{}).value||'');
+    DATA.read.qs.forEach(q=> o.ta[q.id]=($('#ta-'+q.id)||{}).value||'');
+    localStorage.setItem(LS, JSON.stringify(o));
+  }catch(e){}
+}
+(function restore(){
+  try{
+    const o=JSON.parse(localStorage.getItem(LS)||'null'); if(!o||o.submitted) return;
+    Object.keys(o.picked||{}).forEach(k=>{ if(picked[k]) picked[k]=o.picked[k]; });
+    DATA.sort.forEach(draw);
+    Object.entries(o.ta||{}).forEach(([k,v])=>{ const t=$('#ta-'+k); if(t) t.value=v; });
+    if(o.name) $('#wName').value=o.name;
+    if(o.wText){ $('#wText').value=o.wText; $('#wText').oninput(); }
+    if(Array.isArray(o.chatFirst) && typeof o.turn==='number' && o.turn>0){
+      chatFirst.length=0; o.chatFirst.forEach(x=>chatFirst.push(x));
+      $('#thread').innerHTML=''; turn=0;
+      for(let i=0;i<o.turn;i++){
+        const t=DATA.chat[i], ok=t.opts.find(x=>x.ok);
+        $('#thread').append(el('div','bub them','<span class="han">'+t.from+'</span>'));
+        $('#thread').append(el('div','bub me','<span class="han">'+ok.han+'</span>'));
+      }
+      turn=o.turn; $('#opts').innerHTML=''; $('#chatFb').innerHTML=''; chatDraw();
+    }
+    tick();
+  }catch(e){}
+})();
+tick();
+</script>
+</body>
+</html>
