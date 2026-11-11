@@ -93,7 +93,14 @@ const NUM='零一二三四五六七八九十';
 const cn=n=> n<=10?NUM[n] : n<20?'十'+(n%10?NUM[n%10]:'') : NUM[Math.floor(n/10)]+'十'+(n%10?NUM[n%10]:'');
 const pad=n=>String(n).padStart(2,'0');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function done(key){ try{ return (JSON.parse(localStorage.getItem(key)||'[]')).filter(v=>typeof v==='number').length; }catch(e){ return 0; } }
+/* Tiến độ: thử kiểu cũ (mảng số) trước, không có thì đọc kiểu mới (đối tượng có .done). */
+function done(key){
+  try{ const a=JSON.parse(localStorage.getItem(key)||'null');
+       if(Array.isArray(a)) return a.filter(v=>typeof v==='number').length; }catch(e){}
+  try{ const o=JSON.parse(localStorage.getItem('hsk2-'+key+'-v1')||'null');
+       if(o && typeof o==='object') return Number(o.done)||0; }catch(e){}
+  return 0;
+}
 
 async function readLesson(n){
   const file='bai/bai-'+pad(n)+'.html';
@@ -101,10 +108,36 @@ async function readLesson(n){
   if(!r.ok) return null;
   const html=await r.text();
   const doc=new DOMParser().parseFromString(html,'text/html');
-  const key=(html.match(/const\s+KEY\s*=\s*['"]([^'"]+)['"]/)||[])[1]||file;
-  const total=+((html.match(/const\s+TOTAL\s*=\s*(\d+)/)||[])[1]||0);
-  const zh=doc.querySelector('h1 .zh')?.textContent.trim() || doc.title;
-  const tags=[...doc.querySelectorAll('.fact')].map(x=>x.textContent.trim()).slice(0,4);
+  /* Bài kiểu mới (từ bài 6) dựng tiêu đề bằng JS nên đọc tĩnh không thấy gì.
+     Chúng nhúng sẵn khối HSK2-META và các thẻ <meta name="hsk2-…"> để đọc được.
+     Thứ tự dưới đây luôn thử ĐƯỜNG CŨ TRƯỚC, nên bài 1–5 không đổi gì. */
+  let meta=null;
+  const mm=html.match(/<!--HSK2-META\s*([\s\S]*?)-->/);
+  if(mm){ try{ meta=JSON.parse(mm[1]); }catch(e){} }
+  const mtag=k=>(html.match(new RegExp('<meta\\s+name="hsk2-'+k+'"\\s+content="([^"]*)"'))||[])[1];
+
+  const key=(html.match(/const\s+KEY\s*=\s*['"]([^'"]+)['"]/)||[])[1]
+         || (html.match(/const\s+PAGE_KEY\s*=\s*['"]([^'"]+)['"]/)||[])[1]
+         || (meta&&meta.key) || mtag('key') || file;
+
+  const total=+((html.match(/const\s+TOTAL\s*=\s*(\d+)/)||[])[1]
+         || (html.match(/const\s+PAGE_TOTAL\s*=\s*(\d+)/)||[])[1]
+         || (meta&&meta.total) || mtag('total') || 0);
+
+  const zh=doc.querySelector('h1 .zh')?.textContent.trim()
+         || (meta&&meta.han) || mtag('han')
+         || doc.querySelector('h1 .han')?.textContent.trim()
+         || doc.title;
+
+  let tags=[...doc.querySelectorAll('.fact')].map(x=>x.textContent.trim()).slice(0,4);
+  if(!tags.length && meta && meta.parts){
+    const p=meta.parts, L=[];
+    if(p.sort)   L.push(p.sort+' xếp câu');
+    if(p.listen) L.push(p.listen+' nghe');
+    if(p.read)   L.push(p.read+' đọc');
+    if(p.chat)   L.push(p.chat+' nhắn tin');
+    tags=L.slice(0,4);
+  }
   const mod=r.headers.get('last-modified');
   return {so:n, file, key, total, zh, tags, mod: mod?new Date(mod).getTime():0};
 }
