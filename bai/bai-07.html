@@ -258,11 +258,9 @@ textarea:focus{outline:none;border-color:var(--accent)}
 </div>
 
 <script>
-// Nội dung bài tập Bài 7 — 我的爱好是运动
-// 复现: từ và mẫu câu của HSK1 và Bài 1–6 được cài lại có chủ ý, đánh dấu ở phần giải thích.
 const DATA = {
 
-meta:{ id:'bai07', bai:'Bài 7', han:'我的爱好是运动', ten:'Sở thích của tôi là thể thao',
+meta:{ id:'bai07', bai:'Bài 7', han:'他篮球打得很好', ten:'Cậu ấy chơi bóng rổ rất giỏi',
        sach:'《新HSK教程2》', file:'bai-07.html' },
 
 // ───────────────────────── PHẦN 1 · SẮP XẾP CÂU ─────────────────────────
@@ -313,7 +311,7 @@ listen: [
   qvi:'Vì sao hôm qua em trai không đi chơi bóng rổ?',
   model:'因为那天下午下雨了。',
   modelvi:'Vì chiều hôm đó trời mưa.',
-  alt:['因为昨天下午下雨了。'],
+  alt:['因为昨天下午下雨了。','因为下雨了。','那天下午下雨了。','因为下雨，他在家看书。'],
   keys:[['下雨']],
   why:'Nghe câu hỏi 为什么 thì đi tìm chữ <b>因为</b> trong đoạn: 可是昨天他没有去，<b>因为那天下午下雨了</b>。<br>Câu đứng ngay sau 因为 chính là đáp án, chép lại là đủ.<br>Viết 那天下午 hay 昨天下午 đều đúng: câu trước đã nói 昨天他没有去, nên 那天 trong câu sau chính là ngày hôm qua. Chữ 那天 nhắc lại một mốc vừa nêu — đó là cách tiếng Trung tránh lặp chữ 昨天 hai lần.<br><span class="warn">Bẫy:</span> đoạn mở đầu bằng 他一下课就往外跑，去打篮球 — đó là thói quen HẰNG NGÀY, không phải chuyện hôm qua. Chữ 可是 là chỗ đoạn văn quay ngoắt sang hôm qua; nghe thấy 可是 là phải chú ý, vì thông tin đứng trước nó thường bị đem ra phủ lại.'
  },
@@ -326,7 +324,8 @@ listen: [
   qvi:'Thứ Bảy tuần trước, Bạch Gia Nguyệt đã làm gì?',
   model:'她教"我"踢足球。',
   modelvi:'Cậu ấy dạy "mình" đá bóng.',
-  keys:[['教','踢足球'],['教','足球']],
+  alt:['她教我踢足球。','教"我"踢足球。','她教我踢球。','白家月教我踢足球。'],
+  keys:[['教','踢足球'],['教','足球'],['教','球']],
   why:'Câu hỏi hỏi 做了什么 — đáp án phải là một HÀNH ĐỘNG, tức là phải có động từ.<br>Mốc 上个星期六 trong câu hỏi lặp lại y nguyên một cụm trong đoạn, nghe thấy cụm đó là biết đáp án nằm ngay sau: 上个星期六我们一起去运动，<b>她教我踢足球</b>。<br><span class="warn">Bẫy:</span> trả lời “她足球踢得很好” là nói về trình độ nói chung, không phải việc làm hôm thứ Bảy. Câu đó còn nằm TRƯỚC mốc thời gian được hỏi.'
  },
  {
@@ -338,7 +337,8 @@ listen: [
   qvi:'"Mình" chạy thế nào?',
   model:'"我"跑得太慢了。',
   modelvi:'"Mình" chạy chậm quá.',
-  keys:[['跑得','慢'],['很慢'],['太慢']],
+  alt:['"我"跑得很慢。','我跑得太慢了。','跑得太慢。','我跑得不快。'],
+  keys:[['跑得','慢'],['很慢'],['太慢'],['跑得','不快']],
   why:'Câu hỏi dùng <b>V + 得 + 怎么样</b> — kiểu hỏi riêng của bổ ngữ trạng thái, nên đáp án cũng phải trả lời bằng <b>V + 得 + tính từ</b>, không trả lời bằng một danh từ.<br>Đoạn có hai người cùng chạy, phải tách ra: 他跑得很快 là ANH TRAI, 我跑得太慢了 mới là “mình”. Câu hỏi hỏi về “我”.<br><span class="warn">Bẫy:</span> nghe thấy 跑得很快 trước nên nhiều bạn chép luôn — nhưng chủ ngữ của câu đó là 他.<br><span class="warn">Ôn lại:</span> chữ 等 của Bài 5 lại xuất hiện ở câu cuối.'
  }
 ],
@@ -360,6 +360,7 @@ read: {
    qvi:'"Mình" bắt đầu đá bóng từ khi nào?',
    model:'"我"从上小学开始踢足球。',
    modelvi:'"Mình" bắt đầu đá bóng từ hồi học tiểu học.',
+   alt:['从上小学开始。','"我"从上小学开始踢。','从小学开始踢足球。','上小学的时候开始的。'],
    keys:[['上小学'],['小学']],
    why:'Câu hỏi 什么时候 hỏi MỐC BẮT ĐẦU, nên đi tìm chữ <b>开始</b> trong bài: 我<b>从上小学开始</b>踢。<br>Cặp 从……开始 luôn đi với nhau: 从 mở ra mốc, 开始 đóng lại. Khi trả lời nên giữ nguyên cả cặp cho thành câu hoàn chỉnh.<br><span class="warn">Bẫy:</span> bài có tới bốn mốc — 上小学 · 第一年 · 后来 · 现在. Chỉ mốc đầu tiên trả lời được câu hỏi này; ba mốc sau là chuyện về sau.'
   },
@@ -369,7 +370,8 @@ read: {
    qvi:'Năm đầu "mình" đá thế nào? Còn về sau?',
    model:'第一年踢得不太好，后来慢慢地好了。',
    modelvi:'Năm đầu đá không giỏi lắm, về sau dần dần khá lên.',
-   keys:[['不太好','好了'],['不好','好了'],['不太好','慢慢']],
+   alt:['第一年踢得不太好，后来好了。','第一年不太好，后来慢慢地好了。','第一年踢得不好，后来慢慢好了。','开始踢得不太好，后来慢慢地好了。'],
+   keys:[['不太好','好了'],['不好','好了'],['不太好','慢慢'],['不好','慢慢']],
    why:'Câu hỏi có HAI vế (năm đầu · về sau) nên đáp án phải có đủ hai vế — thiếu một vế là mất điểm.<br>• Vế một: 第一年<b>踢得不太好</b>。<br>• Vế hai: 后来我每天下午都去踢，<b>慢慢地好了</b>。<br>Vế một dùng <b>V + 得 + 不 + tính từ</b> — nhớ chữ 不 nằm SAU 得. Chữ 了 ở vế hai là thứ làm nên sự đối lập: từ chưa giỏi đã chuyển thành khá.<br><span class="warn">Ôn lại:</span> 慢慢地 là tính từ láy + 地 của Bài 6 — bài này gặp lại nó ngay cạnh mẫu câu mới.'
   }
  ]
@@ -381,12 +383,12 @@ chat: [
   from:'小雪：明天下午我们去运动，好吗？',
   fromvi:'Chiều mai bọn mình đi tập thể thao nhé?',
   opts:[
-   {han:'好啊！我一到学校就去找你。', ok:true,
-    fb:'Đúng khung 一……就……: cả 一 và 就 đều đứng ngay TRƯỚC động từ (一下课 · 就去), chủ ngữ 我 đặt ở đầu câu.'},
    {han:'好啊！我到学校一就去找你。', ok:false,
     fb:'Sai vị trí chữ 一. 一 phải đứng TRƯỚC động từ thứ nhất: 一到学校. Viết 到学校一 là tách rời hai chữ vốn phải dính nhau.'},
    {han:'好啊！我一就到学校去找你。', ok:false,
-    fb:'Hai chữ 一 và 就 bị dồn vào một chỗ. Mỗi chữ gánh một vế: 一 + việc thứ nhất, 就 + việc thứ hai — không bao giờ đứng cạnh nhau.'}
+    fb:'Hai chữ 一 và 就 bị dồn vào một chỗ. Mỗi chữ gánh một vế: 一 + việc thứ nhất, 就 + việc thứ hai — không bao giờ đứng cạnh nhau.'},
+   {han:'好啊！我一到学校就去找你。', ok:true,
+    fb:'Đúng khung 一……就……: cả 一 và 就 đều đứng ngay TRƯỚC động từ (一下课 · 就去), chủ ngữ 我 đặt ở đầu câu.'}
   ]
  },
  {
@@ -405,10 +407,10 @@ chat: [
   from:'小雪：那你足球踢得怎么样？',
   fromvi:'Thế cậu đá bóng thế nào?',
   opts:[
-   {han:'我踢得还可以，可是跑得不快。', ok:true,
-    fb:'Phủ định của bổ ngữ trạng thái: chữ 不 đứng SAU 得, ngay trước tính từ — 跑得不快.'},
    {han:'我踢得还可以，可是不跑得快。', ok:false,
     fb:'不 đặt trước động từ thành ra “không chạy”, nghĩa khác hẳn. Muốn nói chạy KHÔNG NHANH thì 不 phải nằm sau 得.'},
+   {han:'我踢得还可以，可是跑得不快。', ok:true,
+    fb:'Phủ định của bổ ngữ trạng thái: chữ 不 đứng SAU 得, ngay trước tính từ — 跑得不快.'},
    {han:'我踢得还可以，可是跑不得快。', ok:false,
     fb:'不 chen vào giữa động từ và 得. 跑不得 không phải cách nói của mẫu này — thứ tự luôn là động từ + 得 + 不 + tính từ.'}
   ]
@@ -429,12 +431,12 @@ chat: [
   from:'小雪：那明天见！',
   fromvi:'Vậy mai gặp nhé!',
   opts:[
-   {han:'明天见！我们好好儿地玩一下。', ok:true,
-    fb:'Tính từ láy + <b>地</b> + động từ — đúng mẫu trọng tâm của Bài 6, lần này dùng với 好好儿 và động từ 玩.'},
    {han:'明天见！我们好好儿玩一下。', ok:false,
     fb:'Thiếu chữ 地. Khi tính từ láy bổ nghĩa cho động từ thì bắt buộc có 地 nối ở giữa — đây là lỗi bị trừ điểm nhiều nhất của Bài 6.'},
    {han:'明天见！我们玩好好儿地一下。', ok:false,
-    fb:'Cụm 好好儿地 phải đứng TRƯỚC động từ 玩, không được chen vào sau nó.'}
+    fb:'Cụm 好好儿地 phải đứng TRƯỚC động từ 玩, không được chen vào sau nó.'},
+   {han:'明天见！我们好好儿地玩一下。', ok:true,
+    fb:'Tính từ láy + <b>地</b> + động từ — đúng mẫu trọng tâm của Bài 6, lần này dùng với 好好儿 và động từ 玩.'}
   ]
  }
 ],
@@ -487,7 +489,7 @@ const chatFirst = [];
 const wIdx = 0;
 
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
-const clean = s => (s||'').replace(/[\s，。、？！；：""''（）()"'.,?!;:]/g,'');
+const clean = s => (s||'').replace(/[\s\u3000.,?!;:'"，。、；：？！…—·～〜《》【】「」『』（）()\[\]“”‘’\-－~]/g,'');
 const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
 const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
 const altBox = o => !o.alt ? '' :
@@ -656,7 +658,7 @@ $('#wText').oninput = ()=>{
 
 function wPayload(){
   return { name:$('#wName').value.trim(), topic:DATA.write[wIdx].topic,
-           text:$('#wText').value.trim(), score:(submitted? $('#sNum').textContent+'/13' : 'chưa nộp') };
+           text:$('#wText').value.trim(), score:(submitted? $('#sNum').textContent+'/'+TOTAL : 'chưa nộp') };
 }
 function copyText(str){
   let ok=false;

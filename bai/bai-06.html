@@ -258,7 +258,6 @@ textarea:focus{outline:none;border-color:var(--accent)}
 </div>
 
 <script>
-// Nội dung bài tập Bài 6 — tách riêng để dễ soát từ vựng
 const DATA = {
 
 meta:{ id:'bai06', bai:'Bài 6', han:'生日快乐', ten:'Chúc mừng sinh nhật Tiểu Tuyết',
@@ -312,7 +311,8 @@ listen: [
   qvi:'Vì sao họ không mua bánh kem?',
   model:'因为姐姐不喜欢吃蛋糕。',
   modelvi:'Vì chị gái không thích ăn bánh kem.',
-  keys:[['不喜欢','蛋糕']],
+  alt:['因为姐姐不喜欢蛋糕。','姐姐不喜欢吃蛋糕。','因为姐姐不爱吃蛋糕。','姐姐不吃蛋糕。'],
+  keys:[['不喜欢','蛋糕'],['不爱','蛋糕'],['不吃','蛋糕']],
   why:'Chỗ cho đáp án nằm ở câu: 妈妈想买一个大大的蛋糕，<b>可是姐姐不喜欢吃蛋糕，所以我们没有买</b>。<br>Nghe câu hỏi 为什么 thì phải tìm chữ <b>因为</b> hoặc chữ <b>所以</b> trong đoạn — ở đây là 所以. Nguyên nhân luôn nằm ở vế TRƯỚC chữ 所以.<br>Khi trả lời, đưa nguyên nhân ấy ra và đóng khung lại bằng 因为…… cho thành một câu hoàn chỉnh.<br><span class="warn">Bẫy:</span> nhiều bạn nghe thấy 妈妈想买…蛋糕 rồi trả lời “妈妈想买蛋糕” — đó là điều mẹ MUỐN, không phải lý do KHÔNG mua.'
  },
  {
@@ -324,7 +324,8 @@ listen: [
   qvi:'Sau khi ăn mì, Tiểu Tuyết đã làm gì?',
   model:'她打开了朋友们送的礼物。',
   modelvi:'Cậu ấy mở những món quà các bạn tặng.',
-  keys:[['打开','礼物']],
+  alt:['打开了礼物。','她打开了礼物。','打开朋友们送的礼物。','她看了朋友送的礼物。'],
+  keys:[['打开','礼物'],['开','礼物'],['看','礼物']],
   why:'Câu hỏi hỏi 做了什么 — tức là hỏi MỘT HÀNH ĐỘNG, nên đáp án phải là một động từ, không phải một đồ vật.<br>Mốc thời gian 吃了面条儿以后 trong câu hỏi lặp lại y nguyên một cụm trong đoạn: <b>吃了面条儿以后，小雪打开了朋友们送的礼物</b>。 Nghe thấy cụm lặp lại đó là biết đáp án nằm ngay sau nó.<br><span class="warn">Bẫy:</span> trả lời “礼物” là kể ĐỒ VẬT, không trả lời được chữ 做. Đáp án bắt buộc phải có động từ 打开.'
  },
  {
@@ -336,7 +337,8 @@ listen: [
   qvi:'Hôm sinh nhật Annie, vì sao "mình" không đến nhà cậu ấy?',
   model:'因为那天早上"我"不太舒服，妈妈让"我"在床上休息。',
   modelvi:'Vì sáng hôm đó "mình" thấy không khoẻ, mẹ bắt "mình" nằm nghỉ trên giường.',
-  keys:[['不太舒服'],['不舒服']],
+  alt:['因为"我"不太舒服。','因为那天"我"不舒服，在床上休息。','那天早上我不太舒服。','因为我不舒服，妈妈让我休息。'],
+  keys:[['不太舒服'],['不舒服'],['休息']],
   why:'Đoạn nói thẳng: 可是那天我没有去她家。<b>因为那天早上我不太舒服，妈妈让我在床上休息</b>。 Câu có chữ 因为 đứng ngay sau câu 没有去 chính là lý do.<br>Chỉ cần chép lại vế 不太舒服 là đã đủ ý; thêm 妈妈让我在床上休息 thì câu trả lời đầy đủ hơn.<br><span class="warn">Bẫy:</span> đoạn có hai mốc thời gian — 上个星期六 (sinh nhật) và 那天早上 (bị mệt). Lý do nằm ở mốc 那天早上; bám nhầm sang việc 打电话 ở cuối đoạn thì lạc câu hỏi, vì gọi điện là việc “mình” ĐÃ làm, không phải lý do không đến.'
  }
 ],
@@ -358,7 +360,8 @@ read: {
    qvi:'Vì sao nhà "mình" rất ít khi ăn cơm cùng nhau?',
    model:'因为爸爸每天都很忙，早上很早就出门，晚上很晚才回家。',
    modelvi:'Vì bố ngày nào cũng rất bận, sáng đi rất sớm, tối về rất muộn.',
-   keys:[['忙'],['很早','很晚']],
+   alt:['因为爸爸每天都很忙。','因为爸爸很忙，早上很早就出门。','因为爸爸早上很早就出门，晚上很晚才回家。','爸爸工作很忙。'],
+   keys:[['忙'],['很早','很晚'],['早','晚']],
    why:'Đáp án nằm ngay trong câu thứ hai của bài: 爸爸每天都很忙，早上很早就出门，晚上很晚才回家，<b>所以我们很少一起吃饭</b>。<br>Chữ 所以 cắt câu làm hai: phần SAU 所以 chính là câu hỏi đang hỏi, nên phần TRƯỚC 所以 chính là đáp án. Gặp câu hỏi 为什么, việc đầu tiên là đi tìm 所以 hoặc 因为 trong bài.<br>Hai chữ 就 và 才 ở đây nói lên thái độ: 很早<b>就</b>出门 = sớm đến mức ấy đã đi rồi; 很晚<b>才</b>回家 = muộn đến thế mới về. Cả hai cùng nhấn vào một ý: bố ở nhà rất ít.'
   },
   {
@@ -367,6 +370,7 @@ read: {
    qvi:'"Mình" định tặng bố món quà gì? Vì sao lại tặng món đó?',
    model:'送爸爸一张自己画的画儿，因为爸爸最喜欢看"我"画的画儿。',
    modelvi:'Tặng bố một bức tranh tự vẽ, vì bố thích nhất là ngắm tranh "mình" vẽ.',
+   alt:['送一张"我"自己画的画儿，因为爸爸最喜欢看。','送爸爸一张画儿，因为他最喜欢我画的画儿。','想送自己画的画儿，因为爸爸喜欢。','一张画儿，因为爸爸最喜欢看我画的画儿。'],
    keys:[['画儿','喜欢'],['画','最喜欢'],['画儿','因为']],
    why:'Câu hỏi có HAI vế nên đáp án cũng phải có hai vế — thiếu một vế là mất điểm.<br>• Vế “tặng gì”: 今年我给他<b>画了一张画儿</b> → món quà là một bức tranh tự vẽ.<br>• Vế “vì sao”: ngay sau đó là chữ 因为 — <b>因为爸爸最喜欢看我画的画儿</b>。<br>Cả hai vế nằm trong cùng MỘT câu, nối với nhau bằng 因为. Gặp câu hỏi hai vế, hãy tìm câu nào trong bài chứa đủ cả hành động lẫn chữ 因为.'
   }
@@ -379,10 +383,10 @@ chat: [
   from:'小雪：这个星期六是我的生日，你能来我家吗？',
   fromvi:'Thứ Bảy này là sinh nhật mình, cậu đến nhà mình được không?',
   opts:[
-   {han:'太好了！我一定去。生日快乐！', ok:true,
-    fb:'Chuẩn. Được mời thì trả lời CÓ/KHÔNG trước đã, rồi mới chúc. 一定 (nhất định) làm lời nhận lời chắc chắn và thân tình hơn hẳn “我去”.'},
    {han:'你家在哪儿？', ok:false,
     fb:'Câu này đúng ngữ pháp nhưng SAI THỨ TỰ: bạn vừa được mời mà chưa nhận lời đã hỏi địa chỉ, nghe như đang cân nhắc. Nhận lời trước, hỏi đường sau.'},
+   {han:'太好了！我一定去。生日快乐！', ok:true,
+    fb:'Chuẩn. Được mời thì trả lời CÓ/KHÔNG trước đã, rồi mới chúc. 一定 (nhất định) làm lời nhận lời chắc chắn và thân tình hơn hẳn “我去”.'},
    {han:'我很忙，不能去。', ok:false,
     fb:'Từ chối thẳng mà không có một chữ nào làm mềm. Người Trung Quốc thường nói 真不好意思，那天我有事儿…… rồi mới từ chối. Ở bài này ta chọn hướng nhận lời.'}
   ]
@@ -391,12 +395,12 @@ chat: [
   from:'小雪：谢谢你！下午四点，可以吗？',
   fromvi:'Cảm ơn cậu! Bốn giờ chiều nhé, được không?',
   opts:[
-   {han:'可以，我四点就到。', ok:true,
-    fb:'就 ở đây nghĩa là “đúng giờ ấy là đã tới rồi”, nghe rất chắc chắn. Đây đúng là chữ 就 đã học ở Bài 1.'},
    {han:'可以，我四点才到。', ok:false,
     fb:'才 mang nghĩa MUỘN hơn mong đợi — “mãi bốn giờ mới tới”. Dùng ở đây thành ra than phiền. 就 mới là chữ cần dùng.'},
    {han:'我不知道。', ok:false,
-    fb:'Người ta hỏi một giờ cụ thể, trả lời “không biết” là bỏ lửng cuộc hẹn. Nếu thật sự chưa chắc thì nói 我看一下时间，晚上告诉你，好吗？'}
+    fb:'Người ta hỏi một giờ cụ thể, trả lời “không biết” là bỏ lửng cuộc hẹn. Nếu thật sự chưa chắc thì nói 我看一下时间，晚上告诉你，好吗？'},
+   {han:'可以，我四点就到。', ok:true,
+    fb:'就 ở đây nghĩa là “đúng giờ ấy là đã tới rồi”, nghe rất chắc chắn. Đây đúng là chữ 就 đã học ở Bài 1.'}
   ]
  },
  {
@@ -415,22 +419,22 @@ chat: [
   from:'小雪：太好了！我妈妈会做长长的面条儿。',
   fromvi:'Thích quá! Mẹ mình sẽ làm mì sợi dài dài.',
   opts:[
-   {han:'真的吗？我没吃过长寿面。', ok:true,
-    fb:'过 ở đây là trợ từ chỉ KINH NGHIỆM đã học ở Bài 4, đứng ngay sau động từ: 吃<b>过</b>. Câu phủ định dùng 没 chứ không dùng 不.'},
    {han:'真的吗？我没吃长寿面过。', ok:false,
     fb:'Sai vị trí. 过 phải dính liền sau ĐỘNG TỪ (吃过), không được đẩy xuống cuối câu. Đây là lỗi người Việt hay mắc vì tiếng Việt nói “ăn mì trường thọ bao giờ chưa”.'},
    {han:'真的吗？我不吃过长寿面。', ok:false,
-    fb:'Phủ định của 过 luôn là 没, không bao giờ là 不. 不吃 nghĩa là “không ăn (vì không muốn)”, khác hẳn “chưa từng ăn”.'}
+    fb:'Phủ định của 过 luôn là 没, không bao giờ là 不. 不吃 nghĩa là “không ăn (vì không muốn)”, khác hẳn “chưa từng ăn”.'},
+   {han:'真的吗？我没吃过长寿面。', ok:true,
+    fb:'过 ở đây là trợ từ chỉ KINH NGHIỆM đã học ở Bài 4, đứng ngay sau động từ: 吃<b>过</b>. Câu phủ định dùng 没 chứ không dùng 不.'}
   ]
  },
  {
   from:'小雪：那星期六见！',
   fromvi:'Vậy thứ Bảy gặp nhé!',
   opts:[
-   {han:'星期六见！我们一定要高高兴兴地过这个生日。', ok:true,
-    fb:'Đúng trọng tâm Bài 6: tính từ láy + <b>地</b> + động từ. 高高兴兴地过 = tổ chức/trải qua một cách thật vui vẻ.'},
    {han:'星期六见！我们一定要高高兴兴过这个生日。', ok:false,
     fb:'Thiếu chữ 地. Khi tính từ láy bổ nghĩa cho ĐỘNG TỪ thì bắt buộc có 地 nối ở giữa. Đây là lỗi bị trừ điểm nhiều nhất của bài này.'},
+   {han:'星期六见！我们一定要高高兴兴地过这个生日。', ok:true,
+    fb:'Đúng trọng tâm Bài 6: tính từ láy + <b>地</b> + động từ. 高高兴兴地过 = tổ chức/trải qua một cách thật vui vẻ.'},
    {han:'星期六见！我们一定要过高高兴兴地这个生日。', ok:false,
     fb:'Sai vị trí hẳn. Cụm 高高兴兴地 phải đứng TRƯỚC động từ 过, không được chen vào giữa động từ và tân ngữ.'}
   ]
@@ -485,7 +489,7 @@ const chatFirst = [];
 const wIdx = 0;
 
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
-const clean = s => (s||'').replace(/[\s，。、？！；：""''（）()"'.,?!;:]/g,'');
+const clean = s => (s||'').replace(/[\s\u3000.,?!;:'"，。、；：？！…—·～〜《》【】「」『』（）()\[\]“”‘’\-－~]/g,'');
 const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
 const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
 const altBox = o => !o.alt ? '' :
@@ -654,7 +658,7 @@ $('#wText').oninput = ()=>{
 
 function wPayload(){
   return { name:$('#wName').value.trim(), topic:DATA.write[wIdx].topic,
-           text:$('#wText').value.trim(), score:(submitted? $('#sNum').textContent+'/13' : 'chưa nộp') };
+           text:$('#wText').value.trim(), score:(submitted? $('#sNum').textContent+'/'+TOTAL : 'chưa nộp') };
 }
 function copyText(str){
   let ok=false;
