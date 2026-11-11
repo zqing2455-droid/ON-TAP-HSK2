@@ -142,6 +142,19 @@ textarea:focus{outline:none;border-color:var(--accent)}
   .chip{padding:5px 9px;font-size:.74rem}
 }
 </style>
+<!--HSK2-META {"key": "bai06", "bai": "Bài 6", "han": "生日快乐", "ten": "Chúc mừng sinh nhật Tiểu Tuyết", "file": "bai-06.html", "total": 13, "parts": {"sort": 3, "listen": 3, "read": 2, "chat": 5, "write": 1}} -->
+<meta name="hsk2-key" content="bai06">
+<meta name="hsk2-bai" content="Bài 6">
+<meta name="hsk2-han" content="生日快乐">
+<meta name="hsk2-ten" content="Chúc mừng sinh nhật Tiểu Tuyết">
+<meta name="hsk2-total" content="13">
+<script>
+/* Hằng số TĨNH cho index.html — giữ nguyên dạng này, đừng đổi thành biểu thức. */
+const PAGE_KEY = "bai06";
+const PAGE_TOTAL = 13;
+const PAGE_HAN = "生日快乐";
+const PAGE_LS = "hsk2-bai06-v1";
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -274,7 +287,7 @@ sort: [
   ],
   show:['C','A','B'],
   answer:['B','C','A'],
-  why:'<b>B đứng đầu</b> vì chỉ câu này gọi tên nhân vật (小月). Hai câu kia đều dùng 她 — đại từ phải có người đứng trước thì mới biết chỉ ai.<br><b>C trước A</b>: 唱生日歌 là việc cả lớp làm, 她说谢谢大家 là phản ứng SAU khi được hát mừng. Đảo lại thì thành cảm ơn trước khi có chuyện gì xảy ra.<br>Aâu A cũng chính là mẫu câu trọng tâm của bài: tính từ láy + <b>地</b> + động từ (高高兴兴地说).'
+  why:'<b>B đứng đầu</b> vì chỉ câu này gọi tên nhân vật (小月). Hai câu kia đều dùng 她 — đại từ phải có người đứng trước thì mới biết chỉ ai.<br><b>C trước A</b>: 唱生日歌 là việc cả lớp làm, 她说谢谢大家 là phản ứng SAU khi được hát mừng. Đảo lại thì thành cảm ơn trước khi có chuyện gì xảy ra.<br>Câu A cũng chính là mẫu câu trọng tâm của bài: tính từ láy + <b>地</b> + động từ (高高兴兴地说).'
  },
  {
   id:'s2',
@@ -473,7 +486,12 @@ const FORM = {
 const $  = s => document.querySelector(s);
 const el = (t,c,h) => { const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e; };
 const TOTAL = DATA.sort.length + DATA.listen.length + DATA.read.qs.length + DATA.chat.length;
-const LS = 'hsk2-' + DATA.meta.id + '-v1';
+const KEY = DATA.meta.id;                 // index.html dò bài theo hằng số này
+const LS = 'hsk2-' + KEY + '-v1';
+// index.html đọc được tiến độ mà không cần biết cấu trúc bên trong trang
+try{ localStorage.setItem('hsk2-meta-'+KEY, JSON.stringify(
+  {key:KEY, bai:DATA.meta.bai, han:DATA.meta.han, ten:DATA.meta.ten, total:TOTAL, file:DATA.meta.file})); }catch(e){}
+window.HSK2 = {key:KEY, bai:DATA.meta.bai, han:DATA.meta.han, ten:DATA.meta.ten, total:TOTAL, ls:LS};
 document.querySelector('title').textContent = 'Bài tập ' + DATA.meta.bai + ' · ' + DATA.meta.han;
 $('#hTitle').innerHTML = 'Bài tập ' + DATA.meta.bai + ' · <span class="han">' + DATA.meta.han + '</span>';
 $('#hSub').textContent = DATA.meta.sach + ' · ' + DATA.meta.ten + ' — 5 phần · ' + TOTAL + ' câu chấm điểm';
@@ -675,7 +693,7 @@ function copyText(str){
 }
 $('#wCopy').onclick = async ()=>{
   const p = wPayload();
-  const s = 'Bài 6 · '+(p.name||'(chưa điền tên)')+'\nĐề: '+p.topic+'\n\n'+p.text;
+  const s = DATA.meta.bai+' · '+(p.name||'(chưa điền tên)')+'\nĐề: '+p.topic+'\n\n'+p.text;
   if(await copyText(s)){
     $('#wFb').innerHTML='<div class="fb ok">Đã sao chép. Em dán vào Zalo gửi cô nhé.</div>';
   }else{
@@ -820,7 +838,15 @@ window.__ready = true;
 /* ═══════════ LƯU TẠM TRONG MÁY ═══════════ */
 function save(){
   try{
+    let __done=0;
+    DATA.sort.forEach(it=>{ if(picked[it.id].length===3) __done++; });
+    DATA.listen.forEach(it=>{ if(hanCount(($('#ta-'+it.id)||{}).value)>0) __done++; });
+    DATA.read.qs.forEach(q=>{ if(hanCount(($('#ta-'+q.id)||{}).value)>0) __done++; });
+    __done += chatFirst.filter(x=>x!==undefined).length;
     const o={picked, turn, chatFirst, submitted,
+      // ba trường dưới đây dành cho index.html vẽ tiến độ — đừng xoá
+      key:KEY, done:__done, total:TOTAL,
+      score:(submitted && $('#sNum') ? Number($('#sNum').textContent) : null),
       ta:{}, name:$('#wName').value, wText:$('#wText').value};
     DATA.listen.forEach(it=> o.ta[it.id]=($('#ta-'+it.id)||{}).value||'');
     DATA.read.qs.forEach(q=> o.ta[q.id]=($('#ta-'+q.id)||{}).value||'');
