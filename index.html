@@ -79,6 +79,19 @@ footer{margin-top:44px; padding-top:16px; border-top:1px solid var(--line); font
   lần sau mở lại vẫn thấy mình đã làm tới đâu.</p>
 </header>
 
+<h2 class="sec">Học từ vựng qua flashcard</h2>
+<div class="list">
+  <a class="les" href="flashcard/" id="fcCard">
+    <div class="seal">词</div>
+    <div class="body">
+      <div class="meta">Bộ thẻ từ vựng<span class="new-tag">MỚI</span></div>
+      <div class="ttl">Học từ vựng qua flashcard</div>
+      <div class="tags"><span>Lật thẻ hai mặt</span><span>Nghe đọc</span><span>Mẹo nhớ chữ</span><span>Đánh dấu đã thuộc</span></div>
+    </div>
+    <div class="prog" id="fcNum">&nbsp;</div>
+  </a>
+</div>
+
 <h2 class="sec">Các bài ôn</h2>
 <div class="list" id="list"></div>
 
@@ -165,6 +178,17 @@ async function readLesson(n){
       '<div class="prog">'+(pct===100?'✓ Xong':d+'/'+l.total)+'<div class="bar"><i style="width:'+pct+'%"></i></div></div>';
     list.append(a);
   });
+})();
+
+/* Đếm số bộ thẻ trong thư mục flashcard/ để hiện lên thẻ dẫn đường. */
+(async()=>{
+  const el=document.getElementById('fcNum'); if(!el) return;
+  let n=0;
+  for(let i=1;i<=60;i++){
+    try{ const r=await fetch('flashcard/bai-'+String(i).padStart(2,'0')+'.html',{method:'HEAD',cache:'no-cache'});
+         if(!r.ok) break; n++; }catch(e){ break; }
+  }
+  el.textContent = n ? n+' bài' : '';
 })();
 </script>
 </body>

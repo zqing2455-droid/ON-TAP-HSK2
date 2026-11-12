@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="fc-key" content="flashcard-hsk2-bai01">
+<meta name="fc-han" content="她请我们吃了北京烤鸭">
+<meta name="fc-total" content="15">
+<meta name="fc-sub" content="14 từ mới + 1 danh từ riêng">
+<meta name="fc-lesson" content="1">
+<title>Flashcard từ vựng · HSK2 Bài 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Quicksand:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F4EC; --ink:#26221A; --soft:#7A6E64;
+  --accent:#E3963B; --rose:#C2697A; --green:#4F7E62; --blue:#4A7398;
+  --card:#FFFDF7; --line:#E4DCCB;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Quicksand',sans-serif; font-weight:600;
+  padding:18px 14px 80px; line-height:1.5;
+}
+.wrap{max-width:720px;margin:0 auto}
+.backlink{font-size:.85rem;margin-bottom:10px}
+.backlink a{color:var(--soft);text-decoration:none;font-weight:700}
+.backlink a:hover{color:var(--ink)}
+.han{font-family:'Noto Serif SC',serif}
+.py{font-family:'Space Mono',monospace}
+
+/* ---------- đầu trang ---------- */
+header{text-align:center;margin-bottom:14px}
+header .kicker{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:800}
+header h1{font-size:1.45rem;font-weight:800;letter-spacing:-.3px;margin-top:4px}
+header h1 .han{color:var(--rose)}
+header p{color:var(--soft);font-size:.9rem;margin-top:4px}
+
+/* ---------- thanh điều khiển ---------- */
+.bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.bar + .bar{margin-top:0}
+.btn{
+  font-family:inherit;font-weight:700;font-size:.88rem;cursor:pointer;
+  background:var(--card);color:var(--soft);border:1.5px solid var(--line);
+  border-radius:999px;padding:9px 15px;min-height:42px;transition:.15s;
+}
+.btn:hover{color:var(--ink);border-color:var(--soft)}
+.btn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* ---------- thẻ lật ---------- */
+.flip{perspective:1600px;margin-bottom:16px}
+.inner{
+  position:relative;width:100%;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.4,.1,.3,1), height .35s ease;
+}
+.inner.flipped{transform:rotateY(180deg)}
+.face{
+  position:absolute;top:0;left:0;width:100%;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  background:var(--card);border:1.5px solid var(--line);border-radius:22px;
+  box-shadow:0 3px 0 var(--line);
+  padding:20px 18px;cursor:pointer;
+}
+.face.back{transform:rotateY(180deg)}
+
+/* --- mặt trước --- */
+.front .inner-front{
+  min-height:270px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:6px;
+}
+.front .hz{font-family:'Noto Serif SC',serif;font-weight:900;font-size:4.6rem;line-height:1.1;color:var(--rose)}
+.front .vnfront{font-size:1.75rem;font-weight:800;line-height:1.3;max-width:420px}
+
+.tag{
+  position:absolute;top:16px;left:16px;
+  width:30px;height:30px;border-radius:50%;
+  background:#F3E7D5;color:var(--accent);
+  font-size:.82rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.pos{
+  position:absolute;top:16px;right:16px;
+  font-size:.7rem;font-weight:800;letter-spacing:.4px;
+  color:#fff;background:var(--blue);border-radius:999px;padding:4px 10px;
+}
+.flipnote{
+  position:absolute;left:0;right:0;bottom:12px;text-align:center;
+  font-size:.74rem;color:var(--soft);opacity:.75;
+}
+.back .flipnote{position:static;margin-top:10px}
+
+/* ---------- phân loại ---------- */
+.state{
+  position:absolute;top:16px;right:16px;
+  font-size:.7rem;font-weight:800;border-radius:999px;padding:4px 10px;
+}
+.state.known{background:#E4EFE7;color:var(--green)}
+.state.review{background:#FAEBD5;color:#B0751E}
+.face.st-known{border-color:var(--green)}
+.face.st-review{border-color:var(--accent)}
+
+.acts{display:flex;gap:8px;margin-top:16px}
+.acts button{
+  flex:1 1 0;font-family:inherit;font-weight:800;font-size:.86rem;cursor:pointer;
+  border-radius:999px;padding:11px 8px;min-height:46px;
+  border:1.5px solid var(--line);background:var(--card);color:var(--soft);transition:.15s;
+}
+.acts button:hover{border-color:var(--soft);color:var(--ink)}
+.acts .ok.on{background:var(--green);border-color:var(--green);color:#fff}
+.acts .re.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.counts{text-align:center;font-size:.82rem;color:var(--soft);margin:2px 0 14px}
+.counts .cK{color:var(--green);font-weight:800}
+.counts .cR{color:#B0751E;font-weight:800}
+.empty{
+  text-align:center;color:var(--soft);font-weight:700;
+  background:var(--card);border:1.5px dashed var(--line);border-radius:22px;padding:46px 20px;
+}
+
+/* --- mặt sau --- */
+.bhead{display:flex;align-items:center;gap:12px;margin:30px 0 4px}
+.bhead .hz{font-family:'Noto Serif SC',serif;font-weight:900;font-size:2.1rem;color:var(--rose);line-height:1.2}
+.bhead .pin{font-family:'Space Mono',monospace;font-size:.92rem;color:var(--soft)}
+.bhead .vnb{font-size:1.3rem;font-weight:800;line-height:1.3}
+
+.mean{
+  margin:10px 0 2px;
+  background:#FBF3E8;border:1.5px dashed var(--line);border-radius:14px;padding:10px 12px;
+}
+.mean .vn{font-size:1.12rem;font-weight:800;color:var(--ink)}
+.mean .hv{font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin-top:3px}
+
+.use{
+  margin-top:10px;border-left:4px solid var(--green);
+  background:#F1F5F1;border-radius:0 12px 12px 0;padding:9px 12px;
+}
+.use .ulab{
+  font-size:.68rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--green);margin-bottom:2px;
+}
+.use .utxt{font-size:.9rem;font-weight:600;line-height:1.55}
+
+.tip{
+  margin-top:8px;border-left:4px solid var(--rose);
+  background:#FAF1F2;border-radius:0 12px 12px 0;padding:9px 12px;
+}
+.tip .ulab{
+  font-size:.68rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--rose);margin-bottom:2px;
+}
+.tip .utxt{font-size:.9rem;font-weight:600;line-height:1.55}
+
+.sec{margin-top:14px}
+.sec h3{
+  font-size:.7rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--soft);border-bottom:1.5px solid var(--line);padding-bottom:5px;margin-bottom:8px;
+}
+.item{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+.item + .item{border-top:1px dashed var(--line)}
+.item .body{flex:1 1 auto;min-width:0}
+.item .zh{font-family:'Noto Serif SC',serif;font-weight:700;font-size:1.18rem;line-height:1.35}
+.item .pz{font-family:'Space Mono',monospace;font-size:.74rem;color:var(--soft);margin-top:1px}
+.item .vn2{font-size:.9rem;color:var(--green);font-weight:700;margin-top:2px}
+.item .idx{font-family:'Quicksand',sans-serif;font-size:.8rem;color:var(--soft);margin-right:6px}
+.item .hl{color:var(--rose)}
+
+/* --- nút loa --- */
+.spk{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:none;border:1.5px solid var(--line);border-radius:999px;
+  width:44px;height:44px;cursor:pointer;color:var(--accent);font-size:1.1rem;
+  transition:.15s;flex:0 0 auto;
+}
+.spk:hover{background:#F9F1E4;border-color:var(--accent)}
+.spk.sm{width:30px;height:30px;font-size:.8rem;margin-top:2px}
+.spk.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ---------- điều hướng ---------- */
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:4px}
+.nav .arrow{
+  width:52px;height:52px;border-radius:50%;font-size:1.3rem;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink);
+  cursor:pointer;font-family:inherit;
+}
+.nav .arrow:hover{border-color:var(--soft)}
+.count{font-family:'Space Mono',monospace;font-size:.95rem;color:var(--soft);min-width:72px;text-align:center}
+.prog{height:6px;background:var(--line);border-radius:99px;margin-top:14px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .25s}
+
+.hint{text-align:center;color:var(--soft);font-size:.78rem;margin-top:16px;line-height:1.75}
+.hidden{display:none}
+
+/* ---------- chế độ xem tất cả ---------- */
+#stage.grid .flip{margin-bottom:14px}
+#stage.grid .front .inner-front{min-height:190px}
+#stage.grid .front .hz{font-size:3rem}
+#stage.grid .front .vnfront{font-size:1.3rem}
+
+@media(max-width:480px){
+  .front .hz{font-size:3.3rem}
+  .front .vnfront{font-size:1.45rem}
+  .item .zh{font-size:1.1rem}
+  .pos{font-size:.66rem;padding:3px 9px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="backlink"><a href="./">← Danh sách flashcard</a></p>
+
+  <header>
+    <div class="kicker">新HSK教程 2 · Bài 1</div>
+    <h1><span class="han">她请我们吃了北京烤鸭</span></h1>
+    <p>Flashcard từ vựng — 14 từ mới + 1 danh từ riêng</p>
+  </header>
+
+  <div class="bar">
+    <button class="btn on" id="dir-zh">汉字 → Việt</button>
+    <button class="btn" id="dir-vi">Việt → 汉字</button>
+  </div>
+  <div class="bar">
+    <button class="btn on" id="mode-deck">Lật từng thẻ</button>
+    <button class="btn" id="mode-grid">Xem tất cả</button>
+    <button class="btn" id="shuffle">Trộn thẻ</button>
+    <button class="btn" id="reset">Xoá phân loại</button>
+  </div>
+  <div class="bar">
+    <button class="btn on" id="f-all">Tất cả</button>
+    <button class="btn" id="f-new">Chưa phân loại</button>
+    <button class="btn" id="f-review">Cần ôn thêm</button>
+    <button class="btn" id="f-known">Đã thuộc</button>
+  </div>
+
+  <div class="counts" id="counts"></div>
+
+  <div id="stage"></div>
+
+  <div class="nav" id="nav">
+    <button class="arrow" id="prev" aria-label="Thẻ trước">‹</button>
+    <div class="count" id="count">1 / 15</div>
+    <button class="arrow" id="next" aria-label="Thẻ sau">›</button>
+  </div>
+  <div class="prog" id="progwrap"><i id="prog" style="width:7%"></i></div>
+
+  <p class="hint">
+    Chạm vào thẻ để lật · nhấn 🔊 để nghe đọc · lật xong thì chọn “Đã thuộc” hoặc “Cần ôn thêm”<br>
+    Bàn phím: ← → đổi thẻ · phím cách lật thẻ · phím 1 đã thuộc · phím 2 cần ôn thêm<br>
+    Phân loại được lưu lại trên máy, lần sau mở vẫn còn
+  </p>
+
+</div>
+
+<script>
+const DATA = {
+  lesson: 1,
+  words: [
+    {hz:"就", py:"jiù", pos:"phó từ · adv.", vn:"chính là, đúng là; ngay", hv:"TỰU", use:"就是 dùng khi xác nhận lại điều mình đã đoán — “đúng là người/vật đó”: 你就是…吧？ 现在就 nhấn mạnh làm NGAY, không chờ: 我现在就去。Ngoài ra mẫu 有事就找我 nghĩa là “hễ có việc thì tìm tôi ngay”.", tip:"Bên trái là 京 trong 北京 — “đúng là Bắc Kinh, chính nó, không phải nơi nào khác”. Âm Hán Việt TỰU như trong “tựu trường”: đến đúng ngày là có mặt ngay.",
+      ph:[["就是", "jiù shì", "chính là, đúng là"], ["现在就", "xiànzài jiù", "ngay bây giờ"]],
+      se:[["你们就是她的学生吧？", "Nǐmen jiù shì tā de xuésheng ba?", "Các em chính là học sinh của cô ấy phải không?", "就是"], ["好的，我现在就去。", "Hǎo de, wǒ xiànzài jiù qù.", "Được, tôi đi ngay bây giờ.", "现在就"]]},
+
+    {hz:"给", py:"gěi", pos:"giới từ · prep.", vn:"cho, với (dẫn ra người nhận hành động)", hv:"CẤP", use:"Dùng khi nêu rõ làm việc gì CHO AI. Trật tự chuẩn của bài: 给 + người + động từ — 给我打电话、给你介绍. Người Việt hay bê nguyên trật tự tiếng Việt “gọi điện cho tôi” ra sau động từ, phải sửa thành 给我打电话。", tip:"Bộ 纟 (sợi tơ) + 合 (hợp lại): gom đồ lại trao cho người khác. Âm Hán Việt CẤP — như “cung cấp, cấp cho ai cái gì”, đúng nghĩa luôn.",
+      ph:[["给…打电话", "gěi… dǎ diànhuà", "gọi điện cho…"], ["给…介绍", "gěi… jièshào", "giới thiệu cho…"]],
+      se:[["一飞给我打电话了。", "Yīfēi gěi wǒ dǎ diànhuà le.", "Nhất Phi đã gọi điện cho tôi.", "给我打电话"], ["我给你介绍一下。", "Wǒ gěi nǐ jièshào yíxià.", "Tôi giới thiệu cho bạn một chút nhé.", "给你介绍"]]},
+
+    {hz:"让", py:"ràng", pos:"động từ · v.", vn:"để, bảo, cho phép (ai làm gì)", hv:"NHƯỢNG", use:"Dùng khi ai đó bảo hoặc cho phép người khác làm gì: chủ ngữ + 让 + người + việc. 让我来 là xin được làm thay (“để tôi”); 老师让… là thuật lại lời nhờ, lời dặn của người khác.", tip:"Bộ 讠 (lời nói) + 上: mở lời bảo người khác làm. Âm Hán Việt NHƯỢNG như “nhượng bộ, nhường” — nhường cho người ta làm việc đó.",
+      ph:[["让我来", "ràng wǒ lái", "để tôi (làm)"], ["老师让…", "lǎoshī ràng…", "cô giáo bảo…"]],
+      se:[["她让我来接你们。", "Tā ràng wǒ lái jiē nǐmen.", "Cô ấy bảo tôi đến đón các bạn.", "让我来"], ["王老师让我们说中文。", "Wáng lǎoshī ràng wǒmen shuō Zhōngwén.", "Cô Vương bảo chúng tôi nói tiếng Trung.", "老师让"]]},
+
+    {hz:"接", py:"jiē", pos:"động từ · v.", vn:"đón; nhận; nghe (điện thoại)", hv:"TIẾP", use:"接人 dùng khi đi đón ai ở sân bay, nhà ga, trường học: 我来接你们。接电话 là nghe máy. Không dùng 接 cho nghĩa “đón chào, chào đón”.", tip:"Bộ 扌 (bàn tay): dang tay ra đón, ra nhận. Âm Hán Việt TIẾP — tiếng Việt dùng y hệt: “tiếp đón” khách, “tiếp” điện thoại.",
+      ph:[["接人", "jiē rén", "đón người"], ["接电话", "jiē diànhuà", "nghe điện thoại"]],
+      se:[["我去机场接朋友。", "Wǒ qù jīchǎng jiē péngyou.", "Tôi đi sân bay đón bạn.", "接朋友"], ["不好意思，我接个电话。", "Bù hǎoyìsi, wǒ jiē ge diànhuà.", "Xin lỗi, tôi nghe điện thoại một chút.", "接个电话"]]},
+
+    {hz:"次", py:"cì", pos:"lượng từ · m.", vn:"lần (số lần xảy ra của một việc)", hv:"THỨ", use:"Dùng khi đếm số lần xảy ra của một việc, luôn đứng sau số từ: 一次、第一次、下次; hỏi số lần thì dùng 几次。", tip:"Âm Hán Việt THỨ như “thứ tự, thứ nhất”. 第一次 đọc theo Hán Việt là “đệ nhất thứ” — ra ngay nghĩa “lần thứ nhất”.",
+      ph:[["第一次", "dì-yī cì", "lần đầu tiên"], ["下次", "xià cì", "lần sau"]],
+      se:[["你们是第一次来北京吗？", "Nǐmen shì dì-yī cì lái Běijīng ma?", "Các bạn lần đầu đến Bắc Kinh à?", "第一次"], ["下次我请你吃饭。", "Xià cì wǒ qǐng nǐ chī fàn.", "Lần sau tôi mời bạn ăn cơm.", "下次"]]},
+
+    {hz:"旅游", py:"lǚyóu", pos:"động từ · v.", vn:"du lịch, đi chơi xa", hv:"LỮ DU", use:"Dùng khi đi chơi xa, du lịch một nơi khác; thường đi với 来 / 去 + địa điểm + 旅游. Đi chơi loanh quanh gần nhà thì nói 出去玩儿, không nói 旅游。", tip:"旅 LỮ như “lữ khách, lữ hành”; 游 DU như “du lịch, du học” và có bộ 氵 (nước) — rong ruổi đây đó. Ghép lại chính là “lữ du”.",
+      ph:[["来旅游", "lái lǚyóu", "đến (đây) du lịch"], ["去…旅游", "qù… lǚyóu", "đi du lịch ở…"]],
+      se:[["我们是来旅游的。", "Wǒmen shì lái lǚyóu de.", "Chúng tôi đến đây để du lịch.", "来旅游"], ["我很想去中国旅游。", "Wǒ hěn xiǎng qù Zhōngguó lǚyóu.", "Tôi rất muốn đi du lịch Trung Quốc.", "去中国旅游"]]},
+
+    {hz:"帮忙", py:"bāngmáng", pos:"động từ · v.", vn:"giúp đỡ, giúp một tay", hv:"BANG MANG", use:"Dùng khi nhờ hoặc giúp một việc cụ thể. Đây là từ ly hợp: chen thành phần vào giữa — 帮个忙、帮我一个忙; KHÔNG nói 帮忙我. Nhờ người khác thì dùng 叫 / 请 + người + 帮忙。", tip:"帮 BANG như “bang hội” — người cùng bang thì ra tay giúp nhau. 忙 có bộ 忄 (trái tim) + 亡: bận đến mất cả hồn. Giúp người đang bận = 帮忙.",
+      ph:[["帮个忙", "bāng ge máng", "giúp một việc"], ["叫…帮忙", "jiào… bāngmáng", "nhờ ai đó giúp"]],
+      se:[["我想请你帮个忙。", "Wǒ xiǎng qǐng nǐ bāng ge máng.", "Tôi muốn nhờ bạn giúp một việc.", "帮个忙"], ["你有事可以叫李文帮忙。", "Nǐ yǒu shì kěyǐ jiào Lǐ Wén bāngmáng.", "Bạn có việc gì thì có thể nhờ Lý Văn giúp.", "叫李文帮忙"]]},
+
+    {hz:"不好意思", py:"bù hǎoyìsi", pos:"cụm cố định", vn:"ngại quá, thấy ngại; xin lỗi", hv:"BẤT HẢO Ý TỨ", use:"Dùng khi thấy ngại vì làm phiền người khác, hoặc để mở lời xin lỗi nhẹ, từ chối khéo. 真不好意思 nhấn mạnh hơn. Nhẹ hơn 对不起 — lỗi lớn vẫn phải dùng 对不起。", tip:"Ghép từ ba chữ đã biết: 不 (không) + 好 (tốt) + 意思 (ý tứ) — “thấy ý mình không hay ho” nên ngại. Học chung một lượt với thẻ 意思.",
+      ph:[["不好意思，…", "bù hǎoyìsi…", "xin lỗi nhé, …"], ["真不好意思", "zhēn bù hǎoyìsi", "thật ngại quá"]],
+      se:[["不好意思，我已经到北京了。", "Bù hǎoyìsi, wǒ yǐjīng dào Běijīng le.", "Ngại quá, tôi đã đến Bắc Kinh rồi.", "不好意思"], ["真不好意思，我来晚了。", "Zhēn bù hǎoyìsi, wǒ lái wǎn le.", "Thật ngại quá, tôi đến muộn rồi.", "真不好意思"]]},
+
+    {hz:"已经", py:"yǐjīng", pos:"phó từ · adv.", vn:"đã … rồi", hv:"DĨ KINH", use:"Dùng khi việc đã xảy ra trước thời điểm nói; thường đi thành cặp với 了 ở cuối câu: 已经…了。Đứng trước động từ, không đứng cuối câu.", tip:"已 DĨ như “dĩ vãng” — chuyện đã qua; 经 KINH như “kinh qua” — đã trải rồi. Hai chữ đều mang nghĩa “đã”. Chú ý nét: 已 khác 己 (kỷ, bản thân).",
+      ph:[["已经…了", "yǐjīng… le", "đã … rồi"], ["已经走了", "yǐjīng zǒu le", "đã đi rồi"]],
+      se:[["我已经到北京了。", "Wǒ yǐjīng dào Běijīng le.", "Tôi đã đến Bắc Kinh rồi.", "已经到北京了"], ["不好意思，他已经走了。", "Bù hǎoyìsi, tā yǐjīng zǒu le.", "Ngại quá, anh ấy đã đi rồi.", "已经走了"]]},
+
+    {hz:"那", py:"nà", pos:"liên từ · conj.", vn:"vậy thì, thế thì", hv:"NA", use:"Dùng ở đầu câu để đưa ra quyết định dựa trên điều người kia vừa nói — “vậy thì…”. 那好吧 là câu đồng ý, chốt lại cho xong chuyện. Khác với 那 chỉ định (cái kia, người kia).", tip:"Vẫn là chữ 那 “kia” đã học ở HSK1, chỉ thêm một vai trò mới: chỉ sang vế sau của câu chuyện — “vậy thì…”.",
+      ph:[["那我…", "nà wǒ…", "vậy thì tôi…"], ["那好吧", "nà hǎo ba", "vậy được rồi"]],
+      se:[["那我给他打个电话。", "Nà wǒ gěi tā dǎ ge diànhuà.", "Vậy thì tôi gọi điện cho anh ấy.", "那我"], ["你很忙？那好吧，我们明天再去。", "Nǐ hěn máng? Nà hǎo ba, wǒmen míngtiān zài qù.", "Bạn bận à? Vậy được rồi, mai chúng ta đi.", "那好吧"]]},
+
+    {hz:"介绍", py:"jièshào", pos:"động từ · v.", vn:"giới thiệu", hv:"GIỚI THIỆU", use:"Dùng khi làm quen hai người với nhau (给 A 介绍 B) hoặc khi nói cho ai biết về điều gì. Thêm 一下 cho giọng nhẹ, lịch sự: 介绍一下。", tip:"Âm Hán Việt đọc thẳng ra tiếng Việt: GIỚI THIỆU. Mặt chữ cũng gợi ý: 介 như một người đứng giữa hai bên, 绍 có bộ 纟 (sợi tơ) — nối dây cho hai người quen nhau.",
+      ph:[["介绍一下", "jièshào yíxià", "giới thiệu một chút"], ["给…介绍", "gěi… jièshào", "giới thiệu cho…"]],
+      se:[["我给你介绍一下，这是李文。", "Wǒ gěi nǐ jièshào yíxià, zhè shì Lǐ Wén.", "Tôi giới thiệu với bạn một chút, đây là Lý Văn.", "介绍一下"], ["她给我们介绍了很多东西。", "Tā gěi wǒmen jièshàole hěn duō dōngxi.", "Cô ấy đã giới thiệu cho chúng tôi rất nhiều thứ.", "给我们介绍"]]},
+
+    {hz:"有时", py:"yǒushí", pos:"phó từ · adv.", vn:"có lúc, đôi khi", hv:"HỮU THỜI", use:"Dùng khi việc chỉ thỉnh thoảng xảy ra, đứng trước động từ. Dùng cặp 有时…有时… để nói hai trạng thái thay phiên nhau; khẩu ngữ hay nói 有时候。", tip:"Hai chữ đã học từ HSK1: 有 HỮU (có) + 时 THỜI (lúc) = “có lúc”. Ghép nghĩa hai chữ cũ là ra nghĩa mới.",
+      ph:[["我有时…", "wǒ yǒushí…", "đôi khi tôi…"], ["有时…有时…", "yǒushí… yǒushí…", "lúc thì… lúc thì…"]],
+      se:[["我有时不太懂她的意思。", "Wǒ yǒushí bú tài dǒng tā de yìsi.", "Đôi khi tôi không hiểu lắm ý của cô ấy.", "我有时"], ["他有时来，有时不来。", "Tā yǒushí lái, yǒushí bù lái.", "Anh ấy lúc thì đến, lúc thì không.", "有时来，有时不来"]]},
+
+    {hz:"懂", py:"dǒng", pos:"động từ · v.", vn:"hiểu, biết", hv:"ĐỔNG", use:"Dùng khi hiểu nội dung, ý nghĩa — lời nói, ý của người khác, bài học: 懂…的意思. Nghe xong hiểu rồi thì nói 我懂了。Không thay được cho 知道 — 知道 là biết một thông tin.", tip:"Bên trái là 忄 (trái tim): hiểu là chuyện của cái tâm — thấm vào lòng mới gọi là hiểu. Bên phải 董 (đổng) gợi âm đọc dǒng.",
+      ph:[["懂…的意思", "dǒng… de yìsi", "hiểu ý của…"], ["不懂", "bù dǒng", "không hiểu"]],
+      se:[["你懂我的意思吗？", "Nǐ dǒng wǒ de yìsi ma?", "Bạn hiểu ý tôi không?", "懂我的意思"], ["这个字我不懂。", "Zhège zì wǒ bù dǒng.", "Chữ này tôi không hiểu.", "不懂"]]},
+
+    {hz:"意思", py:"yìsi", pos:"danh từ · n.", vn:"ý, ý nghĩa", hv:"Ý TỨ", use:"Dùng khi hỏi nghĩa của từ, của câu: …是什么意思？ hoặc khi nói về ý của ai đó: 他的意思是… Lưu ý 不好意思 là cụm riêng, không phải nghĩa “ý” ở đây.", tip:"Cả hai chữ đều có 心 (tim) nằm dưới: 意 = 音 (âm thanh) + 心 → lời nói trong lòng; 思 = phần trên như 田 + 心 → nghĩ ngợi. “Ý tứ” là chuyện trong lòng người ta.",
+      ph:[["什么意思", "shénme yìsi", "nghĩa là gì"], ["…的意思", "…de yìsi", "ý của…"]],
+      se:[["这个词是什么意思？", "Zhège cí shì shénme yìsi?", "Từ này nghĩa là gì?", "什么意思"], ["我不太懂你的意思。", "Wǒ bú tài dǒng nǐ de yìsi.", "Tôi không hiểu lắm ý của bạn.", "你的意思"]]},
+
+    {hz:"北京烤鸭", py:"Běijīng kǎoyā", pos:"danh từ riêng", vn:"vịt quay Bắc Kinh", hv:"BẮC KINH KHẢO ÁP", use:"Danh từ riêng chỉ món đặc sản nổi tiếng của Bắc Kinh. Hay dùng khi mời khách: 请 + người + 吃北京烤鸭。", tip:"烤 có bộ 火 (lửa) — nướng; 鸭 có bộ 鸟 (chim) — con vịt. Ghép lại: con vịt nướng trên lửa, đặc sản 北京.",
+      ph:[["请…吃北京烤鸭", "qǐng… chī Běijīng kǎoyā", "mời ai ăn vịt quay Bắc Kinh"], ["吃北京烤鸭", "chī Běijīng kǎoyā", "ăn vịt quay Bắc Kinh"]],
+      se:[["她请我们吃了北京烤鸭。", "Tā qǐng wǒmen chīle Běijīng kǎoyā.", "Cô ấy đã mời chúng tôi ăn vịt quay Bắc Kinh.", "请我们吃"], ["我很想吃北京烤鸭。", "Wǒ hěn xiǎng chī Běijīng kǎoyā.", "Tôi rất muốn ăn vịt quay Bắc Kinh.", "吃北京烤鸭"]]}
+  ]
+};
+
+/* ====================== phát âm ====================== */
+let zhVoice = null;
+function pickVoice(){
+  const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  const zh = vs.filter(v => /^zh/i.test(v.lang));
+  zhVoice = zh.find(v => /CN|Hans|Chinese \(China\)|普通话|Mandarin/i.test(v.lang + v.name)) || zh[0] || null;
+}
+if (window.speechSynthesis){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text, btn){
+  if (btn){
+    document.querySelectorAll('.spk.playing').forEach(b => b.classList.remove('playing'));
+    btn.classList.add('playing');
+    setTimeout(() => btn.classList.remove('playing'), 1400);
+  }
+  if (window.speechSynthesis && zhVoice){
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.voice = zhVoice; u.lang = zhVoice.lang; u.rate = 0.8;
+    speechSynthesis.speak(u);
+    return;
+  }
+  try{
+    const a = new Audio('https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&q=' + encodeURIComponent(text));
+    a.play().catch(() => {});
+  }catch(e){}
+}
+
+/* ====================== dựng thẻ ====================== */
+function esc(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+const MARK = ['①','②','③','④','⑤'];
+
+function rows(list, hl){
+  return list.map((r, i) => {
+    let zh = esc(r[0]);
+    if (hl && r[3]){
+      const k = esc(r[3]);
+      zh = zh.replace(k, '<span class="hl">' + k + '</span>');
+    }
+    return `
+    <div class="item">
+      <button class="spk sm" data-say="${esc(r[0].replace(/[…]/g,''))}">🔊</button>
+      <div class="body">
+        <div class="zh han"><span class="idx">${MARK[i] || ''}</span>${zh}</div>
+        <div class="pz py">${esc(r[1])}</div>
+        <div class="vn2">${esc(r[2])}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function cardHTML(w, idx){
+  // mặt trước đổi theo chiều học
+  const front = (dir === 'zh')
+    ? `<div class="hz han">${esc(w.hz)}</div>
+       <button class="spk" data-say="${esc(w.hz)}" aria-label="Nghe đọc">🔊</button>`
+    : `<div class="vnfront">${esc(w.vn)}</div>`;
+
+  const st = marks[idx] || '';
+  const stCls = st ? ' st-' + st : '';
+  const pill = st
+    ? `<div class="state ${st}">${st === 'known' ? '✓ Đã thuộc' : '↻ Cần ôn thêm'}</div>`
+    : '';
+
+  return `
+  <div class="flip" data-i="${idx}">
+    <div class="inner">
+
+      <div class="face front${stCls}">
+        <div class="tag">${idx + 1}</div>
+        ${pill}
+        <div class="inner-front">${front}</div>
+        <div class="flipnote">chạm để lật ↻</div>
+      </div>
+
+      <div class="face back${stCls}">
+        <div class="tag">${idx + 1}</div>
+        <div class="pos">${esc(w.pos)}</div>
+
+        <div class="bhead">
+          <button class="spk" data-say="${esc(w.hz)}" aria-label="Nghe đọc">🔊</button>
+          <div>
+            <div class="hz han">${esc(w.hz)}</div>
+            <div class="pin py">${esc(w.py)}</div>
+          </div>
+        </div>
+
+        <div class="mean">
+          <div class="vn">${esc(w.vn)}</div>
+          <div class="hv">Hán Việt: ${esc(w.hv)}</div>
+        </div>
+
+        <div class="use">
+          <div class="ulab">Dùng khi nào</div>
+          <div class="utxt">${esc(w.use)}</div>
+        </div>
+
+        <div class="tip">
+          <div class="ulab">💡 Mẹo nhớ</div>
+          <div class="utxt">${esc(w.tip)}</div>
+        </div>
+
+        <div class="sec">
+          <h3>Cụm từ thường dùng</h3>
+          ${rows(w.ph, false)}
+        </div>
+
+        <div class="sec">
+          <h3>Câu ví dụ — theo thứ tự cụm từ ở trên</h3>
+          ${rows(w.se, true)}
+        </div>
+
+        <div class="acts">
+          <button class="ok${st === 'known' ? ' on' : ''}" data-mark="known">✓ Đã thuộc</button>
+          <button class="re${st === 'review' ? ' on' : ''}" data-mark="review">↻ Cần ôn thêm</button>
+        </div>
+        <div class="flipnote">chạm vào thẻ để lật lại ↺</div>
+      </div>
+
+    </div>
+  </div>`;
+}
+
+/* ====================== chiều cao thẻ lật ====================== */
+function fit(flipEl){
+  const inner = flipEl.querySelector('.inner');
+  const face = flipEl.querySelector(inner.classList.contains('flipped') ? '.back' : '.front');
+  inner.style.height = face.offsetHeight + 'px';
+}
+function fitAll(){ document.querySelectorAll('.flip').forEach(fit); }
+
+/* ====================== trạng thái ====================== */
+const stage = document.getElementById('stage');
+const nav = document.getElementById('nav');
+const progwrap = document.getElementById('progwrap');
+const countEl = document.getElementById('count');
+const progEl = document.getElementById('prog');
+
+const KEY = 'flashcard-hsk2-bai01';
+let marks = {};
+try{
+  const raw = localStorage.getItem(KEY);
+  if (raw) marks = JSON.parse(raw) || {};
+}catch(e){ marks = {}; }
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(marks)); }catch(e){}
+}
+
+let base = DATA.words.map((_, i) => i);
+let order = base.slice();
+let pos = 0;
+let mode = 'deck';
+let dir = 'zh';
+let filter = 'all';
+
+function applyFilter(){
+  order = base.filter(i => {
+    const m = marks[i];
+    if (filter === 'known')  return m === 'known';
+    if (filter === 'review') return m === 'review';
+    if (filter === 'new')    return !m;
+    return true;
+  });
+  if (pos >= order.length) pos = Math.max(0, order.length - 1);
+}
+
+function updateCounts(){
+  const vals = Object.values(marks);
+  const k = vals.filter(v => v === 'known').length;
+  const r = vals.filter(v => v === 'review').length;
+  const n = DATA.words.length - k - r;
+  document.getElementById('counts').innerHTML =
+    `<span class="cK">✓ Đã thuộc ${k}</span> · <span class="cR">↻ Cần ôn thêm ${r}</span> · Chưa phân loại ${n}`;
+}
+
+function mark(i, val){
+  if (marks[i] === val) delete marks[i]; else marks[i] = val;
+  save();
+  updateCounts();
+
+  const cur = order[pos];
+  applyFilter();
+
+  if (mode === 'grid'){ render(); return; }
+  if (order.length === 0){ render(); return; }
+
+  const at = order.indexOf(cur);
+  if (at === -1){ render(); }        // thẻ vừa phân loại đã bị bộ lọc ẩn đi
+  else { pos = at; go(1); }          // còn trong danh sách thì sang thẻ kế tiếp
+}
+
+function render(){
+  updateCounts();
+
+  if (order.length === 0){
+    stage.className = '';
+    stage.innerHTML = '<div class="empty">Không có thẻ nào trong mục này.</div>';
+    nav.classList.add('hidden');
+    progwrap.classList.add('hidden');
+    return;
+  }
+
+  if (mode === 'deck'){
+    stage.className = '';
+    stage.innerHTML = cardHTML(DATA.words[order[pos]], order[pos]);
+    nav.classList.remove('hidden');
+    progwrap.classList.remove('hidden');
+    countEl.textContent = (pos + 1) + ' / ' + order.length;
+    progEl.style.width = ((pos + 1) / order.length * 100) + '%';
+  } else {
+    stage.className = 'grid';
+    stage.innerHTML = order.map(i => cardHTML(DATA.words[i], i)).join('');
+    nav.classList.add('hidden');
+    progwrap.classList.add('hidden');
+  }
+  fitAll();
+  requestAnimationFrame(fitAll);
+}
+
+function go(d){
+  pos = (pos + d + order.length) % order.length;
+  render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function flip(flipEl){
+  const inner = flipEl.querySelector('.inner');
+  inner.classList.toggle('flipped');
+  fit(flipEl);
+}
+
+/* ====================== sự kiện ====================== */
+stage.addEventListener('click', e => {
+  const sp = e.target.closest('.spk');
+  if (sp){ e.stopPropagation(); speak(sp.dataset.say, sp); return; }
+  const mk = e.target.closest('[data-mark]');
+  if (mk){
+    e.stopPropagation();
+    mark(parseInt(mk.closest('.flip').dataset.i, 10), mk.dataset.mark);
+    return;
+  }
+  const fl = e.target.closest('.flip');
+  if (fl) flip(fl);
+});
+
+document.getElementById('prev').onclick = () => go(-1);
+document.getElementById('next').onclick = () => go(1);
+
+document.getElementById('mode-deck').onclick = function(){
+  mode = 'deck'; this.classList.add('on');
+  document.getElementById('mode-grid').classList.remove('on');
+  render();
+};
+document.getElementById('mode-grid').onclick = function(){
+  mode = 'grid'; this.classList.add('on');
+  document.getElementById('mode-deck').classList.remove('on');
+  render();
+};
+document.getElementById('dir-zh').onclick = function(){
+  dir = 'zh'; this.classList.add('on');
+  document.getElementById('dir-vi').classList.remove('on');
+  render();
+};
+document.getElementById('dir-vi').onclick = function(){
+  dir = 'vi'; this.classList.add('on');
+  document.getElementById('dir-zh').classList.remove('on');
+  render();
+};
+document.getElementById('shuffle').onclick = () => {
+  for (let i = base.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [base[i], base[j]] = [base[j], base[i]];
+  }
+  pos = 0; applyFilter(); render();
+};
+
+document.getElementById('reset').onclick = () => {
+  if (!Object.keys(marks).length) return;
+  if (!confirm('Xoá toàn bộ phân loại “đã thuộc / cần ôn thêm”?')) return;
+  marks = {}; save(); pos = 0; applyFilter(); render();
+};
+
+[['f-all','all'], ['f-new','new'], ['f-review','review'], ['f-known','known']].forEach(([id, val]) => {
+  document.getElementById(id).onclick = function(){
+    filter = val; pos = 0;
+    document.querySelectorAll('#f-all,#f-new,#f-review,#f-known').forEach(b => b.classList.remove('on'));
+    this.classList.add('on');
+    applyFilter(); render();
+  };
+});
+
+document.addEventListener('keydown', e => {
+  if (mode !== 'deck' || order.length === 0) return;
+  if (e.key === 'ArrowRight') go(1);
+  else if (e.key === 'ArrowLeft') go(-1);
+  else if (e.key === '1') mark(order[pos], 'known');
+  else if (e.key === '2') mark(order[pos], 'review');
+  else if (e.key === ' ' || e.key === 'Enter'){
+    e.preventDefault();
+    const fl = document.querySelector('.flip');
+    if (fl) flip(fl);
+  }
+});
+
+window.addEventListener('resize', fitAll);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+window.addEventListener('load', fitAll);
+
+render();
+</script>
+</body>
+</html>
