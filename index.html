@@ -146,6 +146,7 @@ async function readLesson(n){
   if(!tags.length && meta && meta.parts){
     const p=meta.parts, L=[];
     if(p.sort)   L.push(p.sort+' xếp câu');
+    if(p.fix)    L.push(p.fix+' sửa câu');
     if(p.listen) L.push(p.listen+' nghe');
     if(p.read)   L.push(p.read+' đọc');
     if(p.chat)   L.push(p.chat+' nhắn tin');
