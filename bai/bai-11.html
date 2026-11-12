@@ -257,10 +257,6 @@ const PAGE_LS = "hsk2-bai11-v1";
     <textarea id="wText" rows="9" placeholder="写在这里……"></textarea>
     <div class="counter"><span id="wCount">0</span> chữ Hán · <span id="wCheck"></span></div>
     <div class="btnrow">
-      <input id="wName" placeholder="Họ và tên của em" style="font:inherit;flex:1;min-width:180px;
-        background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
-      <input id="wLop" placeholder="Lớp" style="font:inherit;width:110px;
-        background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
       <button class="btn" id="wSend">Gửi bài cho cô</button>
       <button class="btn ghost" id="wCopy">Sao chép bài</button>
     </div>
@@ -283,7 +279,19 @@ const PAGE_LS = "hsk2-bai11-v1";
       <div class="sub" id="sMsg">Em chưa nộp bài.</div>
     </div>
     <div class="bars" id="bars"></div>
-    <div class="btnrow" style="justify-content:center">
+    <div id="guiBox" style="display:none;margin-top:14px;padding-top:14px;border-top:2px dashed var(--line)">
+      <p class="lead" style="margin:0 0 10px"><b>Gửi kết quả cho cô</b> — điền tên rồi bấm gửi,
+      cô mới biết bài này của ai.</p>
+      <div class="btnrow">
+        <input id="wName" placeholder="Họ và tên của em" style="font:inherit;flex:1;min-width:170px;
+          background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
+        <input id="wLop" placeholder="Lớp" style="font:inherit;width:100px;
+          background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
+        <button class="btn" id="guiKQ">Gửi cho cô</button>
+      </div>
+      <div id="guiFb"></div>
+    </div>
+    <div class="btnrow" style="justify-content:center;margin-top:14px">
       <button class="btn ghost" id="again">Làm lại từ đầu</button>
     </div>
   </div>
@@ -969,9 +977,10 @@ $('#submit').onclick = ()=>{
   const tot = Object.values(per).reduce((s,x)=>s+x[0],0);
   const max = Object.values(per).reduce((s,x)=>s+x[1],0);
   $('#sNum').textContent = tot;
-  if(WEBAPP && !$('#wName').value.trim())
-    setTimeout(()=>{ $('#wFb').innerHTML = '<div class="fb no">Em điền <b>họ tên</b> và '
-      + '<b>lớp</b> ở ô dưới rồi bấm <b>Gửi bài cho cô</b> — chưa điền thì cô không biết bài của ai.</div>'; }, 50);
+  if(WEBAPP){
+    $('#guiBox').style.display = 'block';
+    if($('#wName').value.trim()) guiKetQua();   // đã có tên thì gửi luôn
+  }
   $('#sMsg').innerHTML = tot===max ? 'Tuyệt đối. Đọc kỹ phần giải thích rồi làm nốt bài viết nhé.'
     : tot>=max*0.7 ? 'Khá tốt. Xem lại '+(max-tot)+' câu còn sai ở các phần nhé.'
     : 'Em xem lại phần giải thích của từng câu, rồi nghe/đọc lại một lượt nữa.';
@@ -980,8 +989,21 @@ $('#submit').onclick = ()=>{
   $('#submit').textContent='XEM KẾT QUẢ';
   PER = per;
   tick(); save(); go(5);
-  if(WEBAPP && $('#wName').value.trim()) guiBai();   // có tên thì gửi luôn điểm cho cô
 };
+
+function guiKetQua(){
+  if(!$('#wName').value.trim()){
+    $('#guiFb').innerHTML = '<div class="fb no">Em điền họ tên đã nhé.</div>';
+    $('#wName').focus(); return;
+  }
+  $('#guiFb').innerHTML = '<div class="fb ok">Đang gửi…</div>';
+  save();
+  guiBai().then(()=>{
+    $('#guiFb').innerHTML = '<div class="fb ok">Đã gửi kết quả cho cô. '
+      + 'Viết xong bài ở phần cuối thì bấm <b>Gửi bài cho cô</b> lần nữa để cô nhận luôn bài viết.</div>';
+  });
+}
+$('#guiKQ').onclick = guiKetQua;
 
 $('#again').onclick = ()=>{ localStorage.removeItem(LS); location.reload(); };
 
