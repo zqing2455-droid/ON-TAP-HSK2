@@ -998,7 +998,7 @@ function guiKetQua(){
   }
   $('#guiFb').innerHTML = '<div class="fb ok">Đang gửi…</div>';
   save();
-  guiBai().then(()=>{
+  guiBaiKemGhiAm().then(()=>{   // thu âm rồi thì gửi kèm luôn file
     $('#guiFb').innerHTML = '<div class="fb ok">Đã gửi kết quả cho cô. '
       + 'Viết xong bài ở phần cuối thì bấm <b>Gửi bài cho cô</b> lần nữa để cô nhận luôn bài viết.</div>';
   });
