@@ -69,6 +69,13 @@ a.les.done .seal{background:var(--jade); box-shadow:inset 0 0 0 2px rgba(255,255
 footer{margin-top:44px; padding-top:16px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted)}
 @media (max-width:480px){ .prog{width:52px} .seal{width:40px;height:40px;font-size:18px} }
 </style>
+<!-- MAM-XANH:dau -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/giao-dien.css">
+<!-- MAM-XANH:cuoi -->
+
 </head>
 <body>
 <div class="wrap">
@@ -79,7 +86,7 @@ footer{margin-top:44px; padding-top:16px; border-top:1px solid var(--line); font
   lần sau mở lại vẫn thấy mình đã làm tới đâu.</p>
 </header>
 
-<h2 class="sec">Học từ vựng qua flashcard</h2>
+<h2 class="sec">Học từ vựng · luyện nói</h2>
 <div class="list">
   <a class="les" href="flashcard/" id="fcCard">
     <div class="seal">词</div>
@@ -89,6 +96,15 @@ footer{margin-top:44px; padding-top:16px; border-top:1px solid var(--line); font
       <div class="tags"><span>Lật thẻ hai mặt</span><span>Nghe đọc</span><span>Mẹo nhớ chữ</span><span>Đánh dấu đã thuộc</span></div>
     </div>
     <div class="prog" id="fcNum">&nbsp;</div>
+  </a>
+  <a class="les" href="tro-choi/" id="tcCard">
+    <div class="seal">说</div>
+    <div class="body">
+      <div class="meta">Trò chơi<span class="new-tag">MỚI</span></div>
+      <div class="ttl">Nhìn ảnh nói câu</div>
+      <div class="tags"><span>Vòng xoay câu hỏi</span><span>Ảnh trong bài</span><span>Nói thành tiếng</span><span>Tự chấm</span></div>
+    </div>
+    <div class="prog" id="tcNum">&nbsp;</div>
   </a>
 </div>
 
@@ -181,16 +197,18 @@ async function readLesson(n){
   });
 })();
 
-/* Đếm số bộ thẻ trong thư mục flashcard/ để hiện lên thẻ dẫn đường. */
-(async()=>{
-  const el=document.getElementById('fcNum'); if(!el) return;
+/* Đếm số bài trong thư mục flashcard/ và tro-choi/ để hiện lên thẻ dẫn đường. */
+async function demBai(thuMuc, id){
+  const el=document.getElementById(id); if(!el) return;
   let n=0;
   for(let i=1;i<=60;i++){
-    try{ const r=await fetch('flashcard/bai-'+String(i).padStart(2,'0')+'.html',{method:'HEAD',cache:'no-cache'});
+    try{ const r=await fetch(thuMuc+'/bai-'+String(i).padStart(2,'0')+'.html',{method:'HEAD',cache:'no-cache'});
          if(!r.ok) break; n++; }catch(e){ break; }
   }
   el.textContent = n ? n+' bài' : '';
-})();
+}
+demBai('flashcard','fcNum');
+demBai('tro-choi','tcNum');
 </script>
 </body>
 </html>

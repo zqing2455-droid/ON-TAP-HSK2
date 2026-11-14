@@ -1,0 +1,307 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   GIAO DIỆN "MẦM XANH" — dùng chung cho toàn bộ web Ôn tập HSK 2
+   Nền kem · xanh lá đậm · thẻ bo tròn · ô pastel · linh vật hạt mầm
+
+   Trang nào nạp file này SAU khối <style> của nó thì đổi giao diện ngay.
+   Khuôn cũ dùng 3 bộ tên biến khác nhau — file này gán lại cả ba,
+   nên chỉ cần chỉnh màu ở mục 1 là cả web đổi theo.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── 1 · BẢNG MÀU & CHỮ ─────────────────────────────────────────────── */
+:root,
+:root:not([data-theme="light"]),
+:root[data-theme="dark"] {
+  --m-nen:      #FAF7F1;   /* nền trang */
+  --m-the:      #FFFFFF;   /* thẻ */
+  --m-the-2:    #F5F1EA;   /* ô lõm bên trong thẻ */
+  --m-la:       #3F5B4C;   /* xanh lá — nút, điểm nhấn */
+  --m-la-dam:   #2C4236;   /* tiêu đề */
+  --m-la-nhat:  #E8EEE6;   /* thẻ rêu nhạt */
+  --m-la-vua:   #9DB4A2;   /* lá mầm, biểu tượng */
+  --m-hong:     #D9958A;   /* tim, cảnh báo nhẹ */
+  --m-hong-nhat:#F9E7E2;
+  --m-dao:      #F8EBDA;   /* ô đào */
+  --m-tim:      #ECE8F6;   /* ô tím nhạt */
+  --m-vang:     #DDA640;   /* sao, đồng xu */
+  --m-vang-nhat:#FBF1DC;
+  --m-chu:      #2F3A33;   /* chữ thường */
+  --m-chu-phu:  #7C877F;   /* chữ phụ */
+  --m-vien:     #ECE5D8;   /* đường viền */
+  --m-bong:     0 1px 0 rgba(44,66,54,.04), 0 12px 28px -16px rgba(44,66,54,.22);
+  --m-bo:       22px;      /* bo góc thẻ */
+  --m-bo-nho:   14px;
+
+  --m-serif: 'Fraunces', 'Noto Serif SC', Georgia, serif;
+  --m-sans:  'Nunito', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --m-tay:   'Patrick Hand', 'Nunito', cursive;
+  --m-han:   'Noto Serif SC', 'Songti SC', 'STSong', serif;
+
+  color-scheme: light;
+
+  /* ── gán lại bộ biến A (trang chủ, danh sách flashcard) ── */
+  --paper: var(--m-nen);   --card: var(--m-the);
+  --ink: var(--m-chu);     --ink-2: #4F5C54;   --muted: var(--m-chu-phu);
+  --line: var(--m-vien);   --line-2: #F2EDE3;
+  --cin: var(--m-la);      --cin-soft: var(--m-la-nhat);
+  --jade: var(--m-la);     --jade-soft: var(--m-la-nhat);
+  --gold: var(--m-vang);   --gold-soft: var(--m-vang-nhat);
+  --shadow: var(--m-bong);
+
+  /* ── gán lại bộ biến B (trang bài 6–11, thẻ flashcard) ── */
+  --soft: var(--m-chu-phu);
+  --accent: var(--m-la);   --rose: var(--m-hong);
+  --green: var(--m-la);    --blue: #5B7891;
+  --mint: var(--m-la-nhat); --cream: var(--m-dao); --blush: var(--m-hong-nhat);
+}
+
+/* ── 2 · NỀN TẢNG ────────────────────────────────────────────────────── */
+html { background: var(--m-nen); }
+body {
+  background: var(--m-nen) !important;
+  color: var(--m-chu);
+  font-family: var(--m-sans) !important;
+  -webkit-font-smoothing: antialiased;
+}
+.han, .zh, .hz, [class*="han"] { font-family: var(--m-han); }
+::selection { background: var(--m-la-nhat); color: var(--m-la-dam); }
+a { color: var(--m-la); }
+
+/* tiêu đề lớn: serif mềm, xanh đậm, căn trái */
+header h1, header.top h1, h1 {
+  font-family: var(--m-serif) !important;
+  color: var(--m-la-dam) !important;
+  font-weight: 700 !important;
+  letter-spacing: -.015em;
+  line-height: 1.12;
+}
+header h1 .han, h1 .zh, h1 .han { color: var(--m-la) !important; font-family: var(--m-han) !important; }
+h2, h2.sec, .sec h3, .tier-h h2 {
+  font-family: var(--m-serif) !important;
+  color: var(--m-la-dam) !important;
+  letter-spacing: -.01em;
+}
+
+/* tiêu đề nhóm ngoài thẻ (trang chủ, danh sách flashcard) */
+.wrap > h2.sec {
+  font-family: var(--m-sans) !important;
+  font-size: 15px !important; font-weight: 800 !important;
+  text-transform: none !important; letter-spacing: 0 !important;
+  color: var(--m-la-dam) !important;
+  border: 0 !important; padding-bottom: 0 !important; margin: 30px 2px 12px !important;
+  background: none !important; box-shadow: none !important;
+}
+
+/* ── 3 · ĐẦU TRANG + LINH VẬT ────────────────────────────────────────── */
+/* Linh vật vẽ bằng SVG ngay trong CSS, khỏi phải sửa HTML từng trang */
+:root {
+  --m-mam: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 134'%3E%3Cg fill='none' stroke='%233F5B4C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 32V14'/%3E%3Cpath d='M60 20C52 7 37 7 32 13c8 9 19 11 28 7z' fill='%239DB4A2'/%3E%3Cpath d='M60 16c8-13 24-13 29-7-8 10-20 12-29 7z' fill='%239DB4A2'/%3E%3Cpath d='M60 32C31 32 16 62 16 90c0 24 20 38 44 38s44-14 44-38C104 62 89 32 60 32z' fill='%23FBF5EA'/%3E%3Cpath d='M41 77q6 6 12 0M67 77q6 6 12 0M54 89q6 5 12 0'/%3E%3C/g%3E%3Cellipse cx='37' cy='89' rx='7' ry='4.5' fill='%23F1B9AE'/%3E%3Cellipse cx='83' cy='89' rx='7' ry='4.5' fill='%23F1B9AE'/%3E%3Cpath d='M60 120c-10-8-16-14-12-20 3-4 9-3 12 2 3-5 9-6 12-2 4 6-2 12-12 20z' fill='%23D9958A' stroke='%233F5B4C' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --m-mam-vui: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 134'%3E%3Cg fill='none' stroke='%233F5B4C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 32V14'/%3E%3Cpath d='M60 20C52 7 37 7 32 13c8 9 19 11 28 7z' fill='%239DB4A2'/%3E%3Cpath d='M60 16c8-13 24-13 29-7-8 10-20 12-29 7z' fill='%239DB4A2'/%3E%3Cpath d='M60 32C31 32 16 62 16 90c0 24 20 38 44 38s44-14 44-38C104 62 89 32 60 32z' fill='%23FBF5EA'/%3E%3Cpath d='M41 79q6-7 12 0M67 79q6-7 12 0'/%3E%3Cpath d='M51 88q9 11 18 0z' fill='%23D9958A'/%3E%3Cpath d='M16 84l-10-12M104 84l10-12'/%3E%3C/g%3E%3Cellipse cx='36' cy='91' rx='7' ry='4.5' fill='%23F1B9AE'/%3E%3Cellipse cx='84' cy='91' rx='7' ry='4.5' fill='%23F1B9AE'/%3E%3Cpath d='M98 26l3 6 6 1-5 4 1 6-5-3-5 3 1-6-5-4 6-1z' fill='%23DDA640'/%3E%3Cpath d='M20 22l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z' fill='%23DDA640'/%3E%3C/svg%3E");
+}
+
+/* đầu trang của các khuôn: chừa chỗ bên phải cho linh vật */
+.wrap > header, header.top, body > header {
+  position: relative;
+  text-align: left !important;
+  padding-right: 108px !important;
+  min-height: 96px;
+}
+.wrap > header::after, header.top::after, body > header::after {
+  content: "";
+  position: absolute; right: 4px; top: 6px;
+  width: 86px; height: 96px;
+  background: var(--m-mam) no-repeat center / contain;
+  pointer-events: none;
+}
+/* màn hình hẹp: linh vật nhỏ lại, vẫn nằm góc phải */
+@media (max-width: 560px) {
+  .wrap > header, header.top, body > header { padding-right: 76px !important; min-height: 74px; }
+  .wrap > header::after, header.top::after, body > header::after { width: 62px; height: 70px; }
+}
+header p, header .sub, .sub, header p#hSub { color: var(--m-chu-phu) !important; }
+.eyebrow, header .kicker, .kicker {
+  color: var(--m-la) !important;
+  font-family: var(--m-sans) !important;
+  font-weight: 800; letter-spacing: .08em;
+}
+
+/* ghi chú viết tay — dùng cho chỗ cần một câu dỗ dành nhỏ */
+.m-tay { font-family: var(--m-tay); color: var(--m-chu-phu); font-size: 1.05em; }
+
+/* ── 4 · THẺ ──────────────────────────────────────────────────────────── */
+.card, a.les, .q, .tier, .flip .face, div.sec, .item, .score, .end, .pair, .model.on {
+  background: var(--m-the);
+  border: 1px solid var(--m-vien) !important;
+  border-radius: var(--m-bo) !important;
+  box-shadow: var(--m-bong) !important;
+}
+/* thẻ mở đầu mỗi phần: nền rêu nhạt, có lá nhỏ bên trái — giống thẻ "Small steps" */
+.panel > .card:first-child, .tier-h {
+  background: var(--m-la-nhat) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  position: relative;
+}
+.panel > .card:first-child { padding-left: 64px !important; }
+.tier-h { border-radius: var(--m-bo) !important; margin-bottom: 12px !important; }
+.panel > .card:first-child::before {
+  content: ""; position: absolute; left: 20px; top: 22px; width: 30px; height: 30px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 26C6 13 15 6 27 6c0 12-8 20-21 20z' fill='%239DB4A2' stroke='%233F5B4C' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M7 25L20 13' stroke='%233F5B4C' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.lead { color: #55615A !important; }
+
+/* số câu / nhãn nhỏ: viên thuốc rêu */
+.qno, .q-n, .tag, .pos, .kind-tag, .new-tag {
+  background: var(--m-la-nhat) !important;
+  color: var(--m-la) !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+}
+.new-tag { background: var(--m-hong) !important; color: #fff !important; }
+
+/* ── 5 · NÚT ──────────────────────────────────────────────────────────── */
+.btn, button.act, .acts button, .tab, .chip, .spd .chip {
+  font-family: var(--m-sans) !important;
+  border-radius: 999px !important;
+}
+.btn, button.act, #submit, .sticky .btn {
+  background: var(--m-la) !important;
+  color: #fff !important;
+  border: 0 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 8px 18px -10px rgba(44,66,54,.55) !important;
+}
+.btn:hover, button.act:hover { background: var(--m-la-dam) !important; }
+.btn.ghost, button.act.ghost {
+  background: var(--m-the) !important;
+  color: var(--m-la) !important;
+  border: 1.5px solid var(--m-vien) !important;
+  box-shadow: none !important;
+}
+.btn:disabled, button.act:disabled { opacity: .45; box-shadow: none !important; }
+
+/* nút bật/tắt trong thanh lọc (flashcard): trắng, chỉ nút đang chọn mới tô xanh */
+.bar .btn {
+  background: var(--m-the) !important; color: var(--m-la) !important;
+  border: 1.5px solid var(--m-vien) !important; box-shadow: none !important; font-weight: 700 !important;
+}
+.bar .btn:hover { background: #FBFDF9 !important; border-color: var(--m-la-vua) !important; }
+.bar .btn.on { background: var(--m-la) !important; color: #fff !important; border-color: var(--m-la) !important; }
+
+/* tiêu đề trang bài to hơn, giống tiêu đề lớn trong mẫu */
+.wrap > header h1 { font-size: clamp(26px, 4.2vw, 36px) !important; }
+
+/* ── 6 · THANH CHỌN PHẦN (tab) ───────────────────────────────────────── */
+.tabs { gap: 8px !important; }
+.tab {
+  background: var(--m-the) !important;
+  color: var(--m-la) !important;
+  border: 1.5px solid var(--m-vien) !important;
+  font-weight: 700 !important;
+}
+.tab[aria-selected="true"], .tab.on {
+  background: var(--m-la) !important;
+  color: #fff !important;
+  border-color: var(--m-la) !important;
+}
+.tab .dot { background: var(--m-vien) !important; }
+.tab.done .dot, .tab[aria-selected="true"] .dot { background: var(--m-la-vua) !important; }
+
+/* ── 7 · Ô LỰA CHỌN, MẢNH CHỮ, ĐÚNG / SAI ────────────────────────────── */
+.chunk, .tile, .slot, .tok, .opt, .tfbtn, .chip, .pick, .tray .chip, .line .chip {
+  border-radius: var(--m-bo-nho) !important;
+  border: 1.5px solid var(--m-vien) !important;
+  background: var(--m-the) !important;
+  color: var(--m-chu) !important;
+}
+.chunks, .pool, .tray, .line, .slots, .passage, .sit, .audio, textarea, textarea.ta {
+  background: var(--m-the-2) !important;
+  border: 1.5px solid var(--m-vien) !important;
+  border-radius: var(--m-bo-nho) !important;
+}
+textarea:focus, textarea.ta:focus { border-color: var(--m-la-vua) !important; outline: 3px solid var(--m-la-nhat); }
+.chunk:hover, .tile:hover, .tok:hover, .opt:hover, .tfbtn:hover:not(:disabled), .chip:hover, .pick:hover {
+  border-color: var(--m-la-vua) !important; background: #FBFDF9 !important;
+}
+.chunk.on, .opt.on, .tfbtn.on, .chip.on {
+  background: var(--m-la-nhat) !important; border-color: var(--m-la) !important; color: var(--m-la-dam) !important;
+}
+/* đúng → rêu · sai → hồng đất (không dùng đỏ gắt) */
+.chunk.right, .opt.good, .opt.right, .tfbtn.good, .tok.ok, .fb.ok, .fb.good, .need i.hit {
+  background: #E4F0E5 !important; border-color: #8DB596 !important; color: #2E5A3C !important;
+}
+.chunk.wrongpick, .opt.bad, .opt.wrong, .tfbtn.bad, .tok.bad, .fb.no, .fb.bad, .need i.miss {
+  background: var(--m-hong-nhat) !important; border-color: #E2AFA6 !important; color: #8A4136 !important;
+}
+.fb, .ans, .why, .note, .gloss, .warn, .tip, .use {
+  border-radius: var(--m-bo-nho) !important;
+}
+.ans.on, .model.on { background: var(--m-vang-nhat) !important; border-color: #EEDDB6 !important; }
+
+/* ô pastel xen kẽ cho nhóm ô chọn — giống hàng biểu tượng trong mẫu */
+.spd .chip:nth-child(4n+1) { background: var(--m-dao) !important; }
+.spd .chip:nth-child(4n+2) { background: var(--m-tim) !important; }
+.spd .chip:nth-child(4n+3) { background: var(--m-la-nhat) !important; }
+.spd .chip.on { background: var(--m-la) !important; color: #fff !important; }
+
+/* ── 8 · THANH NỘP BÀI DÍNH CHÂN TRANG ───────────────────────────────── */
+.sticky {
+  background: rgba(255,255,255,.92) !important;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--m-vien) !important;
+  box-shadow: 0 -10px 30px -22px rgba(44,66,54,.4);
+}
+.sticky .st { color: var(--m-chu-phu) !important; }
+
+/* ── 9 · KẾT QUẢ ─────────────────────────────────────────────────────── */
+.score { position: relative; text-align: center; padding-top: 118px !important; }
+.score::before {
+  content: ""; position: absolute; left: 50%; top: 18px; transform: translateX(-50%);
+  width: 92px; height: 100px; background: var(--m-mam-vui) no-repeat center / contain;
+}
+.score .big { font-family: var(--m-serif) !important; color: var(--m-la-dam) !important; }
+.bar, .prog:has(> i), .meter .bar { background: var(--m-the-2) !important; border-radius: 999px !important; }
+.bar i, .prog i { background: var(--m-la-vua) !important; border-radius: 999px !important; }
+
+/* ── 10 · TRANG CHỦ & DANH SÁCH FLASHCARD ────────────────────────────── */
+a.les { transition: transform .15s ease, box-shadow .15s ease; }
+a.les:hover { transform: translateY(-2px); }
+.seal {
+  background: var(--m-la-nhat) !important; color: var(--m-la) !important;
+  border-radius: 16px !important; border: 0 !important; box-shadow: none !important;
+  width: 52px !important; height: 52px !important; font-size: 19px !important;
+  letter-spacing: -.04em; font-family: var(--m-han) !important;
+}
+@media (max-width: 560px) { .seal { width: 44px !important; height: 44px !important; font-size: 16px !important; } }
+a.les.done .seal { background: var(--m-la) !important; color: #fff !important; }
+.tags span { background: var(--m-the-2) !important; border-radius: 999px !important; color: var(--m-chu-phu) !important; }
+/* tô pastel xen kẽ cho các ô bài — giống hàng thẻ "For you" trong mẫu */
+.list a.les:nth-child(3n+1) .seal { background: var(--m-dao) !important; color: #9A6A2E !important; }
+.list a.les:nth-child(3n+2) .seal { background: var(--m-tim) !important; color: #5E5590 !important; }
+.list a.les:nth-child(3n+3) .seal { background: var(--m-la-nhat) !important; color: var(--m-la) !important; }
+a.les.done .seal { background: var(--m-la) !important; color: #fff !important; }
+footer { color: var(--m-chu-phu) !important; border-color: var(--m-vien) !important; }
+.backlink a { color: var(--m-la) !important; font-weight: 700; }
+
+/* ── 11 · THẺ FLASHCARD ──────────────────────────────────────────────── */
+.flip .face { background: var(--m-the) !important; }
+.front .hz { color: var(--m-la-dam) !important; }
+.face.st-known { border-color: #8DB596 !important; }
+.face.st-review { border-color: #E2AFA6 !important; }
+.acts .ok.on { background: var(--m-la) !important; color: #fff !important; }
+.acts .re.on { background: var(--m-hong) !important; color: #fff !important; }
+.nav .arrow, .spk {
+  background: var(--m-the) !important; border: 1.5px solid var(--m-vien) !important;
+  color: var(--m-la) !important; border-radius: 999px !important;
+}
+.mean .hv { color: var(--m-la) !important; }
+
+/* ── 12 · TRANG BÀI 1–5 (khuôn cũ) ───────────────────────────────────── */
+.rail { background: rgba(250,247,241,.94) !important; border-color: var(--m-vien) !important; }
+.rail a { color: var(--m-chu-phu) !important; }
+.rail a .num { background: var(--m-la-nhat) !important; color: var(--m-la) !important; border-radius: 999px; }
+.fact { background: var(--m-the) !important; border: 1px solid var(--m-vien) !important; border-radius: 999px !important; }
+.q.done { border-color: #B9D2BE !important; }
+.bub.them { background: var(--m-the) !important; border: 1px solid var(--m-vien); border-radius: 18px 18px 18px 6px !important; }
+.bub.me   { background: var(--m-la) !important; color: #fff !important; border-radius: 18px 18px 6px 18px !important; }
+.bub.me .zh { color: #fff !important; }
