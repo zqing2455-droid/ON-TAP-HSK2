@@ -1,0 +1,4 @@
+Dữ liệu thứ tự nét (strokes, medians) lấy từ hanzi-writer-data 2.0.1
+https://github.com/chanind/hanzi-writer-data
+Nguồn gốc: Make Me a Hanzi (https://github.com/skishore/makemeahanzi), giấy phép Arphic Public License (xem ARPHICPL.TXT).
+Mỗi file <mã Unicode>.json: {"s": các nét (đường viền SVG), "m": đường giữa từng nét}.
