@@ -32,7 +32,7 @@ def khoi(rel):
 def gan(duong):
     t = io.open(duong, encoding='utf-8').read()
     rel = '../' * (os.path.relpath(duong, GOC).count(os.sep))
-    t = re.sub(re.escape(MOC_DAU) + r'.*?' + re.escape(MOC_CUOI) + r'\n?', '', t, flags=re.S)
+    t = re.sub(r'\n?' + re.escape(MOC_DAU) + r'.*?' + re.escape(MOC_CUOI) + r'\n?', '', t, flags=re.S)  # gỡ đúng phần đã chèn, chạy lại không sinh dòng trống
     if 'name="tc-han"' in t:
         return 'bỏ qua (trò chơi — có giao diện riêng)'
     i = t.rfind('</style>')
