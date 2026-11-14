@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-t></title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Quicksand:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F4EC; --ink:#26221A; --soft:#7A6E64;
+  --accent:#E3963B; --rose:#C2697A; --green:#4F7E62; --blue:#4A7398;
+  --card:#FFFDF7; --line:#E4DCCB;
+  --mint:#E4F1EC; --cream:#F7E9C9; --blush:#FBE5E4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Quicksand',sans-serif;
+     font-weight:600;padding:18px 14px 120px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:880px;margin:0 auto}
+.han{font-family:'Noto Serif SC',serif;font-size:1.1em}
+.py{font-family:'Space Mono',monospace;font-size:.8em;color:var(--soft)}
+.vi{color:var(--soft);font-size:.9rem}
+
+header{text-align:center;margin-bottom:6px}
+header h1{font-size:1.4rem;letter-spacing:.3px}
+header h1 .han{color:var(--rose)}
+header p{color:var(--soft);font-size:.86rem;margin-top:4px}
+
+.tabs{display:flex;gap:7px;justify-content:center;margin:16px 0 18px;flex-wrap:wrap}
+.tab{font:inherit;font-size:.86rem;padding:9px 15px;border-radius:999px;position:relative;
+     border:2px solid var(--line);background:var(--card);color:var(--soft);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+          background:var(--line);margin-left:6px;vertical-align:1px}
+.tab.done .dot{background:var(--green)}
+
+.panel{display:none}
+.panel.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;
+      padding:18px 16px;box-shadow:0 2px 0 var(--line);margin-bottom:16px}
+.kicker{font-size:.72rem;letter-spacing:1.4px;text-transform:uppercase;
+        color:var(--accent);font-weight:800;margin-bottom:6px}
+h2.sec{font-size:1.1rem;margin-bottom:4px}
+.lead{color:var(--soft);font-size:.88rem;margin-bottom:14px}
+.qno{display:inline-block;background:var(--ink);color:var(--paper);border-radius:999px;
+     font-size:.74rem;padding:2px 10px;margin-bottom:8px}
+
+/* ---- sắp xếp ---- */
+.pool{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.tile{text-align:left;font:inherit;background:var(--paper);border:2px solid var(--line);
+      border-radius:13px;padding:11px 13px;cursor:pointer}
+.tile:hover{border-color:var(--accent)}
+.tile.used{opacity:.3;pointer-events:none}
+.slots{display:flex;flex-direction:column;gap:8px;margin:10px 0;min-height:40px}
+.slot{display:flex;gap:9px;align-items:flex-start;background:var(--mint);
+      border:2px solid var(--line);border-radius:13px;padding:11px 13px;cursor:pointer}
+.slot .n{flex:0 0 auto;background:var(--green);color:#fff;border-radius:999px;
+         font-size:.72rem;padding:1px 8px;margin-top:3px}
+.empty{color:var(--soft);font-size:.85rem;font-style:italic}
+
+/* ---- sửa câu sai ---- */
+.chunks{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin:8px 0 4px;
+        background:var(--paper);border:2px solid var(--line);border-radius:13px;padding:11px 13px}
+.chunk{font:inherit;font-size:1.08rem;background:transparent;border:2px dashed transparent;
+       border-radius:9px;padding:3px 7px;cursor:pointer;color:var(--ink)}
+.chunk:hover{border-color:var(--accent)}
+.chunk.on{background:var(--blush);border:2px solid var(--rose)}
+.chunk.right{background:var(--mint);border:2px solid var(--green)}
+.chunk.wrongpick{background:var(--blush);border:2px solid var(--rose);opacity:.85}
+.chunk:disabled{cursor:default}
+.dot-end{font-size:1.08rem;color:var(--soft)}
+.opt.on{background:var(--mint);border-color:var(--green)}
+.opt.good{background:var(--mint);border-color:var(--green);opacity:1}
+
+/* ---- phán đoán đúng/sai ---- */
+.tfrow{display:flex;gap:10px;margin-top:11px}
+.tfbtn{flex:1;font:inherit;font-size:1.1rem;padding:11px 8px;border-radius:12px;cursor:pointer;
+       background:var(--card);border:2px solid var(--line);color:var(--ink)}
+.tfbtn:hover:not(:disabled){border-color:var(--accent)}
+.tfbtn.on{background:var(--blush);border-color:var(--rose);font-weight:600}
+.tfbtn.good{background:var(--mint);border-color:var(--green);font-weight:600}
+.tfbtn.bad{background:var(--blush);border-color:var(--rose)}
+.tfbtn:disabled{cursor:default}
+
+/* ---- nói ---- */
+.sline{margin-bottom:13px}
+.sline:last-child{margin-bottom:0}
+.sline .py{font-size:.85rem;color:var(--soft);font-style:italic;margin:3px 0}
+.sline .vi{font-size:.88rem}
+.recbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:13px}
+.rectime{font-variant-numeric:tabular-nums;font-size:.9rem;color:var(--soft);min-width:44px}
+.btn.rec{background:var(--rose);border-color:var(--rose);color:#fff}
+.rechint{font-size:.85rem;color:var(--soft);margin-top:9px;line-height:1.6}
+@media(max-width:430px){ .tw{display:none} .tabs{gap:5px} }
+
+/* ---- nghe ---- */
+.audio{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--cream);
+       border:2px solid var(--line);border-radius:13px;padding:11px 13px;margin:6px 0 12px}
+audio{height:36px;max-width:100%}
+.nofile{font-size:.84rem;color:var(--rose)}
+.spd{display:flex;gap:6px;align-items:center;flex-wrap:wrap;width:100%;margin-top:9px}
+.spd .lbl{font-size:.76rem;color:var(--soft);margin-right:2px}
+.spd .gap{flex:1 1 0;min-width:4px}
+.chip{font:inherit;font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:999px;
+      border:2px solid var(--line);background:var(--card);color:var(--soft);cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+textarea{width:100%;font:inherit;font-family:'Noto Serif SC',serif;font-size:1.02rem;
+         background:var(--paper);border:2px solid var(--line);border-radius:13px;
+         padding:11px 13px;resize:vertical;color:var(--ink)}
+textarea:focus{outline:none;border-color:var(--accent)}
+.counter{font-size:.78rem;color:var(--soft);text-align:right;margin-top:4px}
+
+/* ---- đọc ---- */
+.passage{background:var(--paper);border:2px solid var(--line);border-radius:13px;padding:14px}
+.passage p{font-family:'Noto Serif SC',serif;font-size:1.06rem;line-height:2;margin-bottom:10px}
+.passage p:last-child{margin-bottom:0}
+
+/* ---- lựa chọn (dùng cho phần sửa câu sai) ---- */
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;font:inherit;background:var(--card);border:2px solid var(--line);
+     border-radius:13px;padding:10px 13px;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.bad{background:var(--blush);border-color:var(--rose);opacity:.65;pointer-events:none}
+
+/* ---- phản hồi / đáp án ---- */
+.fb{margin-top:9px;border-radius:13px;padding:11px 13px;font-size:.89rem;line-height:1.6}
+.fb.ok{background:var(--mint);border:2px solid #C9DED6}
+.fb.no{background:var(--blush);border:2px solid #EBCBC8}
+.ans{margin-top:10px;background:var(--mint);border:2px solid #C9DED6;
+     border-radius:13px;padding:12px 14px;font-size:.89rem;line-height:1.65;display:none}
+.ans.on{display:block}
+.ans .lab{font-size:.7rem;letter-spacing:1.3px;text-transform:uppercase;
+          color:var(--green);font-weight:800;display:block;margin-bottom:5px}
+.ans .model{font-family:'Noto Serif SC',serif;font-size:1.05rem;color:var(--ink);display:block}
+.warn{color:var(--rose);font-weight:800}
+
+.gloss{margin-top:10px;background:var(--paper);border:1px dashed var(--line);
+       border-radius:11px;padding:9px 12px;font-size:.82rem;color:var(--soft)}
+.gloss b{color:var(--ink);font-family:'Noto Serif SC',serif}
+
+/* ---- nút ---- */
+.btn{font:inherit;font-size:.92rem;font-weight:700;padding:11px 20px;border-radius:999px;
+     border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--card);
+        border-top:2px solid var(--line);padding:11px 14px;z-index:9}
+.sticky .wrap{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.sticky .st{font-size:.84rem;color:var(--soft)}
+
+/* ---- kết quả ---- */
+.score{text-align:center;padding:10px 0 2px}
+.score .big{font-size:3rem;font-weight:800;color:var(--rose);line-height:1.1;
+            font-family:'Space Mono',monospace}
+.score .sub{color:var(--soft);font-size:.9rem}
+.bars{margin-top:14px;display:flex;flex-direction:column;gap:9px}
+.barrow{display:grid;grid-template-columns:120px 1fr 44px;gap:9px;align-items:center;font-size:.85rem}
+.bar{height:10px;background:var(--paper);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green)}
+@media(max-width:520px){
+  .barrow{grid-template-columns:96px 1fr 40px;font-size:.8rem}
+  .spd .gap{display:none}
+  .chip{padding:5px 9px;font-size:.74rem}
+}
+</style>
+<!-- MAM-XANH:dau -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/giao-dien.css">
+<!-- MAM-XANH:cuoi -->
+
+<!--HSK2-META {"key": "bai13", "bai": "Bài 13", "han": "我们爱上中文课", "ten": "Chúng em yêu giờ học tiếng Trung", "file": "bai-13.html", "total": 9, "parts": {"fix": 3, "listen": 3, "read": 3, "speak": 1, "write": 1}} -->
+<meta name="hsk2-key" content="bai13">
+<meta name="hsk2-bai" content="Bài 13">
+<meta name="hsk2-han" content="我们爱上中文课">
+<meta name="hsk2-ten" content="Chúng em yêu giờ học tiếng Trung">
+<meta name="hsk2-total" content="9">
+<script>
+/* Hằng số TĨNH cho index.html — giữ nguyên dạng này, đừng đổi thành biểu thức. */
+const PAGE_KEY = "bai13";
+const PAGE_TOTAL = 9;
+const PAGE_HAN = "我们爱上中文课";
+const PAGE_LS = "hsk2-bai13-v1";
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1 id="hTitle"></h1>
+  <p id="hSub"></p>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<!-- ══════════ PHẦN 1 ══════════ -->
+<section class="panel on" id="p1">
+  <div class="card">
+    <div class="kicker" id="k1"></div>
+    <h2 class="sec">Tìm chỗ sai rồi sửa lại</h2>
+    <p class="lead">Mỗi câu dưới đây có đúng MỘT chỗ sai. Bấm vào chỗ em cho là sai, rồi chọn câu đã sửa đúng.
+    Chọn lại được, nhưng chỉ lần chọn đầu tiên mới tính điểm.</p>
+  </div>
+  <div id="fixBox"></div>
+</section>
+
+<!-- ══════════ PHẦN 2 ══════════ -->
+<section class="panel" id="p2">
+  <div class="card">
+    <div class="kicker" id="k2"></div>
+    <h2 class="sec">Nghe một bài rồi phán đoán <span class="han">对</span> / <span class="han">错</span></h2>
+    <p class="lead">Nghe cả bài một lượt để nắm ý chung, rồi đọc ba câu dưới đây và nghe lại lần hai.
+    Câu nào khớp với bài thì chọn <b><span class="han">对</span></b> (đúng), không khớp thì chọn
+    <b><span class="han">错</span></b> (sai). Chọn lại được, nhưng chỉ lần chọn đầu tiên mới tính điểm.</p>
+  </div>
+  <div id="listenBox"></div>
+</section>
+
+<!-- ══════════ PHẦN 3 ══════════ -->
+<section class="panel" id="p3">
+  <div class="card">
+    <div class="kicker" id="k3"></div>
+    <h2 class="sec">Đọc rồi phán đoán <span class="han">对</span> / <span class="han">错</span></h2>
+    <p class="lead">Đọc kỹ bài văn, rồi với mỗi câu chọn <b><span class="han">对</span></b> (đúng) hoặc
+    <b><span class="han">错</span></b> (sai). Câu nào không chắc thì đọc lại đúng đoạn có chữ đó,
+    đừng chọn theo cảm giác.</p>
+  </div>
+  <div id="readBox"></div>
+</section>
+
+<!-- ══════════ PHẦN 4 · NÓI ══════════ -->
+<section class="panel" id="p4">
+  <div class="card">
+    <div class="kicker">Phần 4 · Nói</div>
+    <h2 class="sec">Trả lời bằng giọng nói</h2>
+    <p class="lead">Phần này không tính vào số câu chấm điểm ở trên. Bấm <b>Thu âm</b>, nói xong bấm <b>Dừng</b> rồi nghe lại;
+    thấy được thì bấm <b>Gửi / Lưu file</b> rồi gửi cho cô qua Zalo.</p>
+  </div>
+  <div id="speakBox"></div>
+</section>
+
+<!-- ══════════ PHẦN 5 ══════════ -->
+<section class="panel" id="p5">
+  <div class="card">
+    <div class="kicker">Phần 5 · Bài viết</div>
+    <h2 class="sec">Viết tối thiểu 40 chữ</h2>
+    <p class="lead">Đề bài được bốc ngẫu nhiên. Phần này cô chấm tay, không tính vào số câu chấm điểm ở trên.</p>
+    <div class="ans on" style="background:var(--cream);border-color:#E8D7AE">
+      <span class="lab" style="color:var(--accent)">Đề của em</span>
+      <span class="model" id="wTopic"></span>
+      <span class="vi" id="wTopicVi" style="display:none;margin-top:5px"></span>
+    </div>
+    <div class="gloss" style="margin-top:12px" id="wReq"></div>
+  </div>
+  <div class="card">
+    <textarea id="wText" rows="9" placeholder="写在这里……"></textarea>
+    <div class="counter"><span id="wCount">0</span> chữ Hán · <span id="wCheck"></span></div>
+    <div class="btnrow">
+      <button class="btn" id="wSend">Gửi bài cho cô</button>
+      <button class="btn ghost" id="wCopy">Sao chép bài</button>
+    </div>
+    <div id="wFb"></div>
+    <div class="ans" id="wModel">
+      <span class="lab">Bài mẫu tham khảo</span>
+      <span class="model" id="wModelHan"></span>
+      <span class="vi" id="wModelVi" style="display:block;margin-top:7px"></span>
+      <div style="margin-top:9px;font-size:.87rem" id="wTip"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ KẾT QUẢ ══════════ -->
+<section class="panel" id="p6">
+  <div class="card">
+    <div class="kicker">Kết quả</div>
+    <div class="score">
+      <div class="big"><span id="sNum">–</span><span style="font-size:1.4rem;color:var(--soft)">/<span id="sMax"></span></span></div>
+      <div class="sub" id="sMsg">Em chưa nộp bài.</div>
+    </div>
+    <div class="bars" id="bars"></div>
+    <div id="guiBox" style="display:none;margin-top:14px;padding-top:14px;border-top:2px dashed var(--line)">
+      <p class="lead" style="margin:0 0 10px"><b>Gửi kết quả cho cô</b> — điền tên rồi bấm gửi,
+      cô mới biết bài này của ai.</p>
+      <div class="btnrow">
+        <input id="wName" placeholder="Họ và tên của em" style="font:inherit;flex:1;min-width:170px;
+          background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
+        <input id="wLop" placeholder="Lớp" style="font:inherit;width:100px;
+          background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
+        <button class="btn" id="guiKQ">Gửi cho cô</button>
+      </div>
+      <div id="guiFb"></div>
+    </div>
+    <div class="btnrow" style="justify-content:center;margin-top:14px">
+      <button class="btn ghost" id="again">Làm lại từ đầu</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="kicker">Sau khi nộp</div>
+    <p class="lead" style="margin:0">Quay lại từng phần để xem đáp án và phần giải thích vì sao —
+    ô màu xanh bạc hà nằm ngay dưới mỗi câu.</p>
+  </div>
+</section>
+
+<div class="sticky"><div class="wrap">
+  <span class="st" id="stat"></span>
+  <button class="btn" id="submit">NỘP BÀI</button>
+</div></div>
+
+</div>
+
+<script>
+// Nội dung bài tập Bài 13 — 我们爱上中文课
+// Ngữ liệu bám giáo án Bài 13 của cô: 双宾语句 động từ + 给 + NGƯỜI + VẬT (送给她花)
+// · 比较句 nói ra CON SỐ chênh lệch (多一笔 · 贵十块钱) · 比……一点儿／一些 (chênh RẤT ÍT)
+// · 13 từ mới 新年 教 花 希望 上面 洗手间 里面 笔 可能 上网 那样 告诉 班.
+// 复现: 比……多了 · 正……呢 (Bài 12), 高高兴兴地 (Bài 6), 礼物 (Bài 5).
+// Phần nghe là HỘI THOẠI hai người — mỗi lượt lời một dòng (\n), nhãn 女／男 không đọc thành tiếng.
+// Mọi phương án nhiễu ở phần sửa câu đều SAI NGỮ PHÁP; mọi cách sửa khác cũng đúng nằm trong `khac`.
+const DATA = {
+
+meta:{ id:'bai13', bai:'Bài 13', han:'我们爱上中文课', ten:'Chúng em yêu giờ học tiếng Trung',
+       sach:'《新HSK教程2》', file:'bai-13.html' },
+
+// ───────────────────────── PHẦN 1 · SỬA CÂU SAI ─────────────────────────
+fix: [
+ {
+  id:'f1',
+  sai:'这个本子比那个十块钱贵。',
+  khoi:['这个本子','比那个','十块钱贵'],
+  loi:2,
+  sua:[
+   {han:'这个本子比那个贵十块钱。', ok:true},
+   {han:'这个本子比那个很贵十块钱。', ok:false},
+   {han:'这个本子十块钱比那个贵。', ok:false}
+  ],
+  dung:'这个本子比那个贵十块钱。',
+  khac:['这个本子比那个贵十块。','那个本子比这个便宜十块钱。'],
+  dungvi:'Cuốn vở này đắt hơn cuốn kia mười tệ.',
+  why:'Muốn nói hơn BAO NHIÊU thì con số đứng SAU tính từ: A 比 B + <b>tính từ + con số</b> — 贵<b>十块钱</b> · 大<b>两岁</b> · 多<b>一笔</b>.<br>Tiếng Việt cũng nói "đắt hơn MƯỜI TỆ" — con số đứng sau, giống tiếng Trung. Đừng nhầm với cách báo giá, nơi con số đứng trước: 十块钱一个.<br><span class="warn">Hai câu sửa sai ở đâu:</span> 这个本子比那个很贵十块钱 — câu có 比 không dùng 很; 这个本子十块钱比那个贵 — con số vẫn đứng TRƯỚC tính từ, còn chen lên trước 比.<br><span class="warn">Ôn lại:</span> cùng khuôn với câu trong bài khoá 2 — “日”比“口”<b>多一笔</b>.'
+ },
+ {
+  id:'f2',
+  sai:'她的本子比我的有点儿贵。',
+  khoi:['她的','本子','比我的','有点儿贵'],
+  loi:3,
+  sua:[
+   {han:'她的本子比我的贵有点儿。', ok:false},
+   {han:'她的本子比我的一点儿贵。', ok:false},
+   {han:'她的本子比我的贵一点儿。', ok:true}
+  ],
+  dung:'她的本子比我的贵一点儿。',
+  khac:['她的本子比我的贵一些。','她的本子比我的贵。','我的本子比她的便宜一点儿。'],
+  dungvi:'Vở của bạn ấy đắt hơn vở của mình một chút.',
+  why:'So sánh hơn MỘT CHÚT dùng <b>一点儿 / 一些 đặt SAU tính từ</b>: 比我的贵<b>一点儿</b>.<br><b>有点儿</b> đứng TRƯỚC tính từ và chỉ dùng khi KHÔNG so sánh, thường kèm ý chê: 这个本子<b>有点儿</b>贵 (hơi đắt). Có 比 thì không dùng 有点儿.<br><span class="warn">Hai câu sửa sai ở đâu:</span> 她的本子比我的贵有点儿 — 有点儿 không bao giờ đứng sau tính từ; 她的本子比我的一点儿贵 — 一点儿 thì phải đứng SAU tính từ, không đứng trước.<br>Mẹo nhớ: <b>有点儿 + tính từ</b> (hơi…) · <b>tính từ + 一点儿</b> (…hơn một chút). Tiếng Việt "hơi đắt hơn" là cái bẫy kéo học viên dùng 有点儿.'
+ },
+ {
+  id:'f3',
+  sai:'我们就送给花王老师吧。',
+  khoi:['我们就送给','花王老师','吧'],
+  loi:1,
+  sua:[
+   {han:'我们就送王老师给花吧。', ok:false},
+   {han:'我们就送给王老师花吧。', ok:true},
+   {han:'我们就给王老师送给花吧。', ok:false}
+  ],
+  dung:'我们就送给王老师花吧。',
+  khac:['我们就送王老师花吧。','我们就送花给王老师吧。','我们就给王老师送花吧。'],
+  dungvi:'Vậy bọn mình tặng hoa cho cô Vương nhé.',
+  why:'Khuôn của bài: <b>送给 + NGƯỜI + VẬT</b> — người nhận đứng ngay sau 送给, món quà đứng cuối: 送给<b>王老师</b><b>花</b>.<br>Câu sai đặt món quà 花 lên trước người nhận, vì tiếng Việt nói "tặng HOA cho cô".<br><span class="warn">Hai câu sửa sai ở đâu:</span> 我们就送王老师给花吧 — 给 bị tách khỏi 送, chen vào giữa người và vật; 我们就给王老师送给花吧 — dùng hai lần 给.<br><span class="warn">Các cách khác cũng đúng:</span> 送王老师花 (bỏ 给) · 送花给王老师 (vật trước, 给 + người sau) · 给王老师送花 (给 + người đứng trước động từ). Bài này luyện khuôn 送给 + người + vật.'
+ }
+],
+
+// ───────────────────────── PHẦN 2 · NGHE (hội thoại) ─────────────────────────
+listen: {
+ file:'audio-bai-13/nghe.mp3',
+ text:'女：新年就要到了，我们班送王老师什么礼物？\n男：王老师喜欢花，我们就送给她花吧。\n女：好啊！我上网看了，这家花店的花比那家贵十块钱，可是漂亮多了。\n男：贵一点儿没关系。你告诉班长了吗？\n女：告诉了，他可能在上课，还没回我。\n男：那样我们明天一起去买吧，希望王老师高高兴兴地过个新年。',
+ vi:'Nữ: Sắp Tết rồi, lớp mình tặng cô Vương quà gì đây?\nNam: Cô Vương thích hoa, mình tặng cô hoa đi.\nNữ: Được đấy! Mình lên mạng xem rồi, hoa ở tiệm này đắt hơn tiệm kia mười tệ, nhưng đẹp hơn nhiều.\nNam: Đắt hơn một chút cũng không sao. Cậu nói với lớp trưởng chưa?\nNữ: Nói rồi, cậu ấy chắc đang học, chưa trả lời mình.\nNam: Thế thì mai bọn mình cùng đi mua nhé, mong cô Vương đón một cái Tết thật vui.',
+ tf:[
+  {
+   id:'n1',
+   cau:'这家花店的花比那家便宜。',
+   vi:'Hoa ở tiệm này rẻ hơn tiệm kia.',
+   dap:false,
+   why:'Bạn nữ nói: 这家花店的花比那家<b>贵十块钱</b>，可是漂亮多了。<br>Hoa tiệm này ĐẮT hơn, không phải rẻ hơn — câu phán đoán đổi 贵 thành 便宜.<br><span class="warn">Bẫy:</span> nghe tiếp thấy 漂亮多了 và bạn nam bảo 贵一点儿没关系, dễ nhớ lẫn thành "tiệm này tốt hơn về mọi mặt". Chỗ quyết định là tính từ đứng ngay sau 比那家: <b>贵</b>.<br>Ôn khuôn: A 比 B + tính từ + con số — 贵<b>十块钱</b>.'
+  },
+  {
+   id:'n2',
+   cau:'班长已经知道这件事了。',
+   vi:'Lớp trưởng đã biết chuyện này rồi.',
+   dap:true,
+   why:'Bạn nam hỏi: 你<b>告诉</b>班长了吗？ — bạn nữ đáp: <b>告诉了</b>。<br>Đã nói cho lớp trưởng biết, tức là lớp trưởng đã biết. Câu phán đoán dùng 知道 thay cho 告诉 — đổi góc nhìn từ người nói sang người nghe, ý không đổi.<br><span class="warn">Bẫy:</span> câu sau 他可能在上课，还没回我 — lớp trưởng CHƯA TRẢ LỜI, chứ không phải chưa biết. Đừng lẫn "chưa trả lời" với "chưa biết".<br><b>告诉</b> + người = nói cho ai biết · <b>知道</b> = biết.'
+  },
+  {
+   id:'n3',
+   cau:'他们今天就去花店买花。',
+   vi:'Hôm nay họ đi tiệm mua hoa luôn.',
+   dap:false,
+   why:'Câu cuối: 那样我们<b>明天</b>一起去买吧。 — hẹn MAI mới đi mua, không phải hôm nay.<br><span class="warn">Bẫy:</span> câu phán đoán có đủ 去 · 买花 khớp với bài, chỉ khác mốc thời gian. Nghe hội thoại hẹn hò thì luôn để ý từ chỉ thời gian: 今天 · 明天 · 下个星期.<br><b>那样</b> ở đây = "thế thì…" — chốt lại sau khi hai bên đã bàn xong.'
+  }
+ ]
+},
+
+// ───────────────────────── PHẦN 3 · ĐỌC ─────────────────────────
+read: {
+ title:'写错的字',
+ titlevi:'Chữ viết sai',
+ text:[
+  '今天上课的时候，王老师让我们在本子上面写“问题”的“问”字。可是我写的是“间”。“间”字的里面是“日”，“问”字的里面是“口”，“日”比“口”多一笔。王老师告诉我：“这是‘洗手间’的‘间’。”下课以后，我上网看了看，很多学中文的人都写错这两个字。我们班的安妮写得比我好一点儿，她都写对了。我希望下次别再写错，那样王老师会更高兴。'
+ ],
+ vi:[
+  'Hôm nay trong giờ học, cô Vương bảo bọn mình viết chữ "问" trong "问题" lên vở. Nhưng mình lại viết "间". Bên trong chữ "间" là "日", bên trong chữ "问" là "口", "日" nhiều hơn "口" một nét. Cô Vương bảo mình: "Đây là chữ \'间\' trong \'洗手间\'." Tan học, mình lên mạng xem thử, rất nhiều người học tiếng Trung đều viết sai hai chữ này. Anne lớp mình viết tốt hơn mình một chút, bạn ấy viết đúng hết. Mình mong lần sau đừng viết sai nữa, như thế cô Vương sẽ vui hơn.'
+ ],
+ tf:[
+  {
+   id:'r1',
+   cau:'“我”写的那个字比“问”多一笔。',
+   vi:'Chữ "mình" viết ra nhiều hơn chữ "问" một nét.',
+   dap:true,
+   why:'Mình viết <b>间</b> (bên trong là 日), chữ đúng là <b>问</b> (bên trong là 口). Bài nói rõ: “日”比“口”<b>多一笔</b>。<br>Vậy chữ mình viết ra — 间 — nhiều hơn 问 đúng một nét.<br><span class="warn">Phải nối hai chi tiết:</span> bài không có câu nào nói thẳng "chữ mình viết nhiều hơn một nét". Phải ghép 我写的是“间” với 日比口多一笔 mới ra đáp án.<br>Ôn khuôn: A 比 B + 多 + con số + lượng từ — 多<b>一笔</b>.'
+  },
+  {
+   id:'r2',
+   cau:'安妮也写错了这个字。',
+   vi:'Anne cũng viết sai chữ này.',
+   dap:false,
+   why:'Bài viết: 我们班的安妮写得比我好一点儿，<b>她都写对了</b>。<br>Anne viết đúng hết, không sai chữ nào.<br><span class="warn">Bẫy:</span> câu ngay trước đó nói 很多学中文的人都写错这两个字 — "rất nhiều người" viết sai, nhưng Anne thì không nằm trong số đó.<br>写得比我好<b>一点儿</b> = viết tốt hơn mình MỘT CHÚT — 一点儿 đứng sau tính từ, đúng điểm ngữ pháp của bài.'
+  },
+  {
+   id:'r3',
+   cau:'下课以后，“我”去了洗手间。',
+   vi:'Tan học, "mình" đi vệ sinh.',
+   dap:false,
+   why:'Bài viết: 下课以后，我<b>上网看了看</b>。 — tan học là lên mạng xem, không phải đi vệ sinh.<br><span class="warn">Bẫy:</span> chữ 洗手间 có trong bài, nhưng chỉ là lời cô giải thích chữ 间 thuộc từ nào (这是‘洗手间’的‘间’), không phải nơi ai đó đi tới. Thấy từ quen trong bài đừng vội chọn Đúng — xem nó đóng vai gì trong câu.'
+  }
+ ]
+},
+
+// ───────────────────────── PHẦN 4 · NÓI ─────────────────────────
+speak: [
+ {
+  id:'s1',
+  loai:'回答',
+  ten:'Trả lời bằng giọng nói',
+  lead:'Nói liền 3–4 câu, khoảng 20–30 giây. Không cần viết ra giấy trước — cứ nói, sai cũng không sao, cô nghe để sửa phát âm.',
+  q:'新年的时候，你想送给谁什么礼物？为什么？',
+  qvi:'Dịp Tết, em muốn tặng ai món quà gì? Vì sao?',
+  goi:[
+   '我想送给……',
+   '因为她／他喜欢……',
+   '……比……贵一点儿，可是……',
+   '我希望她／他……'
+  ],
+  meo:'Cố dùng cho được <b>送给 + người + vật</b> một lần và <b>比……一点儿</b> một lần. Nhớ: người nhận đứng TRƯỚC món quà — 送给妈妈花, không nói 送给花妈妈. Nói chậm, đọc rõ thanh 4 của <b>送 sòng</b> và <b>告诉 gàosu</b> (诉 đọc nhẹ).'
+ }
+],
+
+// ───────────────────────── PHẦN 5 · VIẾT ─────────────────────────
+write: [
+ {
+  topic:'新年就要到了，你想送给谁什么礼物？请比一比两个礼物。',
+  topicvi:'Sắp Tết rồi, em muốn tặng ai món quà gì? Hãy so sánh hai món quà.',
+  req:'dùng ít nhất <b>1</b> câu <b>送给 + người + vật</b> · <b>1</b> câu <b>比</b> có <b>一点儿 / 一些</b> hoặc có con số',
+  checks:[
+   {lab:'送给 / 送 (tặng)', re:/送/},
+   {lab:'比……一点儿 / 比 + con số', re:/比[^。！？，]*?(一点儿|一些|[一二两三四五六七八九十百千几0-9]+ *(块|元|岁|笔|个|本|天|分钟|次))/}
+  ],
+  // tự kiểm của máy: các câu bên `dat` phải được báo ĐỦ, các câu bên `thieu` phải bị báo THIẾU
+  thu:{
+   dat:['我想送给妈妈花，花比蛋糕便宜一点儿。','我送他一个书包，这个书包比那个贵五十块。','我要送给弟弟本子，红色的比白色的贵一些。','我想送给朋友礼物，这个比那个贵10块钱。'],
+   thieu:['我想送给妈妈花。','这个书包比那个贵一点儿。','我想送给妈妈花，花比蛋糕好看多了。']
+  },
+  model:'新年就要到了，我想送给妈妈一个礼物。我上网看了看，红色的包比黑色的贵一点儿，可是更漂亮。我还想送给王老师花，她教我们中文教得很好。我希望她们都高高兴兴地过个新年。',
+  modelvi:'Sắp Tết rồi, mình muốn tặng mẹ một món quà. Mình lên mạng xem thử, cái túi màu đỏ đắt hơn cái màu đen một chút, nhưng đẹp hơn. Mình còn muốn tặng cô Vương hoa, cô dạy bọn mình tiếng Trung rất hay. Mình mong cả hai người đều đón một cái Tết thật vui.'
+ }
+]
+};
+
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   CẤU HÌNH GỬI BÀI VIẾT VỀ GOOGLE FORM
+   Xem hướng dẫn 5 bước trong file "Huong-dan-thu-bai-viet.docx".
+   Chưa điền thì nút "Gửi bài cho cô" sẽ tự chuyển thành nút sao chép.
+   ═══════════════════════════════════════════════════════════════════ */
+const FORM = {
+  action : '',   // vd: https://docs.google.com/forms/d/e/FORM_ID/formResponse
+  name   : '',   // vd: entry.1234567890   ← ô Họ và tên
+  topic  : '',   // vd: entry.1234567891   ← ô Đề bài
+  text   : '',   // vd: entry.1234567892   ← ô Bài viết
+  score  : ''    // vd: entry.1234567893   ← ô Điểm 4 phần đầu (có thể bỏ trống)
+};
+/* ═══════════════════════════════════════════════════════════════════ */
+
+const $  = s => document.querySelector(s);
+const el = (t,c,h) => { const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e; };
+const TOTAL = DATA.fix.length + DATA.listen.tf.length + DATA.read.tf.length;
+const KEY = DATA.meta.id;                 // index.html dò bài theo hằng số này
+const LS = 'hsk2-' + KEY + '-v1';
+
+/* Địa chỉ web app Apps Script ghi thẳng vào tab BaiNop_HSK2 của bảng tính cô.
+   Để trống '' thì trang quay về chế độ cũ: bấm Gửi là sao chép cho học viên dán Zalo. */
+const WEBAPP = 'https://script.google.com/macros/s/AKfycbwI2IUhLPxDkPZ8n9iKorCw351kB9JgkD_uNh8D0pYofp3SBQD_hUduTGT2OsqwEOow2A/exec';
+
+/* Mã của LƯỢT LÀM BÀI này — gửi kèm để học viên nộp rồi viết bài gửi sau
+   vẫn chỉ nằm trên một dòng trong bảng tính. Bấm "Xoá hết và làm lại" thì sinh mã mới. */
+let MA = '';
+try{ const __o = JSON.parse(localStorage.getItem(LS)||'null'); MA = (__o && __o.ma) || ''; }catch(e){}
+if(!MA) MA = KEY + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,7);
+
+let PER = null;   // điểm từng phần, có sau khi nộp
+// index.html đọc được tiến độ mà không cần biết cấu trúc bên trong trang
+try{ localStorage.setItem('hsk2-meta-'+KEY, JSON.stringify(
+  {key:KEY, bai:DATA.meta.bai, han:DATA.meta.han, ten:DATA.meta.ten, total:TOTAL, file:DATA.meta.file})); }catch(e){}
+window.HSK2 = {key:KEY, bai:DATA.meta.bai, han:DATA.meta.han, ten:DATA.meta.ten, total:TOTAL, ls:LS};
+document.querySelector('title').textContent = 'Bài tập ' + DATA.meta.bai + ' · ' + DATA.meta.han;
+$('#hTitle').innerHTML = 'Bài tập ' + DATA.meta.bai + ' · <span class="han">' + DATA.meta.han + '</span>';
+$('#hSub').textContent = DATA.meta.sach + ' · ' + DATA.meta.ten + ' — 5 phần · ' + TOTAL + ' câu chấm điểm';
+$('#wReq').innerHTML = '<b>Yêu cầu:</b> ít nhất 40 chữ Hán · ' + DATA.write[0].req;
+$('#sMax').textContent = TOTAL;
+$('#k1').textContent = 'Phần 1 · ' + DATA.fix.length + ' câu';
+$('#k2').textContent = 'Phần 2 · 1 bài nghe · ' + DATA.listen.tf.length + ' câu';
+$('#k3').textContent = 'Phần 3 · ' + DATA.read.tf.length + ' câu';
+let submitted = false;
+const wIdx = 0;
+
+/* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
+const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
+
+/* ═══════════ PHẦN 1 · 改错 ═══════════ */
+const fixTap = {};    // khối đang chọn
+const fixSua = {};    // câu sửa đang chọn
+const fixFirst = {};  // lần chọn ĐẦU TIÊN — chỉ lần này mới tính điểm
+DATA.fix.forEach((it,i)=>{
+  fixTap[it.id]=null; fixSua[it.id]=null; fixFirst[it.id]={tap:null,sua:null};
+  const c = el('div','card');
+  c.innerHTML = '<span class="qno">Câu '+(i+1)+'</span>'
+    + '<p class="lead" style="margin:7px 0 0">Bấm vào chỗ sai trong câu:</p>';
+  const row = el('div','chunks'); row.id = 'ck-'+it.id;
+  it.khoi.forEach((k,n)=>{
+    const b = el('button','chunk', k);
+    b.onclick = ()=>{ if(submitted) return;
+      if(fixFirst[it.id].tap===null) fixFirst[it.id].tap = n;
+      fixTap[it.id] = n; drawFix(it); save(); };
+    row.append(b);
+  });
+  row.append(el('span','dot-end','。'));
+  const st2 = el('div'); st2.id = 'st-'+it.id; st2.style.display='none';
+  st2.append(el('p','lead','Câu nào là câu đã sửa đúng?'));
+  const opts = el('div','opts'); opts.id = 'fo-'+it.id;
+  it.sua.forEach((o,n)=>{
+    const b = el('button','opt','<span class="han">'+o.han+'</span>');
+    b.onclick = ()=>{ if(submitted) return;
+      if(fixFirst[it.id].sua===null) fixFirst[it.id].sua = n;
+      fixSua[it.id] = n; drawFix(it); save(); };
+    opts.append(b);
+  });
+  st2.append(opts);
+  const ans = el('div','ans'); ans.id = 'an-'+it.id;
+  c.append(row, st2, ans);
+  $('#fixBox').append(c);
+  drawFix(it);
+});
+function drawFix(it){
+  [...$('#ck-'+it.id).querySelectorAll('.chunk')].forEach((b,n)=>
+    b.classList.toggle('on', fixTap[it.id]===n));
+  $('#st-'+it.id).style.display = (fixTap[it.id]===null ? 'none' : 'block');
+  [...$('#fo-'+it.id).querySelectorAll('.opt')].forEach((b,n)=>
+    b.classList.toggle('on', fixSua[it.id]===n));
+  tick();
+}
+const fixDone = it => fixTap[it.id]!==null && fixSua[it.id]!==null;
+
+/* ═══════════ KHỐI PHÁN ĐOÁN ĐÚNG / SAI ═══════════ */
+const tfPick  = {};   // id → lựa chọn hiện tại
+const tfFirst = {};   // id → lần chọn ĐẦU TIÊN, chỉ lần này tính điểm
+function tfCards(box, items){
+  items.forEach((it,i)=>{
+    tfPick[it.id]=null; tfFirst[it.id]=null;
+    const c = el('div','card');
+    c.innerHTML = '<span class="qno">Câu '+(i+1)+'</span>'
+      + '<div class="han" style="font-size:1.06rem;margin:6px 0 0">'+it.cau+'</div>'
+      // nghĩa tiếng Việt chỉ hiện SAU khi nộp — đọc được nghĩa thì khỏi cần hiểu câu Hán
+      + '<div class="vi" id="vi-'+it.id+'" style="display:none;margin:3px 0 0">'+it.vi+'</div>';
+    const row = el('div','tfrow'); row.id = 'tf-'+it.id;
+    [[true,'✓ 对'],[false,'✗ 错']].forEach(([v,lab])=>{
+      const b = el('button','tfbtn', lab);
+      b.onclick = ()=>{ if(submitted) return;
+        if(tfFirst[it.id]===null) tfFirst[it.id]=v;
+        tfPick[it.id]=v; drawTf(it); save(); };
+      row.append(b);
+    });
+    const ans = el('div','ans'); ans.id = 'an-'+it.id;
+    c.append(row, ans);
+    box.append(c);
+    drawTf(it);
+  });
+}
+function drawTf(it){
+  const bs = $('#tf-'+it.id).querySelectorAll('.tfbtn');
+  bs[0].classList.toggle('on', tfPick[it.id]===true);
+  bs[1].classList.toggle('on', tfPick[it.id]===false);
+  tick();
+}
+function tfScore(per, name, items){   // `per` là biến cục bộ của hàm chấm, phải truyền vào
+  per[name] = [0, items.length];
+  items.forEach(it=>{
+    const ok = tfFirst[it.id] === it.dap;
+    if(ok) per[name][0]++;
+    const a = $('#an-'+it.id); a.classList.add('on');
+    a.innerHTML = '<span class="lab"' + (ok ? '' : ' style="color:var(--rose)"') + '>'
+      + (ok ? '✓ Em chọn đúng' : '✗ Em chọn sai') + ' · câu này <span class="han">'
+      + (it.dap ? '对' : '错') + '</span> (' + (it.dap ? 'đúng' : 'sai') + ')</span>'
+      + '<div style="margin-top:8px">' + it.why + '</div>';
+    const v = $('#vi-'+it.id); if(v) v.style.display = 'block';
+    const bs = $('#tf-'+it.id).querySelectorAll('.tfbtn');
+    bs.forEach(b=>{ b.disabled = true; b.classList.remove('on'); });
+    (it.dap ? bs[0] : bs[1]).classList.add('good');
+    if(tfPick[it.id] !== null && tfPick[it.id] !== it.dap)
+      (tfPick[it.id] ? bs[0] : bs[1]).classList.add('bad');
+  });
+}
+
+/* ═══════════ PHẦN 2 · nghe một bài ═══════════ */
+(function(){
+  const L = DATA.listen;
+  const c = el('div','card');
+  c.innerHTML = '<div class="kicker">听力 · Bài nghe</div>';
+  const au = el('div','audio');
+  au.innerHTML = '<audio controls preload="metadata"></audio>';
+  const warn = el('span','nofile',''); warn.style.display='none';
+  const ctl = el('div','spd','<span class="lbl">Tốc độ</span>');
+  au.append(warn, ctl);
+  // tên file có thể là nghe.mp3, nghe-1.mp3 hay "nghe 1.mp3" — thử lần lượt
+  const cands = [...new Set([L.file,
+                             L.file.replace(/nghe\.mp3$/,'nghe-1.mp3'),
+                             L.file.replace(/nghe\.mp3$/,'nghe 1.mp3')])].map(encodeURI);
+  const a = au.querySelector('audio');
+  let ci = 0, rate = 1;
+  a.onerror = ()=>{
+    if(++ci < cands.length){ a.src = cands[ci]; a.load(); return; }
+    warn.innerHTML = 'Chưa đọc được file âm thanh. Trang đã thử: '
+      + cands.map(x=>'<b>'+decodeURI(x)+'</b>').join(' · ');
+    warn.style.display='inline'; ctl.style.display='none';
+  };
+  a.onloadedmetadata = ()=>{ warn.style.display='none'; a.playbackRate = rate; };
+  [['0,75×',0.75],['1×',1],['1,25×',1.25]].forEach(([lab,v])=>{
+    const b = el('button','chip'+(v===1?' on':''), lab);
+    b.onclick = ()=>{ rate = v; a.playbackRate = v;
+      [...ctl.querySelectorAll('.chip')].forEach(x=>x.classList.toggle('on', x===b)); };
+    ctl.append(b);
+  });
+  ctl.append(el('span','gap'));
+  const back = el('button','chip','↺ nghe lại 5 giây');
+  back.onclick = ()=>{ a.currentTime = Math.max(0, a.currentTime - 5); a.play(); };
+  const again = el('button','chip','⟲ từ đầu');
+  again.onclick = ()=>{ a.currentTime = 0; a.play(); };
+  ctl.append(back, again);
+  a.src = cands[0];
+  c.append(au);
+  const tx = el('div','ans'); tx.id = 'an-listentext';
+  tx.innerHTML = '<span class="lab">原文 · nguyên văn bài nghe</span>'
+    + '<span class="han" style="display:block;line-height:2">' + L.text.replace(/\n/g,'<br>') + '</span>'
+    + '<span style="display:block;margin-top:8px">' + L.vi.replace(/\n/g,'<br>') + '</span>';
+  c.append(tx);
+  $('#listenBox').append(c);
+  tfCards($('#listenBox'), L.tf);
+})();
+
+/* ═══════════ PHẦN 3 ═══════════ */
+(function(){
+  const r = DATA.read;
+  const c = el('div','card');
+  c.innerHTML = '<div class="kicker">阅读 · Bài đọc</div><h2 class="sec"><span class="han">'+r.title+'</span>'
+    + '<span class="vi" id="vi-readtitle" style="display:none"> · '+r.titlevi+'</span></h2>';
+  const p = el('div','passage');
+  r.text.forEach(t=> p.append(el('p','han',t)));
+  c.append(p);
+  const vi = el('div','ans'); vi.id='an-readvi';
+  vi.innerHTML = '<span class="lab">Bản dịch</span>' + r.vi.map(t=>'<div style="margin-bottom:6px">'+t+'</div>').join('');
+  c.append(vi);
+  $('#readBox').append(c);
+
+  tfCards($('#readBox'), r.tf);
+})();
+
+/* ═══════════ PHẦN 5 · BÀI VIẾT ═══════════ */
+function wDraw(){
+  $('#wTopic').textContent  = DATA.write[wIdx].topic;
+  $('#wTopicVi').textContent= DATA.write[wIdx].topicvi;
+  $('#wModelHan').textContent = DATA.write[wIdx].model;
+  $('#wTip').innerHTML = 'Đọc bài mẫu xong hãy soát lại bài của em: đủ 40 chữ chưa · '
+    + DATA.write[0].checks.map(c=>'có <b>'+c.lab+'</b> chưa').join(' · ');
+  $('#wModelVi').textContent  = DATA.write[wIdx].modelvi;
+}
+wDraw();
+$('#wText').oninput = ()=>{
+  const t=$('#wText').value, n=hanCount(t);
+  $('#wCount').textContent = n;
+  $('#wCheck').innerHTML = [(n>=40 ? '✓ đủ số chữ' : '· còn thiếu '+(40-n)+' chữ')]
+    .concat(DATA.write[0].checks.map(c => (c.re.test(t) ? '✓ có ' : '· chưa có ') + c.lab))
+    .join(' &nbsp;·&nbsp; ');
+  save();
+};
+
+function wPayload(){
+  return { name:$('#wName').value.trim(), topic:DATA.write[wIdx].topic,
+           text:$('#wText').value.trim(), score:(submitted? $('#sNum').textContent+'/'+TOTAL : 'chưa nộp') };
+}
+/* Liệt kê câu làm sai để cô nhìn một cái là biết em đó hổng chỗ nào.
+   (mk_tpl2.py thay hàm này bằng bản của khuôn mới) */
+function cauSai(){
+  const ds = [];
+  DATA.fix.forEach((it,i)=>{ const f = fixFirst[it.id];
+    if(!(f.tap === it.loi && f.sua !== null && it.sua[f.sua].ok)) ds.push('Sửa lỗi '+(i+1)); });
+  DATA.listen.tf.forEach((it,i)=>{ if(tfFirst[it.id] !== it.dap) ds.push('Nghe '+(i+1)); });
+  DATA.read.tf.forEach((it,i)=>{ if(tfFirst[it.id] !== it.dap) ds.push('Đọc '+(i+1)); });
+  return ds.join(' · ');
+}
+
+
+/* Gửi về bảng tính của cô. Dùng no-cors nên trình duyệt không đọc được câu trả lời
+   của Google — coi như đã gửi, cô kiểm lại bằng chính bảng tính. */
+function guiBai(kem){
+  if(!WEBAPP) return Promise.resolve(false);
+  const d = {
+    ma      : MA,
+    ten     : $('#wName').value.trim(),
+    lop     : ($('#wLop') ? $('#wLop').value.trim() : ''),
+    bai     : DATA.meta.bai + ' · ' + DATA.meta.han,
+    tong    : submitted ? ($('#sNum').textContent + '/' + TOTAL) : '',
+    phan1   : diem(PHAN1), nghe: diem('Nghe'), doc: diem('Đọc'),
+    causai  : submitted ? cauSai() : '',
+    baiviet : $('#wText').value.trim()
+  };
+  if(kem) for(const k in kem) d[k] = kem[k];
+  return fetch(WEBAPP, { method:'POST', mode:'no-cors', cache:'no-store',
+                         headers:{'Content-Type':'text/plain;charset=utf-8'},
+                         body: JSON.stringify(d) })
+    .then(()=>true).catch(()=>false);
+}
+const PHAN1 = 'Sửa lỗi';
+const diem = k => (PER && PER[k]) ? (PER[k][0] + '/' + PER[k][1]) : '';
+
+function copyText(str){
+  let ok=false;
+  const ta=el('textarea');
+  ta.value=str; ta.setAttribute('readonly','');
+  ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';
+  document.body.append(ta);
+  try{ ta.focus(); ta.select(); ta.setSelectionRange(0,str.length); ok=document.execCommand('copy'); }catch(e){}
+  ta.remove();
+  if(ok) return Promise.resolve(true);
+  if(navigator.clipboard && navigator.clipboard.writeText)
+    return navigator.clipboard.writeText(str).then(()=>true,()=>false);
+  return Promise.resolve(false);
+}
+$('#wCopy').onclick = async ()=>{
+  const p = wPayload();
+  const s = DATA.meta.bai+' · '+(p.name||'(chưa điền tên)')+'\nĐề: '+p.topic+'\n\n'+p.text;
+  if(await copyText(s)){
+    $('#wFb').innerHTML='<div class="fb ok">Đã sao chép. Em dán vào Zalo gửi cô nhé.</div>';
+  }else{
+    const t=$('#wText'); t.focus(); t.select(); t.setSelectionRange(0,t.value.length);
+    $('#wFb').innerHTML='<div class="fb no">Em đã được bôi đen sẵn bài viết ở ô trên — '
+      +'bấm <b>Ctrl+C</b> (máy Mac: <b>Cmd+C</b>), hoặc trên điện thoại thì giữ vào chỗ bôi đen rồi chọn Sao chép.</div>';
+  }
+};
+function guiBaiKemGhiAm(){
+  if(!GHIAM) return guiBai();
+  if(GHIAM.blob.size > 3 * 1024 * 1024) return guiBai({ amTen: GHIAM.ten });  // quá nặng thì chỉ gửi tên
+  return new Promise(res=>{
+    const fr = new FileReader();
+    fr.onload  = ()=> res(String(fr.result).split(',')[1] || '');
+    fr.onerror = ()=> res('');
+    fr.readAsDataURL(GHIAM.blob);
+  }).then(b64 => guiBai(b64 ? { amTen:GHIAM.ten, amLoai:GHIAM.loai, amThanh:b64 }
+                            : { amTen:GHIAM.ten }));
+}
+$('#wSend').onclick = ()=>{
+  const p = wPayload();
+  if(hanCount(p.text) < 40){ $('#wFb').innerHTML='<div class="fb no">Bài còn dưới 40 chữ Hán, em viết thêm rồi gửi nhé.</div>'; return; }
+  if(!p.name){ $('#wFb').innerHTML='<div class="fb no">Em điền họ tên trước khi gửi nhé.</div>'; return; }
+  if(WEBAPP){
+    $('#wFb').innerHTML = '<div class="fb ok">Đang gửi…</div>';
+    guiBaiKemGhiAm().then(()=>{
+      $('#wFb').innerHTML = '<div class="fb ok">Đã gửi bài cho cô. '
+        + 'Em vẫn nên bấm “Sao chép bài” để giữ một bản nhé.</div>';
+    });
+    return;
+  }
+  if(!FORM.action || !FORM.text){ $('#wCopy').click(); return; }
+  let f = document.getElementById('gform');
+  if(!f){
+    const ifr = el('iframe'); ifr.name='gsink'; ifr.style.display='none'; document.body.append(ifr);
+    f = el('form'); f.id='gform'; f.target='gsink'; f.method='POST'; f.style.display='none'; document.body.append(f);
+  }
+  f.action = FORM.action; f.innerHTML='';
+  const add=(k,v)=>{ if(!k) return; const i=el('input'); i.name=k; i.value=v; f.append(i); };
+  add(FORM.name,p.name); add(FORM.topic,p.topic); add(FORM.text,p.text); add(FORM.score,p.score);
+  f.submit();
+  $('#wFb').innerHTML='<div class="fb ok">Đã gửi bài cho cô. Em vẫn nên bấm “Sao chép bài” để giữ một bản nhé.</div>';
+};
+
+/* ═══════════ PHẦN 4 · NÓI ═══════════ */
+let spoke = false;
+let GHIAM = null;      // file ghi âm mới nhất, để gửi kèm về bảng tính của cô
+const REC_MAX = 150;   // giây — tự dừng để không ra file quá nặng
+const duoiFile = ty => (ty.indexOf('mp4') >= 0 || ty.indexOf('mpeg') >= 0) ? 'm4a'
+                     : (ty.indexOf('ogg') >= 0 ? 'ogg' : 'webm');
+const canRec = () => !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia
+                        && window.MediaRecorder);
+function pickMime(){
+  const cand = ['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];
+  for(const m of cand){
+    try{ if(MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m)) return m; }catch(e){}
+  }
+  return '';
+}
+function makeRec(card, fname){
+  const bar  = el('div','recbar');
+  const bRec = el('button','btn','● Thu âm');
+  const tTim = el('span','rectime','0:00');
+  const bSave= el('button','btn ghost','Gửi / Lưu file');
+  const bDel = el('button','btn ghost','Thu lại');
+  const note = el('div','rechint','');
+  const au   = el('audio'); au.controls = true;
+  au.style.cssText = 'display:none;width:100%;margin-top:10px';
+  bSave.style.display='none'; bDel.style.display='none';
+  bar.append(bRec, tTim, bSave, bDel);
+  card.append(bar, au, note);
+
+  if(!canRec()){
+    bRec.disabled = true;
+    note.innerHTML = 'Trình duyệt này không cho thu âm ngay trong trang. '
+      + 'Em mở app ghi âm có sẵn của máy, thu rồi gửi file cho cô qua Zalo nhé.';
+    return;
+  }
+
+  let rec=null, chunks=[], stream=null, t0=0, timer=null, blob=null;
+  const fmt = s => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
+  function stopAll(){
+    try{ if(rec && rec.state!=='inactive') rec.stop(); }catch(e){}
+    if(timer){ clearInterval(timer); timer=null; }
+    if(stream){ stream.getTracks().forEach(x=>x.stop()); stream=null; }
+  }
+  bRec.onclick = async ()=>{
+    if(rec && rec.state==='recording'){ stopAll(); return; }
+    try{ stream = await navigator.mediaDevices.getUserMedia({audio:true}); }
+    catch(e){
+      note.innerHTML = 'Máy chưa cho phép dùng micro. Em bấm biểu tượng ổ khoá trên thanh địa chỉ '
+        + 'rồi bật micro cho trang này, hoặc thu bằng app ghi âm của máy.';
+      return;
+    }
+    const mime = pickMime();
+    chunks = []; blob = null;
+    try{ rec = new MediaRecorder(stream, mime ? {mimeType:mime} : undefined); }
+    catch(e){ rec = new MediaRecorder(stream); }
+    rec.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
+    rec.onstop = ()=>{
+      blob = new Blob(chunks, {type:(chunks[0] && chunks[0].type) || mime || 'audio/webm'});
+      au.src = URL.createObjectURL(blob); au.style.display = 'block';
+      bRec.textContent = '● Thu lại từ đầu'; bRec.classList.remove('rec');
+      bSave.style.display = ''; bDel.style.display = 'none';
+      note.innerHTML = 'Nghe lại một lượt xem có vấp chỗ nào không. Chưa ưng thì thu lại.';
+      GHIAM = { blob: blob, loai: blob.type || '',
+                ten: fname + '.' + duoiFile(blob.type || '') };
+      spoke = true; tick();
+    };
+    rec.start();
+    t0 = Date.now();
+    bRec.textContent = '■ Dừng'; bRec.classList.add('rec');
+    au.style.display = 'none'; bSave.style.display = 'none'; bDel.style.display = 'none';
+    note.textContent = 'Đang thu… em nói vào micro của máy.';
+    timer = setInterval(()=>{
+      const s = (Date.now()-t0)/1000;
+      tTim.textContent = fmt(s);
+      if(s >= REC_MAX) stopAll();
+    }, 200);
+  };
+  bDel.onclick = ()=> bRec.click();
+  bSave.onclick = async ()=>{
+    if(!blob) return;
+    const name = fname + '.' + duoiFile(blob.type || '');
+    try{
+      if(window.File && navigator.canShare && navigator.share){
+        const f = new File([blob], name, {type: blob.type});
+        if(navigator.canShare({files:[f]})){
+          await navigator.share({files:[f], title:name});
+          note.innerHTML = 'Đã mở bảng chia sẻ — em chọn Zalo rồi gửi cho cô nhé.';
+          return;
+        }
+      }
+    }catch(e){ if(e && e.name === 'AbortError') return; }
+    const a = el('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.append(a); a.click(); a.remove();
+    note.innerHTML = 'Đã lưu <b>' + name + '</b> vào máy. Em mở Zalo gửi file đó cho cô nhé.';
+  };
+}
+DATA.speak.forEach((it,i)=>{
+  const c = el('div','card');
+  c.innerHTML = '<span class="qno">Việc '+(i+1)+'</span>'
+    + '<h2 class="sec" style="margin:8px 0 2px"><span class="han">'+it.loai+'</span> · '+it.ten+'</h2>'
+    + '<p class="lead">'+it.lead+'</p>';
+  if(it.cau){
+    const box = el('div','passage');
+    it.cau.forEach((s,k)=> box.append(el('div','sline',
+        '<div class="han" style="font-size:1.08rem">'+(k+1)+'. '+s.han+'</div>'
+      + '<div class="py" style="display:none">'+s.py+'</div>'
+      + '<div class="vi">'+s.vi+'</div>')));
+    const bar = el('div','spd');
+    const tg  = el('button','chip','Hiện phiên âm');
+    tg.onclick = ()=>{
+      const on = box.querySelector('.py').style.display === 'none';
+      [...box.querySelectorAll('.py')].forEach(p=> p.style.display = on ? 'block' : 'none');
+      tg.textContent = on ? 'Ẩn phiên âm' : 'Hiện phiên âm';
+      tg.classList.toggle('on', on);
+    };
+    bar.append(tg);
+    c.append(bar, box);
+  }
+  if(it.q){
+    c.append(el('div','passage',
+        '<div class="han" style="font-size:1.12rem">'+it.q+'</div>'
+      + '<div class="vi" style="margin-top:5px">'+it.qvi+'</div>'));
+    c.append(el('div','gloss','<b>Khung câu gợi ý</b><br>'
+      + it.goi.map(g=>'<span class="han">'+g+'</span>').join('<br>')));
+  }
+  c.append(el('div','gloss','<b>Mẹo</b> · '+it.meo));
+  makeRec(c, 'HSK2-' + KEY + '-' + it.id);
+  $('#speakBox').append(c);
+});
+
+/* ═══════════ ĐẾM TIẾN ĐỘ ═══════════ */
+function tick(){
+  if(!window.__ready) return;
+  let done=0;
+  DATA.fix.forEach(it=>{ if(fixDone(it)) done++; });
+  DATA.listen.tf.forEach(it=>{ if(tfPick[it.id]!==null) done++; });
+  DATA.read.tf.forEach(it=>{ if(tfPick[it.id]!==null) done++; });
+  $('#stat').textContent = submitted ? 'Đã nộp bài' : 'Đã làm '+done+'/'+TOTAL+' câu';
+  const d=[
+    DATA.fix.every(fixDone),
+    DATA.listen.tf.every(it=>tfPick[it.id]!==null),
+    DATA.read.tf.every(it=>tfPick[it.id]!==null),
+    spoke,
+    hanCount($('#wText').value)>=40
+  ];
+  document.querySelectorAll('#tabs .tab').forEach((t,i)=>{ if(i<5) t.classList.toggle('done', d[i]); });
+}
+
+/* ═══════════ NỘP BÀI ═══════════ */
+$('#submit').onclick = ()=>{
+  if(submitted){ go(5); return; }
+  submitted = true;
+  const per = {};
+
+  per['Sửa lỗi'] = [0, DATA.fix.length];
+  DATA.fix.forEach(it=>{
+    const f = fixFirst[it.id];
+    const ok = (f.tap === it.loi) && (f.sua !== null) && it.sua[f.sua].ok;
+    if(ok) per['Sửa lỗi'][0]++;
+    const a = $('#an-'+it.id); a.classList.add('on');
+    a.innerHTML = '<span class="lab"' + (ok ? '' : ' style="color:var(--rose)"') + '>'
+      + (ok ? '✓ Đúng' : '✗ Chưa đúng')
+      + ' · chỗ sai là <span class="han">' + it.khoi[it.loi] + '</span></span>'
+      + '<span class="model">' + it.dung + '</span>'
+      + '<span class="vi" style="display:block;margin-top:4px">' + it.dungvi + '</span>'
+      + ((it.khac && it.khac.length) ? '<div style="margin-top:8px"><b>Sửa cách khác cũng đúng:</b> '
+          + it.khac.map(s => '<span class="han">' + s + '</span>').join(' · ') + '</div>' : '')
+      + '<div style="margin-top:9px">' + it.why + '</div>';
+    $('#st-'+it.id).style.display = 'block';
+    [...$('#ck-'+it.id).querySelectorAll('.chunk')].forEach((b,k)=>{
+      b.disabled = true; b.classList.remove('on');
+      if(k === it.loi) b.classList.add('right');          // chỗ sai thật
+      else if(f.tap === k) b.classList.add('wrongpick');  // chỗ em đã bấm
+    });
+    [...$('#fo-'+it.id).querySelectorAll('.opt')].forEach((b,k)=>{
+      b.disabled = true;
+      if(it.sua[k].ok) b.classList.add('good');
+      else if(fixSua[it.id] === k) b.classList.add('bad');
+    });
+  });
+
+  tfScore(per, 'Nghe', DATA.listen.tf);
+  tfScore(per, 'Đọc', DATA.read.tf);
+  $('#an-listentext').classList.add('on');
+  $('#an-readvi').classList.add('on');
+  $('#vi-readtitle').style.display = 'inline';
+
+  $('#wModel').classList.add('on');
+  $('#wTopicVi').style.display = 'block';
+
+  const tot = Object.values(per).reduce((s,x)=>s+x[0],0);
+  const max = Object.values(per).reduce((s,x)=>s+x[1],0);
+  $('#sNum').textContent = tot;
+  if(WEBAPP){
+    $('#guiBox').style.display = 'block';
+    if($('#wName').value.trim()) guiKetQua();   // đã có tên thì gửi luôn
+  }
+  $('#sMsg').innerHTML = tot===max ? 'Tuyệt đối. Đọc kỹ phần giải thích rồi làm nốt bài viết nhé.'
+    : tot>=max*0.7 ? 'Khá tốt. Xem lại '+(max-tot)+' câu còn sai ở các phần nhé.'
+    : 'Em xem lại phần giải thích của từng câu, rồi nghe/đọc lại một lượt nữa.';
+  $('#bars').innerHTML = Object.entries(per).map(([k,[a,b]])=>
+     '<div class="barrow"><span>'+k+'</span><span class="bar"><i style="width:'+(a/b*100)+'%"></i></span><span>'+a+'/'+b+'</span></div>').join('');
+  $('#submit').textContent='XEM KẾT QUẢ';
+  PER = per;
+  tick(); save(); go(5);
+};
+
+function guiKetQua(){
+  if(!$('#wName').value.trim()){
+    $('#guiFb').innerHTML = '<div class="fb no">Em điền họ tên đã nhé.</div>';
+    $('#wName').focus(); return;
+  }
+  $('#guiFb').innerHTML = '<div class="fb ok">Đang gửi…</div>';
+  save();
+  guiBaiKemGhiAm().then(()=>{   // thu âm rồi thì gửi kèm luôn file
+    $('#guiFb').innerHTML = '<div class="fb ok">Đã gửi kết quả cho cô. '
+      + 'Viết xong bài ở phần cuối thì bấm <b>Gửi bài cho cô</b> lần nữa để cô nhận luôn bài viết.</div>';
+  });
+}
+$('#guiKQ').onclick = guiKetQua;
+
+$('#again').onclick = ()=>{ localStorage.removeItem(LS); location.reload(); };
+
+/* ═══════════ TAB ═══════════ */
+const NAMES=['Phần 1','Phần 2','Phần 3','Phần 4','Phần 5','Kết quả'];
+NAMES.forEach((n,i)=>{
+  const b=el('button','tab', n.replace('Phần ','<span class="tw">Phần </span>')
+          + (i<5?'<span class="dot"></span>':''));
+  b.onclick=()=>go(i); $('#tabs').append(b);
+});
+function go(i){
+  document.querySelectorAll('.panel').forEach((p,n)=>p.classList.toggle('on', n===i));
+  document.querySelectorAll('#tabs .tab').forEach((t,n)=>t.setAttribute('aria-selected', n===i));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+go(0);
+window.__ready = true;
+
+/* ═══════════ LƯU TẠM TRONG MÁY ═══════════ */
+function save(){
+  try{
+    let __done=0;
+    DATA.fix.forEach(it=>{ if(fixDone(it)) __done++; });
+    DATA.listen.tf.forEach(it=>{ if(tfPick[it.id]!==null) __done++; });
+    DATA.read.tf.forEach(it=>{ if(tfPick[it.id]!==null) __done++; });
+    const o={fixTap, fixSua, fixFirst, tfPick, tfFirst, submitted,
+      // ba trường dưới đây dành cho index.html vẽ tiến độ — đừng xoá
+      key:KEY, done:__done, total:TOTAL,
+      score:(submitted && $('#sNum') ? Number($('#sNum').textContent) : null),
+      ma:MA, name:$('#wName').value,
+      lop:($('#wLop')?$('#wLop').value:''), wText:$('#wText').value};
+    localStorage.setItem(LS, JSON.stringify(o));
+  }catch(e){}
+}
+(function restore(){
+  try{
+    const o=JSON.parse(localStorage.getItem(LS)||'null'); if(!o||o.submitted) return;
+    // bài làm dở của BẢN CŨ (phần xếp câu) không dùng được cho bản này — bỏ đi, làm lại từ đầu
+    if((o.picked || o.ta) && !o.tfPick){ localStorage.removeItem(LS); return; }
+    DATA.fix.forEach(it=>{
+      if(o.fixTap && o.fixTap[it.id]!==undefined) fixTap[it.id]=o.fixTap[it.id];
+      if(o.fixSua && o.fixSua[it.id]!==undefined) fixSua[it.id]=o.fixSua[it.id];
+      if(o.fixFirst && o.fixFirst[it.id]) fixFirst[it.id]=o.fixFirst[it.id];
+      drawFix(it);
+    });
+    [...DATA.listen.tf, ...DATA.read.tf].forEach(it=>{
+      if(o.tfPick && o.tfPick[it.id]!==undefined) tfPick[it.id]=o.tfPick[it.id];
+      if(o.tfFirst && o.tfFirst[it.id]!==undefined) tfFirst[it.id]=o.tfFirst[it.id];
+      drawTf(it);
+    });
+    if(o.name) $('#wName').value=o.name;
+    if(o.lop && $('#wLop')) $('#wLop').value=o.lop;
+    if(o.wText){ $('#wText').value=o.wText; $('#wText').oninput(); }
+    tick();
+  }catch(e){}
+})();
+tick();
+</script>
+</body>
+</html>
