@@ -330,16 +330,16 @@ footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
 const SORT = [
  {n:1, t:'Em xem một chiếc áo, thấy đắt quá nên quyết định thôi không mua. Xếp lại câu.',
   sit:'<b>还是别……了</b> — đã cân nhắc rồi mới quyết định KHÔNG làm.',
-  words:['这件','太贵了','还是','别','买','了'], ans:['这件太贵了，还是别买了。'],
-  why:'Thứ tự cố định: <b>还是 + 别 + động từ + 了</b>. 还是 đứng TRƯỚC 别 (✗别还是买了). Chữ 了 ở cuối là bắt buộc — nó cho biết em vốn đã định mua, giờ đổi ý.'},
+  words:['太贵了','还是','别','了','买','这件'], ans:['这件太贵了，还是别买了。'],
+  why:'Thứ tự cố định: <b>还是 + 别 + động từ + 了</b>. 还是 đứng TRƯỚC 别 (✗别还是买了). Chữ 了 ở cuối gần như luôn đi kèm — nó cho biết em vốn đã định mua, giờ đổi ý.'},
  {n:2, t:'Bạn hỏi nhà em có xa công ty không. Xếp lại câu trả lời.',
   sit:'<b>A + 离 + B + 远/近</b> · <b>但</b> nối hai vế trái ngược.',
-  words:['我家','离','公司','有点儿远','但','有公交车'], ans:['我家离公司有点儿远，但有公交车。'],
+  words:['离','公司','我家','有点儿远','有公交车','但'], ans:['我家离公司有点儿远，但有公交车。'],
   why:'离 phải đứng ngay sau chủ ngữ, rồi mới tới mốc so sánh (公司), tính từ 远 để CUỐI. Người Việt hay nói ngược thành ✗我家很远离公司 vì tiếng Việt là "nhà tôi xa công ty".'},
- {n:3, zh:'网上说这个教室有两百多名外国学生。',
-  py:'Wǎngshang shuō zhège jiàoshì yǒu liǎngbǎi duō míng wàiguó xuésheng.',
-  vn:'Trên mạng nói phòng học này có hơn hai trăm học sinh nước ngoài.',
-  audio:'audio-bai-02/d3.mp3', on:'网上 · 教室 · 数+多+名 · 外国'},
+ {n:3, zh:'网上说这个学校有两百多名外国学生。',
+  py:'Wǎngshang shuō zhège xuéxiào yǒu liǎngbǎi duō míng wàiguó xuésheng.',
+  vn:'Trên mạng nói trường này có hơn hai trăm học sinh nước ngoài.',
+  audio:'audio-bai-02/d3.mp3', on:'网上 · 数+多+名 · 外国'},
  {n:4, zh:'车站离这儿不远，你别打车，还是坐公交车吧。',
   py:'Chēzhàn lí zhèr bù yuǎn, nǐ bié dǎchē, háishi zuò gōngjiāochē ba.',
   vn:'Trạm xe cách đây không xa, bạn đừng bắt taxi, thôi thì đi xe buýt đi.',
@@ -348,10 +348,10 @@ const SORT = [
   py:'Bié dānxīn, chēzhàn pángbiān jiù yǒu yì jiān mài piào de xiǎo wūzi.',
   vn:'Đừng lo, ngay cạnh trạm xe có một căn nhà nhỏ bán vé.',
   audio:'audio-bai-02/d5.mp3', on:'别 · 车站 · 间 · 票'},
- {n:6, zh:'这件衣服是在网上买的，但是有点儿贵，别买了。',
-  py:'Zhè jiàn yīfu shì zài wǎngshang mǎi de, dànshì yǒudiǎnr guì, bié mǎi le.',
-  vn:'Chiếc áo này là mua trên mạng, nhưng có hơi đắt, đừng mua nữa.',
-  audio:'audio-bai-02/d6.mp3', on:'件 · 网上 · 但(是) · 别'},
+ {n:6, zh:'网上卖的这件衣服很好看，但是有点儿贵，别买了。',
+  py:'Wǎngshang mài de zhè jiàn yīfu hěn hǎokàn, dànshì yǒudiǎnr guì, bié mǎi le.',
+  vn:'Cái áo bán trên mạng này đẹp lắm, nhưng hơi đắt, đừng mua nữa.',
+  audio:'audio-bai-02/d6.mp3', on:'件 · 网上 · động từ + 的 + danh từ · 但(是) · 别'},
  {n:7, zh:'教室离车站很远，我们还是打车过去吧。',
   py:'Jiàoshì lí chēzhàn hěn yuǎn, wǒmen háishi dǎchē guòqù ba.',
   vn:'Phòng học cách trạm xe rất xa, chúng ta thôi bắt taxi đi qua đó đi.',
@@ -376,16 +376,16 @@ const PICKQ = [
    {z:'太晚了，你别还是喝茶了。', ok:false, w:'Sai trật tự. 还是 luôn đứng TRƯỚC 别: 还是别喝茶了。'}
   ]},
  {n:10, t:'Em đợi bạn đã hơn một tiếng. Nói thế nào?',
-  sit:'Số LẺ (一, 三, 五…) thì 多 đứng SAU lượng từ.',
+  sit:'Số từ 1 đến 9 (一 · 两 · 三 … 九) thì 多 đứng SAU lượng từ: 一个多小时 · 两年多 · 三块多钱.',
   opts:[
-   {z:'我等了一多个小时了。', ok:false, w:'Sai. 一 là số lẻ nên 多 không được đứng ngay sau nó. Khuôn 数+多+量 chỉ dùng với số chẵn: 十多个小时 · 二十多分钟.'},
-   {z:'我等了一个小时多了。', ok:false, w:'多 bị đẩy ra sau cả cụm lượng từ. Phải chen vào GIỮA lượng từ và danh từ: 一个多小时.'},
+   {z:'我等了一多个小时了。', ok:false, w:'Sai. 一 là số từ 1 đến 9 nên 多 không đứng ngay sau nó. Khuôn 数+多+量 chỉ dùng với số TRÒN CHỤC, TRÒN TRĂM: 十多个小时 · 二十多分钟.'},
+   {z:'我等了一个小时多了。', ok:false, w:'Khuôn chuẩn của bài là chen 多 vào GIỮA lượng từ và danh từ: 一个多小时. (Khẩu ngữ có người nói 一个小时多, nhưng làm bài và đi thi thì dùng 一个多小时.)'},
    {z:'我等了一个多小时了。', ok:true,  w:'Đúng. Phần dư nhỏ hơn một tiếng → <b>数 + 量 + 多</b>: 一个多小时 · 三块多钱 · 两年多.'}
   ]},
  {n:11, t:'Chiếc áo em vừa mua giá hơn hai trăm tệ. Nói thế nào?',
-  sit:'Số CHẴN (kết thúc bằng 0: 十, 二十, 两百, 三千…) thì 多 đứng ngay SAU số.',
+  sit:'Số TRÒN (tận cùng là 0: 十, 二十, 两百, 三千…) thì 多 đứng ngay SAU số.',
   opts:[
-   {z:'这件衣服两百多块钱。', ok:true,  w:'Đúng. 两百 là số chẵn, phần dư là mấy chục tệ nguyên → <b>数 + 多 + 量</b>: 两百多块钱 (khoảng 200–300).'},
+   {z:'这件衣服两百多块钱。', ok:true,  w:'Đúng. 两百 là số tròn trăm, phần dư là mấy chục tệ nguyên → <b>数 + 多 + 量</b>: 两百多块钱 (khoảng 200–300).'},
    {z:'这件衣服两多百块钱。', ok:false, w:'Sai chỗ. 多 phải đứng sau TRỌN con số (两百), không chen vào giữa 两 và 百.'},
    {z:'这件衣服两百块多钱。', ok:false, w:'Câu này đúng ngữ pháp nhưng NGHĨA KHÁC: 两百块多 = 200 tệ lẻ mấy hào, tức chỉ hơn 200 một chút. Muốn nói "hơn hai trăm" (200–300) thì phải là 两百多块钱.'}
   ]},
@@ -400,7 +400,7 @@ const PICKQ = [
   sit:'<b>过来</b> = tới CHỖ NGƯỜI NÓI · <b>过去</b> = rời chỗ người nói đi nơi khác.',
   opts:[
    {z:'你过去一下。', ok:false, w:'Sai điểm nhìn. 过去 là đi RA XA chỗ em — nói vậy thành ra em đang xua bạn đi.'},
-   {z:'我过来一下。', ok:false, w:'Không nói được. Em đang ở đây rồi, không thể "过来" chính chỗ mình. Nếu em đi tới chỗ bạn thì phải nói 我过去一下.'},
+   {z:'我过来一下。', ok:false, w:'Sai người: câu này nói EM đi tới chỗ bạn, trong khi em muốn BẠN tới chỗ em. Gọi bạn lại thì chủ ngữ là 你: 你过来一下.'},
    {z:'你过来一下。', ok:true,  w:'Đúng. Người nói là cái mốc: gọi ai tới chỗ mình thì luôn là 过来. Đây là câu dùng suốt ngày: 你过来一下 · 你过来看看.'}
   ]}
 ];
@@ -420,7 +420,7 @@ const CHATS = [
      {z:'那我们还打车去吧。', ok:false, note:'Thiếu 是. 还 một mình là "còn, thêm nữa", không dùng để chọn phương án.', to:'c'},
      {z:'那我们坐打车去吧。', ok:false, note:'坐 thừa. 打车 đã gồm nghĩa đi xe: 打车去 (✗坐打车去).', to:'c'}]},
    c:{them:'好。打车要多少钱？', picks:[
-     {z:'网上说三十多块。', ok:true,  note:'三十 là số chẵn nên 多 đứng ngay sau số. 网上说 là cách dẫn nguồn dùng hằng ngày.', to:null},
+     {z:'网上说三十多块。', ok:true,  note:'三十 là số tròn chục nên 多 đứng ngay sau số. 网上说 là cách dẫn nguồn dùng hằng ngày.', to:null},
      {z:'网上说三多十块。', ok:false, note:'多 phải đứng sau TRỌN con số 三十, không chen vào giữa.', to:null},
      {z:'网上说三十块多。', ok:false, note:'Nghĩa khác: 三十块多 = 30 tệ lẻ mấy hào. Muốn nói "hơn ba mươi tệ" thì là 三十多块.', to:null}]}
   },
@@ -439,7 +439,7 @@ const CHATS = [
      {z:'太贵了，别还是买了。', ok:false, note:'Sai trật tự — 还是 phải đứng trước 别: 还是别买了。', to:'c'}]},
    c:{them:'好吧。那你过来我家看，行吗？', picks:[
      {z:'行，我现在过去。', ok:true,  note:'Đúng điểm nhìn: em rời chỗ mình để tới chỗ bạn → 过去.', to:null},
-     {z:'行，我现在过来。', ok:false, note:'Sai điểm nhìn. Bạn ở đầu kia nên với EM đó là 过去. 过来 chỉ dùng khi ai đó tới chỗ mình.', to:null}]}
+     {z:'行，我现在过来。', ok:false, note:'Theo quy tắc của bài thì chưa đúng: lấy người nói làm mốc, em rời chỗ mình tới chỗ bạn → 过去. (Khẩu ngữ đôi khi nói 我过来 theo điểm nhìn của người nghe, nhưng làm bài thì dùng 过去.)', to:null}]}
   },
   done:'Xong. Cặp 过来 / 过去 luôn lấy NGƯỜI NÓI làm mốc — đây là chỗ nhầm nhiều nhất của bài.'},
 
@@ -448,14 +448,14 @@ const CHATS = [
   start:'a',
   nodes:{
    a:{them:'你住的那个地方人多吗？', picks:[
-     {z:'不太多，有三十多万人。', ok:true,  note:'三十万 là số chẵn nên 多 đứng ngay sau 三十: 三十多万人.', to:'b'},
+     {z:'不太多，有三十多万人。', ok:true,  note:'三十万 có phần đếm là 三十 (tròn chục) nên 多 đứng ngay sau 三十: 三十多万人.', to:'b'},
      {z:'不太多，有三十万多人。', ok:false, note:'Nghĩa lệch: 三十万多 nghe như 300 000 lẻ mấy. Nói "hơn ba mươi vạn" là 三十多万人.', to:'b'},
      {z:'不太多，有多三十万人。', ok:false, note:'多 không bao giờ đứng TRƯỚC số trong khuôn này.', to:'b'}]},
    b:{them:'你在哪儿学中文？', picks:[
      {z:'我在一个中文学校学，那儿有很多外国学生。', ok:true,  note:'外国 bổ nghĩa trực tiếp cho 学生 — đúng cách nói.', to:'c'},
      {z:'我在一个中文学校学，那儿有很多外国人学生。', ok:false, note:'外国人 đã là một NGƯỜI, không bổ nghĩa cho 学生 được. Nói 外国学生 hoặc 外国人.', to:'c'},
      {z:'我在一个中文学校学，那儿有很多外国的。', ok:false, note:'Bỏ lửng sau 的 thì người nghe không biết em nói về ai, về cái gì.', to:'c'}]},
-   c:{them:'你们的教室大不大？', picks:[
+   c:{them:'你们学校大不大？', picks:[
      {z:'挺大的，学校有十多间教室。', ok:true,  note:'间 là lượng từ của phòng: 一间教室 · 十多间教室 — đúng.', to:null},
      {z:'挺大的，学校有十多名教室。', ok:false, note:'名 chỉ dùng đếm NGƯỜI. Đếm phòng thì dùng 间.', to:null},
      {z:'挺大的，学校有十多教室。', ok:false, note:'Thiếu lượng từ. Số đếm và danh từ không dán trực tiếp vào nhau: phải có 间.', to:null}]}
@@ -493,12 +493,13 @@ const TYPE = [
     tip:'Nói rõ em chọn cách nào: 还是打车去吧 · 还是坐公交车吧 · 还是别去了.'}],
   order:['还是','吧','Đủ thành phần nhưng 还是 phải đứng TRƯỚC, 吧 đóng ở CUỐI câu: 我们还是打车去吧。'],
   model:'下大雨，我们还是打车去吧。',
+  more:'Cách nói khác cũng đúng: 我们还是坐公交车去吧。 · 雨太大了，我们还是别去了。 · 我们还是在家看电影吧。 · 外边下大雨，还是打车吧。 · 车站离这儿有点儿远，我们还是打车去吧。',
   why:'还是 mang phép so sánh ĐÃ hoàn tất: em đã nghĩ qua xe buýt, đi bộ… rồi mới chốt taxi. Vì vậy câu thường có hai vế — nêu trở ngại rồi mới chốt. Mở rộng: 雨太大了，还是别出去了。 · 车站有点儿远，还是打车吧。',
   avoid:[{z:'我们还打车去吧', w:'Thiếu 是. <b>还</b> một mình nghĩa là "còn, thêm nữa" (我还要一杯茶). Chọn phương án thì phải đủ 还是.'},
          {z:'别还是', w:'Sai trật tự. 还是 luôn đứng TRƯỚC 别: 还是别去了。'}]},
 
  {n:19, t:'Trả lời bằng một câu tiếng Trung hoàn chỉnh.',
-  sit:'Số áng chừng: số CHẴN → <b>数+多+量</b> (十多分钟) · số LẺ → <b>数+量+多</b> (一个多小时).',
+  sit:'Số áng chừng: số TRÒN CHỤC → <b>数+多+量</b> (十多分钟) · số từ 1 đến 9 → <b>数+量+多</b> (一个多小时).',
   ask:'从你家到你上班的地方要多长时间？',
   need:[
    {lbl:'要', any:['要','用'], tip:'Nói mất bao nhiêu thời gian thì dùng 要: 要二十多分钟.'},
@@ -506,9 +507,10 @@ const TYPE = [
    {lbl:'đơn vị thời gian', any:['小时','分钟','分'],
     tip:'Kèm đơn vị: 小时 hoặc 分钟.'}],
   model:'从我家到公司要一个多小时。',
-  why:'Chọn khuôn theo con số: 一 là số lẻ nên 多 đứng sau lượng từ (一个多小时); 十, 二十, 三十 là số chẵn nên 多 đứng ngay sau số (十多分钟 · 二十多分钟). Mở rộng: 我每天上班要用四十多分钟。 · 坐公交车要一个多小时，打车只要二十多分钟。',
-  avoid:[{z:'一多个小时', w:'Sai. 一 là số lẻ, 多 không được đứng ngay sau nó. Phải là 一个多小时.'},
-         {z:'一个小时多', w:'多 bị đẩy ra sau cả cụm. Phải chen vào giữa lượng từ và danh từ: 一个多小时.'},
+  more:'Cách nói khác cũng đúng: 从我家到公司要二十多分钟。 · 坐公交车要一个多小时。 · 我每天上班要用四十多分钟。 · 打车只要十多分钟。 · 从我家到学校要两个多小时。',
+  why:'Chọn khuôn theo con số: 一 là số từ 1 đến 9 nên 多 đứng sau lượng từ (一个多小时); 十, 二十, 三十 là số tròn chục nên 多 đứng ngay sau số (十多分钟 · 二十多分钟). Mở rộng: 我每天上班要用四十多分钟。 · 坐公交车要一个多小时，打车只要二十多分钟。',
+  avoid:[{z:'一多个小时', w:'Sai. 一 là số từ 1 đến 9, 多 không được đứng ngay sau nó. Phải là 一个多小时.'},
+         {z:'一个小时多', w:'Khuôn chuẩn của bài là chen 多 vào giữa lượng từ và danh từ: 一个多小时 (khẩu ngữ có người nói 一个小时多, nhưng làm bài thì viết 一个多小时).'},
          {z:'多二十分钟', w:'多 không đứng TRƯỚC số. Phải là 二十多分钟.'},
          {z:'二十分钟多', w:'Nghĩa lệch. Muốn nói "hơn hai mươi phút" thì là 二十多分钟.'}]},
 
@@ -521,6 +523,7 @@ const TYPE = [
    {lbl:'做的 (có 的)', any:['做的'], tip:'的 phải dán NGAY SAU động từ 做 rồi mới tới 菜: 做的菜.'},
    {lbl:'菜', any:['菜','饭','面条儿','饺子'], tip:'Nói rõ em thích ăn cái gì: 菜 · 饭 · 饺子.'}],
   model:'我喜欢吃我妈妈做的菜。',
+  more:'Cách nói khác cũng đúng: 我喜欢吃我爸爸做的菜。 · 我喜欢吃我姐姐做的面条儿。 · 我喜欢吃我朋友做的中国菜。 · 我喜欢吃饭店做的菜。 · 我喜欢吃妈妈做的饭，她做的菜都很好吃。',
   why:'的 gói cụm 我妈妈做 lại thành phần bổ nghĩa cho 菜; cả khối 我妈妈做的菜 là một danh ngữ, làm tân ngữ của 喜欢吃. Khuôn này dùng được với rất nhiều động từ đã học: 我昨天买的衣服 · 老师说的话 · 他们卖的票 · 你看的那个电影.',
   avoid:[{z:'我妈妈做菜我喜欢吃', w:'Không có 的 nên 做菜 thành một VIỆC, không còn là MÓN ăn. Phải gói lại: 我喜欢吃我妈妈做的菜。'},
          {z:'我喜欢吃我妈妈的做菜', w:'的 sai chỗ. 的 phải nằm ngay sau động từ: 做的菜, không phải 的做菜.'}]}

@@ -330,11 +330,11 @@ footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
 const SORT = [
  {n:1, t:'Bạn em nghe cô giáo giảng bài nhưng không hiểu. Xếp lại câu.',
   sit:'<b>没 + động từ + bổ ngữ</b> — việc ĐÃ xảy ra mà chưa đạt kết quả. Câu bắt đầu bằng <b>他</b>.',
-  words:['他','没','听','懂','老师','的','话'], ans:['他没听懂老师的话。'],
+  words:['懂','话','的','听','没','老师','他'], ans:['他没听懂老师的话。'],
   why:'Thứ tự cố định: <b>没 + 听 + 懂 + tân ngữ</b>. 没 đứng TRƯỚC động từ, bổ ngữ 懂 dán SÁT sau 听, tân ngữ <b>老师的话</b> ra sau cùng. Thể phủ định thì BỎ 了 (✗他没听懂了老师的话).'},
  {n:2, t:'Em muốn rủ mẹ cùng đi cửa hàng vào ngày mai. Xếp lại câu.',
   sit:'<b>一起</b> luôn đứng TRƯỚC động từ. 明天 đứng trước hay sau 我 đều đúng.',
-  words:['明天','我','想','和','妈妈','一起','去','商店'],
+  words:['和','一起','明天','商店','去','想','妈妈','我'],
   ans:['明天我想和妈妈一起去商店。','我明天想和妈妈一起去商店。'],
   why:'Khuôn: <b>和 + người + 一起 + động từ</b>. Tiếng Việt để \u201Ccùng nhau\u201D ở cuối câu, tiếng Trung thì 一起 phải đứng ngay trước 去 (✗我想和妈妈去商店一起).'}
 ];
@@ -385,10 +385,10 @@ const PICKQ = [
    {z:'我们去外边走走吧。',     ok:true,  w:'Đúng. 走走 là dạng AA của việc chưa xảy ra, nghe nhẹ nhàng; 吧 đóng câu rủ rê.'}
   ]},
  {n:11, t:'Em kể lại: tối qua mình học tiếng Trung một lát.',
-  sit:'Việc ĐÃ xảy ra. 学习 có HAI âm tiết nên không lặp được — phải đổi sang <b>AB 了一下</b>.',
+  sit:'Việc ĐÃ xảy ra, động từ HAI âm tiết (学习) → dùng <b>AB 了一下</b>. Khuôn chen 一 (看一看) và chen 了 (看了看) là của động từ MỘT âm tiết.',
   opts:[
    {z:'昨天晚上我学习了一下。', ok:true,  w:'Đúng. Động từ hai âm tiết, việc đã xảy ra → 学习了一下. Đây là chỗ khác với 看了看 của động từ một âm tiết.'},
-   {z:'昨天晚上我学习了学习。', ok:false, w:'Sai. Em suy từ 看了看 mà ra, nhưng 学习 có hai âm tiết nên không chen 了 vào giữa để lặp được. Phải dùng 学习了一下.'},
+   {z:'昨天晚上我学习一学习。', ok:false, w:'Sai. Chen 一 vào giữa (看一看 · 听一听) chỉ dùng cho động từ MỘT âm tiết; động từ hai âm tiết không nói ✗学习一学习. Hơn nữa đây là việc đã qua → 学习了一下.'},
    {z:'昨天晚上我学习学习了。', ok:false, w:'Mâu thuẫn: 学习学习 là hình thức của việc CHƯA xảy ra, trong khi 昨天晚上 là việc đã qua. Việc đã qua phải dùng 学习了一下.'}
   ]},
  {n:12, t:'Em đang nói chuyện về phim, chợt nhớ ra cần hỏi bạn ngày mai có rảnh không.',
@@ -439,7 +439,7 @@ const CHATS = [
      {z:'我们班也是每个人想去。',   ok:false, note:'Thiếu 都. Khi chủ ngữ là 每个人 thì phải có 都 phía sau.', to:'c'},
      {z:'我们班也是都每个人想去。', ok:false, note:'Sai chỗ 都. 都 đứng SAU 每个人, không đứng trước.', to:'c'}]},
    c:{them:'那你呢？你想去什么地方？', picks:[
-     {z:'我想去北京，听说那儿真不错！', ok:true,  note:'Đúng. 不错 là lời KHEN, mạnh ngang 很好.', to:null},
+     {z:'我想去北京，听说那儿真不错！', ok:true,  note:'Đúng. 不错 là lời KHEN (= khá hay, tốt), chứ không phải "không sai".', to:null},
      {z:'我想去北京，听说那儿真错！',   ok:false, note:'错 đứng một mình nghĩa là SAI. Muốn khen phải thêm 不: 不错.', to:null}]}
   },
   done:'Xong. Ba lượt vừa rồi dùng đủ 为什么 (hỏi lý do) · 每……都 · 不错 (lời khen).'},
@@ -472,7 +472,7 @@ const CHATS = [
    b:{them:'晚上我做了五个菜，你来吃吧！', picks:[
      {z:'五个菜？这么多啊！好，我马上过去。', ok:true,  note:'Đúng cả hai chỗ: 这么多啊 là cảm thán, và em đi tới chỗ bạn nên dùng 过去.', to:null},
      {z:'五个菜？这么多吗！好，我马上过去。', ok:false, note:'吗 là để HỎI, không dùng để cảm thán. Cảm thán thì đóng câu bằng 啊.', to:null},
-     {z:'五个菜？这么多啊！好，我马上过来。', ok:false, note:'Sai điểm nhìn. Em đi tới chỗ bạn nên với EM đó là 过去. 过来 chỉ dùng khi ai đó tới chỗ mình.', to:null}]}
+     {z:'五个菜？这么多啊！好，我马上过来。', ok:false, note:'Theo quy tắc của bài thì chưa đúng: em rời chỗ mình tới chỗ bạn nên lấy em làm mốc là 过去. (Khẩu ngữ đôi khi nói 我马上过来 theo điểm nhìn của người nghe, nhưng làm bài thì dùng 过去.)', to:null}]}
   },
   done:'Xong. Hai lượt vừa rồi dùng đủ: lặp động từ đã xảy ra, 这么……啊 và cặp 过来 / 过去 của Bài 2.'}
 ];
@@ -486,6 +486,7 @@ const TYPE = [
    {lbl:'做完 hoặc 做好', any:['做完','做好'], tip:'Phải có bổ ngữ kết quả dán sát sau 做: 做完 hoặc 做好. Chỉ nói 做 thì chưa nói được kết quả.'},
    {lbl:'了 (xong) hoặc 没 (chưa xong)', any:['了','没'], tip:'Đã xong thì đóng bằng 了 (我做完了); chưa xong thì dùng 没 (我还没做完).'}],
   model:'今天的工作我做完了，可以回家了。',
+  more:'Cách nói khác cũng đúng: 我做完了。 · 今天的工作我还没做完。 · 还没做完呢，我明天再做。 · 我已经做完了，现在想休息一下。 · 我做好了，可以回家了。',
   why:'做完 là động từ + bổ ngữ kết quả: 完 nói rõ việc đã tới đích. Thể khẳng định cần 了; thể phủ định đổi sang 没 và bỏ 了. Mở rộng: 今天的工作我还没做完。 · 我没做好今天的工作。',
   avoid:[{z:'做工作完', w:'Sai chỗ 完. Bổ ngữ phải dán SÁT sau động từ: 做完工作.'},
          {z:'没做完了', w:'Có 没 thì phải BỎ 了: 还没做完.'},
@@ -499,7 +500,7 @@ const TYPE = [
    {lbl:'một động từ lặp (走走 · 看看 · 休息休息…)', any:['走走','看看','听听','说说','写写','玩玩','洗洗','想想','问问','聊聊','逛逛','休息休息','学习学习','看一看','听一听','走一走'], tip:'Bài này luyện động từ LẶP: 走走 · 看看 · 听听 · 休息休息. Hãy dùng ít nhất một dạng.'}],
   model:'星期六我想去外边走走，再休息休息。',
   why:'想 + động từ lặp là cách nói quen thuộc cho kế hoạch nhẹ nhàng, tuỳ ý. Một âm tiết → 走走 / 走一走; hai âm tiết → 休息休息; từ ly hợp → 聊聊天儿.',
-  more:'Mở rộng: 星期六我想和朋友一起去商店看看。 · 我想在家听听歌，洗洗衣服。',
+  more:'Cách nói khác cũng đúng: 星期六我想和朋友一起去商店看看。 · 我想在家听听歌，洗洗衣服。 · 我想去外边走走。 · 星期六我想在家休息休息。 · 我想和朋友聊聊天儿。',
   avoid:[{z:'聊聊一下', w:'Lặp rồi thì thôi 一下: 聊聊 hoặc 聊一下, không nói cả hai.'},
          {z:'走走一下',     w:'Lặp rồi thì thôi 一下: 走走 hoặc 走一下.'},
          {z:'看看一下',     w:'Lặp rồi thì thôi 一下: 看看 hoặc 看一下.'},
@@ -514,7 +515,7 @@ const TYPE = [
    {lbl:'lý do (不错 · 漂亮 · 好吃 · 网上说…)', any:['不错','漂亮','好吃','好看','好玩','有意思','网上','喜欢','便宜','大'], tip:'Thêm một vế lý do bằng từ đã học: 很漂亮 · 东西好吃 · 网上说那儿很不错.'}],
   model:'我最想去西安旅游。网上说那儿很漂亮，东西也很好吃。',
   why:'Không cần giống câu mẫu. Cấu trúc nên có: nơi em chọn (想去) + một đến hai lý do ngắn. Mỗi lý do dùng một cụm đã quen: 很 + tính từ · 网上说…… · 真不错.',
-  more:'Cách nói khác: 我最想去北京。每个人都说那儿真不错。',
+  more:'Cách nói khác cũng đúng: 我最想去北京。每个人都说那儿真不错。 · 我最想去上海，因为网上说上海很漂亮。 · 我最想去西安旅游。我很喜欢西安的菜。 · 我最想去广州，听说那儿的菜很好吃。 · 我想去北京，我觉得北京很有意思。',
   avoid:[{z:'真错', w:'错 đứng một mình nghĩa là SAI. Muốn khen thì phải là 不错.'}]}
 ];
 </script>

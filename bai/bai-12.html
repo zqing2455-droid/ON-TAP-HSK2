@@ -423,7 +423,7 @@ read: {
    cau:'小时候弟弟跑得比“我”快。',
    vi:'Hồi bé em trai chạy nhanh hơn "mình".',
    dap:false,
-   why:'Câu đầu bài: 我小时候比弟弟高，<b>也跑得比他快</b>。<br>Chủ ngữ của cả câu là 我, nên 也跑得比他快 = MÌNH chạy nhanh hơn em. Câu phán đoán đảo ngược hai người.<br><span class="warn">Bẫy:</span> câu thứ hai nói 弟弟……跑得比我快得多 — đó là chuyện BÂY GIỜ (现在). Bài đặt 小时候 và 现在 cạnh nhau để so: hồi bé mình hơn, giờ em hơn.<br>Mẹo đọc câu 比: tìm xem ai đứng TRƯỚC 比 — người đó là người "hơn".'
+   why:'Câu đầu bài: 我小时候比弟弟高，<b>也跑得比他快</b>。<br>Chủ ngữ của cả câu là 我, nên 也跑得比他快 = MÌNH chạy nhanh hơn em. Câu phán đoán đảo ngược hai người.<br><span class="warn">Bẫy:</span> câu thứ hai nói 弟弟……跑得比我快得多 — đó là chuyện BÂY GIỜ (现在). Bài đặt 小时候 và 现在 cạnh nhau để so: hồi bé mình hơn, giờ em hơn.<br>Mẹo đọc câu 比: tìm CHỦ NGỮ của vế có 比 (có khi đứng cách xa, như 我……也跑得比他快) — người đó là người "hơn" về tính từ đứng sau (cao hơn, nhanh hơn…).'
   },
   {
    id:'r2',
@@ -468,6 +468,10 @@ write: [
   topicvi:'Kể về thời tiết chỗ em, so sánh với Bắc Kinh. Từ bé em đã thích làm gì?',
   req:'dùng ít nhất <b>1</b> câu có <b>比</b> · trong đó có <b>多了</b> hoặc <b>得多</b>',
   checks:[{lab:'比', re:/比/}, {lab:'多了 / 得多', re:/多了|得多/}],
+  thu:{
+   dat:['越南比北京热多了。','今天比昨天冷得多。','他跑步跑得比我快多了。','我家比学校远得多，我每天坐地铁。'],
+   thieu:['今天很冷，外面正下着雪呢。','他跑得比我快。','北京冷多了。']
+  },
   model:'我是越南人，现在在北京学习。北京比我家那里冷多了，今天是阴天，外面还正下着雪呢。我每天坐两站地铁去学校。我从小就喜欢跑步，小时候我跑得比哥哥快，现在哥哥跑得比我快得多。天气好的时候，我们一起去外面跑步，我好高兴啊！',
   modelvi:'Mình là người Việt Nam, giờ đang học ở Bắc Kinh. Bắc Kinh lạnh hơn quê mình nhiều, hôm nay trời râm, ngoài trời còn đang có tuyết. Ngày nào mình cũng đi hai bến tàu điện tới trường. Từ bé mình đã thích chạy bộ, hồi bé mình chạy nhanh hơn anh trai, giờ anh trai chạy nhanh hơn mình nhiều. Lúc trời đẹp, hai anh em cùng ra ngoài chạy bộ, mình vui ghê!'
  }
@@ -517,7 +521,7 @@ $('#hSub').textContent = DATA.meta.sach + ' · ' + DATA.meta.ten + ' — 5 phầ
 $('#wReq').innerHTML = '<b>Yêu cầu:</b> ít nhất 40 chữ Hán · ' + DATA.write[0].req;
 $('#sMax').textContent = TOTAL;
 $('#k1').textContent = 'Phần 1 · ' + DATA.fix.length + ' câu';
-$('#k2').textContent = 'Phần 2 · 1 bài nghe · ' + DATA.listen.tf.length + ' câu';
+$('#k2').textContent = 'Phần 2 · ' + (DATA.listen.doan ? DATA.listen.doan.length + ' đoạn nghe' : '1 bài nghe') + ' · ' + DATA.listen.tf.length + ' câu';
 $('#k3').textContent = 'Phần 3 · ' + DATA.read.tf.length + ' câu';
 let submitted = false;
 const wIdx = 0;
@@ -572,11 +576,12 @@ const fixDone = it => fixTap[it.id]!==null && fixSua[it.id]!==null;
 /* ═══════════ KHỐI PHÁN ĐOÁN ĐÚNG / SAI ═══════════ */
 const tfPick  = {};   // id → lựa chọn hiện tại
 const tfFirst = {};   // id → lần chọn ĐẦU TIÊN, chỉ lần này tính điểm
-function tfCards(box, items){
+function tfCards(box, items, start){
+  start = start || 0;   // nghe theo đoạn: số câu chạy tiếp qua các đoạn
   items.forEach((it,i)=>{
     tfPick[it.id]=null; tfFirst[it.id]=null;
     const c = el('div','card');
-    c.innerHTML = '<span class="qno">Câu '+(i+1)+'</span>'
+    c.innerHTML = '<span class="qno">Câu '+(start+i+1)+'</span>'
       + '<div class="han" style="font-size:1.06rem;margin:6px 0 0">'+it.cau+'</div>'
       // nghĩa tiếng Việt chỉ hiện SAU khi nộp — đọc được nghĩa thì khỏi cần hiểu câu Hán
       + '<div class="vi" id="vi-'+it.id+'" style="display:none;margin:3px 0 0">'+it.vi+'</div>';
@@ -619,20 +624,17 @@ function tfScore(per, name, items){   // `per` là biến cục bộ của hàm 
   });
 }
 
-/* ═══════════ PHẦN 2 · nghe một bài ═══════════ */
-(function(){
-  const L = DATA.listen;
-  const c = el('div','card');
-  c.innerHTML = '<div class="kicker">听力 · Bài nghe</div>';
+/* ═══════════ PHẦN 2 · nghe (một bài, hoặc từng đoạn) ═══════════ */
+function mayPhat(file){
   const au = el('div','audio');
   au.innerHTML = '<audio controls preload="metadata"></audio>';
   const warn = el('span','nofile',''); warn.style.display='none';
   const ctl = el('div','spd','<span class="lbl">Tốc độ</span>');
   au.append(warn, ctl);
   // tên file có thể là nghe.mp3, nghe-1.mp3 hay "nghe 1.mp3" — thử lần lượt
-  const cands = [...new Set([L.file,
-                             L.file.replace(/nghe\.mp3$/,'nghe-1.mp3'),
-                             L.file.replace(/nghe\.mp3$/,'nghe 1.mp3')])].map(encodeURI);
+  const cands = [...new Set([file,
+                             file.replace(/nghe\.mp3$/,'nghe-1.mp3'),
+                             file.replace(/nghe\.mp3$/,'nghe 1.mp3')])].map(encodeURI);
   const a = au.querySelector('audio');
   let ci = 0, rate = 1;
   a.onerror = ()=>{
@@ -655,12 +657,36 @@ function tfScore(per, name, items){   // `per` là biến cục bộ của hàm 
   again.onclick = ()=>{ a.currentTime = 0; a.play(); };
   ctl.append(back, again);
   a.src = cands[0];
-  c.append(au);
-  const tx = el('div','ans'); tx.id = 'an-listentext';
-  tx.innerHTML = '<span class="lab">原文 · nguyên văn bài nghe</span>'
-    + '<span class="han" style="display:block;line-height:2">' + L.text + '</span>'
-    + '<span style="display:block;margin-top:8px">' + L.vi + '</span>';
-  c.append(tx);
+  return au;
+}
+function nguyenVan(id, lab, text, vi){
+  const tx = el('div','ans'); tx.id = id;
+  tx.innerHTML = '<span class="lab">' + lab + '</span>'
+    + '<span class="han" style="display:block;line-height:2">' + text.replace(/\n/g,'<br>') + '</span>'
+    + '<span style="display:block;margin-top:8px">' + vi.replace(/\n/g,'<br>') + '</span>';
+  return tx;
+}
+(function(){
+  const L = DATA.listen;
+  if(L.doan){
+    $('#p2 h2.sec').innerHTML = 'Nghe từng đoạn rồi phán đoán <span class="han">对</span> / <span class="han">错</span>';
+    $('#p2 p.lead').innerHTML = 'Bài nghe chia thành ' + L.doan.length + ' đoạn ngắn, mỗi đoạn có máy phát riêng. '
+      + 'Đọc câu của đoạn đó trước, rồi mới bấm nghe. Câu nào khớp với đoạn vừa nghe thì chọn <b><span class="han">对</span></b> (đúng), '
+      + 'không khớp thì chọn <b><span class="han">错</span></b> (sai). Chọn lại được, nhưng chỉ lần chọn đầu tiên mới tính điểm.';
+    let n = 0;
+    L.doan.forEach((d,i)=>{
+      const c = el('div','card');
+      c.innerHTML = '<div class="kicker">听力 · Đoạn ' + (i+1) + '</div>';
+      c.append(mayPhat(d.file), nguyenVan('an-listentext-'+(i+1), '原文 · nguyên văn đoạn ' + (i+1), d.text, d.vi));
+      $('#listenBox').append(c);
+      tfCards($('#listenBox'), d.tf, n);
+      n += d.tf.length;
+    });
+    return;
+  }
+  const c = el('div','card');
+  c.innerHTML = '<div class="kicker">听力 · Bài nghe</div>';
+  c.append(mayPhat(L.file), nguyenVan('an-listentext', '原文 · nguyên văn bài nghe', L.text, L.vi));
   $('#listenBox').append(c);
   tfCards($('#listenBox'), L.tf);
 })();
@@ -982,7 +1008,7 @@ $('#submit').onclick = ()=>{
 
   tfScore(per, 'Nghe', DATA.listen.tf);
   tfScore(per, 'Đọc', DATA.read.tf);
-  $('#an-listentext').classList.add('on');
+  document.querySelectorAll('[id^="an-listentext"]').forEach(x=>x.classList.add('on'));
   $('#an-readvi').classList.add('on');
   $('#vi-readtitle').style.display = 'inline';
 

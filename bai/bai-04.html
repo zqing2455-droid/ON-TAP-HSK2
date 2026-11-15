@@ -331,13 +331,13 @@ footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
 const SORT = [
  {n:1, t:'Em kể với bạn rằng mình chưa bao giờ mặc đồ màu đỏ. Xếp lại câu.',
   sit:'<b>没 + động từ + 过</b> — thể phủ định của 过. Giữ nguyên 过, KHÔNG thêm 了. Câu bắt đầu bằng <b>我</b>.',
-  words:['我','没','穿','过','红色','的','衣服'], ans:['我没穿过红色的衣服。'],
+  words:['没','过','衣服','的','红色','我','穿'], ans:['我没穿过红色的衣服。'],
   why:'Khuôn cố định: <b>没 + 穿 + 过 + tân ngữ</b>. 没 đứng TRƯỚC động từ, 过 dán SÁT sau 穿, tân ngữ 红色的衣服 ra sau cùng. Thể phủ định thì BỎ 了 (✗我没穿过了红色的衣服).<br><br>Từ HSK1 gặp lại trong câu này: <b>穿 · 衣服 · 的</b>.'},
  {n:2, t:'Em giải thích vì sao mình mua cái quần đó. Xếp lại câu.',
-  sit:'<b>因为 + nguyên nhân，所以 + kết quả</b>. Tiếng Trung đặt NGUYÊN NHÂN ra trước.',
-  words:['因为','这','条','裤子','很','便宜','所以','我','买','了'],
+  sit:'<b>因为 + nguyên nhân，所以 + kết quả</b>. Dùng cặp 因为……所以…… thì NGUYÊN NHÂN đi trước.',
+  words:['因为','所以','这','条','买','很','便宜','我','裤子','了'],
   ans:['因为这条裤子很便宜，所以我买了。'],
-  why:'因为 mở vế lý do, 所以 mở vế kết quả — không đảo ngược như tiếng Việt “Tôi mua vì nó rẻ”. Lượng từ của 裤子 là <b>条</b> (vật DÀI), không phải 件.<br><br>Từ HSK1 gặp lại trong câu này: <b>这 · 很 · 便宜 · 买 · 了</b>.'}
+  why:'因为 mở vế lý do, 所以 mở vế kết quả — dùng cả cặp thì vế 因为 luôn đi trước. (Muốn nói lý do sau như tiếng Việt “Tôi mua vì nó rẻ” thì bỏ 所以: 我买了，因为很便宜.) Lượng từ của 裤子 là <b>条</b> (vật DÀI), không phải 件.<br><br>Từ HSK1 gặp lại trong câu này: <b>这 · 很 · 便宜 · 买 · 了</b>.'}
 ];
 
 /* Tầng 2 — nghe và viết lại */
@@ -377,13 +377,13 @@ const PICKQ = [
   sit:'<b>了</b> = việc ĐÃ xảy ra, kết quả có thể còn · <b>过</b> = KINH NGHIỆM từng có, nay không còn.',
   opts:[
    {z:'我买过一个绿色的书包。',   ok:true,  w:'Đúng. Cái cặp đó giờ không dùng nữa, em chỉ kể lại kinh nghiệm từng có → 过.'},
-   {z:'我买了一个绿色的书包。',   ok:false, w:'Câu này đúng ngữ pháp nhưng NGHĨA khác: 了 cho hiểu cái cặp vừa mua và vẫn đang dùng. Muốn kể chuyện đã qua thì dùng 过.'},
+   {z:'我买了一个绿色的书包。',   ok:false, w:'Đúng ngữ pháp nhưng chưa hợp ý: 了 chỉ báo việc mua đã xảy ra (thường là một lần cụ thể, gần đây), không mang ý "từng có kinh nghiệm, giờ đã qua". Kể lại chuyện từng có thì dùng 过.'},
    {z:'我买过了一个绿色的书包。', ok:false, w:'过 và 了 không chồng lên nhau trong câu kể kinh nghiệm. Chọn một: 买过 (từng mua) hoặc 买了 (đã mua).'}
   ]},
  {n:10, t:'Trời mưa nên em không đi trung tâm thương mại. Em kể lại cho bạn.',
-  sit:'Tiếng Trung đặt <b>NGUYÊN NHÂN TRƯỚC</b>, kết quả sau. Vế sau dùng 所以, không dùng 但是.',
+  sit:'Dùng cặp <b>因为……，所以……</b> thì NGUYÊN NHÂN đi trước, kết quả sau. Vế sau dùng 所以, không dùng 但是.',
   opts:[
-   {z:'所以我没去商场，因为下雨了。',   ok:false, w:'Đảo ngược. Tiếng Việt nói “Tôi không đi, vì trời mưa” được, tiếng Trung thì vế nguyên nhân phải ra TRƯỚC: 因为下雨了，所以我没去商场.'},
+   {z:'所以我没去商场，因为下雨了。',   ok:false, w:'Đảo ngược. Đã dùng cặp 因为……所以…… thì vế 因为 phải ra TRƯỚC: 因为下雨了，所以我没去商场. (Muốn nói lý do sau thì bỏ 所以: 我没去商场，因为下雨了.)'},
    {z:'因为下雨了，但是我没去商场。',   ok:false, w:'Lẫn 但是 (Bài 2). 但是 nối hai vế TRÁI NGƯỢC nhau; đây là quan hệ nhân quả nên phải dùng 所以.'},
    {z:'因为下雨了，所以我没去商场。',   ok:true,  w:'Đúng. 因为 mở vế lý do, 所以 mở vế kết quả, đúng thứ tự của tiếng Trung.'}
   ]},
@@ -426,7 +426,7 @@ const CHATS = [
      {z:'我想买个裤子。', ok:false, note:'个 là lượng từ chung, nhưng quần đã có lượng từ riêng — người bản ngữ luôn nói 一条裤子.', to:'c'}]},
    c:{them:'好啊。你穿过红色的裤子吗？', picks:[
      {z:'没穿过，红色的好看吗？', ok:true,  note:'Đúng cả hai chỗ: 没穿过 giữ nguyên 过, và 红色的 (= 红色的裤子) khỏi phải lặp lại 裤子.', to:null},
-     {z:'没穿过，红色好看吗？',   ok:false, note:'Thiếu 的. 红色 một mình là tên màu; muốn thay cho cái quần thì phải nói 红色的.', to:null}]}
+     {z:'没穿红色的过，好看吗？',   ok:false, note:'Sai chỗ 过. 过 dán SÁT sau động từ, tân ngữ ra sau: 没穿过红色的. Tiếng Việt để "bao giờ" ở cuối nên hay đẩy 过 ra sau.', to:null}]}
   },
   done:'Xong. Ba lượt vừa rồi đi trọn một lần vào cửa hàng: phủ định 过 → chọn đúng lượng từ 条 → dùng 的字短语 để khỏi lặp 裤子.'},
 
@@ -439,7 +439,7 @@ const CHATS = [
      {z:'我喜欢白色，想看看白色。',   ok:false, note:'Chỗ thứ hai thiếu 的 — ở đó 白色的 đang thay cho món đồ, không phải đang nói về màu.', to:'b'}]},
    b:{them:'这条白色的有点儿贵，那条红色的更便宜。', picks:[
      {z:'因为我没穿过红色的，所以我想试试。',   ok:true,  note:'Đúng. Nguyên nhân trước, kết quả sau; 试试 là động từ lặp của Bài 3, nghe nhẹ nhàng hơn 试.', to:'c'},
-     {z:'所以我想试试，因为我没穿过红色的。',   ok:false, note:'Đảo ngược. Tiếng Trung đặt vế 因为 ra TRƯỚC vế 所以.', to:'c'},
+     {z:'所以我想试试，因为我没穿过红色的。',   ok:false, note:'Đảo ngược. Dùng cả cặp thì vế 因为 đi TRƯỚC vế 所以.', to:'c'},
      {z:'因为我没穿过了红色的，所以我想试试。', ok:false, note:'没 đi với 过 thì bỏ 了: 没穿过.', to:'c'}]},
    c:{them:'您试一下吧。怎么样？', picks:[
      {z:'不错，我觉得红色的更好看。', ok:true,  note:'Đúng. 更 đứng ngay trước tính từ 好看. 不错 là từ Bài 3, HSK1 gặp lại: 觉得 · 好看.', to:null},
@@ -490,7 +490,7 @@ const TYPE = [
    {lbl:'một màu đã học (红色 · 白色 · 绿色 · 黑色)', any:['红色','白色','绿色','黑色','颜色'], tip:'Nói rõ màu em đang nhắc tới: 红色 · 白色 · 绿色 · 黑色.'}],
   model:'我买过一件红色的衣服，我觉得红色很好看。',
   why:'过 dán SÁT sau động từ, tân ngữ ra sau: 买过 + 一件红色的衣服. Nếu chưa từng mua thì đổi sang 没买过 và bỏ 了. Câu thứ hai nêu thêm cảm nhận bằng từ HSK1 đã quen: 觉得 · 很 · 好看.',
-  more:'Cách nói khác: 我没买过红色的，因为我更喜欢白色的。',
+  more:'Cách nói khác cũng đúng: 我没买过红色的，因为我更喜欢白色的。 · 我买过红色的衣服。 · 我没买过红色的衣服。 · 买过，我有一件红色的衣服。 · 没买过，我觉得红色的不好看。 · 我买过一条红色的裤子。',
   avoid:[{z:'不买过',   w:'Phủ định của 过 là 没, không dùng 不: 没买过.'},
          {z:'没买过了', w:'Có 没 thì BỎ 了: 没买过.'},
          {z:'买了过',   w:'了 và 过 không đi liền nhau. Chọn một: 买了 (đã mua) hoặc 买过 (từng mua).'}]},
@@ -504,7 +504,7 @@ const TYPE = [
   order:['因为','所以','Đủ thành phần nhưng sai trật tự: vế <b>因为</b> (nguyên nhân) phải đứng TRƯỚC vế <b>所以</b> (kết quả).'],
   model:'因为我觉得白色很好看，所以我买了很多白色的衣服。',
   why:'Trả lời câu hỏi 为什么 thì chỉ cần vế 因为…… là đã đủ; thêm vế 所以…… thì câu tròn hơn. Chú ý không đổi 所以 thành 但是 — 但是 nối hai vế trái ngược, còn đây là nhân quả.',
-  more:'Cách nói khác: 因为绿色的更好看，所以我想买绿色的书包。',
+  more:'Cách nói khác cũng đúng: 因为绿色的更好看，所以我想买绿色的书包。 · 因为白色很好看，所以我很喜欢白色。 · 因为我觉得黑色的衣服很漂亮。 · 因为我妈妈也喜欢红色。 · 因为我有很多白色的衣服，所以我更喜欢白色。',
   avoid:[{z:'因为所以', w:'Giữa 因为 và 所以 phải có vế nguyên nhân: 因为 + lý do，所以 + kết quả.'},
          {z:'为什么因为', w:'Khi TRẢ LỜI thì không nhắc lại 为什么 nữa, mở thẳng bằng 因为……'}]},
 
@@ -516,7 +516,7 @@ const TYPE = [
    {lbl:'更 hoặc 因为', any:['更','因为'], tip:'Nêu lý do bằng 因为……, hoặc so sánh bằng 更: 绿色的更好看.'}],
   model:'我想买绿色的。因为我没有绿色的书包，我也觉得绿色的更好看。',
   why:'Không cần giống câu mẫu. Cấu trúc nên có: cái em chọn (một cụm 的字短语) + một đến hai lý do ngắn. Mỗi lý do dùng cụm đã quen của HSK1: 很 + tính từ · 我觉得…… · 我没有…… .',
-  more:'Cách nói khác: 我想买黑色的，因为黑色的更便宜，我的钱不多。',
+  more:'Cách nói khác cũng đúng: 我想买黑色的，因为黑色的更便宜，我的钱不多。 · 我想买绿色的，因为我觉得绿色的更好看。 · 我想买绿色的，因为我已经有一个黑色的了。 · 我想买黑色的。黑色的更好看，也不贵。 · 我想买绿色的，我妹妹也觉得绿色的更漂亮。',
   avoid:[{z:'喜欢更', w:'Sai chỗ 更: 更 đứng TRƯỚC động từ — 我更喜欢绿色的.'},
          {z:'很更',   w:'很 và 更 không đi cùng nhau. Chọn một: 很好看 hoặc 更好看.'}]}
 ];

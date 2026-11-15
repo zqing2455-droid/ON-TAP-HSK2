@@ -296,7 +296,7 @@ sort: [
   ],
   show:['A','C','B'],
   answer:['B','A','C'],
-  why:'<b>B đứng đầu</b> vì nêu việc nền — có đi mua đồng hồ thì hai chữ 左边 · 右边 ở câu sau mới biết là đang chỉ cái nào.<br><b>A ở giữa</b>: câu 比 đưa ra so sánh, và nó chính là thứ câu C nhắc lại.<br><b>C đứng cuối</b> vì mở bằng <b>虽然</b> — chữ 有点儿贵 trong đó nhắc lại ý 贵 vừa nói ở câu A, nên không thể đứng trước A. Cặp 虽然……但是…… luôn là câu chốt đoạn.<br>Mẹo nhặt chữ: thấy 虽然 hoặc 但是 là gần như chắc chắn câu đó đứng sau, vì nó phải có cái gì đó ở trước để nhường rồi mới xoay lại.'
+  why:'<b>B đứng đầu</b> vì nêu việc nền — có đi mua đồng hồ thì hai chữ 左边 · 右边 ở câu sau mới biết là đang chỉ cái nào.<br><b>A ở giữa</b>: câu 比 đưa ra so sánh, và nó chính là thứ câu C nhắc lại.<br><b>C đứng cuối</b> vì mở bằng <b>虽然</b> — chữ 有点儿贵 trong đó nhắc lại ý 贵 vừa nói ở câu A, nên không thể đứng trước A. Ở đoạn này, câu có cặp 虽然……但是…… chính là câu chốt.<br>Mẹo nhặt chữ: thấy 虽然 hoặc 但是 là gần như chắc chắn câu đó đứng sau, vì nó phải có cái gì đó ở trước để nhường rồi mới xoay lại.'
  },
  {
   id:'s2',
@@ -453,8 +453,8 @@ chat: [
   from:'小雪：你还记得上次我们去的那个饭馆吗？',
   fromvi:'Cậu còn nhớ cái nhà hàng lần trước bọn mình tới không?',
   opts:[
-   {han:'记得！虽然那个饭馆有点儿贵，我们还去了两次。', ok:false,
-    fb:'Lại thiếu 但是. Có 虽然 ở vế đầu thì vế sau phải có 但是 đỡ lấy, câu mới trọn.'},
+   {han:'记得！虽然那个饭馆有点儿贵，所以菜做得很好吃。', ok:false,
+    fb:'Ghép nhầm cặp. 所以 đi với 因为 (nhân quả); 虽然 phải đi với 但是. “Đắt” và “ngon” là hai ý xoay chiều, không phải vì đắt nên ngon.'},
    {han:'记得！虽然那个饭馆有点儿贵，但是菜做得很好吃。', ok:true,
     fb:'Đủ cặp 虽然……但是……, lại gài thêm 做得很好吃 — bổ ngữ trạng thái của Bài 7, 得 dính ngay sau động từ.'},
    {han:'记得！那个饭馆有点儿贵虽然，但是菜做得很好吃。', ok:false,
@@ -518,7 +518,7 @@ const wIdx = 0;
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
 const clean = s => (s||'').replace(/[\s\u3000.,?!;:'"，。、；：？！…—·～〜《》【】「」『』（）()\[\]“”‘’\-－~]/g,'');
 const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
-const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
+const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => k[0]==='=' ? a===clean(k.slice(1)) : a.includes(clean(k)))); };
 const altBox = o => !o.alt ? '' :
   '<div style="margin-top:7px"><span class="vi" style="font-size:.8rem">Cũng được tính đúng:</span> '
   + o.alt.map(x=>'<span class="han">'+x+'</span>').join(' &nbsp;·&nbsp; ') + '</div>';

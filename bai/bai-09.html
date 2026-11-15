@@ -314,11 +314,11 @@ sort: [
   sents:[
    {k:'A', han:'昨天我在咖啡店门口等朋友。', vi:'Hôm qua mình đợi bạn trước cửa quán cà phê.'},
    {k:'C', han:'我等他等了半个小时，他才来。', vi:'Mình đợi cậu ấy nửa tiếng đồng hồ, mãi mới thấy tới.'},
-   {k:'B', han:'他说今天车太多了。', vi:'Cậu ấy bảo hôm nay xe đông quá.'}
+   {k:'B', han:'他说：“今天车太多了。”', vi:'Cậu ấy bảo: “Hôm nay đông xe quá.”'}
   ],
   show:['B','A','C'],
   answer:['A','C','B'],
-  why:'<b>A đứng đầu</b> vì dựng bối cảnh: ai, ở đâu, làm gì. Không có nó thì 他 ở hai câu sau không có chỗ bám.<br><b>C ở giữa</b>: kể việc xảy ra, có chữ <b>才</b> nghĩa là “mãi mới” — báo rằng người kia tới MUỘN.<br><b>B đứng cuối</b> vì là lời giải thích SAU KHI đã tới muộn. Không ai giải thích trước khi chuyện xảy ra.<br><span class="warn">Nhớ kỹ:</span> động từ 等 đã có tân ngữ 他 nên phải LẶP lại động từ rồi mới gắn thời lượng — 等他<b>等了</b>半个小时. Viết ✗ 等了半个小时他 là lỗi nặng nhất của bài này.'
+  why:'<b>A đứng đầu</b> vì dựng bối cảnh: ai, ở đâu, làm gì. Không có nó thì 他 ở hai câu sau không có chỗ bám.<br><b>C ở giữa</b>: kể việc xảy ra, có chữ <b>才</b> nghĩa là “mãi mới” — báo rằng người kia tới MUỘN.<br><b>B đứng cuối</b> vì là lời giải thích SAU KHI đã tới muộn. Không ai giải thích trước khi chuyện xảy ra.<br><span class="warn">Nhớ kỹ:</span> động từ 等 đã có tân ngữ 他 nên cách chắc chắn nhất là LẶP lại động từ rồi mới gắn thời lượng — 等他<b>等了</b>半个小时 (tân ngữ là đại từ thì còn nói được 等了他半个小时). Viết ✗ 等了半个小时他 là lỗi nặng nhất của bài này.'
  }
 ],
 
@@ -347,7 +347,7 @@ listen: [
   model:'弟弟跑得比"我"快。',
   modelvi:'Em trai chạy nhanh hơn "mình".',
   alt:['弟弟跑得快。','弟弟比我跑得快。','他跑得比我快。','是弟弟。'],
-  keys:[['弟弟跑得'],['弟弟比'],['他跑得比我快'],['是弟弟']],
+  keys:[['弟弟跑得快'],['弟弟跑得比'],['弟弟比'],['他跑得比我快'],['是弟弟'],['=弟弟']],
   why:'Câu hỏi 谁 bắt chọn MỘT trong hai người, nên đáp án phải nói rõ tên người đó.<br>Đoạn có hai nhận xét trái chiều về cùng một người: 个子没有我那么高 (thấp hơn) ↔ 可是他<b>跑得比我快</b> (chạy nhanh hơn). Câu hỏi hỏi về CHẠY, nên lấy vế sau chữ 可是.<br><span class="warn">Bẫy:</span> nghe thấy 没有我那么高 trước nên nhiều bạn kết luận ngược là “mình hơn”. Chữ 可是 báo đoạn văn sắp quay ngoắt — nghe thấy nó là phải chú ý.<br>Viết ngắn gọn “弟弟” hay “是弟弟” cũng được tính đúng.'
  },
  {
@@ -392,8 +392,8 @@ read: {
    qvi:'Em trai cao thế nào? Cậu ấy đi bộ ra sao?',
    model:'弟弟个子没有"我"那么高，可是他走得比"我"快。',
    modelvi:'Em trai không cao bằng "mình", nhưng đi nhanh hơn "mình".',
-   alt:['他没有我那么高，可是走得比我快。','弟弟个子没有我高，但是走得很快。','没有我那么高，走得比我快。','弟弟不太高，可是他走得比我快。'],
-   keys:[['没有','高','快'],['不太高','快'],['没','高','比','快']],
+   alt:['他没有我那么高，可是走得比我快。','弟弟个子没有我高，但是走得很快。','没有我那么高，走得比我快。','弟弟没有我那么高，可是走得比我快。'],
+   keys:[['没有','高','快'],['没','高','比','快']],
    why:'Câu hỏi có HAI vế (chiều cao · tốc độ đi) nên đáp án phải đủ hai vế.<br>• Vế một: 我弟弟个子<b>没有我那么高</b>。<br>• Vế hai: 可是他<b>走得比我快</b>。<br>Hai vế này dùng hai khung so sánh khác nhau của hai bài liền nhau: 没有……那么 (Bài 9) và 比 (Bài 8). Để ý hướng so sánh ngược nhau — một vế thua, một vế hơn.<br><span class="warn">Nhớ kỹ:</span> phủ định của 有 luôn là 没有, không bao giờ là ✗ 不有.'
   }
  ]
@@ -430,9 +430,9 @@ chat: [
   fromvi:'Hôm qua cậu đợi ở quán cà phê bao lâu?',
   opts:[
    {han:'我等了半个小时他。', ok:false,
-    fb:'Động từ đã có tân ngữ 他 thì không gắn thẳng thời lượng vào được. Phải LẶP động từ: 等他等了半个小时.'},
+    fb:'Thời lượng không đứng SAU tân ngữ ở cuối câu. Cách chắc chắn nhất là LẶP động từ: 等他等了半个小时 (tân ngữ là đại từ thì cũng nói được 等了他半个小时).'},
    {han:'我等他等了半个小时。', ok:true,
-    fb:'Đúng cách xử lý khi động từ đã “vướng” tân ngữ: lặp lại động từ một lần nữa rồi mới gắn thời lượng.'},
+    fb:'Đúng cách xử lý khi động từ đã “vướng” tân ngữ: lặp lại động từ một lần nữa rồi mới gắn thời lượng. (Với đại từ 他, 我等了他半个小时 cũng đúng.)'},
    {han:'我等他了半个小时。', ok:false,
     fb:'了 bị đẩy ra sau tân ngữ. 了 phải dính ngay sau động từ — ở đây là sau động từ lần thứ hai: 等他等了.'}
   ]
@@ -450,8 +450,8 @@ chat: [
   ]
  },
  {
-  from:'小雪：那你们星期天做什么？',
-  fromvi:'Thế chủ nhật các cậu làm gì?',
+  from:'小雪：那你们上个星期天做什么了？',
+  fromvi:'Thế Chủ nhật tuần trước các cậu làm gì?',
   opts:[
    {han:'我们去门口的咖啡店喝咖啡，坐一个小时了。', ok:false,
     fb:'了 đặt ở cuối câu kiểu này nghe như việc còn đang tiếp diễn. Kể một buổi đã xong thì nói 坐了一个小时.'},
@@ -518,7 +518,7 @@ const wIdx = 0;
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
 const clean = s => (s||'').replace(/[\s\u3000.,?!;:'"，。、；：？！…—·～〜《》【】「」『』（）()\[\]“”‘’\-－~]/g,'');
 const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
-const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
+const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => k[0]==='=' ? a===clean(k.slice(1)) : a.includes(clean(k)))); };
 const altBox = o => !o.alt ? '' :
   '<div style="margin-top:7px"><span class="vi" style="font-size:.8rem">Cũng được tính đúng:</span> '
   + o.alt.map(x=>'<span class="han">'+x+'</span>').join(' &nbsp;·&nbsp; ') + '</div>';

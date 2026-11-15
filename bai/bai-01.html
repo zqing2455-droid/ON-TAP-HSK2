@@ -295,20 +295,20 @@ footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
 const SORT = [
  {n:1, t:'Bạn hỏi em mua chiếc áo này ở đâu. Xếp lại câu trả lời.',
   sit:'<b>是……的</b> — việc ĐÃ xảy ra, nhấn vào NƠI CHỐN.',
-  words:['这件','衣服','是','在商店','买','的'], ans:['这件衣服是在商店买的。'],
+  words:['买','这件','的','在商店','衣服','是'], ans:['这件衣服是在商店买的。'],
   why:'是 đứng ngay trước phần muốn nhấn (在商店), 的 đóng cuối câu. Bỏ 的 thì câu mất hẳn ý nhấn mạnh.'},
  {n:2, t:'Mẹ bảo em đi siêu thị. Xếp lại lời kể.',
   sit:'<b>让 + người + việc</b> — người đứng NGAY SAU 让.',
-  words:['妈妈','让','我','去超市','买','东西'], ans:['妈妈让我去超市买东西。'],
+  words:['我','去超市','让','东西','买','妈妈'], ans:['妈妈让我去超市买东西。'],
   why:'Người bị bảo (我) phải đứng ngay sau 让 rồi mới tới việc. Tiếng Việt nói "bảo đi mua đồ với tôi" nên hay bị đảo.'},
  {n:3, t:'Em vừa mua đồ cho em gái. Xếp lại câu — bài này có HAI cách đều đúng.',
   sit:'<b>给 + người + động từ</b>. Chữ 了 đặt sau động từ hay cuối câu đều được.',
-  words:['我','给','妹妹','买','东西','了'],
+  words:['妹妹','了','买','我','给','东西'],
   ans:['我给妹妹买东西了。','我给妹妹买了东西。'],
   why:'给妹妹 phải đứng trước động từ 买. Chữ 了 thì linh động: <b>买东西了</b> (了 cuối câu, kể việc vừa xảy ra) và <b>买了东西</b> (了 ngay sau động từ, nhấn việc đã hoàn thành) — cả hai đều chuẩn.'},
  {n:4, t:'Lớp có một bạn em chưa gặp bao giờ, gần như chắc là bạn mới. Xếp lại câu hỏi.',
   sit:'<b>就 + 是 … 吧</b> — 就 nhấn "đúng người rồi", 吧 là phỏng đoán.',
-  words:['你','就','是','新来的','同学','吧'], ans:['你就是新来的同学吧？'],
+  words:['是','吧','同学','就','你','新来的'], ans:['你就是新来的同学吧？'],
   why:'就 đứng trước 是 để nhấn; 吧 luôn ở CUỐI câu. Có 吧 nghĩa là em đã có căn cứ, chỉ hỏi cho chắc.'}
 ];
 
@@ -351,11 +351,11 @@ const FIND = [
 
 /* Tầng 2 — phân biệt. Đáp án đúng rải đều A/B/C. */
 const PICKQ = [
- {n:8, t:'Em muốn nhờ bác sĩ xem giúp một chút. Nói thế nào?',
-  sit:'Thang lịch sự: <b>请</b> (lịch sự) &gt; <b>让</b> (trung tính) &gt; <b>叫</b> (thân mật / sai bảo).',
+ {n:8, t:'Em kể với bạn: mình sẽ NHỜ bác sĩ xem giúp một chút. Chọn cách nói lịch sự nhất.',
+  sit:'Thang lịch sự: <b>请</b> (lịch sự) &gt; <b>让</b> (trung tính) &gt; <b>叫</b> (khẩu ngữ, thiên về bảo / sai).',
   opts:[
-   {z:'我让医生看一下。', ok:false, w:'Sai sắc thái. <b>让</b> trung tính, hợp với người ngang hàng hoặc nhỏ hơn. Nói với bác sĩ nghe như em đang cho phép bác sĩ.'},
-   {z:'我叫医生看一下。', ok:false, w:'Bất lịch sự nhất. <b>叫</b> mang sắc thái sai bảo, chỉ dùng với người thân thiết hoặc nhỏ hơn mình.'},
+   {z:'我让医生看一下。', ok:false, w:'Chưa hợp sắc thái. <b>让</b> trung tính, nghĩa là "bảo / để ai làm" — không có ý NHỜ. Với người trên như bác sĩ, muốn tỏ ý nhờ thì dùng 请.'},
+   {z:'我叫医生看一下。', ok:false, w:'Kém lịch sự nhất trong ba cách. <b>叫</b> là khẩu ngữ, thiên về "bảo, gọi ai làm" — hợp với người thân hoặc nhỏ hơn mình, không thể hiện ý nhờ người trên.'},
    {z:'我请医生看一下。', ok:true,  w:'Đúng. <b>请</b> là bậc lịch sự nhất, dùng với người trên — bác sĩ, thầy cô, khách, người lạ.'}
   ]},
  {n:9, t:'Bạn em mặt mệt mỏi, em khá chắc là bạn ốm. Hỏi thế nào?',
@@ -472,11 +472,12 @@ const TYPE = [
   sit:'Việc mua ĐÃ xảy ra, người ta hỏi NƠI CHỐN → dùng <b>是……的</b>.',
   ask:'你的手机是在哪儿买的？',
   need:[
-   {lbl:'是', any:['是'], tip:'Việc đã xảy ra mà nhấn vào nơi chốn thì bắt buộc có 是 đứng trước phần muốn nhấn.'},
-   {lbl:'的 ở cuối', any:['的'], tip:'Mẫu câu 是……的 phải có 的 đóng câu, thường ở ngay cuối.'},
+   {lbl:'是', any:['是'], tip:'Bài này luyện khuôn 是……的: viết đủ 是 ngay trước phần muốn nhấn (在商店). Khẩu ngữ đôi khi lược 是, nhưng làm bài nên viết đủ.'},
+   {lbl:'买的', any:['买的'], tip:'Mẫu câu 是……的 phải có 的 đứng ngay sau động từ 买: 是在商店买的. (Chữ 的 trong 我的手机 không tính.)'},
    {lbl:'một nơi chốn', any:['商店','超市','北京','中国','越南','学校','那儿','这儿','家','书店','饭店','医院'],
     tip:'Nói rõ em mua ở đâu: 在商店 · 在超市 · 在中国…'}],
   model:'我的手机是在商店买的。',
+  more:'Cách nói khác cũng đúng: 我的手机是在越南买的。 · 我的手机是在北京买的。 · 我的手机是在学校旁边的商店买的。 · 我的手机是在中国买的。 · 我是在超市买的。 · 我的手机是我姐姐在超市给我买的。',
   why:'是 đặt ngay trước phần thông tin mới (在商店), 的 khép câu lại. Có thể mở rộng: 我的手机是去年在北京买的。 · 我的手机是我姐姐在超市给我买的。',
   avoid:[{z:'我在商店买手机了', w:'Câu này chỉ KỂ việc đã mua, không nhấn nơi chốn. Người ta đã biết em có điện thoại rồi, đang hỏi mua ở đâu — nên phải là 我的手机是在商店买的。'},
          {z:'我的手机是在商店买的了', w:'Thừa 了. Khuôn 是……的 tự nó đã nói việc đã xảy ra, không dùng thêm 了.'}]},
@@ -491,6 +492,7 @@ const TYPE = [
    {lbl:'việc phải làm', any:['买','做','去','看','写','学','打','找','回','吃','洗','休息','读','接','帮'],
     tip:'Sau người mới tới việc: 让我去超市买东西 · 让我做饭…'}],
   model:'妈妈今天让我去超市买东西。',
+  more:'Cách nói khác cũng đúng: 妈妈今天让我在家休息。 · 妈妈让我去学校接妹妹。 · 妈妈今天让我给爸爸打电话。 · 妈妈让我和弟弟一起洗衣服。 · 她让我早点儿回家吃饭。',
   why:'Thứ tự bắt buộc là <b>让 + người + việc</b>. Có thể viết cụ thể hơn: 妈妈今天让我回家做饭。 · 妈妈今天让我去学校接妹妹。 Đổi 让 thành 请 thì lịch sự hơn, thành 叫 thì thân mật hơn — nghĩa khuôn câu không đổi.',
   avoid:[{z:'让去超市买东西我', w:'Sai trật tự — người bị bảo bị đẩy ra cuối. Phải là 让我去超市买东西。'},
          {z:'妈妈让买东西我', w:'Sai trật tự — người bị bảo bị đẩy ra cuối. Tiếng Việt nói "bảo mua đồ với con" nên rất dễ nhầm. Phải là 妈妈让我买东西。'},
@@ -506,6 +508,7 @@ const TYPE = [
    {lbl:'买 + đồ vật', any:['买'], tip:'Động từ của việc này là 买, và nên nói luôn mua cái gì.'}],
   order:['给','买','Đủ chữ nhưng 给 phải đứng TRƯỚC động từ 买. Khuôn sách là 给妈妈买东西, không phải 买东西给妈妈.'],
   model:'我想给妈妈买一件衣服。',
+  more:'Cách nói khác cũng đúng: 我想给爸爸买一本书。 · 我想给我朋友买一个手机。 · 我想给妹妹买一些水果。 · 我想给老师买一杯茶。 · 我想给孩子买一件新衣服。',
   why:'Khuôn <b>给 + người + động từ</b> dùng được với rất nhiều động từ đã học: 给我打电话 · 给你介绍一下 · 给孩子做饭 · 给妈妈买东西. Nhớ một hình ảnh: 给 + người luôn đi TRƯỚC việc.',
   avoid:[{z:'我想买东西给妈妈', w:'Giáo trình dạy khuôn 给 + người + động từ, nên ở lớp em viết 给妈妈买东西. (Ngoài đời 买东西给妈妈 vẫn nghe được, nhiều ở miền Nam Trung Quốc và Đài Loan — nhưng làm bài và đi thi thì theo khuôn sách.)'}]}
 ];

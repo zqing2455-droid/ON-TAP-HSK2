@@ -344,8 +344,8 @@ listen: [
   qvi:'Sau khi ăn mì, Tiểu Tuyết đã làm gì?',
   model:'她打开了朋友们送的礼物。',
   modelvi:'Cậu ấy mở những món quà các bạn tặng.',
-  alt:['打开了礼物。','她打开了礼物。','打开朋友们送的礼物。','她看了朋友送的礼物。'],
-  keys:[['打开','礼物'],['开','礼物'],['看','礼物']],
+  alt:['打开了礼物。','她打开了礼物。','打开朋友们送的礼物。','她打开了朋友们送的礼物。'],
+  keys:[['打开','礼物'],['开','礼物']],
   why:'Câu hỏi hỏi 做了什么 — tức là hỏi MỘT HÀNH ĐỘNG, nên đáp án phải là một động từ, không phải một đồ vật.<br>Mốc thời gian 吃了面条儿以后 trong câu hỏi lặp lại y nguyên một cụm trong đoạn: <b>吃了面条儿以后，小雪打开了朋友们送的礼物</b>。 Nghe thấy cụm lặp lại đó là biết đáp án nằm ngay sau nó.<br><span class="warn">Bẫy:</span> trả lời “礼物” là kể ĐỒ VẬT, không trả lời được chữ 做. Đáp án bắt buộc phải có động từ 打开.'
  },
  {
@@ -416,11 +416,11 @@ chat: [
   fromvi:'Cảm ơn cậu! Bốn giờ chiều nhé, được không?',
   opts:[
    {han:'可以，我四点才到。', ok:false,
-    fb:'才 mang nghĩa MUỘN hơn mong đợi — “mãi bốn giờ mới tới”. Dùng ở đây thành ra than phiền. 就 mới là chữ cần dùng.'},
+    fb:'才 mang nghĩa MUỘN hơn mong đợi — “mãi bốn giờ mới tới”. Bạn đề nghị bốn giờ mà em đáp vậy thì nghe như em thấy bốn giờ là muộn, miễn cưỡng. Nhận lời vui vẻ thì dùng 就.'},
    {han:'我不知道。', ok:false,
     fb:'Người ta hỏi một giờ cụ thể, trả lời “không biết” là bỏ lửng cuộc hẹn. Nếu thật sự chưa chắc thì nói 我看一下时间，晚上告诉你，好吗？'},
    {han:'可以，我四点就到。', ok:true,
-    fb:'就 ở đây nghĩa là “đúng giờ ấy là đã tới rồi”, nghe rất chắc chắn. Đây đúng là chữ 就 đã học ở Bài 1.'}
+    fb:'就 ở đây nhấn ý “bốn giờ là tới ngay”, nghe sẵn sàng và chắc chắn — ngược với 才 (muộn hơn mong đợi).'}
   ]
  },
  {
@@ -451,8 +451,8 @@ chat: [
   from:'小雪：那星期六见！',
   fromvi:'Vậy thứ Bảy gặp nhé!',
   opts:[
-   {han:'星期六见！我们一定要高高兴兴过这个生日。', ok:false,
-    fb:'Thiếu chữ 地. Khi tính từ láy bổ nghĩa cho ĐỘNG TỪ thì bắt buộc có 地 nối ở giữa. Đây là lỗi bị trừ điểm nhiều nhất của bài này.'},
+   {han:'星期六见！我们一定要高高兴兴的过这个生日。', ok:false,
+    fb:'Nhầm 的 với 地. Cụm láy đứng TRƯỚC ĐỘNG TỪ thì nối bằng <b>地</b> (高高兴兴地过); <b>的</b> dùng trước DANH TỪ (小小的蛋糕). Học viên Việt hay nhầm vì hai chữ cùng đọc de.'},
    {han:'星期六见！我们一定要高高兴兴地过这个生日。', ok:true,
     fb:'Đúng trọng tâm Bài 6: tính từ láy + <b>地</b> + động từ. 高高兴兴地过 = tổ chức/trải qua một cách thật vui vẻ.'},
    {han:'星期六见！我们一定要过高高兴兴地这个生日。', ok:false,
@@ -516,7 +516,7 @@ const wIdx = 0;
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
 const clean = s => (s||'').replace(/[\s\u3000.,?!;:'"，。、；：？！…—·～〜《》【】「」『』（）()\[\]“”‘’\-－~]/g,'');
 const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
-const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
+const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => k[0]==='=' ? a===clean(k.slice(1)) : a.includes(clean(k)))); };
 const altBox = o => !o.alt ? '' :
   '<div style="margin-top:7px"><span class="vi" style="font-size:.8rem">Cũng được tính đúng:</span> '
   + o.alt.map(x=>'<span class="han">'+x+'</span>').join(' &nbsp;·&nbsp; ') + '</div>';

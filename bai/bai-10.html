@@ -449,7 +449,7 @@ chat: [
    {han:'拿。你拿本子还是拿笔？', ok:true,
     fb:'Đúng câu hỏi lựa chọn: 还是 đứng GIỮA hai phương án, cuối câu là dấu hỏi chứ không có 吗.'},
    {han:'拿。你还是拿本子拿笔？', ok:false,
-    fb:'还是 bị đẩy lên đầu vế. Đứng đầu vế là 还是……吧 của Bài 9 (để đề nghị), khác hẳn 还是 nối hai lựa chọn.'}
+    fb:'还是 bị đẩy lên đầu vế. Đứng đầu vế là 还是……吧 của Bài 2 (để đề nghị), khác hẳn 还是 nối hai lựa chọn.'}
   ]
  },
  {
@@ -485,8 +485,8 @@ write: [
   topicvi:'Kể xem trước khi thi bạn làm gì? Bạn đọc sách hay xem vở? Thi xong bạn thấy thế nào?',
   req:'dùng ít nhất <b>1</b> câu hỏi có <b>还是</b> · dùng ít nhất <b>1</b> câu theo mẫu <b>快要/就要……了</b>',
   checks:[{lab:'还是', re:/还是/}, {lab:'快要/就要…了', re:/(快要|就要|快)[^。！？]{0,12}了/}],
-  model:'下个星期我们就要考试了。考试前我每天在家看书，也看本子上做错的题。我问同学：“你看书还是看本子？”他说两个都看。昨天考完以后，我觉得考得比上次好。回到家，妈妈说饭菜快要做好了，叫我和弟弟一起去洗手。我们都笑了，因为妈妈比我们还忙。',
-  modelvi:'Tuần sau là bọn mình thi rồi. Trước khi thi ngày nào mình cũng ở nhà đọc sách, xem cả mấy câu làm sai trong vở. Mình hỏi bạn: "Cậu đọc sách hay xem vở?" Bạn bảo xem cả hai. Hôm qua thi xong, mình thấy làm tốt hơn lần trước. Về tới nhà, mẹ bảo cơm sắp xong rồi, gọi mình với em trai cùng đi rửa tay. Cả nhà đều bật cười, vì mẹ còn bận hơn cả bọn mình.'
+  model:'下个星期我们就要考试了。考试前我每天在家看书，也看本子上做错的题。我问同学：“你看书还是看本子？”他说两个都看。上次考完以后，我觉得考得比以前好，所以这次我也要好好儿准备。快要考试了，我每天晚上都看一个小时的书。',
+  modelvi:'Tuần sau là bọn mình thi rồi. Trước khi thi ngày nào mình cũng ở nhà đọc sách, xem cả mấy câu làm sai trong vở. Mình hỏi bạn: "Cậu đọc sách hay xem vở?" Bạn bảo xem cả hai. Lần trước thi xong, mình thấy làm tốt hơn trước, nên lần này mình cũng muốn chuẩn bị thật kỹ. Sắp thi rồi, tối nào mình cũng đọc sách một tiếng.'
  }
 ]
 };
@@ -533,7 +533,7 @@ const wIdx = 0;
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
 const clean = s => (s||'').replace(/[\s\u3000.,?!;:'"，。、；：？！…—·～〜《》【】「」『』（）()\[\]“”‘’\-－~]/g,'');
 const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
-const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
+const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => k[0]==='=' ? a===clean(k.slice(1)) : a.includes(clean(k)))); };
 const altBox = o => !o.alt ? '' :
   '<div style="margin-top:7px"><span class="vi" style="font-size:.8rem">Cũng được tính đúng:</span> '
   + o.alt.map(x=>'<span class="han">'+x+'</span>').join(' &nbsp;·&nbsp; ') + '</div>';

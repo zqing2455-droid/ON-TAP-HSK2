@@ -408,7 +408,7 @@ chat: [
    {han:'好啊！我一就到学校去找你。', ok:false,
     fb:'Hai chữ 一 và 就 bị dồn vào một chỗ. Mỗi chữ gánh một vế: 一 + việc thứ nhất, 就 + việc thứ hai — không bao giờ đứng cạnh nhau.'},
    {han:'好啊！我一到学校就去找你。', ok:true,
-    fb:'Đúng khung 一……就……: cả 一 và 就 đều đứng ngay TRƯỚC động từ (一下课 · 就去), chủ ngữ 我 đặt ở đầu câu.'}
+    fb:'Đúng khung 一……就……: cả 一 và 就 đều đứng ngay TRƯỚC động từ (一到 · 就去), chủ ngữ 我 đặt ở đầu câu.'}
   ]
  },
  {
@@ -442,7 +442,7 @@ chat: [
    {han:'真的吗？我没游过泳。', ok:true,
     fb:'游泳 là từ ly hợp nên 过 chen vào GIỮA hai chữ: 游过泳. Chữ 过 chỉ kinh nghiệm này là của Bài 4, phủ định luôn dùng 没.'},
    {han:'真的吗？我没游泳过。', ok:false,
-    fb:'Với từ ly hợp, 过 không được đẩy ra sau cả từ. Giống như 过生日 của Bài 6, phần sau của từ ly hợp có thể bị tách ra.'},
+    fb:'游泳 là từ ly hợp (游 + 泳): 过 phải chen vào GIỮA — 游过泳, không đặt sau cả từ (✗游泳过). Cùng kiểu: 跑过步.'},
    {han:'真的吗？我不游过泳。', ok:false,
     fb:'Phủ định của 过 luôn là 没, không bao giờ là 不. 不游泳 nghĩa là “không bơi (vì không muốn)”, khác hẳn “chưa từng bơi”.'}
   ]
@@ -451,8 +451,8 @@ chat: [
   from:'小雪：那明天见！',
   fromvi:'Vậy mai gặp nhé!',
   opts:[
-   {han:'明天见！我们好好儿玩一下。', ok:false,
-    fb:'Thiếu chữ 地. Khi tính từ láy bổ nghĩa cho động từ thì bắt buộc có 地 nối ở giữa — đây là lỗi bị trừ điểm nhiều nhất của Bài 6.'},
+   {han:'明天见！我们好好儿得玩一下。', ok:false,
+    fb:'Nhầm 得 với 地. 得 đứng SAU động từ (跑得快); cụm láy đứng TRƯỚC động từ thì nối bằng 地: 好好儿地玩 (với dạng láy một âm tiết như 好好儿, khẩu ngữ còn bỏ hẳn 地: 好好儿玩).'},
    {han:'明天见！我们玩好好儿地一下。', ok:false,
     fb:'Cụm 好好儿地 phải đứng TRƯỚC động từ 玩, không được chen vào sau nó.'},
    {han:'明天见！我们好好儿地玩一下。', ok:true,
@@ -516,7 +516,7 @@ const wIdx = 0;
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
 const clean = s => (s||'').replace(/[\s\u3000.,?!;:'"，。、；：？！…—·～〜《》【】「」『』（）()\[\]“”‘’\-－~]/g,'');
 const hanCount = s => ((s||'').match(/[一-鿿]/g)||[]).length;
-const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => a.includes(clean(k)))); };
+const match = (ans, keys) => { const a=clean(ans); return keys.some(g => g.every(k => k[0]==='=' ? a===clean(k.slice(1)) : a.includes(clean(k)))); };
 const altBox = o => !o.alt ? '' :
   '<div style="margin-top:7px"><span class="vi" style="font-size:.8rem">Cũng được tính đúng:</span> '
   + o.alt.map(x=>'<span class="han">'+x+'</span>').join(' &nbsp;·&nbsp; ') + '</div>';

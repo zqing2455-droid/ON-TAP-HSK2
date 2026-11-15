@@ -352,7 +352,7 @@ fix: [
   ],
   dung:'她穿着白色的裤子。',
   dungvi:'Cô ấy đang mặc quần trắng.',
-  why:'Trật tự đúng là <b>动词 + 着 + 宾语</b>: 穿<b>着</b>白色的裤子.<br>着 bám ngay sau động từ, tân ngữ đẩy ra sau cùng — không được ném 着 xuống cuối câu.<br><span class="warn">Vì sao hay sai:</span> học viên thấy 了 đứng cuối câu (我吃饭了) nên tưởng 着 cũng vậy. Hai chữ đứng hai chỗ khác nhau: 了 có thể ở cuối câu, 着 thì không bao giờ rời khỏi động từ.<br><span class="warn">Hai câu sửa sai ở đâu:</span> 她着穿…… — 着 không đứng trước động từ; 她穿了……着 — một câu không mang cả 了 lẫn 着.'
+  why:'Trật tự đúng là <b>动词 + 着 + 宾语</b>: 穿<b>着</b>白色的裤子.<br>着 bám ngay sau động từ, tân ngữ đẩy ra sau cùng — không được ném 着 xuống cuối câu.<br><span class="warn">Vì sao hay sai:</span> học viên thấy 了 đứng cuối câu (我吃饭了) nên tưởng 着 cũng vậy. Hai chữ đứng hai chỗ khác nhau: 了 có thể ở cuối câu, 着 thì không bao giờ rời khỏi động từ.<br><span class="warn">Hai câu sửa sai ở đâu:</span> 她着穿…… — 着 không đứng trước động từ; 她穿了……着 — 了 và 着 không cùng gắn vào một động từ như thế, mà 着 cũng không bị đẩy xuống cuối câu.'
  },
  {
   id:'f3',
@@ -452,7 +452,7 @@ speak: [
    '我家里人也喜欢吃……',
    '不舒服的时候，我……'
   ],
-  meo:'Cố dùng cho được chữ <b>最</b> một lần và chữ <b>着</b> một lần (ví dụ 我妈妈做着饭的时候……). Nói chậm hơn bình thường một chút, đừng vừa nghĩ vừa kéo dài "ưm…".'
+  meo:'Cố dùng cho được chữ <b>最</b> một lần và chữ <b>着</b> một lần (ví dụ 妈妈笑着说…… · 门口站着……). Nói chậm hơn bình thường một chút, đừng vừa nghĩ vừa kéo dài "ưm…".'
  }
 ],
 
@@ -462,7 +462,7 @@ write: [
   topicvi:'Kể xem lúc người không khoẻ bạn làm gì? Bạn ra hiệu thuốc hay đi bệnh viện? Bạn thích ăn gì nhất?',
   req:'dùng ít nhất <b>1</b> câu có <b>着</b> · dùng ít nhất <b>1</b> câu có <b>最</b>',
   checks:[{lab:'着', re:/着/}, {lab:'最', re:/最/}],
-  model:'我这几天经常头疼。昨天下课以后，我没去医院，从药店买了点儿药。回家的时候外边下着雪，路上车很多，我走得很慢。到家以后我坐着休息了半个小时，吃完药就好多了。妈妈说身体不舒服时更要好好吃饭，她知道我最喜欢吃中国菜，就给我做了几个。现在我头不那么疼了。',
+  model:'我这几天经常头疼。昨天下课以后，我没去医院，在药店买了点儿药。回家的时候外边下着雪，路上车很多，我走得很慢。到家以后我坐着休息了半个小时，吃完药就好多了。妈妈说身体不舒服时更要好好吃饭，她知道我最喜欢吃中国菜，就给我做了几个。现在我头不那么疼了。',
   modelvi:'Mấy hôm nay mình hay đau đầu. Hôm qua tan học, mình không đi bệnh viện, ra hiệu thuốc mua ít thuốc. Lúc về nhà ngoài trời đang có tuyết, ngoài đường xe đông, mình đi rất chậm. Về tới nhà mình ngồi nghỉ nửa tiếng, uống xong thuốc là đỡ hẳn. Mẹ bảo lúc người không khoẻ lại càng phải ăn uống tử tế, mẹ biết mình thích món Trung nhất nên nấu cho mấy món. Giờ đầu mình đỡ đau rồi.'
  }
 ]
@@ -511,7 +511,7 @@ $('#hSub').textContent = DATA.meta.sach + ' · ' + DATA.meta.ten + ' — 5 phầ
 $('#wReq').innerHTML = '<b>Yêu cầu:</b> ít nhất 40 chữ Hán · ' + DATA.write[0].req;
 $('#sMax').textContent = TOTAL;
 $('#k1').textContent = 'Phần 1 · ' + DATA.fix.length + ' câu';
-$('#k2').textContent = 'Phần 2 · 1 bài nghe · ' + DATA.listen.tf.length + ' câu';
+$('#k2').textContent = 'Phần 2 · ' + (DATA.listen.doan ? DATA.listen.doan.length + ' đoạn nghe' : '1 bài nghe') + ' · ' + DATA.listen.tf.length + ' câu';
 $('#k3').textContent = 'Phần 3 · ' + DATA.read.tf.length + ' câu';
 let submitted = false;
 const wIdx = 0;
@@ -566,11 +566,12 @@ const fixDone = it => fixTap[it.id]!==null && fixSua[it.id]!==null;
 /* ═══════════ KHỐI PHÁN ĐOÁN ĐÚNG / SAI ═══════════ */
 const tfPick  = {};   // id → lựa chọn hiện tại
 const tfFirst = {};   // id → lần chọn ĐẦU TIÊN, chỉ lần này tính điểm
-function tfCards(box, items){
+function tfCards(box, items, start){
+  start = start || 0;   // nghe theo đoạn: số câu chạy tiếp qua các đoạn
   items.forEach((it,i)=>{
     tfPick[it.id]=null; tfFirst[it.id]=null;
     const c = el('div','card');
-    c.innerHTML = '<span class="qno">Câu '+(i+1)+'</span>'
+    c.innerHTML = '<span class="qno">Câu '+(start+i+1)+'</span>'
       + '<div class="han" style="font-size:1.06rem;margin:6px 0 0">'+it.cau+'</div>'
       // nghĩa tiếng Việt chỉ hiện SAU khi nộp — đọc được nghĩa thì khỏi cần hiểu câu Hán
       + '<div class="vi" id="vi-'+it.id+'" style="display:none;margin:3px 0 0">'+it.vi+'</div>';
@@ -613,20 +614,17 @@ function tfScore(per, name, items){   // `per` là biến cục bộ của hàm 
   });
 }
 
-/* ═══════════ PHẦN 2 · nghe một bài ═══════════ */
-(function(){
-  const L = DATA.listen;
-  const c = el('div','card');
-  c.innerHTML = '<div class="kicker">听力 · Bài nghe</div>';
+/* ═══════════ PHẦN 2 · nghe (một bài, hoặc từng đoạn) ═══════════ */
+function mayPhat(file){
   const au = el('div','audio');
   au.innerHTML = '<audio controls preload="metadata"></audio>';
   const warn = el('span','nofile',''); warn.style.display='none';
   const ctl = el('div','spd','<span class="lbl">Tốc độ</span>');
   au.append(warn, ctl);
   // tên file có thể là nghe.mp3, nghe-1.mp3 hay "nghe 1.mp3" — thử lần lượt
-  const cands = [...new Set([L.file,
-                             L.file.replace(/nghe\.mp3$/,'nghe-1.mp3'),
-                             L.file.replace(/nghe\.mp3$/,'nghe 1.mp3')])].map(encodeURI);
+  const cands = [...new Set([file,
+                             file.replace(/nghe\.mp3$/,'nghe-1.mp3'),
+                             file.replace(/nghe\.mp3$/,'nghe 1.mp3')])].map(encodeURI);
   const a = au.querySelector('audio');
   let ci = 0, rate = 1;
   a.onerror = ()=>{
@@ -649,12 +647,36 @@ function tfScore(per, name, items){   // `per` là biến cục bộ của hàm 
   again.onclick = ()=>{ a.currentTime = 0; a.play(); };
   ctl.append(back, again);
   a.src = cands[0];
-  c.append(au);
-  const tx = el('div','ans'); tx.id = 'an-listentext';
-  tx.innerHTML = '<span class="lab">原文 · nguyên văn bài nghe</span>'
-    + '<span class="han" style="display:block;line-height:2">' + L.text + '</span>'
-    + '<span style="display:block;margin-top:8px">' + L.vi + '</span>';
-  c.append(tx);
+  return au;
+}
+function nguyenVan(id, lab, text, vi){
+  const tx = el('div','ans'); tx.id = id;
+  tx.innerHTML = '<span class="lab">' + lab + '</span>'
+    + '<span class="han" style="display:block;line-height:2">' + text.replace(/\n/g,'<br>') + '</span>'
+    + '<span style="display:block;margin-top:8px">' + vi.replace(/\n/g,'<br>') + '</span>';
+  return tx;
+}
+(function(){
+  const L = DATA.listen;
+  if(L.doan){
+    $('#p2 h2.sec').innerHTML = 'Nghe từng đoạn rồi phán đoán <span class="han">对</span> / <span class="han">错</span>';
+    $('#p2 p.lead').innerHTML = 'Bài nghe chia thành ' + L.doan.length + ' đoạn ngắn, mỗi đoạn có máy phát riêng. '
+      + 'Đọc câu của đoạn đó trước, rồi mới bấm nghe. Câu nào khớp với đoạn vừa nghe thì chọn <b><span class="han">对</span></b> (đúng), '
+      + 'không khớp thì chọn <b><span class="han">错</span></b> (sai). Chọn lại được, nhưng chỉ lần chọn đầu tiên mới tính điểm.';
+    let n = 0;
+    L.doan.forEach((d,i)=>{
+      const c = el('div','card');
+      c.innerHTML = '<div class="kicker">听力 · Đoạn ' + (i+1) + '</div>';
+      c.append(mayPhat(d.file), nguyenVan('an-listentext-'+(i+1), '原文 · nguyên văn đoạn ' + (i+1), d.text, d.vi));
+      $('#listenBox').append(c);
+      tfCards($('#listenBox'), d.tf, n);
+      n += d.tf.length;
+    });
+    return;
+  }
+  const c = el('div','card');
+  c.innerHTML = '<div class="kicker">听力 · Bài nghe</div>';
+  c.append(mayPhat(L.file), nguyenVan('an-listentext', '原文 · nguyên văn bài nghe', L.text, L.vi));
   $('#listenBox').append(c);
   tfCards($('#listenBox'), L.tf);
 })();
@@ -958,6 +980,8 @@ $('#submit').onclick = ()=>{
       + ' · chỗ sai là <span class="han">' + it.khoi[it.loi] + '</span></span>'
       + '<span class="model">' + it.dung + '</span>'
       + '<span class="vi" style="display:block;margin-top:4px">' + it.dungvi + '</span>'
+      + ((it.khac && it.khac.length) ? '<div style="margin-top:8px"><b>Sửa cách khác cũng đúng:</b> '
+          + it.khac.map(s => '<span class="han">' + s + '</span>').join(' · ') + '</div>' : '')
       + '<div style="margin-top:9px">' + it.why + '</div>';
     $('#st-'+it.id).style.display = 'block';
     [...$('#ck-'+it.id).querySelectorAll('.chunk')].forEach((b,k)=>{
@@ -974,7 +998,7 @@ $('#submit').onclick = ()=>{
 
   tfScore(per, 'Nghe', DATA.listen.tf);
   tfScore(per, 'Đọc', DATA.read.tf);
-  $('#an-listentext').classList.add('on');
+  document.querySelectorAll('[id^="an-listentext"]').forEach(x=>x.classList.add('on'));
   $('#an-readvi').classList.add('on');
   $('#vi-readtitle').style.display = 'inline';
 

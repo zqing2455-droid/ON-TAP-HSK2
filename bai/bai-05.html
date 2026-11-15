@@ -331,14 +331,14 @@ footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
 const SORT = [
  {n:1, t:'Em đang đứng ở sảnh tầng dưới, gọi bạn còn ở trên phòng. Xếp lại câu.',
   sit:'<b>上 / 下 + 来 / 去</b> — chọn 来 hay 去 phải căn theo chỗ <b>NGƯỜI NÓI</b> đang đứng. Câu bắt đầu bằng <b>我</b>.',
-  words:['我','不','上去','了','就','在','下面','等','你'],
+  words:['了','等','上去','我','你','下面','不','就','在'],
   ans:['我不上去了，就在下面等你。'],
   why:'Người nói đang ở DƯỚI. Đi lên là <b>rời khỏi</b> chỗ mình → dùng <b>去</b> → 上去. Vế sau dùng 在 + nơi chốn rồi mới tới động từ: <b>在下面等你</b>, không nói ✗等你在下面.<br><br>Từ cũ gặp lại — <b>HSK1:</b> 我 · 不 · 了 · 就 · 在 · 你.'},
  {n:2, t:'Em kể lại vì sao hôm đó cả nhóm đi bộ về khách sạn. Xếp lại câu.',
   sit:'<b>因为……，所以……</b> (Bài 4) ghép với <b>走 + 回 + nơi đến</b> của bài này.',
-  words:['因为','吃了','太多','东西','所以','我们','走回','酒店'],
+  words:['吃了','因为','所以','走回','东西','我们','太多','酒店'],
   ans:['因为吃了太多东西，所以我们走回酒店。','因为我们吃了太多东西，所以走回酒店。','我们因为吃了太多东西，所以走回酒店。'],
-  why:'因为 mở vế lý do, 所以 mở vế kết quả — tiếng Trung đặt NGUYÊN NHÂN ra trước. <b>走回酒店</b>: 回 và 酒店 dính nhau thành một khối, không tách ra hai đầu (✗走酒店回).<br><br><b>Về vị trí của 我们:</b> hai vế cùng một chủ ngữ nên 我们 chỉ xuất hiện MỘT lần, đặt ở vế nào cũng được — 因为我们吃了…，所以走回酒店 hoặc 因为吃了…，所以我们走回酒店. Hoặc đưa hẳn ra đầu câu, trước cả 因为: 我们因为吃了太多东西，所以走回酒店 — sách ngữ pháp thường nêu cách này là chuẩn mực nhất khi hai vế cùng chủ ngữ. Cả ba cách đều được chấm đúng ở bài này. Điều cần tránh là lặp 我们 ở cả hai vế. Nếu hai vế KHÁC chủ ngữ thì mỗi vế phải giữ chủ ngữ riêng: 因为天气不好，所以我们没去.<br><br>Từ cũ gặp lại — <b>Bài 4:</b> 因为……，所以…… · <b>Bài 1:</b> 了 · <b>HSK1:</b> 吃 · 太 · 多 · 东西 · 我们.'}
+  why:'因为 mở vế lý do, 所以 mở vế kết quả — dùng cả cặp thì NGUYÊN NHÂN đi trước. <b>走回酒店</b>: 回 và 酒店 dính nhau thành một khối, không tách ra hai đầu (✗走酒店回).<br><br><b>Về vị trí của 我们:</b> hai vế cùng một chủ ngữ nên 我们 chỉ xuất hiện MỘT lần, đặt ở vế nào cũng được — 因为我们吃了…，所以走回酒店 hoặc 因为吃了…，所以我们走回酒店. Hoặc đưa hẳn ra đầu câu, trước cả 因为: 我们因为吃了太多东西，所以走回酒店 — sách ngữ pháp thường nêu cách này là chuẩn mực nhất khi hai vế cùng chủ ngữ. Cả ba cách đều được chấm đúng ở bài này. Điều cần tránh là lặp 我们 ở cả hai vế. Nếu hai vế KHÁC chủ ngữ thì mỗi vế phải giữ chủ ngữ riêng: 因为天气不好，所以我们没去.<br><br>Từ cũ gặp lại — <b>Bài 4:</b> 因为……，所以…… · <b>Bài 1:</b> 了 · <b>HSK1:</b> 吃 · 太 · 多 · 东西 · 我们.'}
 ];
 
 /* Tầng 2 — nghe và viết lại */
@@ -392,13 +392,13 @@ const PICKQ = [
   sit:'Tân ngữ chỉ <b>ĐỒ VẬT</b> thì linh hoạt — đứng trước hoặc sau 来/去 đều được.',
   opts:[
    {z:'还拿这么多礼物来！', ok:true,  w:'Đúng — và câu này đặc biệt ở chỗ <b>còn một cách nói nữa cũng đúng</b>: 还拿来这么多礼物！ Đồ vật có HAI vị trí (trước hoặc sau 来/去), trong khi nơi chốn chỉ có MỘT (phải đứng trước). Đây chính là điểm phân biệt của ngữ pháp 1B.'},
-   {z:'还来拿这么多礼物！', ok:false, w:'Sai trật tự. 来 không đứng trước động từ chính 拿. Phải là 拿……来 hoặc 拿来…….'},
+   {z:'还来拿这么多礼物！', ok:false, w:'Sai nghĩa. 来 đứng TRƯỚC động từ thì thành "đến để làm gì" — 来拿礼物 là "đến để LẤY quà". Mang quà tới thì 来 đứng sau 拿: 拿……来 hoặc 拿来…….'},
    {z:'还礼物拿来这么多！', ok:false, w:'Sai trật tự. Dù linh hoạt thì tân ngữ vẫn phải nằm SAU động từ 拿, không đẩy lên trước.'}
   ]},
  {n:12, t:'Đã mười hai giờ trưa, em giục mọi người ăn cơm.',
   sit:'<b>都 + mốc thời gian + 了</b> — mang sắc thái “đã tận … rồi”, hơi sốt ruột.',
   opts:[
-   {z:'已经都十二点了，我们吃饭吧。', ok:false, w:'Thừa 已经. Bản thân 都……了 đã mang nghĩa “đã” rồi, thêm 已经 làm câu nặng và thừa. Đây là lỗi vì tiếng Việt quen nói “đã … rồi”.'},
+   {z:'已经都十二点了，我们吃饭吧。', ok:false, w:'Không tự nhiên. Bản thân 都……了 đã mang nghĩa “đã … rồi”, không cần thêm 已经; mà có thêm thì người bản ngữ nói 都已经十二点了 chứ không đặt 已经 lên trước 都. Lỗi này do tiếng Việt quen nói “đã … rồi”.'},
    {z:'都十二点了，我们吃饭吧。',     ok:true,  w:'Đúng. 都 + 十二点 + 了. Câu này 王一雪 nói trong bài khoá 3 khi mời khách vào bàn.'},
    {z:'都十二点，我们吃饭吧。',       ok:false, w:'Thiếu 了. Cấu trúc phải đủ cả hai đầu: <b>都……了</b>.'}
   ]},
@@ -406,7 +406,7 @@ const PICKQ = [
   sit:'<b>下面 · 上面 · 前面</b> là danh từ chỉ vị trí, đứng <b>SAU</b> danh từ chính.',
   opts:[
    {z:'下面桌子有一个书包。', ok:false, w:'Sai trật tự. Tiếng Việt đặt “dưới” TRƯỚC danh từ (“dưới bàn”), tiếng Trung đặt SAU: <b>桌子下面</b>.'},
-   {z:'桌子下面有一个书包。', ok:true,  w:'Đúng. Danh từ trước, 下面 ngay sau. Cùng kiểu: 床下面 · 前面的商场 · 楼上.'},
+   {z:'桌子下面有一个书包。', ok:true,  w:'Đúng. Danh từ trước, 下面 ngay sau. Cùng kiểu: 椅子下面 · 前面的商场 · 楼上.'},
    {z:'桌子的下面有书包一个。', ok:false, w:'Hai lỗi: 桌子下面 không cần 的, và lượng từ 一个 phải đứng TRƯỚC danh từ (一个书包), đây là quy tắc đã học từ HSK1.'}
   ]}
 ];
@@ -426,7 +426,7 @@ const CHATS = [
      {z:'我不上来了，就在下面等你。', ok:false, note:'Nhầm. Em đang ở dưới, đi lên là RỜI chỗ mình → 上去, không phải 上来.', to:'c'},
      {z:'我不上去了，就等你在下面。', ok:false, note:'Sai trật tự. Nơi chốn đi trước động từ: 在下面等你.', to:'c'}]},
    c:{them:'好吧，那我马上下去。你再等我五分钟。', picks:[
-     {z:'好，我一会儿见。',       ok:false, note:'一会儿见 nghe lạ. Nói 一会儿见 thì được nhưng ở đây tự nhiên hơn là nhận lời đợi: 好，我等你。', to:null},
+     {z:'好，我一会儿见。',       ok:false, note:'Sai: 一会儿见 là câu chào hẹn gặp, không thêm chủ ngữ 我 (✗我一会儿见). Hơn nữa bạn vừa nhờ em đợi thêm năm phút — tự nhiên nhất là nhận lời đợi: 好，我在下面等你。', to:null},
      {z:'好，我在下面等你，快点儿！', ok:true,  note:'Đúng và tự nhiên. 快点儿 là cụm của bài này, dùng để giục nhẹ. HSK1 gặp lại: 好 · 我 · 你.', to:null},
      {z:'好，你一会儿就上来吧。',   ok:false, note:'Sai hướng và sai cả logic: bạn đang ở TRÊN, phải đi XUỐNG chỗ em → 下来.', to:null}]}
   },
@@ -466,7 +466,7 @@ const CHATS = [
    c:{them:'就在前边的商场，吃完饭你们可以跟我去看看。', picks:[
      {z:'太好了，我跟您去！',   ok:true,  note:'Đúng. <b>跟 + 人 + 去</b>: chủ nhà dẫn đi nên em đi CÙNG người đó, rời khỏi nhà → 去. Với người lớn tuổi dùng 您.', to:null},
      {z:'太好了，我跟您来！',   ok:false, note:'Sai hướng. Hai người cùng rời khỏi chỗ đang đứng để đi ra商场 → phải là 去.', to:null},
-     {z:'太好了，我和您去看看吧。', ok:false, note:'和 cũng nối hai người được, nhưng bài này luyện 跟 + 人 + động từ. Đáp bằng 跟 sẽ đúng trọng tâm hơn.', to:null}]}
+     {z:'太好了，我跟去您！', ok:false, note:'Sai trật tự. Người đi cùng đứng NGAY SAU 跟, động từ ra sau: 跟您去. Tiếng Việt nói "đi cùng bác" nên hay đặt 去 lên trước.', to:null}]}
   },
   done:'Xong. Đoạn này ghép ba thứ: 都……了 của bài 5, 过 và 的字短语 của bài 4, cộng cách khen món ăn.'},
 
@@ -475,12 +475,12 @@ const CHATS = [
   start:'a',
   nodes:{
    a:{them:'昨天你们去一雪姐家了吗？怎么样？', picks:[
-     {z:'去了。到她家的时候，饭菜都做好了。', ok:true,  note:'Đúng. 都……了 ở đây nghĩa là “đã xong hết rồi”. HSK1 gặp lại: 到 · 的时候 · 做好.', to:'b'},
-     {z:'去了。到她家的时候，饭菜已经都做好了。', ok:false, note:'Thừa 已经 — 都……了 đã đủ nghĩa “đã”.', to:'b'},
+     {z:'去了。到她家的时候，饭菜都做好了。', ok:true,  note:'Đúng. Chú ý: 都 ở đây là "đều, hết" (tất cả các món), 了 báo việc đã xong — khác với 都十二点了 ("đã tận mười hai giờ rồi"). HSK1 gặp lại: 到 · 的时候 · 做好.', to:'b'},
+     {z:'去了。到她家的时候，饭菜都做好。', ok:false, note:'Thiếu 了. Việc đã xong lúc em tới nơi thì phải có 了: 饭菜都做好了.', to:'b'},
      {z:'去了。到她家的时候，都饭菜做好了。',   ok:false, note:'Sai chỗ 都. 都 đứng trước ĐỘNG TỪ/TÍNH TỪ: 饭菜都做好了.', to:'b'}]},
    b:{them:'有什么好吃的？', picks:[
      {z:'刘爷爷还准备了奶茶，很好喝。',   ok:true,  note:'Đúng. 准备 + danh từ, thêm 了 là việc đã làm xong.', to:'c'},
-     {z:'刘爷爷还准备奶茶了，很好喝。',   ok:false, note:'Sai chỗ 了. 了 dán ngay sau động từ: 准备了奶茶.', to:'c'},
+     {z:'刘爷爷还准备了奶茶，很好吃。',   ok:false, note:'Sai từ khen. 奶茶 là đồ UỐNG — khen thì dùng 好喝; 好吃 dành cho đồ ĂN.', to:'c'},
      {z:'刘爷爷还准备好奶茶，很好喝。',   ok:false, note:'Thiếu 了. Việc đã hoàn tất thì phải có 了: 准备好了奶茶.', to:'c'}]},
    c:{them:'吃完饭你们怎么回去的？', picks:[
      {z:'因为吃了太多东西，我们吃完饭是走回酒店的。', ok:true,  note:'Đúng. 走回酒店 — 回 dính liền nơi đến. Lại dùng 因为 của Bài 4 để nêu lý do.', to:null},
@@ -500,7 +500,7 @@ const TYPE = [
    {lbl:'một từ giục hoặc mời (快 · 吧 · 快点儿)', any:['快','吧','快点儿'], tip:'Thêm 快 hoặc 吧 cho câu tự nhiên như lời gọi: 你快下来吧！'}],
   model:'你快下来吧，我在下面等你。',
   why:'Câu gồm hai phần: lời gọi (你快下来吧) + nói rõ mình đang ở đâu (我在下面等你). Phần sau dùng <b>在 + nơi chốn + động từ</b> — nơi chốn đi TRƯỚC động từ, đây là trật tự ngược với tiếng Việt.<br><br>Từ cũ gặp lại — <b>HSK1:</b> 你 · 快 · 吧 · 我 · 在.',
-  more:'Cách nói khác: 我都到了，你一会儿就下来吧。',
+  more:'Cách nói khác cũng đúng: 我都到了，你一会儿就下来吧。 · 你快下来吧！ · 快下来吧，我在下面等你。 · 你下来吧，我们都在下面等你。 · 都八点了，你快点儿下来吧。 · 我到了，你快下来吧，我们一起去吃饭。',
   avoid:[{z:'下去', w:'Ngược hướng. Em ở dưới, bạn phải đi VỀ PHÍA em → 下来.'},
          {z:'你快下吧', w:'Thiếu 来/去. Tiếng Trung không bỏ phần chỉ hướng.'},
          {z:'等你在下面', w:'Sai trật tự. Nơi chốn đi trước động từ: 在下面等你.'}]},
@@ -511,9 +511,9 @@ const TYPE = [
   need:[
    {lbl:'礼物 hoặc 准备', any:['礼物','准备'], tip:'Nói rõ em chuẩn bị quà gì: 我准备…… · 我带的礼物是……'},
    {lbl:'因为', any:['因为'], tip:'Mở vế lý do bằng 因为 — ôn lại cấu trúc của Bài 4.'}],
-  model:'我准备一些水果和茶，因为这些礼物很常见，大家都喜欢。',
+  model:'我想准备一些水果和茶，因为中国人都很喜欢喝茶。',
   why:'Trả lời câu 为什么 thì chỉ cần vế <b>因为……</b> là đủ, thêm 所以 thì câu tròn hơn. Đừng đổi 所以 thành 但是 — 但是 (Bài 2) nối hai vế TRÁI NGƯỢC, còn đây là nhân quả.<br><br>Từ cũ gặp lại — <b>Bài 4:</b> 因为 · <b>HSK1:</b> 水果 · 茶 · 喜欢 · 都 · 很.',
-  more:'Cách nói khác: 我想准备一些水果，因为我没买过中国的礼物，水果比较安全。',
+  more:'Cách nói khác cũng đúng: 我想准备一些水果，因为我不知道他们喜欢什么。 · 我准备一些茶，因为中国人很喜欢喝茶。 · 我想准备越南的咖啡，因为我的中国朋友很喜欢喝咖啡。 · 礼物我准备了一些越南的茶，因为朋友的爸爸妈妈喜欢喝茶。 · 我想给孩子们准备一些礼物，因为他们家有两个孩子。',
   avoid:[{z:'因为但是', w:'Vế kết quả dùng 所以, không dùng 但是.'},
          {z:'为什么因为', w:'Khi TRẢ LỜI thì không nhắc lại 为什么, mở thẳng bằng 因为……'}]},
 
@@ -523,9 +523,9 @@ const TYPE = [
   need:[
    {lbl:'都……了', any:['都'], tip:'Dùng 都 + mốc thời gian + 了 để nhấn mạnh: 都十二点了 · 饭菜都做好了.'},
    {lbl:'một từ chỉ hướng (进来 · 下来 · 上去 · 走回)', any:['进来','进去','下来','下去','上来','上去','走回','回来','回去'], tip:'Có ít nhất một từ chỉ hướng để câu kể rõ ai di chuyển về phía ai.'}],
-  model:'我十一点到的，朋友开门说“快进来”。都十二点了，我们才开始吃饭。吃完饭我走回家，因为吃得太多了。',
+  model:'我十一点到的，朋友开门说“快进来”。都十二点了，我们才开始吃饭。吃完饭我走回家，因为吃了太多东西。',
   why:'Không cần giống câu mẫu. Bố cục nên có: mấy giờ đến → vào nhà thế nào → ăn cơm lúc nào → về bằng cách gì. Mỗi ý một câu ngắn, dùng lại cụm đã quen của HSK1: 几点 · 开始 · 太……了.<br><br>Từ cũ gặp lại — <b>Bài 4:</b> 因为 · <b>Bài 3:</b> 回家 · <b>HSK1:</b> 点 · 吃完饭 · 太……了.',
-  more:'Cách nói khác: 我下午两点才到。进来以后，朋友的奶奶给我准备了奶茶。都五点了我才走回酒店。',
+  more:'Cách nói khác cũng đúng: 我下午两点才到。进去以后，朋友的奶奶给我准备了奶茶。都五点了我才走回家。 · 我是十一点到的。都十二点了，我们才开始吃饭，吃完饭我走回家了。 · 我十点就到了，朋友说“快进来”。都下午三点了，我才回家。 · 我是坐车去的，到的时候都十二点了。吃完饭我们走回酒店。 · 我两点到的，朋友在楼下等我，我们一起上去。都五点了我才回去。',
   avoid:[{z:'已经都', w:'都……了 đã mang nghĩa “đã”, bỏ 已经.'},
          {z:'进来家', w:'Nơi chốn chen vào GIỮA: 进家来, hoặc nói gọn 进来.'},
          {z:'走家回', w:'回 phải dính liền nơi đến: 走回家.'}]}
