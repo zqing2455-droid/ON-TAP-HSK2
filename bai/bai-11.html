@@ -175,6 +175,7 @@ textarea:focus{outline:none;border-color:var(--accent)}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/giao-dien.css">
+<script src="../assets/gui-ket-qua.js"></script>
 <!-- MAM-XANH:cuoi -->
 
 <!--HSK2-META {"key": "bai11", "bai": "Bài 11", "han": "我最喜欢吃中国菜", "ten": "Tôi thích ăn món Trung nhất", "file": "bai-11.html", "total": 9, "parts": {"fix": 3, "listen": 3, "read": 3, "speak": 1, "write": 1}} -->
@@ -492,7 +493,7 @@ const LS = 'hsk2-' + KEY + '-v1';
 
 /* Địa chỉ web app Apps Script ghi thẳng vào tab BaiNop_HSK2 của bảng tính cô.
    Để trống '' thì trang quay về chế độ cũ: bấm Gửi là sao chép cho học viên dán Zalo. */
-const WEBAPP = 'https://script.google.com/macros/s/AKfycbwI2IUhLPxDkPZ8n9iKorCw351kB9JgkD_uNh8D0pYofp3SBQD_hUduTGT2OsqwEOow2A/exec';
+const WEBAPP = window.HSK2_WEBAPP || '';   // địa chỉ đặt ở assets/gui-ket-qua.js
 
 /* Mã của LƯỢT LÀM BÀI này — gửi kèm để học viên nộp rồi viết bài gửi sau
    vẫn chỉ nằm trên một dòng trong bảng tính. Bấm "Xoá hết và làm lại" thì sinh mã mới. */
@@ -721,16 +722,27 @@ function wPayload(){
   return { name:$('#wName').value.trim(), topic:DATA.write[wIdx].topic,
            text:$('#wText').value.trim(), score:(submitted? $('#sNum').textContent+'/'+TOTAL : 'chưa nộp') };
 }
-/* Liệt kê câu làm sai để cô nhìn một cái là biết em đó hổng chỗ nào.
-   (mk_tpl2.py thay hàm này bằng bản của khuôn mới) */
-function cauSai(){
-  const ds = [];
+/* Liệt kê từng câu sai: em làm gì — đáp án là gì. Trả về {sai:[…], chua:[…]} */
+const tron = s => (window.HSK2_TRON ? HSK2_TRON(s) : String(s||'').replace(/<[^>]+>/g,''));
+function chiTiet(){
+  const sai=[], chua=[], DS = v => v ? '对' : '错';
   DATA.fix.forEach((it,i)=>{ const f = fixFirst[it.id];
-    if(!(f.tap === it.loi && f.sua !== null && it.sua[f.sua].ok)) ds.push('Sửa lỗi '+(i+1)); });
-  DATA.listen.tf.forEach((it,i)=>{ if(tfFirst[it.id] !== it.dap) ds.push('Nghe '+(i+1)); });
-  DATA.read.tf.forEach((it,i)=>{ if(tfFirst[it.id] !== it.dap) ds.push('Đọc '+(i+1)); });
-  return ds.join(' · ');
+    if(f.tap===null){ chua.push('Sửa lỗi '+(i+1)); return; }
+    if(f.tap === it.loi && f.sua !== null && it.sua[f.sua].ok) return;
+    let s = 'Sửa lỗi '+(i+1)+': «'+tron(it.sai)+'» ';
+    if(f.tap !== it.loi) s += 'em bấm «'+tron(it.khoi[f.tap])+'» (chỗ sai là «'+tron(it.khoi[it.loi])+'»)';
+    else s += 'tìm đúng chỗ sai «'+tron(it.khoi[it.loi])+'»';
+    s += f.sua===null ? ', chưa chọn câu sửa' : ', chọn câu sửa «'+tron(it.sua[f.sua].han)+'»';
+    sai.push(s + ' — đúng: «'+tron(it.dung)+'»');
+  });
+  [['Nghe', DATA.listen.tf], ['Đọc', DATA.read.tf]].forEach(([ten, ds])=>ds.forEach((it,i)=>{
+    const v = tfFirst[it.id];
+    if(v===null){ chua.push(ten+' '+(i+1)); return; }
+    if(v !== it.dap) sai.push(ten+' '+(i+1)+': «'+tron(it.cau)+'» em chọn '+DS(v)+' — đáp án '+DS(it.dap));
+  }));
+  return {sai, chua};
 }
+function cauSai(){ return chiTiet().sai.join(' · '); }
 
 
 /* Gửi về bảng tính của cô. Dùng no-cors nên trình duyệt không đọc được câu trả lời
@@ -742,16 +754,20 @@ function guiBai(kem){
     ten     : $('#wName').value.trim(),
     lop     : ($('#wLop') ? $('#wLop').value.trim() : ''),
     bai     : DATA.meta.bai + ' · ' + DATA.meta.han,
-    tong    : submitted ? ($('#sNum').textContent + '/' + TOTAL) : '',
-    phan1   : diem(PHAN1), nghe: diem('Nghe'), doc: diem('Đọc'),
-    causai  : submitted ? cauSai() : '',
-    baiviet : $('#wText').value.trim()
+    tong    : TOTAL,
+    baiviet : $('#wText').value.trim(),
+    dang    : 3
   };
+  if(submitted && PER){
+    const c = chiTiet();
+    d.dung    = Object.values(PER).reduce((s,x)=>s+x[0],0);
+    d.chualam = c.chua.length;
+    d.sai     = TOTAL - d.dung - c.chua.length;
+    d.phan    = Object.entries(PER).map(([k,[a,b]])=>k+' '+a+'/'+b).join(' · ');
+    d.causai  = c.sai.join('\n') + (c.chua.length ? (c.sai.length?'\n':'')+'Chưa làm: '+c.chua.join(', ') : '');
+  }
   if(kem) for(const k in kem) d[k] = kem[k];
-  return fetch(WEBAPP, { method:'POST', mode:'no-cors', cache:'no-store',
-                         headers:{'Content-Type':'text/plain;charset=utf-8'},
-                         body: JSON.stringify(d) })
-    .then(()=>true).catch(()=>false);
+  return HSK2_GUI(d);
 }
 const PHAN1 = 'Sửa lỗi';
 const diem = k => (PER && PER[k]) ? (PER[k][0] + '/' + PER[k][1]) : '';
@@ -1008,6 +1024,7 @@ $('#submit').onclick = ()=>{
   const tot = Object.values(per).reduce((s,x)=>s+x[0],0);
   const max = Object.values(per).reduce((s,x)=>s+x[1],0);
   $('#sNum').textContent = tot;
+  PER = per;   // phải có điểm trước khi tự gửi
   if(WEBAPP){
     $('#guiBox').style.display = 'block';
     if($('#wName').value.trim()) guiKetQua();   // đã có tên thì gửi luôn

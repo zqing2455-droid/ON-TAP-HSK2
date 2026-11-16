@@ -147,6 +147,7 @@ textarea:focus{outline:none;border-color:var(--accent)}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/giao-dien.css">
+<script src="../assets/gui-ket-qua.js"></script>
 <!-- MAM-XANH:cuoi -->
 
 <!--HSK2-META {"key": "bai10", "bai": "Bài 10", "han": "就要考试了", "ten": "Sắp thi rồi", "file": "bai-10.html", "total": 13, "parts": {"sort": 3, "listen": 3, "read": 2, "chat": 5, "write": 1}} -->
@@ -259,6 +260,18 @@ const PAGE_LS = "hsk2-bai10-v1";
       <div class="sub" id="sMsg">Em chưa nộp bài.</div>
     </div>
     <div class="bars" id="bars"></div>
+    <div id="guiBox" style="display:none;margin-top:14px;padding-top:14px;border-top:2px dashed var(--line)">
+      <p class="lead" style="margin:0 0 10px"><b>Gửi kết quả cho cô</b> — điền tên rồi bấm gửi,
+      cô mới biết bài này của ai.</p>
+      <div class="btnrow">
+        <input id="gName" placeholder="Họ và tên của em" style="font:inherit;flex:1;min-width:170px;
+          background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
+        <input id="gLop" placeholder="Lớp" style="font:inherit;width:100px;
+          background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ink)">
+        <button class="btn" id="guiKQ">Gửi cho cô</button>
+      </div>
+      <div id="guiFb"></div>
+    </div>
     <div class="btnrow" style="justify-content:center">
       <button class="btn ghost" id="again">Làm lại từ đầu</button>
     </div>
@@ -528,6 +541,7 @@ $('#k4').textContent = 'Phần 4 · ' + DATA.chat.length + ' lượt';
 let submitted = false;
 let turn = 0;
 const chatFirst = [];
+const chatSai = [];   // câu em chọn sai ở lần đầu của từng lượt
 const wIdx = 0;
 
 /* ---------- chuẩn hoá câu trả lời tiếng Trung ---------- */
@@ -661,7 +675,7 @@ function chatDraw(){
   t.opts.forEach(o=>{
     const b = el('button','opt','<span class="han">'+o.han+'</span>');
     b.onclick = ()=>{
-      if(chatFirst[turn]===undefined) chatFirst[turn] = !!o.ok;
+      if(chatFirst[turn]===undefined){ chatFirst[turn] = !!o.ok; if(!o.ok) chatSai[turn] = o.han; }
       if(o.ok){
         th.append(el('div','bub me','<span class="han">'+o.han+'</span>'));
         $('#chatFb').innerHTML = '<div class="fb ok"><b>Chuẩn rồi.</b> '+o.fb+'</div>';
@@ -730,6 +744,13 @@ $('#wSend').onclick = ()=>{
   const p = wPayload();
   if(hanCount(p.text) < 40){ $('#wFb').innerHTML='<div class="fb no">Bài còn dưới 40 chữ Hán, em viết thêm rồi gửi nhé.</div>'; return; }
   if(!p.name){ $('#wFb').innerHTML='<div class="fb no">Em điền họ tên trước khi gửi nhé.</div>'; return; }
+  if(WEBAPP){
+    $('#wFb').innerHTML='<div class="fb ok">Đang gửi…</div>'; save();
+    guiBai().then(ok=>{ $('#wFb').innerHTML = ok
+      ? '<div class="fb ok">Đã gửi bài cho cô. Em vẫn nên bấm “Sao chép bài” để giữ một bản nhé.</div>'
+      : '<div class="fb no">Chưa gửi được. Em kiểm tra mạng rồi gửi lại, hoặc bấm “Sao chép bài” dán Zalo cho cô.</div>'; });
+    return;
+  }
   if(!FORM.action || !FORM.text){ $('#wCopy').click(); return; }
   let f = document.getElementById('gform');
   if(!f){
@@ -742,6 +763,74 @@ $('#wSend').onclick = ()=>{
   f.submit();
   $('#wFb').innerHTML='<div class="fb ok">Đã gửi bài cho cô. Em vẫn nên bấm “Sao chép bài” để giữ một bản nhé.</div>';
 };
+
+
+/* ═══════════ GỬI KẾT QUẢ VỀ BẢNG TÍNH CỦA CÔ ═══════════ */
+const WEBAPP = window.HSK2_WEBAPP || '';
+let MA = '';
+try{ const __o = JSON.parse(localStorage.getItem(LS)||'null'); MA = (__o && __o.ma) || ''; }catch(e){}
+if(!MA) MA = KEY + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,7);
+let PER = null;
+const tron = s => (window.HSK2_TRON ? HSK2_TRON(s) : String(s||'').replace(/<[^>]+>/g,''));
+const tenHS = () => ($('#gName').value.trim() || $('#wName').value.trim());
+$('#gName').oninput = ()=>{ $('#wName').value = $('#gName').value; save(); };
+$('#wName').addEventListener('input', ()=>{ $('#gName').value = $('#wName').value; });
+$('#gLop').oninput = ()=> save();
+
+/* Liệt kê từng câu sai: em làm gì — đáp án là gì */
+function chiTiet(){
+  const sai=[], chua=[];
+  DATA.sort.forEach((it,i)=>{
+    const p = picked[it.id];
+    if(!p.length){ chua.push('Sắp xếp '+(i+1)); return; }
+    if(p.join('')!==it.answer.join(''))
+      sai.push('Sắp xếp '+(i+1)+': em xếp '+p.join('→')+(p.length<it.answer.length?' (chưa đủ)':'')+' — đúng: '+it.answer.join('→'));
+  });
+  DATA.listen.forEach((it,i)=>{
+    const v = (($('#ta-'+it.id)||{}).value||'').trim();
+    if(!hanCount(v)){ chua.push('Nghe '+(i+1)); return; }
+    if(!match(v, it.keys)) sai.push('Nghe '+(i+1)+': «'+tron(it.q)+'» em trả lời «'+v+'» — mẫu: «'+tron(it.model)+'»');
+  });
+  DATA.read.qs.forEach((q,i)=>{
+    const v = (($('#ta-'+q.id)||{}).value||'').trim();
+    if(!hanCount(v)){ chua.push('Đọc '+(i+1)); return; }
+    if(!match(v, q.keys)) sai.push('Đọc '+(i+1)+': «'+tron(q.q)+'» em trả lời «'+v+'» — mẫu: «'+tron(q.model)+'»');
+  });
+  DATA.chat.forEach((t,i)=>{
+    if(chatFirst[i]===undefined){ chua.push('Nhắn tin '+(i+1)); return; }
+    if(chatFirst[i]===false){
+      const ok = t.opts.find(o=>o.ok);
+      sai.push('Nhắn tin lượt '+(i+1)+': lần đầu em chọn «'+tron(chatSai[i]||'?')+'» — hợp hơn: «'+tron(ok?ok.han:'')+'»');
+    }
+  });
+  return {sai, chua};
+}
+function guiBai(){
+  if(!WEBAPP) return Promise.resolve(false);
+  const d = { dang:2, ma:MA, ten:tenHS(), lop:$('#gLop').value.trim(),
+              bai: DATA.meta.bai + ' · ' + DATA.meta.han, tong:TOTAL,
+              baiviet: $('#wText').value.trim() };
+  if(submitted && PER){
+    const c = chiTiet();
+    d.dung = Object.values(PER).reduce((s,x)=>s+x[0],0);
+    d.chualam = c.chua.length;
+    d.sai = TOTAL - d.dung - c.chua.length;
+    d.phan = Object.entries(PER).map(([k,[a,b]])=>k+' '+a+'/'+b).join(' · ');
+    d.causai = c.sai.join('\n') + (c.chua.length ? (c.sai.length?'\n':'')+'Chưa làm: '+c.chua.join(', ') : '');
+  }
+  return HSK2_GUI(d);
+}
+function guiKetQua(){
+  if(!tenHS()){ $('#guiFb').innerHTML='<div class="fb no">Em điền họ tên đã nhé.</div>'; $('#gName').focus(); return; }
+  $('#guiFb').innerHTML='<div class="fb ok">Đang gửi…</div>';
+  save();
+  guiBai().then(ok=>{
+    $('#guiFb').innerHTML = ok
+      ? '<div class="fb ok">Đã gửi kết quả cho cô. Viết xong bài ở Phần 5 thì bấm <b>Gửi bài cho cô</b> để cô nhận luôn bài viết.</div>'
+      : '<div class="fb no">Chưa gửi được. Em kiểm tra mạng rồi bấm gửi lại nhé.</div>';
+  });
+}
+$('#guiKQ').onclick = guiKetQua;
 
 /* ═══════════ ĐẾM TIẾN ĐỘ ═══════════ */
 function tick(){
@@ -840,6 +929,12 @@ $('#submit').onclick = ()=>{
   $('#bars').innerHTML = Object.entries(per).map(([k,[a,b]])=>
      '<div class="barrow"><span>'+k+'</span><span class="bar"><i style="width:'+(a/b*100)+'%"></i></span><span>'+a+'/'+b+'</span></div>').join('');
   $('#submit').textContent='XEM KẾT QUẢ';
+  PER = per;
+  if(WEBAPP){
+    $('#guiBox').style.display='block';
+    $('#gName').value = $('#gName').value || $('#wName').value;
+    if(tenHS()) guiKetQua();   // đã có tên thì gửi luôn
+  }
   tick(); save(); go(5);
 };
 
@@ -871,7 +966,8 @@ function save(){
       // ba trường dưới đây dành cho index.html vẽ tiến độ — đừng xoá
       key:KEY, done:__done, total:TOTAL,
       score:(submitted && $('#sNum') ? Number($('#sNum').textContent) : null),
-      ta:{}, name:$('#wName').value, wText:$('#wText').value};
+      ta:{}, name:$('#wName').value, wText:$('#wText').value,
+      ma:MA, lop:$('#gLop').value, chatSai};
     DATA.listen.forEach(it=> o.ta[it.id]=($('#ta-'+it.id)||{}).value||'');
     DATA.read.qs.forEach(q=> o.ta[q.id]=($('#ta-'+q.id)||{}).value||'');
     localStorage.setItem(LS, JSON.stringify(o));
@@ -883,7 +979,9 @@ function save(){
     Object.keys(o.picked||{}).forEach(k=>{ if(picked[k]) picked[k]=o.picked[k]; });
     DATA.sort.forEach(draw);
     Object.entries(o.ta||{}).forEach(([k,v])=>{ const t=$('#ta-'+k); if(t) t.value=v; });
-    if(o.name) $('#wName').value=o.name;
+    if(o.name){ $('#wName').value=o.name; $('#gName').value=o.name; }
+    if(o.lop) $('#gLop').value=o.lop;
+    if(Array.isArray(o.chatSai)) o.chatSai.forEach((x,i)=>{ if(x) chatSai[i]=x; });
     if(o.wText){ $('#wText').value=o.wText; $('#wText').oninput(); }
     if(Array.isArray(o.chatFirst) && typeof o.turn==='number' && o.turn>0){
       chatFirst.length=0; o.chatFirst.forEach(x=>chatFirst.push(x));

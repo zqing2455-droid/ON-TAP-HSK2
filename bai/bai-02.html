@@ -225,6 +225,7 @@ footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/giao-dien.css">
+<script src="../assets/gui-ket-qua.js"></script>
 <!-- MAM-XANH:cuoi -->
 
 
@@ -315,6 +316,27 @@ footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
     </div>
   </div>
   <div id="w4"></div>
+</section>
+
+<!-- ══════════ GỬI KẾT QUẢ ══════════ -->
+<section class="tier" id="tkq">
+  <div class="tier-h">
+    <div class="seal">交</div>
+    <div>
+      <div class="kind">Cuối bài</div>
+      <h2>Gửi kết quả cho cô</h2>
+      <p>Máy tính theo <b>lần làm đầu tiên</b> của mỗi câu. Làm lại để luyện thêm thì không đổi kết quả.</p>
+    </div>
+  </div>
+  <div class="q">
+    <div id="kqTom"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+      <input id="kqTen" placeholder="Họ và tên của em" style="font:inherit;flex:1;min-width:170px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:8px 12px;color:var(--ink)">
+      <input id="kqLop" placeholder="Lớp" style="font:inherit;width:100px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:8px 12px;color:var(--ink)">
+      <button class="act" id="kqGui" type="button">Gửi cho cô</button>
+    </div>
+    <div class="fb" id="kqFb"></div>
+  </div>
 </section>
 
 <footer>
@@ -535,6 +557,41 @@ const TYPE = [
 const TOTAL = 20;                       // cả 20 bài đều chấm được
 const state = new Set();
 const KEY = 'hsk2b2-ontap';
+
+/* ═══════════ GHI LẦN LÀM ĐẦU TIÊN CỦA TỪNG CÂU — để gửi kết quả cho cô ═══════════
+   Chỉ lần làm đầu tiên được tính. Làm lại sau đó để luyện thì không đổi kết quả. */
+const KQ_LS = KEY + '-ketqua';
+const LOAI = {};          // số câu → loại bài
+let KQ = {};              // số câu → {ok, ghi}
+let MA = '', KQ_TEN = '', KQ_LOP = '';
+try{ const o=JSON.parse(localStorage.getItem(KQ_LS)||'null');
+     if(o){ KQ=o.kq||{}; MA=o.ma||''; KQ_TEN=o.ten||''; KQ_LOP=o.lop||''; } }catch(e){}
+if(!MA) MA = KEY + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,7);
+const tron = s => (window.HSK2_TRON ? HSK2_TRON(s) : String(s||'').replace(/<[^>]+>/g,''));
+function luuKQ(){ try{ localStorage.setItem(KQ_LS, JSON.stringify({kq:KQ, ma:MA,
+  ten:(document.getElementById('kqTen')||{}).value||KQ_TEN, lop:(document.getElementById('kqLop')||{}).value||KQ_LOP})); }catch(e){} }
+function ghiKQ(n, ok, ghi){ if(KQ[n]) return; KQ[n]={ok:!!ok, ghi:ghi||''}; luuKQ(); veKQ(); }
+function tomKQ(){
+  const so = Object.keys(LOAI).map(Number).sort((a,b)=>a-b);
+  const phan = {}, sai = [], chua = [];
+  let dung = 0;
+  so.forEach(n=>{
+    const l = LOAI[n]; phan[l] = phan[l] || [0,0]; phan[l][1]++;
+    const r = KQ[n];
+    if(!r) chua.push(n);
+    else if(r.ok){ dung++; phan[l][0]++; }
+    else sai.push('Câu '+String(n).padStart(2,'0')+' · '+l+(r.ghi?': '+r.ghi:''));
+  });
+  return {dung, sai, chua, tong:so.length,
+          phan:Object.entries(phan).map(([k,[a,b]])=>k+' '+a+'/'+b).join(' · ')};
+}
+function veKQ(){
+  const box=document.getElementById('kqTom'); if(!box) return;
+  const t=tomKQ();
+  box.innerHTML='<b style="color:var(--jade)">Đúng '+t.dung+'</b> · <b style="color:var(--cin)">Sai '+t.sai.length
+    +'</b> · Chưa làm '+t.chua.length+' <span style="color:var(--muted)">/ '+t.tong+' câu</span>'
+    +'<div style="font-size:13px;color:var(--ink-2);margin-top:4px">'+t.phan+'</div>';
+}
 function load(){ try{ (JSON.parse(localStorage.getItem(KEY)||'[]')).forEach(v=>state.add(v)); }catch(e){} }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify([...state])); }catch(e){} }
 function mark(n){ state.add(n); save(); paint(); }
@@ -557,6 +614,7 @@ function say(f,good,lead,body){ f.className='fb on '+(good?'good':'bad');
 
 /* ═══════════ TẦNG 1A · KÉO THẢ XẾP CÂU ═══════════ */
 function buildSort(d, host){
+  LOAI[d.n]='Xếp câu';
   const q=card(d.n, d.t, d.sit);
   const line=el('div','line'); line.dataset.ph='Kéo hoặc chạm từng ô chữ vào đây';
   const tray=el('div','tray');
@@ -643,10 +701,11 @@ function buildSort(d, host){
         : d.ans[0];
       say(fb,true, d.ans.length>1 ? 'Đúng rồi — và đây là một trong hai cách đúng.' : 'Đúng rồi.',
         '<span class="zh">'+all+'</span><br>'+d.why);
-      q.classList.add('done'); mark(d.n);
+      q.classList.add('done'); mark(d.n); ghiKQ(d.n,true);
     }
     else if(!got){ say(fb,false,'Chưa xếp gì cả.','Chạm hoặc kéo từng ô chữ lên dòng phía trên.'); }
-    else{ say(fb,false,'Chưa đúng.','Em đang xếp: <span class="zh">'+got+'</span><br>'+
+    else{ ghiKQ(d.n,false,'em xếp «'+got+'» — đúng: «'+tron(d.ans[0])+'»');
+      say(fb,false,'Chưa đúng.','Em đang xếp: <span class="zh">'+got+'</span><br>'+
       'Gợi ý — '+d.why.replace(/<[^>]+>/g,'').split('.')[0]+'.'); }
   };
   bClr.onclick=()=>{ [...line.querySelectorAll('.chip')].forEach(c=>tray.append(c)); fb.className='fb'; };
@@ -655,6 +714,7 @@ function buildSort(d, host){
 
 /* ═══════════ TẦNG 1B · TÌM LỖI ═══════════ */
 function buildFind(d, host){
+  LOAI[d.n]='Tìm lỗi';
   const q=card(d.n, d.t);
   q.append(el('div','kind-tag','◆ '+d.kind));
   if(d.hint) q.append(el('div','sit','Gợi ý thu hẹp: '+d.hint));
@@ -666,6 +726,7 @@ function buildFind(d, host){
   function choose(s){
     if(locked) return;
     const i=+s.dataset.i;
+    ghiKQ(d.n, i===d.bad, i===d.bad?'':'em bấm «'+tron(d.toks[i])+'» — chỗ sai là «'+tron(d.toks[d.bad])+'»');
     if(i===d.bad){
       locked=true;
       row.querySelectorAll('.tok').forEach(t=>{ t.classList.add('flat'); t.classList.remove('fine'); });
@@ -692,6 +753,7 @@ function buildFind(d, host){
 
 /* ═══════════ TẦNG NGHE VIẾT LẠI ═══════════ */
 function buildDictate(d, host){
+  LOAI[d.n]='Nghe viết';
   const q=card(d.n, 'Nghe và viết lại câu em nghe được bằng chữ Hán.');
   const box=el('div','dict-audio');
   const audio=document.createElement('audio');
@@ -721,11 +783,12 @@ function buildDictate(d, host){
   q.append(ans);
 
   function reveal(){ ans.classList.add('on'); q.classList.add('done'); mark(d.n); }
-  bAns.onclick=reveal;
+  bAns.onclick=()=>{ ghiKQ(d.n,false,'bấm xem đáp án, không tự viết'); reveal(); };
   bChk.onclick=()=>{
     const raw=ta.value.trim();
     if(!raw){ say(fb,false,'Chưa viết gì cả.','Nghe audio (bấm nút tốc độ chậm hơn nếu cần) rồi viết lại câu bằng chữ Hán vào ô trên.'); return; }
     const got=norm(raw), want=norm(d.zh);
+    ghiKQ(d.n, got===want, got===want?'':'em viết «'+raw+'» — đúng: «'+tron(d.zh)+'»');
     if(got===want){ say(fb,true,'Đúng, khớp hoàn toàn.','Đúng là câu giáo viên đọc.'); }
     else{ say(fb,false,'Chưa khớp hoàn toàn.','Câu em viết: <span class="zh">'+raw+'</span><br>Nghe lại (thử tốc độ 0.75x hoặc 0.5x) rồi sửa, hoặc bấm "Xem đáp án".'); }
     reveal();
@@ -735,6 +798,7 @@ function buildDictate(d, host){
 
 /* ═══════════ TẦNG 2 · PHÂN BIỆT ═══════════ */
 function buildPick(d, host){
+  LOAI[d.n]='Chọn cách nói';
   const q=card(d.n, d.t, d.sit);
   const box=el('div','opts');
   d.opts.forEach((o,i)=>{
@@ -745,6 +809,8 @@ function buildPick(d, host){
     b.onclick=()=>{
       if(box.dataset.done) return;
       box.dataset.done='1';
+      { const k=d.opts.findIndex(x=>x.ok);
+        ghiKQ(d.n, o.ok, o.ok?'':'em chọn '+'ABC'[i]+'. «'+tron(o.z)+'» — đúng: '+'ABC'[k]+'. «'+tron((d.opts[k]||{}).z)+'»'); }
       [...box.querySelectorAll('.opt')].forEach((btn,j)=>{
         btn.disabled=true; btn.classList.add('shown');
         btn.classList.add(d.opts[j].ok?'right':'wrong');
@@ -761,6 +827,8 @@ function buildPick(d, host){
 
 /* ═══════════ TẦNG 3 · HỘI THOẠI RẼ NHÁNH ═══════════ */
 function buildChat(d, host){
+  LOAI[d.n]='Hội thoại';
+  let vong1=true; const saiVong1=[];
   const q=card(d.n, d.title, d.sit);
   const chat=el('div','chat'); q.append(chat);
   const btns=el('div','btns');
@@ -779,9 +847,11 @@ function buildChat(d, host){
       b.onclick=()=>{
         br.remove();
         bub('Em', p.z, true);
+        if(vong1 && !p.ok) saiVong1.push(tron(p.z));
         chat.append(el('div','note'+(p.ok?'':' warn'), (p.ok?'✓ ':'⚠ ')+p.note));
         if(p.to) step(p.to);
-        else{ chat.append(el('div','end','— '+d.done)); q.classList.add('done'); mark(d.n); }
+        else{ chat.append(el('div','end','— '+d.done)); q.classList.add('done'); mark(d.n);
+          if(vong1){ vong1=false; ghiKQ(d.n, !saiVong1.length, saiVong1.length?'chọn chưa hợp: «'+saiVong1.join('» · «')+'»':''); } }
         chat.lastElementChild.scrollIntoView({block:'nearest',behavior:'smooth'});
       };
       br.append(b);
@@ -796,6 +866,7 @@ function buildChat(d, host){
 /* ═══════════ TẦNG 4 · TỰ GÕ TIẾNG TRUNG ═══════════ */
 const norm = s => s.replace(/[\s。，、？！；：,.?!"'“”‘’()（）]/g,'');
 function buildType(d, host){
+  LOAI[d.n]='Tự viết câu';
   const q=card(d.n, d.t, d.sit);
   q.append(el('div','ask','<span class="zh">'+d.ask+'</span>'));
   const need=el('div','need');
@@ -817,7 +888,7 @@ function buildType(d, host){
     mod.innerHTML='<b>Câu mẫu:</b> <span class="zh">'+d.model+'</span><br>'+d.why
       + (d.more ? '<br><br>'+d.more : '');
   }
-  bMod.onclick=()=>{ showModel(); mark(d.n); };
+  bMod.onclick=()=>{ ghiKQ(d.n,false,'bấm xem câu mẫu trước khi tự viết'); showModel(); mark(d.n); };
 
   bChk.onclick=()=>{
     const raw=ta.value.trim(), s=norm(raw);
@@ -829,16 +900,18 @@ function buildType(d, host){
       if(!ok) miss.push(r);
     });
     const bad=(d.avoid||[]).find(a=>s.includes(norm(a.z)));
-    if(bad){ say(fb,false,'Gần đúng, nhưng có một chỗ phải sửa.', bad.w); return; }
+    if(bad){ ghiKQ(d.n,false,'em viết «'+raw+'» — dùng sai «'+tron(bad.z)+'»'); say(fb,false,'Gần đúng, nhưng có một chỗ phải sửa.', bad.w); return; }
     if(miss.length){
+      ghiKQ(d.n,false,'em viết «'+raw+'» — thiếu: '+miss.map(m=>tron(m.lbl)).join(', '));
       say(fb,false,'Còn thiếu thành phần.',
         'Câu của em chưa có: <b>'+miss.map(m=>m.lbl).join('</b> · <b>')+'</b><br>'+miss[0].tip);
       return;
     }
     if(d.order){
       const a=s.indexOf(d.order[0]), b=s.indexOf(d.order[1]);
-      if(a>-1 && b>-1 && a>b){ say(fb,false,'Đủ thành phần nhưng sai trật tự.', d.order[2]); return; }
+      if(a>-1 && b>-1 && a>b){ ghiKQ(d.n,false,'em viết «'+raw+'» — sai trật tự'); say(fb,false,'Đủ thành phần nhưng sai trật tự.', d.order[2]); return; }
     }
+    ghiKQ(d.n,true);
     say(fb,true,'Được rồi.','<span class="zh">'+raw+'</span><br>Câu của em có đủ thành phần bắt buộc. So thêm với câu mẫu bên dưới để xem còn cách diễn đạt nào tự nhiên hơn.');
     showModel(); q.classList.add('done'); mark(d.n);
   };
@@ -854,8 +927,35 @@ PICKQ.forEach(d=>buildPick(d,document.getElementById('w2')));
 CHATS.forEach(d=>buildChat(d,document.getElementById('w3')));
 TYPE.forEach(d=>buildType(d,document.getElementById('w4')));
 paint();
+
+/* ═══════════ GỬI KẾT QUẢ CHO CÔ ═══════════ */
+(function(){
+  const ten=document.getElementById('kqTen'), lop=document.getElementById('kqLop'), fb=document.getElementById('kqFb');
+  ten.value=KQ_TEN; lop.value=KQ_LOP;
+  ten.oninput=lop.oninput=luuKQ;
+  veKQ();
+  document.getElementById('kqGui').onclick=()=>{
+    if(!ten.value.trim()){ say(fb,false,'Em điền họ tên đã nhé.',''); ten.focus(); return; }
+    if(!window.HSK2_WEBAPP){ say(fb,false,'Cô chưa mở chức năng nhận kết quả.','Em chụp màn hình phần này gửi cô qua Zalo nhé.'); return; }
+    const t=tomKQ();
+    if(t.chua.length && !fb.dataset.hoi){
+      fb.dataset.hoi='1';
+      say(fb,false,'Em còn '+t.chua.length+' câu chưa làm.','Câu '+t.chua.join(', ')+'. Làm nốt rồi gửi, hoặc bấm <b>Gửi cho cô</b> lần nữa để gửi luôn.');
+      return;
+    }
+    luuKQ();
+    say(fb,true,'Đang gửi…','');
+    const so=(KEY.match(/b(\d+)-/)||['',''])[1];
+    HSK2_GUI({ dang:1, ma:MA, ten:ten.value.trim(), lop:lop.value.trim(),
+      bai:'Bài '+so+' · '+tron((document.querySelector('h1 .zh')||{}).textContent||''),
+      dung:t.dung, sai:t.sai.length, chualam:t.chua.length, tong:t.tong, phan:t.phan,
+      causai:t.sai.join('\n') + (t.chua.length ? (t.sai.length?'\n':'')+'Chưa làm: câu '+t.chua.join(', ') : '')
+    }).then(ok=> ok ? say(fb,true,'Đã gửi kết quả cho cô.','Làm thêm câu nào thì bấm gửi lại — cô sẽ nhận bản mới nhất.')
+                    : say(fb,false,'Chưa gửi được.','Em kiểm tra mạng rồi bấm gửi lại nhé.'));
+  };
+})();
 document.getElementById('reset').onclick=()=>{
-  state.clear(); save(); location.reload();
+  state.clear(); save(); try{ localStorage.removeItem(KQ_LS); }catch(e){} location.reload();
 };
 </script>
 
