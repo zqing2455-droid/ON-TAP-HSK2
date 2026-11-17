@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trò chơi · Nhìn ảnh nói câu · HSK2</title>
+<title>Trò chơi · HSK2</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&family=Noto+Serif+SC:wght@400;600;900&display=swap">
 <style>
@@ -68,7 +68,14 @@ a.les.done .seal{background:var(--jade); box-shadow:inset 0 0 0 2px rgba(255,255
   padding:14px 16px; box-shadow:var(--shadow); color:var(--ink-2); font-size:13.5px}
 .how b{color:var(--ink)}
 footer{margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted)}
-@media (max-width:480px){ .prog{width:58px} .seal{width:40px;height:40px;font-size:18px} }
+.kinds{display:grid; gap:12px}
+.kgroup{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px}
+.klabel{flex:none; width:92px; font-size:12.5px; font-weight:800; color:var(--muted)}
+.tabs{display:flex; flex-wrap:wrap; gap:8px}
+.tab{font:inherit; font-size:14px; font-weight:700; padding:8px 16px; border-radius:99px; cursor:pointer;
+  background:var(--card); color:var(--ink); border:1px solid var(--line)}
+.how p{margin:0 0 6px} .how p:last-child{margin:0}
+@media (max-width:480px){ .prog{width:58px} .seal{width:40px;height:40px;font-size:18px} .klabel{width:100%} }
 </style>
 <!-- MAM-XANH:dau -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,34 +92,68 @@ footer{margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font
 
 <header>
   <div class="eyebrow">《新 HSK 教程 2》</div>
-  <h1>Trò chơi <span class="zh">看图说话</span></h1>
-  <p class="sub">Nhìn ảnh nói câu — mỗi bài một vòng xoay câu hỏi. Quay trúng mẫu nào thì nhìn ảnh,
-  NÓI THÀNH TIẾNG trước, rồi mới mở câu mẫu để đối chiếu và tự chấm. Máy nhớ giúp em câu nào đã nói được.</p>
+  <h1>Trò chơi <span class="zh">游戏</span></h1>
+  <p class="sub">Chọn loại trò chơi, rồi chọn bài. Trò luyện nói thì nhìn ảnh và nói thành câu;
+  trò ôn từ vựng dùng đúng bộ từ trong flashcard của từng bài. Máy nhớ giúp em kết quả của từng trò.</p>
 </header>
 
-<h2 class="sec">Các bài</h2>
+<h2 class="sec">Chọn trò chơi</h2>
+<div class="kinds">
+  <div class="kgroup">
+    <div class="klabel">Luyện nói</div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-k="nhin-anh">Nhìn ảnh nói câu</button>
+    </div>
+  </div>
+  <div class="kgroup">
+    <div class="klabel">Ôn từ vựng</div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-k="cau-ca">Gấu trúc câu cá</button>
+      <button class="tab" role="tab" data-k="duong-dua">Đường đua rừng trúc</button>
+      <button class="tab" role="tab" data-k="bui-truc">Ai trốn sau bụi trúc?</button>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec" id="secTitle">Các bài</h2>
 <div class="list" id="list"></div>
 
 <h2 class="sec">Chơi thế nào cho vào</h2>
-<div class="how">
-  <b>Lượt 1</b> — quay vòng, nhìn ảnh rồi nói to cả câu. Chưa nói được thì chấm “Cần luyện lại”, đừng ngại.<br>
-  <b>Lượt 2</b> — bấm “Quay lại những mẫu còn hồng”, chỉ luyện lại đúng những câu còn vấp.<br>
-  <b>Lượt 3</b> — tự nói mà KHÔNG mở câu mẫu. Nói trơn được cả bài là thuộc thật.
-</div>
+<div class="how" id="how"></div>
 
 <footer>Tiến độ được lưu trên máy em đang dùng. Bài mới nhất nằm trên cùng.</footer>
 </div>
 
 <script>
-/* ═════════ TỰ ĐỘNG TÌM BỘ THẺ ═════════
-   Trang tự dò bai-01.html, bai-02.html, … trong cùng thư mục cho tới khi
-   không thấy file tiếp theo. Thêm bài mới chỉ cần copy file vào đây, không phải sửa trang này. */
+/* ═════════ PHÂN LOẠI TRÒ CHƠI ═════════
+   Luyện nói   · nhin-anh  → mỗi bài một file bai-NN.html trong thư mục này (nặng vì có ảnh).
+   Ôn từ vựng  · cau-ca, duong-dua, bui-truc → dùng chung trang choi.html?tro=…&bai=N,
+                 dữ liệu từng bài ở du-lieu/bai-NN.json (dựng bằng assets/dung-tro-choi.py).
+   Trang tự dò file bài cho tới khi không thấy file tiếp theo — thêm bài mới không phải sửa trang này. */
 const NUM='零一二三四五六七八九十';
 const cn=n=> n<=10?NUM[n] : n<20?'十'+(n%10?NUM[n%10]:'') : NUM[Math.floor(n/10)]+'十'+(n%10?NUM[n%10]:'');
 const pad=n=>String(n).padStart(2,'0');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-/* Đếm số mẫu câu học viên đã chấm "Nói được rồi" (trò chơi lưu {thứ tự: 1|0}). */
+const LOAI={
+  'nhin-anh':{ten:'Nhìn ảnh nói câu', tags:['Vòng xoay','Nhìn ảnh','Nói thành tiếng'], how:
+    '<p><b>Lượt 1</b> — quay vòng, nhìn ảnh rồi nói to cả câu. Chưa nói được thì chấm “Cần luyện lại”, đừng ngại.</p>'+
+    '<p><b>Lượt 2</b> — bấm “Quay lại những mẫu còn hồng”, chỉ luyện lại đúng những câu còn vấp.</p>'+
+    '<p><b>Lượt 3</b> — tự nói mà KHÔNG mở câu mẫu. Nói trơn được cả bài là thuộc thật.</p>'},
+  'cau-ca':{ten:'Gấu trúc câu cá', tags:['Nghe → chữ','Nghĩa → chữ','10 lượt'], how:
+    '<p><b>Nghe → chữ</b> — nghe một từ, bấm con cá mang đúng chữ đó để câu lên. Chưa rõ thì bấm “Nghe lại” hoặc “Chậm”.</p>'+
+    '<p><b>Nghĩa → chữ</b> — xem nghĩa tiếng Việt, câu con cá mang chữ Hán tương ứng.</p>'+
+    '<p>Câu trúng ngay lần đầu mới được tính điểm. Mỗi lần câu lên, em đọc to từ đó một lần.</p>'},
+  'duong-dua':{ten:'Đường đua rừng trúc', tags:['Điền từ','Chọn chữ theo nghĩa','1 người · 2 đội'], how:
+    '<p><b>1 người</b> — đúng thì em tiến 1 bước, sai thì bạn Thỏ nhảy 2 bước. Về rừng trúc trước Thỏ là thắng.</p>'+
+    '<p><b>2 đội</b> — hai đội thay phiên trả lời trên cùng một màn hình, hợp để chơi trên lớp.</p>'+
+    '<p>Câu điền từ lấy từ câu ví dụ trong flashcard. Trả lời xong, em đọc to cả câu theo phiên âm hiện ra.</p>'},
+  'bui-truc':{ten:'Ai trốn sau bụi trúc?', tags:['Nhớ 6 thẻ từ','Nói thành tiếng','6 lượt'], how:
+    '<p>Nhìn kỹ sáu thẻ từ (bấm vào thẻ để nghe), rồi bấm “Trốn đi!”. Các thẻ đổi chỗ và một thẻ trốn sau bụi trúc.</p>'+
+    '<p>Em <b>nói to</b> từ vừa trốn bằng tiếng Trung trước, rồi mới chọn chữ. Bí thì bấm “Gợi ý” để xem nghĩa.</p>'}
+};
+
+/* ── Luyện nói: đếm số mẫu câu đã chấm "Nói được rồi" (trò chơi lưu {thứ tự: 1|0}) ── */
 function known(key){
   try{
     const o=JSON.parse(localStorage.getItem(key)||'null');
@@ -120,7 +161,6 @@ function known(key){
   }catch(e){}
   return 0;
 }
-
 /* File trò chơi nặng vì có ảnh — chỉ xin vài KB đầu để đọc thẻ <meta name="tc-…">. */
 async function readSet(n){
   const file='bai-'+pad(n)+'.html';
@@ -130,32 +170,74 @@ async function readSet(n){
   const tag=k=>(html.match(new RegExp('<meta\\s+name="tc-'+k+'"\\s+content="([^"]*)"'))||[])[1];
   return {so:n, file, han:tag('han')||file, key:tag('key')||file, total:+(tag('total')||0)};
 }
+/* ── Ôn từ vựng: đọc du-lieu/bai-NN.json (nhẹ, chỉ vài KB) ── */
+async function readData(n){
+  let r; try{ r=await fetch('du-lieu/bai-'+pad(n)+'.json',{cache:'no-cache'}); }catch(e){ return null; }
+  if(!r.ok) return null;
+  let d; try{ d=await r.json(); }catch(e){ return null; }
+  return {so:n, han:d.han||('Bài '+n), tu:(d.pool||[]).length, cau:(d.cloze||[]).length};
+}
+const KHO={};                                  // nhớ kết quả dò để đổi qua lại giữa các trò không phải tải lại
+async function tim(nhom){
+  if(KHO[nhom]) return KHO[nhom];
+  const doc = nhom==='noi'?readSet:readData, found=[];
+  for(let n=1;n<=200;n++){ const s=await doc(n); if(!s) break; found.push(s); }
+  return KHO[nhom]=found.sort((a,b)=>b.so-a.so);
+}
+function tienDo(k,so){
+  try{ const o=JSON.parse(localStorage.getItem('hsk2-tc-'+k+'-bai'+pad(so))||'null');
+       if(o && typeof o==='object') return o; }catch(e){}
+  return null;
+}
 
-(async()=>{
+let dang=null;
+async function chon(k){
+  if(!LOAI[k]) k='nhin-anh';
+  dang=k;
+  try{ localStorage.setItem('hsk2-tc-loai',k); }catch(e){}
+  if(location.hash.slice(1)!==k) history.replaceState(null,'','#'+k);
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected', t.dataset.k===k?'true':'false'));
+  document.getElementById('secTitle').textContent='Các bài · '+LOAI[k].ten;
+  document.getElementById('how').innerHTML=LOAI[k].how;
   const list=document.getElementById('list');
-  list.innerHTML='<p class="meta">Đang tải danh sách trò chơi…</p>';
-  const found=[];
-  for(let n=1;n<=200;n++){ const s=await readSet(n); if(!s) break; found.push(s); }
+  list.innerHTML='<p class="meta">Đang tải danh sách bài…</p>';
+  const found=await tim(k==='nhin-anh'?'noi':'tu');
+  if(dang!==k) return;                         // em đã bấm sang trò khác trong lúc đang tải
   list.innerHTML='';
-  if(!found.length){
-    list.innerHTML='<p class="meta">Chưa có trò chơi nào. Hãy đặt file bai-01.html vào thư mục tro-choi/.</p>';
-    return;
-  }
-  found.sort((a,b)=>b.so-a.so).forEach(s=>{
-    const k=s.total?Math.min(known(s.key),s.total):0, pct=s.total?Math.round(k/s.total*100):0;
+  if(!found.length){ list.innerHTML='<p class="meta">Chưa có bài nào cho trò chơi này.</p>'; return; }
+  const tags=LOAI[k].tags.map(t=>'<span>'+esc(t)+'</span>').join('');
+  found.forEach(s=>{
+    let href, meta, prog, pct;
+    if(k==='nhin-anh'){
+      const n=s.total?Math.min(known(s.key),s.total):0; pct=s.total?Math.round(n/s.total*100):0;
+      href=s.file; meta='Bài '+s.so+(s.total?' · '+s.total+' mẫu câu':'');
+      prog=pct===100?'✓ Nói hết':'Nói được '+n+'/'+s.total;
+    }else{
+      const o=tienDo(k,s.so); pct=o&&o.total?Math.round(o.best/o.total*100):0;
+      href='choi.html?tro='+k+'&bai='+s.so;
+      meta='Bài '+s.so+' · '+s.tu+' từ'+(k==='duong-dua'&&s.cau?' · '+s.cau+' câu điền từ':'');
+      prog=!o?'Chưa chơi':o.done?'✓ Tốt nhất '+o.best+'/'+o.total:'Tốt nhất '+o.best+'/'+o.total;
+      if(o&&o.done) pct=100;
+    }
     const a=document.createElement('a');
-    a.className='les'+(pct===100?' done':''); a.href=s.file;
+    a.className='les'+(pct===100?' done':''); a.href=href;
     a.innerHTML=
       '<div class="seal">'+cn(s.so)+'</div>'+
       '<div class="body">'+
-        '<div class="meta">Bài '+s.so+(s.total?' · '+s.total+' mẫu câu':'')+'</div>'+
+        '<div class="meta">'+meta+'</div>'+
         '<div class="ttl"><span class="zh">'+esc(s.han)+'</span></div>'+
-        '<div class="tags"><span>Vòng xoay</span><span>Nhìn ảnh</span><span>Nói thành tiếng</span></div>'+
+        '<div class="tags">'+tags+'</div>'+
       '</div>'+
-      '<div class="prog">'+(pct===100?'✓ Nói hết':'Nói được '+k+'/'+s.total)+'<div class="bar"><i style="width:'+pct+'%"></i></div></div>';
+      '<div class="prog">'+prog+'<div class="bar"><i style="width:'+pct+'%"></i></div></div>';
     list.append(a);
   });
-})();
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>chon(t.dataset.k));
+window.addEventListener('hashchange',()=>{ const k=location.hash.slice(1); if(LOAI[k]&&k!==dang) chon(k); });
+window.addEventListener('pageshow',e=>{ if(e.persisted&&dang) chon(dang); });   // quay lại từ trò chơi: cập nhật tiến độ
+let dau=location.hash.slice(1);
+if(!LOAI[dau]){ try{ dau=localStorage.getItem('hsk2-tc-loai'); }catch(e){} }
+chon(LOAI[dau]?dau:'nhin-anh');
 </script>
 </body>
 </html>
