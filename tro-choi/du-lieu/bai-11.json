@@ -1,0 +1,243 @@
+{
+ "so": 11,
+ "han": "我最喜欢吃中国菜",
+ "sub": "13 từ mới",
+ "pool": [
+  {
+   "h": "头",
+   "p": "tóu",
+   "v": "đầu",
+   "hv": "ĐẦU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "疼",
+   "p": "téng",
+   "v": "đau",
+   "hv": "ĐÔNG",
+   "loai": "tính từ"
+  },
+  {
+   "h": "经常",
+   "p": "jīngcháng",
+   "v": "thường xuyên",
+   "hv": "KINH THƯỜNG",
+   "loai": "phó từ"
+  },
+  {
+   "h": "动",
+   "p": "dòng",
+   "v": "động đậy, cử động",
+   "hv": "ĐỘNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "着",
+   "p": "zhe",
+   "v": "(trợ từ chỉ trạng thái đang tiếp diễn)",
+   "hv": "TRƯỚC",
+   "loai": "trợ từ"
+  },
+  {
+   "h": "路上",
+   "p": "lùshang",
+   "v": "trên đường",
+   "hv": "LỘ THƯỢNG",
+   "loai": "danh từ"
+  },
+  {
+   "h": "慢",
+   "p": "màn",
+   "v": "chậm",
+   "hv": "MẠN",
+   "loai": "tính từ"
+  },
+  {
+   "h": "进",
+   "p": "jìn",
+   "v": "vào",
+   "hv": "TIẾN",
+   "loai": "động từ"
+  },
+  {
+   "h": "药",
+   "p": "yào",
+   "v": "thuốc",
+   "hv": "DƯỢC",
+   "loai": "danh từ"
+  },
+  {
+   "h": "身体",
+   "p": "shēntǐ",
+   "v": "cơ thể, sức khoẻ",
+   "hv": "THÂN THỂ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "时",
+   "p": "shí",
+   "v": "khi, lúc",
+   "hv": "THỜI",
+   "loai": "danh từ"
+  },
+  {
+   "h": "最",
+   "p": "zuì",
+   "v": "nhất",
+   "hv": "TỐI",
+   "loai": "phó từ"
+  },
+  {
+   "h": "药店",
+   "p": "yàodiàn",
+   "v": "hiệu thuốc",
+   "hv": "DƯỢC ĐIẾM",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "我＿＿疼，不太舒服。",
+   "a": "头",
+   "o": [
+    "慢",
+    "经常",
+    "动"
+   ],
+   "p": "Wǒ tóu téng, bú tài shūfu.",
+   "v": "Em đau đầu, trong người không khoẻ lắm."
+  },
+  {
+   "q": "家月，你怎么样了？头还＿＿吗？",
+   "a": "疼",
+   "o": [
+    "最",
+    "进",
+    "时"
+   ],
+   "p": "Jiāyuè, nǐ zěnmeyàng le? Tóu hái téng ma?",
+   "v": "Gia Nguyệt, em sao rồi? Đầu còn đau không?"
+  },
+  {
+   "q": "你这几天＿＿头疼，去医院看看吧。",
+   "a": "经常",
+   "o": [
+    "着",
+    "动",
+    "进"
+   ],
+   "p": "Nǐ zhè jǐ tiān jīngcháng tóu téng, qù yīyuàn kànkan ba.",
+   "v": "Mấy hôm nay em hay đau đầu, đi bệnh viện khám đi."
+  },
+  {
+   "q": "我现在不能＿＿。",
+   "a": "动",
+   "o": [
+    "药店",
+    "疼",
+    "头"
+   ],
+   "p": "Wǒ xiànzài bù néng dòng.",
+   "v": "Bây giờ em không cử động được."
+  },
+  {
+   "q": "那你在这儿坐＿＿，我去开车。",
+   "a": "着",
+   "o": [
+    "时",
+    "进",
+    "身体"
+   ],
+   "p": "Nà nǐ zài zhèr zuòzhe, wǒ qù kāichē.",
+   "v": "Vậy em ngồi đây đi, cô đi lấy xe."
+  },
+  {
+   "q": "现在＿＿车多，还下着雪。",
+   "a": "路上",
+   "o": [
+    "疼",
+    "经常",
+    "进"
+   ],
+   "p": "Xiànzài lùshang chē duō, hái xiàzhe xuě.",
+   "v": "Giờ trên đường đông xe, lại còn đang có tuyết."
+  },
+  {
+   "q": "我开＿＿一点儿。",
+   "a": "慢",
+   "o": [
+    "经常",
+    "药",
+    "头"
+   ],
+   "p": "Wǒ kāi màn yìdiǎnr.",
+   "v": "Cô lái chậm lại một chút."
+  },
+  {
+   "q": "李文，快请＿＿！",
+   "a": "进",
+   "o": [
+    "路上",
+    "时",
+    "头"
+   ],
+   "p": "Lǐ Wén, kuài qǐng jìn!",
+   "v": "Lý Văn, mời vào đi!"
+  },
+  {
+   "q": "我每天都要吃＿＿。",
+   "a": "药",
+   "o": [
+    "经常",
+    "最",
+    "慢"
+   ],
+   "p": "Wǒ měi tiān dōu yào chī yào.",
+   "v": "Ngày nào tôi cũng phải uống thuốc."
+  },
+  {
+   "q": "＿＿不舒服时更要好好吃饭。",
+   "a": "身体",
+   "o": [
+    "动",
+    "慢",
+    "进"
+   ],
+   "p": "Shēntǐ bù shūfu shí gèng yào hǎohǎo chī fàn.",
+   "v": "Lúc trong người khó chịu càng phải ăn uống đàng hoàng."
+  },
+  {
+   "q": "吃饭＿＿不要看手机。",
+   "a": "时",
+   "o": [
+    "最",
+    "进",
+    "动"
+   ],
+   "p": "Chī fàn shí bú yào kàn shǒujī.",
+   "v": "Lúc ăn cơm đừng xem điện thoại."
+  },
+  {
+   "q": "你＿＿喜欢吃中国菜。",
+   "a": "最",
+   "o": [
+    "动",
+    "进",
+    "药"
+   ],
+   "p": "Nǐ zuì xǐhuan chī Zhōngguó cài.",
+   "v": "Em thích ăn món Trung Quốc nhất."
+  },
+  {
+   "q": "头疼的话可以去＿＿。",
+   "a": "药店",
+   "o": [
+    "最",
+    "着",
+    "经常"
+   ],
+   "p": "Tóu téng dehuà kěyǐ qù yàodiàn.",
+   "v": "Đau đầu thì có thể ra hiệu thuốc."
+  }
+ ]
+}

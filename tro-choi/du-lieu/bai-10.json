@@ -1,0 +1,261 @@
+{
+ "so": 10,
+ "han": "就要考试了",
+ "sub": "14 từ mới",
+ "pool": [
+  {
+   "h": "开学",
+   "p": "kāixué",
+   "v": "khai giảng, vào học",
+   "hv": "KHAI HỌC",
+   "loai": "động từ"
+  },
+  {
+   "h": "门",
+   "p": "mén",
+   "v": "cửa",
+   "hv": "MÔN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "后面",
+   "p": "hòumiàn",
+   "v": "phía sau",
+   "hv": "HẬU DIỆN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "笔",
+   "p": "bǐ",
+   "v": "bút",
+   "hv": "BÚT",
+   "loai": "danh từ"
+  },
+  {
+   "h": "帮",
+   "p": "bāng",
+   "v": "giúp",
+   "hv": "BANG",
+   "loai": "động từ"
+  },
+  {
+   "h": "考试",
+   "p": "kǎoshì",
+   "v": "thi; kỳ thi",
+   "hv": "KHẢO THÍ",
+   "loai": "động từ"
+  },
+  {
+   "h": "词",
+   "p": "cí",
+   "v": "từ, từ vựng",
+   "hv": "TỪ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "本子",
+   "p": "běnzi",
+   "v": "quyển vở",
+   "hv": "BẢN TỬ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "错",
+   "p": "cuò",
+   "v": "sai",
+   "hv": "THÁC",
+   "loai": "tính từ"
+  },
+  {
+   "h": "题",
+   "p": "tí",
+   "v": "câu hỏi, bài tập",
+   "hv": "ĐỀ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "还是",
+   "p": "háishi",
+   "v": "hay là (trong câu hỏi lựa chọn)",
+   "hv": "HOÀN THỊ",
+   "loai": "liên từ"
+  },
+  {
+   "h": "考",
+   "p": "kǎo",
+   "v": "thi",
+   "hv": "KHẢO",
+   "loai": "động từ"
+  },
+  {
+   "h": "快要",
+   "p": "kuàiyào",
+   "v": "sắp, sắp sửa",
+   "hv": "KHOÁI YẾU",
+   "loai": "phó từ"
+  },
+  {
+   "h": "笑",
+   "p": "xiào",
+   "v": "cười",
+   "hv": "TIẾU",
+   "loai": "động từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "小明，你们明天＿＿。",
+   "a": "开学",
+   "o": [
+    "词",
+    "后面",
+    "题"
+   ],
+   "p": "Xiǎomíng, nǐmen míngtiān kāixué.",
+   "v": "Tiểu Minh, mai các con vào học rồi."
+  },
+  {
+   "q": "书包在＿＿后面。",
+   "a": "门",
+   "o": [
+    "快要",
+    "错",
+    "笑"
+   ],
+   "p": "Shūbāo zài mén hòumiàn.",
+   "v": "Cặp sách ở phía sau cửa."
+  },
+  {
+   "q": "书包在门＿＿。",
+   "a": "后面",
+   "o": [
+    "快要",
+    "错",
+    "笑"
+   ],
+   "p": "Shūbāo zài mén hòumiàn.",
+   "v": "Cặp sách ở phía sau cửa."
+  },
+  {
+   "q": "爸爸帮弟弟准备书包、本子和＿＿。",
+   "a": "笔",
+   "o": [
+    "考试",
+    "考",
+    "错"
+   ],
+   "p": "Bàba bāng dìdi zhǔnbèi shūbāo, běnzi hé bǐ.",
+   "v": "Bố giúp em chuẩn bị cặp sách, vở và bút."
+  },
+  {
+   "q": "不好意思，你能＿＿我叫一下白家月吗？",
+   "a": "帮",
+   "o": [
+    "词",
+    "快要",
+    "本子"
+   ],
+   "p": "Bù hǎoyìsi, nǐ néng bāng wǒ jiào yíxià Bái Jiāyuè ma?",
+   "v": "Ngại quá, bạn gọi giúp mình Bạch Gia Nguyệt một chút được không?"
+  },
+  {
+   "q": "明天＿＿，我在看书呢。",
+   "a": "考试",
+   "o": [
+    "门",
+    "错",
+    "笔"
+   ],
+   "p": "Míngtiān kǎoshì, wǒ zài kàn shū ne.",
+   "v": "Mai thi nên con đang đọc sách đây."
+  },
+  {
+   "q": "这些＿＿要好好看看。",
+   "a": "词",
+   "o": [
+    "帮",
+    "错",
+    "考"
+   ],
+   "p": "Zhèxiē cí yào hǎohǎo kànkan.",
+   "v": "Những từ này phải xem cho kỹ."
+  },
+  {
+   "q": "＿＿上做错的题也要看一看。",
+   "a": "本子",
+   "o": [
+    "快要",
+    "考",
+    "笑"
+   ],
+   "p": "Běnzi shang zuòcuò de tí yě yào kàn yi kàn.",
+   "v": "Mấy bài làm sai trong vở cũng phải xem lại."
+  },
+  {
+   "q": "本子上做＿＿的题也要看一看。",
+   "a": "错",
+   "o": [
+    "门",
+    "快要",
+    "考"
+   ],
+   "p": "Běnzi shang zuòcuò de tí yě yào kàn yi kàn.",
+   "v": "Mấy bài làm sai trong vở cũng phải xem lại."
+  },
+  {
+   "q": "本子上做错的＿＿也要看一看。",
+   "a": "题",
+   "o": [
+    "快要",
+    "考",
+    "笑"
+   ],
+   "p": "Běnzi shang zuòcuò de tí yě yào kàn yi kàn.",
+   "v": "Mấy bài làm sai trong vở cũng phải xem lại."
+  },
+  {
+   "q": "你喝咖啡＿＿喝奶茶？",
+   "a": "还是",
+   "o": [
+    "考",
+    "本子",
+    "后面"
+   ],
+   "p": "Nǐ hē kāfēi háishi hē nǎichá?",
+   "v": "Bạn uống cà phê hay uống trà sữa?"
+  },
+  {
+   "q": "她这次＿＿得很好。",
+   "a": "考",
+   "o": [
+    "快要",
+    "还是",
+    "错"
+   ],
+   "p": "Tā zhè cì kǎo de hěn hǎo.",
+   "v": "Lần này con bé thi rất tốt."
+  },
+  {
+   "q": "＿＿开学了。",
+   "a": "快要",
+   "o": [
+    "考",
+    "笑",
+    "本子"
+   ],
+   "p": "Kuàiyào kāixué le.",
+   "v": "Sắp khai giảng rồi."
+  },
+  {
+   "q": "我问完，他们都＿＿了。",
+   "a": "笑",
+   "o": [
+    "门",
+    "笔",
+    "还是"
+   ],
+   "p": "Wǒ wènwán, tāmen dōu xiào le.",
+   "v": "Con hỏi xong, bố mẹ đều bật cười."
+  }
+ ]
+}

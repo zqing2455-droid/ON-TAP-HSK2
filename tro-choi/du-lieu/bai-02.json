@@ -1,0 +1,315 @@
+{
+ "so": 2,
+ "han": "还是打车去北大吧",
+ "sub": "16 từ mới + 1 danh từ riêng",
+ "pool": [
+  {
+   "h": "公交车",
+   "p": "gōngjiāochē",
+   "v": "xe buýt",
+   "hv": "CÔNG GIAO XA",
+   "loai": "danh từ"
+  },
+  {
+   "h": "但",
+   "p": "dàn",
+   "v": "nhưng",
+   "hv": "ĐÃN",
+   "loai": "liên từ"
+  },
+  {
+   "h": "车站",
+   "p": "chēzhàn",
+   "v": "bến xe, trạm xe",
+   "hv": "XA TRẠM",
+   "loai": "danh từ"
+  },
+  {
+   "h": "远",
+   "p": "yuǎn",
+   "v": "xa",
+   "hv": "VIỄN",
+   "loai": "tính từ"
+  },
+  {
+   "h": "打车",
+   "p": "dǎchē",
+   "v": "bắt taxi, đi taxi",
+   "hv": "ĐẢ XA",
+   "loai": "động từ"
+  },
+  {
+   "h": "还是",
+   "p": "háishi",
+   "v": "… thì hơn, thôi thì…",
+   "hv": "HOÀN THỊ",
+   "loai": "phó từ"
+  },
+  {
+   "h": "啊",
+   "p": "a",
+   "v": "à, nhỉ, thế (trợ từ cuối câu)",
+   "hv": "A",
+   "loai": "trợ từ"
+  },
+  {
+   "h": "万",
+   "p": "wàn",
+   "v": "vạn (10 000)",
+   "hv": "VẠN",
+   "loai": "số từ"
+  },
+  {
+   "h": "名",
+   "p": "míng",
+   "v": "(lượng từ đếm người)",
+   "hv": "DANH",
+   "loai": "lượng từ"
+  },
+  {
+   "h": "网上",
+   "p": "wǎngshang",
+   "v": "trên mạng",
+   "hv": "VÕNG THƯỢNG",
+   "loai": "danh từ"
+  },
+  {
+   "h": "外国",
+   "p": "wàiguó",
+   "v": "nước ngoài",
+   "hv": "NGOẠI QUỐC",
+   "loai": "danh từ"
+  },
+  {
+   "h": "间",
+   "p": "jiān",
+   "v": "gian, căn (lượng từ đếm phòng)",
+   "hv": "GIAN",
+   "loai": "lượng từ"
+  },
+  {
+   "h": "教室",
+   "p": "jiàoshì",
+   "v": "phòng học",
+   "hv": "GIÁO THẤT",
+   "loai": "danh từ"
+  },
+  {
+   "h": "票",
+   "p": "piào",
+   "v": "vé",
+   "hv": "PHIẾU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "别",
+   "p": "bié",
+   "v": "đừng",
+   "hv": "BIỆT",
+   "loai": "phó từ"
+  },
+  {
+   "h": "过来",
+   "p": "guòlái",
+   "v": "qua đây, lại đây",
+   "hv": "QUÁ LAI",
+   "loai": "động từ"
+  },
+  {
+   "h": "北京大学",
+   "p": "Běijīng Dàxué",
+   "v": "Đại học Bắc Kinh",
+   "hv": "BẮC KINH ĐẠI HỌC",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "我坐＿＿去学校。",
+   "a": "公交车",
+   "o": [
+    "还是",
+    "打车",
+    "万"
+   ],
+   "p": "Wǒ zuò gōngjiāochē qù xuéxiào.",
+   "v": "Tôi đi xe buýt đến trường."
+  },
+  {
+   "q": "有，＿＿车站有点儿远。",
+   "a": "但",
+   "o": [
+    "过来",
+    "打车",
+    "名"
+   ],
+   "p": "Yǒu, dàn chēzhàn yǒudiǎnr yuǎn.",
+   "v": "Có, nhưng bến xe hơi xa."
+  },
+  {
+   "q": "公交＿＿就在前边。",
+   "a": "车站",
+   "o": [
+    "名",
+    "间",
+    "别"
+   ],
+   "p": "Gōngjiāo chēzhàn jiù zài qiánbian.",
+   "v": "Bến xe buýt ở ngay phía trước."
+  },
+  {
+   "q": "车站有点儿＿＿，我们打车吧。",
+   "a": "远",
+   "o": [
+    "还是",
+    "间",
+    "但"
+   ],
+   "p": "Chēzhàn yǒudiǎnr yuǎn, wǒmen dǎchē ba.",
+   "v": "Bến xe hơi xa, mình bắt taxi đi."
+  },
+  {
+   "q": "我们还是＿＿去吧。",
+   "a": "打车",
+   "o": [
+    "远",
+    "网上",
+    "万"
+   ],
+   "p": "Wǒmen háishi dǎchē qù ba.",
+   "v": "Thôi mình bắt taxi đi vậy."
+  },
+  {
+   "q": "太晚了，＿＿明天去吧。",
+   "a": "还是",
+   "o": [
+    "万",
+    "车站",
+    "外国"
+   ],
+   "p": "Tài wǎn le, háishi míngtiān qù ba.",
+   "v": "Muộn rồi, thôi mai hẵng đi."
+  },
+  {
+   "q": "是＿＿，北京大学很大。",
+   "a": "啊",
+   "o": [
+    "万",
+    "外国",
+    "名"
+   ],
+   "p": "Shì a, Běijīng Dàxué hěn dà.",
+   "v": "Đúng thế, Đại học Bắc Kinh rất lớn."
+  },
+  {
+   "q": "这个手机一＿＿块钱。",
+   "a": "万",
+   "o": [
+    "过来",
+    "打车",
+    "但"
+   ],
+   "p": "Zhège shǒujī yí wàn kuài qián.",
+   "v": "Cái điện thoại này một vạn tệ."
+  },
+  {
+   "q": "他是一＿＿学生。",
+   "a": "名",
+   "o": [
+    "远",
+    "网上",
+    "票"
+   ],
+   "p": "Tā shì yì míng xuésheng.",
+   "v": "Cậu ấy là một học sinh."
+  },
+  {
+   "q": "我喜欢在＿＿买东西。",
+   "a": "网上",
+   "o": [
+    "远",
+    "还是",
+    "万"
+   ],
+   "p": "Wǒ xǐhuan zài wǎngshang mǎi dōngxi.",
+   "v": "Tôi thích mua đồ trên mạng."
+  },
+  {
+   "q": "这个＿＿人会说中文。",
+   "a": "外国",
+   "o": [
+    "啊",
+    "打车",
+    "别"
+   ],
+   "p": "Zhège wàiguó rén huì shuō Zhōngwén.",
+   "v": "Người nước ngoài này biết nói tiếng Trung."
+  },
+  {
+   "q": "那边就有一＿＿教室。",
+   "a": "间",
+   "o": [
+    "还是",
+    "万",
+    "远"
+   ],
+   "p": "Nàbiān jiù yǒu yì jiān jiàoshì.",
+   "v": "Bên kia có ngay một phòng học."
+  },
+  {
+   "q": "老师在＿＿里。",
+   "a": "教室",
+   "o": [
+    "还是",
+    "远",
+    "别"
+   ],
+   "p": "Lǎoshī zài jiàoshì li.",
+   "v": "Cô giáo đang ở trong phòng học."
+  },
+  {
+   "q": "他们卖的电影＿＿很便宜。",
+   "a": "票",
+   "o": [
+    "远",
+    "间",
+    "万"
+   ],
+   "p": "Tāmen mài de diànyǐngpiào hěn piányi.",
+   "v": "Vé phim họ bán rất rẻ."
+  },
+  {
+   "q": "很晚了，你＿＿去了。",
+   "a": "别",
+   "o": [
+    "间",
+    "名",
+    "教室"
+   ],
+   "p": "Hěn wǎn le, nǐ bié qù le.",
+   "v": "Muộn rồi, bạn đừng đi nữa."
+  },
+  {
+   "q": "菜都做好了，＿＿吃饭吧。",
+   "a": "过来",
+   "o": [
+    "票",
+    "名",
+    "网上"
+   ],
+   "p": "Cài dōu zuòhǎo le, guòlái chī fàn ba.",
+   "v": "Cơm nước xong rồi, qua đây ăn thôi."
+  },
+  {
+   "q": "我们打车去＿＿吧。",
+   "a": "北京大学",
+   "o": [
+    "但",
+    "间",
+    "过来"
+   ],
+   "p": "Wǒmen dǎchē qù Běijīng Dàxué ba.",
+   "v": "Mình bắt taxi đi Đại học Bắc Kinh nhé."
+  }
+ ]
+}

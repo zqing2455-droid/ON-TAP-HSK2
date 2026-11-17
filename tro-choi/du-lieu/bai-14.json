@@ -1,0 +1,225 @@
+{
+ "so": 14,
+ "han": "一个人过年多没意思啊",
+ "sub": "12 từ mới",
+ "pool": [
+  {
+   "h": "站",
+   "p": "zhàn",
+   "v": "đứng",
+   "hv": "TRẠM",
+   "loai": "động từ"
+  },
+  {
+   "h": "包",
+   "p": "bāo",
+   "v": "túi, cặp",
+   "hv": "BAO",
+   "loai": "danh từ"
+  },
+  {
+   "h": "过年",
+   "p": "guònián",
+   "v": "ăn Tết, đón năm mới",
+   "hv": "QUÁ NIÊN",
+   "loai": "động từ"
+  },
+  {
+   "h": "没意思",
+   "p": "méi yìsi",
+   "v": "chán, không thú vị",
+   "hv": "MỘT Ý TỨ",
+   "loai": "cụm cố định"
+  },
+  {
+   "h": "位",
+   "p": "wèi",
+   "v": "vị (lượng từ lịch sự đếm người)",
+   "hv": "VỊ",
+   "loai": "lượng từ"
+  },
+  {
+   "h": "前面",
+   "p": "qiánmiàn",
+   "v": "phía trước",
+   "hv": "TIỀN DIỆN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "房子",
+   "p": "fángzi",
+   "v": "nhà, căn nhà",
+   "hv": "PHÒNG TỬ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "小孩儿",
+   "p": "xiǎoháir",
+   "v": "trẻ con, đứa nhỏ",
+   "hv": "TIỂU HÀI NHI",
+   "loai": "danh từ"
+  },
+  {
+   "h": "女孩儿",
+   "p": "nǚháir",
+   "v": "bé gái",
+   "hv": "NỮ HÀI NHI",
+   "loai": "danh từ"
+  },
+  {
+   "h": "姓",
+   "p": "xìng",
+   "v": "họ là",
+   "hv": "TÍNH",
+   "loai": "động từ"
+  },
+  {
+   "h": "眼睛",
+   "p": "yǎnjing",
+   "v": "mắt",
+   "hv": "NHÃN TINH",
+   "loai": "danh từ"
+  },
+  {
+   "h": "跳舞",
+   "p": "tiàowǔ",
+   "v": "nhảy, múa",
+   "hv": "KHIÊU VŨ",
+   "loai": "động từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "王老师，你家楼下＿＿着一个人。",
+   "a": "站",
+   "o": [
+    "房子",
+    "没意思",
+    "女孩儿"
+   ],
+   "p": "Wáng lǎoshī, nǐ jiā lóu xià zhànzhe yí ge rén.",
+   "v": "Cô Vương ơi, dưới nhà cô có một người đang đứng."
+  },
+  {
+   "q": "她手里拿着一个＿＿。",
+   "a": "包",
+   "o": [
+    "没意思",
+    "过年",
+    "姓"
+   ],
+   "p": "Tā shǒu li názhe yí ge bāo.",
+   "v": "Cô ấy cầm trong tay một cái túi."
+  },
+  {
+   "q": "今年我要回家＿＿。",
+   "a": "过年",
+   "o": [
+    "眼睛",
+    "女孩儿",
+    "前面"
+   ],
+   "p": "Jīnnián wǒ yào huí jiā guònián.",
+   "v": "Năm nay tôi sẽ về nhà ăn Tết."
+  },
+  {
+   "q": "你一个人在这儿多＿＿啊。",
+   "a": "没意思",
+   "o": [
+    "包",
+    "小孩儿",
+    "房子"
+   ],
+   "p": "Nǐ yí ge rén zài zhèr duō méi yìsi a.",
+   "v": "Em ở đây một mình chán biết bao."
+  },
+  {
+   "q": "一飞，你旁边这＿＿是？",
+   "a": "位",
+   "o": [
+    "跳舞",
+    "没意思",
+    "过年"
+   ],
+   "p": "Yīfēi, nǐ pángbiān zhè wèi shì?",
+   "v": "Nhất Phi, vị bên cạnh cậu là ai thế?"
+  },
+  {
+   "q": "我家就在＿＿那个楼。",
+   "a": "前面",
+   "o": [
+    "站",
+    "没意思",
+    "位"
+   ],
+   "p": "Wǒ jiā jiù zài qiánmiàn nàge lóu.",
+   "v": "Nhà tôi ở ngay toà nhà phía trước kia."
+  },
+  {
+   "q": "一飞，你住的＿＿真不错，很大。",
+   "a": "房子",
+   "o": [
+    "姓",
+    "过年",
+    "位"
+   ],
+   "p": "Yīfēi, nǐ zhù de fángzi zhēn búcuò, hěn dà.",
+   "v": "Nhất Phi, căn nhà cậu đang ở đẹp thật đấy, rộng ghê."
+  },
+  {
+   "q": "我也帮他们家的＿＿学中文。",
+   "a": "小孩儿",
+   "o": [
+    "没意思",
+    "过年",
+    "姓"
+   ],
+   "p": "Wǒ yě bāng tāmen jiā de xiǎoháir xué Zhōngwén.",
+   "v": "Tôi cũng giúp đứa nhỏ nhà họ học tiếng Trung."
+  },
+  {
+   "q": "我记得你跟我说过，是个＿＿。",
+   "a": "女孩儿",
+   "o": [
+    "没意思",
+    "站",
+    "跳舞"
+   ],
+   "p": "Wǒ jìde nǐ gēn wǒ shuōguo, shì ge nǚháir.",
+   "v": "Anh nhớ em từng kể với anh, là một bé gái."
+  },
+  {
+   "q": "我＿＿李，叫李明。",
+   "a": "姓",
+   "o": [
+    "没意思",
+    "眼睛",
+    "包"
+   ],
+   "p": "Wǒ xìng Lǐ, jiào Lǐ Míng.",
+   "v": "Tôi họ Lý, tên là Lý Minh."
+  },
+  {
+   "q": "他高个子、大＿＿，唱歌唱得很好。",
+   "a": "眼睛",
+   "o": [
+    "没意思",
+    "过年",
+    "位"
+   ],
+   "p": "Tā gāo gèzi, dà yǎnjing, chàng gē chàng de hěn hǎo.",
+   "v": "Anh ấy người cao, mắt to, hát rất hay."
+  },
+  {
+   "q": "我妹妹很喜欢＿＿。",
+   "a": "跳舞",
+   "o": [
+    "位",
+    "没意思",
+    "前面"
+   ],
+   "p": "Wǒ mèimei hěn xǐhuan tiàowǔ.",
+   "v": "Em gái tôi rất thích nhảy."
+  }
+ ]
+}

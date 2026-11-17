@@ -1,0 +1,243 @@
+{
+ "so": 9,
+ "han": "我去买杯奶茶",
+ "sub": "13 từ mới",
+ "pool": [
+  {
+   "h": "坏",
+   "p": "huài",
+   "v": "hỏng, hư; xấu",
+   "hv": "HOẠI",
+   "loai": "tính từ"
+  },
+  {
+   "h": "旁边",
+   "p": "pángbiān",
+   "v": "bên cạnh",
+   "hv": "BÀNG BIÊN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "男孩儿",
+   "p": "nánháir",
+   "v": "bé trai, cậu bé",
+   "hv": "NAM HÀI NHI",
+   "loai": "danh từ"
+  },
+  {
+   "h": "这样",
+   "p": "zhèyàng",
+   "v": "như thế này, kiểu này",
+   "hv": "GIÁ DẠNG",
+   "loai": "đại từ"
+  },
+  {
+   "h": "个子",
+   "p": "gèzi",
+   "v": "dáng người, chiều cao",
+   "hv": "CÁ TỬ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "那么",
+   "p": "nàme",
+   "v": "như thế, đến thế",
+   "hv": "NA MA",
+   "loai": "đại từ"
+  },
+  {
+   "h": "高",
+   "p": "gāo",
+   "v": "cao",
+   "hv": "CAO",
+   "loai": "tính từ"
+  },
+  {
+   "h": "门口",
+   "p": "ménkǒu",
+   "v": "cửa ra vào, trước cửa",
+   "hv": "MÔN KHẨU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "咖啡",
+   "p": "kāfēi",
+   "v": "cà phê",
+   "hv": "CA PHI (từ phiên âm)",
+   "loai": "danh từ"
+  },
+  {
+   "h": "离",
+   "p": "lí",
+   "v": "cách (bao xa)",
+   "hv": "LY",
+   "loai": "động từ"
+  },
+  {
+   "h": "近",
+   "p": "jìn",
+   "v": "gần",
+   "hv": "CẬN",
+   "loai": "tính từ"
+  },
+  {
+   "h": "走路",
+   "p": "zǒulù",
+   "v": "đi bộ",
+   "hv": "TẨU LỘ",
+   "loai": "động từ"
+  },
+  {
+   "h": "周",
+   "p": "zhōu",
+   "v": "tuần",
+   "hv": "CHU",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "儿子的裤子＿＿了。",
+   "a": "坏",
+   "o": [
+    "咖啡",
+    "那么",
+    "周"
+   ],
+   "p": "Érzi de kùzi huài le.",
+   "v": "Quần của con trai hỏng rồi."
+  },
+  {
+   "q": "＿＿那个男孩儿就穿了这样的裤子。",
+   "a": "旁边",
+   "o": [
+    "那么",
+    "近",
+    "坏"
+   ],
+   "p": "Pángbiān nàge nánháir jiù chuānle zhèyàng de kùzi.",
+   "v": "Cậu bé bên cạnh mặc đúng kiểu quần như thế này."
+  },
+  {
+   "q": "旁边那个＿＿个子很高。",
+   "a": "男孩儿",
+   "o": [
+    "坏",
+    "那么",
+    "近"
+   ],
+   "p": "Pángbiān nàge nánháir gèzi hěn gāo.",
+   "v": "Cậu bé bên cạnh dáng người rất cao."
+  },
+  {
+   "q": "他就穿了＿＿的裤子。",
+   "a": "这样",
+   "o": [
+    "走路",
+    "咖啡",
+    "近"
+   ],
+   "p": "Tā jiù chuānle zhèyàng de kùzi.",
+   "v": "Cậu ấy mặc đúng kiểu quần như thế này."
+  },
+  {
+   "q": "他的＿＿很高。",
+   "a": "个子",
+   "o": [
+    "坏",
+    "走路",
+    "那么"
+   ],
+   "p": "Tā de gèzi hěn gāo.",
+   "v": "Dáng người cậu ấy rất cao."
+  },
+  {
+   "q": "儿子的个子没有他＿＿高。",
+   "a": "那么",
+   "o": [
+    "走路",
+    "咖啡",
+    "坏"
+   ],
+   "p": "Érzi de gèzi méiyǒu tā nàme gāo.",
+   "v": "Con trai mình không cao bằng cậu ấy."
+  },
+  {
+   "q": "那个男孩儿很＿＿。",
+   "a": "高",
+   "o": [
+    "这样",
+    "旁边",
+    "那么"
+   ],
+   "p": "Nàge nánháir hěn gāo.",
+   "v": "Cậu bé đó rất cao."
+  },
+  {
+   "q": "＿＿有家奶茶店。",
+   "a": "门口",
+   "o": [
+    "走路",
+    "高",
+    "那么"
+   ],
+   "p": "Ménkǒu yǒu jiā nǎichádiàn.",
+   "v": "Trước cửa có một quán trà sữa."
+  },
+  {
+   "q": "我想喝＿＿。",
+   "a": "咖啡",
+   "o": [
+    "高",
+    "那么",
+    "离"
+   ],
+   "p": "Wǒ xiǎng hē kāfēi.",
+   "v": "Anh muốn uống cà phê."
+  },
+  {
+   "q": "咖啡店＿＿这儿有点儿远。",
+   "a": "离",
+   "o": [
+    "近",
+    "男孩儿",
+    "门口"
+   ],
+   "p": "Kāfēidiàn lí zhèr yǒudiǎnr yuǎn.",
+   "v": "Quán cà phê cách đây hơi xa."
+  },
+  {
+   "q": "这里离家很＿＿，还是走路吧。",
+   "a": "近",
+   "o": [
+    "门口",
+    "咖啡",
+    "这样"
+   ],
+   "p": "Zhèlǐ lí jiā hěn jìn, háishi zǒulù ba.",
+   "v": "Chỗ này cách nhà gần lắm, thôi đi bộ đi."
+  },
+  {
+   "q": "我们＿＿回家吧。",
+   "a": "走路",
+   "o": [
+    "咖啡",
+    "近",
+    "旁边"
+   ],
+   "p": "Wǒmen zǒulù huí jiā ba.",
+   "v": "Mình đi bộ về nhà nhé."
+  },
+  {
+   "q": "这＿＿刘明休息。",
+   "a": "周",
+   "o": [
+    "走路",
+    "那么",
+    "离"
+   ],
+   "p": "Zhè zhōu Liú Míng xiūxi.",
+   "v": "Tuần này Lưu Minh nghỉ."
+  }
+ ]
+}

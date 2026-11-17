@@ -1,0 +1,225 @@
+{
+ "so": 15,
+ "han": "我想再去一次中国",
+ "sub": "11 từ mới + 1 danh từ riêng",
+ "pool": [
+  {
+   "h": "姓名",
+   "p": "xìngmíng",
+   "v": "họ tên",
+   "hv": "TÍNH DANH",
+   "loai": "danh từ"
+  },
+  {
+   "h": "出国",
+   "p": "chūguó",
+   "v": "ra nước ngoài",
+   "hv": "XUẤT QUỐC",
+   "loai": "động từ"
+  },
+  {
+   "h": "门票",
+   "p": "ménpiào",
+   "v": "vé vào cửa",
+   "hv": "MÔN PHIẾU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "高中",
+   "p": "gāozhōng",
+   "v": "trung học phổ thông, cấp ba",
+   "hv": "CAO TRUNG",
+   "loai": "danh từ"
+  },
+  {
+   "h": "出门",
+   "p": "chūmén",
+   "v": "ra khỏi nhà, đi xa",
+   "hv": "XUẤT MÔN",
+   "loai": "động từ"
+  },
+  {
+   "h": "路",
+   "p": "lù",
+   "v": "đường, con đường",
+   "hv": "LỘ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "机场",
+   "p": "jīchǎng",
+   "v": "sân bay",
+   "hv": "CƠ TRƯỜNG",
+   "loai": "danh từ"
+  },
+  {
+   "h": "机票",
+   "p": "jīpiào",
+   "v": "vé máy bay",
+   "hv": "CƠ PHIẾU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "飞",
+   "p": "fēi",
+   "v": "bay",
+   "hv": "PHI",
+   "loai": "động từ"
+  },
+  {
+   "h": "好像",
+   "p": "hǎoxiàng",
+   "v": "hình như; giống như",
+   "hv": "HẢO TƯỢNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "鸟",
+   "p": "niǎo",
+   "v": "chim",
+   "hv": "ĐIỂU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "颐和园",
+   "p": "Yíhé Yuán",
+   "v": "Di Hoà Viên (Bắc Kinh)",
+   "hv": "DI HOÀ VIÊN",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "考试就要开始了，请大家写上＿＿。",
+   "a": "姓名",
+   "o": [
+    "出国",
+    "好像",
+    "出门"
+   ],
+   "p": "Kǎoshì jiù yào kāishǐ le, qǐng dàjiā xiě shàng xìngmíng.",
+   "v": "Sắp bắt đầu thi rồi, mời các em viết họ tên vào."
+  },
+  {
+   "q": "考完试了，我现在可以＿＿旅游了。",
+   "a": "出国",
+   "o": [
+    "鸟",
+    "机场",
+    "门票"
+   ],
+   "p": "Kǎowán shì le, wǒ xiànzài kěyǐ chūguó lǚyóu le.",
+   "v": "Thi xong rồi, giờ tớ có thể đi du lịch nước ngoài."
+  },
+  {
+   "q": "我还在网上买好＿＿了呢。",
+   "a": "门票",
+   "o": [
+    "飞",
+    "出国",
+    "出门"
+   ],
+   "p": "Wǒ hái zài wǎngshang mǎihǎo ménpiào le ne.",
+   "v": "Tớ còn đặt sẵn vé trên mạng rồi đấy."
+  },
+  {
+   "q": "我的＿＿同学就在颐和园上班。",
+   "a": "高中",
+   "o": [
+    "好像",
+    "飞",
+    "出门"
+   ],
+   "p": "Wǒ de gāozhōng tóngxué jiù zài Yíhé Yuán shàngbān.",
+   "v": "Bạn cấp ba của tớ làm việc ngay ở Di Hoà Viên."
+  },
+  {
+   "q": "＿＿旅游，多个朋友多条路。",
+   "a": "出门",
+   "o": [
+    "门票",
+    "鸟",
+    "高中"
+   ],
+   "p": "Chūmén lǚyóu, duō ge péngyou duō tiáo lù.",
+   "v": "Đi xa du lịch, thêm một người bạn là thêm một con đường."
+  },
+  {
+   "q": "出门旅游，多个朋友多条＿＿。",
+   "a": "路",
+   "o": [
+    "出国",
+    "好像",
+    "飞"
+   ],
+   "p": "Chūmén lǚyóu, duō ge péngyou duō tiáo lù.",
+   "v": "Đi xa du lịch, thêm một người bạn là thêm một con đường."
+  },
+  {
+   "q": "我明天早上去＿＿。",
+   "a": "机场",
+   "o": [
+    "出国",
+    "好像",
+    "飞"
+   ],
+   "p": "Wǒ míngtiān zǎoshang qù jīchǎng.",
+   "v": "Sáng mai tôi ra sân bay."
+  },
+  {
+   "q": "我上网买＿＿了。",
+   "a": "机票",
+   "o": [
+    "出门",
+    "好像",
+    "飞"
+   ],
+   "p": "Wǒ shàngwǎng mǎi jīpiào le.",
+   "v": "Tôi đã lên mạng mua vé máy bay."
+  },
+  {
+   "q": "想到就要＿＿北京了，我还是很高兴的。",
+   "a": "飞",
+   "o": [
+    "颐和园",
+    "门票",
+    "鸟"
+   ],
+   "p": "Xiǎngdào jiù yào fēi Běijīng le, wǒ háishi hěn gāoxìng de.",
+   "v": "Nghĩ đến chuyện sắp bay đi Bắc Kinh là tôi vẫn thấy rất vui."
+  },
+  {
+   "q": "家月说我们＿＿小鸟。",
+   "a": "好像",
+   "o": [
+    "路",
+    "颐和园",
+    "机票"
+   ],
+   "p": "Jiāyuè shuō wǒmen hǎoxiàng xiǎo niǎo.",
+   "v": "Gia Nguyệt bảo chúng tôi giống như mấy chú chim nhỏ."
+  },
+  {
+   "q": "你看，那只小＿＿多漂亮啊！",
+   "a": "鸟",
+   "o": [
+    "出门",
+    "出国",
+    "好像"
+   ],
+   "p": "Nǐ kàn, nà zhī xiǎo niǎo duō piàoliang a!",
+   "v": "Nhìn kìa, con chim nhỏ kia đẹp ghê!"
+  },
+  {
+   "q": "这次去北京我要去＿＿。",
+   "a": "颐和园",
+   "o": [
+    "出门",
+    "好像",
+    "出国"
+   ],
+   "p": "Zhè cì qù Běijīng wǒ yào qù Yíhé Yuán.",
+   "v": "Lần này đi Bắc Kinh tôi muốn đến Di Hoà Viên."
+  }
+ ]
+}

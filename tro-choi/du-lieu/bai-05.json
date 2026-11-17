@@ -1,0 +1,315 @@
+{
+ "so": 5,
+ "han": "第一次去中国朋友家",
+ "sub": "17 từ mới",
+ "pool": [
+  {
+   "h": "快",
+   "p": "kuài",
+   "v": "nhanh; mau lên",
+   "hv": "KHOÁI",
+   "loai": "phó từ"
+  },
+  {
+   "h": "下来",
+   "p": "xiàlái",
+   "v": "xuống đây",
+   "hv": "HẠ LAI",
+   "loai": "động từ"
+  },
+  {
+   "h": "上来",
+   "p": "shànglái",
+   "v": "lên đây",
+   "hv": "THƯỢNG LAI",
+   "loai": "động từ"
+  },
+  {
+   "h": "上去",
+   "p": "shàngqù",
+   "v": "đi lên (trên kia)",
+   "hv": "THƯỢNG KHỨ",
+   "loai": "động từ"
+  },
+  {
+   "h": "下面",
+   "p": "xiàmiàn",
+   "v": "phía dưới, bên dưới",
+   "hv": "HẠ DIỆN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "等",
+   "p": "děng",
+   "v": "đợi, chờ",
+   "hv": "ĐẲNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "一会儿",
+   "p": "yíhuìr",
+   "v": "một lát, một chút",
+   "hv": "NHẤT HỘI NHI",
+   "loai": "lượng từ thời gian"
+  },
+  {
+   "h": "下去",
+   "p": "xiàqù",
+   "v": "đi xuống (dưới kia)",
+   "hv": "HẠ KHỨ",
+   "loai": "động từ"
+  },
+  {
+   "h": "进来",
+   "p": "jìnlái",
+   "v": "vào đây",
+   "hv": "TIẾN LAI",
+   "loai": "động từ"
+  },
+  {
+   "h": "爷爷",
+   "p": "yéye",
+   "v": "ông nội",
+   "hv": "GIA GIA",
+   "loai": "danh từ"
+  },
+  {
+   "h": "奶奶",
+   "p": "nǎinai",
+   "v": "bà nội",
+   "hv": "NÃI NÃI",
+   "loai": "danh từ"
+  },
+  {
+   "h": "礼物",
+   "p": "lǐwù",
+   "v": "quà, món quà",
+   "hv": "LỄ VẬT",
+   "loai": "danh từ"
+  },
+  {
+   "h": "准备",
+   "p": "zhǔnbèi",
+   "v": "chuẩn bị",
+   "hv": "CHUẨN BỊ",
+   "loai": "động từ"
+  },
+  {
+   "h": "奶茶",
+   "p": "nǎichá",
+   "v": "trà sữa",
+   "hv": "NÃI TRÀ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "跟",
+   "p": "gēn",
+   "v": "với, cùng",
+   "hv": "CÂN",
+   "loai": "giới từ"
+  },
+  {
+   "h": "走",
+   "p": "zǒu",
+   "v": "đi bộ; rời đi",
+   "hv": "TẨU",
+   "loai": "động từ"
+  },
+  {
+   "h": "酒店",
+   "p": "jiǔdiàn",
+   "v": "khách sạn",
+   "hv": "TỬU ĐIẾM",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "你＿＿点儿吧。",
+   "a": "快",
+   "o": [
+    "爷爷",
+    "等",
+    "进来"
+   ],
+   "p": "Nǐ kuài diǎnr ba.",
+   "v": "Bạn nhanh lên chút đi."
+  },
+  {
+   "q": "家月，快＿＿吧。",
+   "a": "下来",
+   "o": [
+    "爷爷",
+    "跟",
+    "奶奶"
+   ],
+   "p": "Jiāyuè, kuài xiàlái ba.",
+   "v": "Gia Nguyệt, mau xuống đây nào."
+  },
+  {
+   "q": "还有时间，你＿＿吧。",
+   "a": "上来",
+   "o": [
+    "快",
+    "奶奶",
+    "一会儿"
+   ],
+   "p": "Hái yǒu shíjiān, nǐ shànglái ba.",
+   "v": "Vẫn còn thời gian mà, bạn lên đây đi."
+  },
+  {
+   "q": "我不＿＿了，就在下面等你。",
+   "a": "上去",
+   "o": [
+    "快",
+    "爷爷",
+    "礼物"
+   ],
+   "p": "Wǒ bú shàngqù le, jiù zài xiàmiàn děng nǐ.",
+   "v": "Tôi không lên nữa, đợi bạn ở dưới này thôi."
+  },
+  {
+   "q": "我就在＿＿等你。",
+   "a": "下面",
+   "o": [
+    "准备",
+    "走",
+    "下去"
+   ],
+   "p": "Wǒ jiù zài xiàmiàn děng nǐ.",
+   "v": "Tôi đợi bạn ở ngay dưới này."
+  },
+  {
+   "q": "我就在下面＿＿你。",
+   "a": "等",
+   "o": [
+    "奶奶",
+    "酒店",
+    "快"
+   ],
+   "p": "Wǒ jiù zài xiàmiàn děng nǐ.",
+   "v": "Tôi đợi bạn ở ngay dưới này."
+  },
+  {
+   "q": "那我＿＿就下去。",
+   "a": "一会儿",
+   "o": [
+    "等",
+    "下来",
+    "走"
+   ],
+   "p": "Nà wǒ yíhuìr jiù xiàqù.",
+   "v": "Vậy lát nữa tôi xuống ngay."
+  },
+  {
+   "q": "那我一会儿就＿＿。",
+   "a": "下去",
+   "o": [
+    "快",
+    "奶茶",
+    "跟"
+   ],
+   "p": "Nà wǒ yíhuìr jiù xiàqù.",
+   "v": "Vậy lát nữa tôi xuống ngay."
+  },
+  {
+   "q": "家月、安妮，快＿＿！",
+   "a": "进来",
+   "o": [
+    "奶茶",
+    "酒店",
+    "奶奶"
+   ],
+   "p": "Jiāyuè, Ānnī, kuài jìnlái!",
+   "v": "Gia Nguyệt, Annie, vào đây mau!"
+  },
+  {
+   "q": "这是刘＿＿准备的。",
+   "a": "爷爷",
+   "o": [
+    "下来",
+    "走",
+    "进来"
+   ],
+   "p": "Zhè shì Liú yéye zhǔnbèi de.",
+   "v": "Đây là do ông Lưu chuẩn bị."
+  },
+  {
+   "q": "＿＿好！我是安妮。",
+   "a": "奶奶",
+   "o": [
+    "等",
+    "快",
+    "走"
+   ],
+   "p": "Nǎinai hǎo! Wǒ shì Ānnī.",
+   "v": "Cháu chào bà! Cháu là Annie."
+  },
+  {
+   "q": "生日的时候我们送＿＿。",
+   "a": "礼物",
+   "o": [
+    "准备",
+    "一会儿",
+    "等"
+   ],
+   "p": "Shēngrì de shíhou wǒmen sòng lǐwù.",
+   "v": "Dịp sinh nhật thì chúng ta tặng quà."
+  },
+  {
+   "q": "我们给她＿＿礼物吧。",
+   "a": "准备",
+   "o": [
+    "奶茶",
+    "快",
+    "酒店"
+   ],
+   "p": "Wǒmen gěi tā zhǔnbèi lǐwù ba.",
+   "v": "Mình chuẩn bị quà cho con bé nhé."
+  },
+  {
+   "q": "我很喜欢喝＿＿。",
+   "a": "奶茶",
+   "o": [
+    "上来",
+    "下去",
+    "上去"
+   ],
+   "p": "Wǒ hěn xǐhuan hē nǎichá.",
+   "v": "Tôi rất thích uống trà sữa."
+  },
+  {
+   "q": "吃完饭你们可以＿＿我去看看。",
+   "a": "跟",
+   "o": [
+    "上去",
+    "下面",
+    "进来"
+   ],
+   "p": "Chīwán fàn nǐmen kěyǐ gēn wǒ qù kànkan.",
+   "v": "Ăn xong các cháu có thể đi cùng bác xem thử."
+  },
+  {
+   "q": "我们吃完饭是＿＿回去的。",
+   "a": "走",
+   "o": [
+    "下面",
+    "奶茶",
+    "跟"
+   ],
+   "p": "Wǒmen chīwán fàn shì zǒu huíqù de.",
+   "v": "Ăn cơm xong chúng tôi đi bộ về."
+  },
+  {
+   "q": "我们吃完饭是走回＿＿的。",
+   "a": "酒店",
+   "o": [
+    "下去",
+    "等",
+    "准备"
+   ],
+   "p": "Wǒmen chīwán fàn shì zǒu huí jiǔdiàn de.",
+   "v": "Ăn cơm xong chúng tôi đi bộ về khách sạn."
+  }
+ ]
+}

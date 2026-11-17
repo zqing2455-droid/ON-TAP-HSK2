@@ -1,0 +1,261 @@
+{
+ "so": 8,
+ "han": "虽然你忘了，但是我记得",
+ "sub": "14 từ mới",
+ "pool": [
+  {
+   "h": "手表",
+   "p": "shǒubiǎo",
+   "v": "đồng hồ đeo tay",
+   "hv": "THỦ BIỂU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "左边",
+   "p": "zuǒbian",
+   "v": "bên trái",
+   "hv": "TẢ BIÊN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "比",
+   "p": "bǐ",
+   "v": "hơn, so với",
+   "hv": "TỈ",
+   "loai": "giới từ"
+  },
+  {
+   "h": "右边",
+   "p": "yòubian",
+   "v": "bên phải",
+   "hv": "HỮU BIÊN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "记得",
+   "p": "jìde",
+   "v": "nhớ",
+   "hv": "KÝ ĐẮC",
+   "loai": "động từ"
+  },
+  {
+   "h": "爱情片",
+   "p": "àiqíngpiàn",
+   "v": "phim tình cảm",
+   "hv": "ÁI TÌNH PHIẾN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "有意思",
+   "p": "yǒu yìsi",
+   "v": "thú vị, hay",
+   "hv": "HỮU Ý TỨ",
+   "loai": "cụm cố định"
+  },
+  {
+   "h": "点",
+   "p": "diǎn",
+   "v": "gọi (món ăn)",
+   "hv": "ĐIỂM",
+   "loai": "động từ"
+  },
+  {
+   "h": "虽然",
+   "p": "suīrán",
+   "v": "tuy, mặc dù",
+   "hv": "TUY NHIÊN",
+   "loai": "liên từ"
+  },
+  {
+   "h": "但是",
+   "p": "dànshì",
+   "v": "nhưng",
+   "hv": "ĐÃN THỊ",
+   "loai": "liên từ"
+  },
+  {
+   "h": "花",
+   "p": "huā",
+   "v": "tiêu, tốn (tiền, thời gian)",
+   "hv": "HOA",
+   "loai": "động từ"
+  },
+  {
+   "h": "妻子",
+   "p": "qīzi",
+   "v": "vợ",
+   "hv": "THÊ TỬ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "丈夫",
+   "p": "zhàngfu",
+   "v": "chồng",
+   "hv": "TRƯỢNG PHU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "饭馆",
+   "p": "fànguǎn",
+   "v": "quán ăn, nhà hàng",
+   "hv": "PHẠN QUÁN",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "吃饭、看电影、买＿＿，今天花了不少钱吧？",
+   "a": "手表",
+   "o": [
+    "记得",
+    "有意思",
+    "虽然"
+   ],
+   "p": "Chī fàn, kàn diànyǐng, mǎi shǒubiǎo, jīntiān huāle bù shǎo qián ba?",
+   "v": "Ăn cơm, xem phim, mua đồng hồ, hôm nay tiêu kha khá tiền rồi nhỉ?"
+  },
+  {
+   "q": "我觉得＿＿的比右边的好看。",
+   "a": "左边",
+   "o": [
+    "但是",
+    "有意思",
+    "花"
+   ],
+   "p": "Wǒ juéde zuǒbian de bǐ yòubian de hǎokàn.",
+   "v": "Anh thấy cái bên trái đẹp hơn cái bên phải."
+  },
+  {
+   "q": "左边的＿＿右边的好看。",
+   "a": "比",
+   "o": [
+    "丈夫",
+    "手表",
+    "花"
+   ],
+   "p": "Zuǒbian de bǐ yòubian de hǎokàn.",
+   "v": "Cái bên trái đẹp hơn cái bên phải."
+  },
+  {
+   "q": "我也觉得左边的比＿＿的好看。",
+   "a": "右边",
+   "o": [
+    "但是",
+    "有意思",
+    "虽然"
+   ],
+   "p": "Wǒ yě juéde zuǒbian de bǐ yòubian de hǎokàn.",
+   "v": "Anh cũng thấy cái bên trái đẹp hơn cái bên phải."
+  },
+  {
+   "q": "虽然你忘了，但是我＿＿。",
+   "a": "记得",
+   "o": [
+    "有意思",
+    "左边",
+    "爱情片"
+   ],
+   "p": "Suīrán nǐ wàng le, dànshì wǒ jìde.",
+   "v": "Tuy em quên rồi nhưng anh vẫn nhớ."
+  },
+  {
+   "q": "我记得你喜欢看＿＿。",
+   "a": "爱情片",
+   "o": [
+    "但是",
+    "虽然",
+    "有意思"
+   ],
+   "p": "Wǒ jìde nǐ xǐhuan kàn àiqíngpiàn.",
+   "v": "Anh nhớ em thích xem phim tình cảm."
+  },
+  {
+   "q": "这本书很＿＿。",
+   "a": "有意思",
+   "o": [
+    "妻子",
+    "爱情片",
+    "丈夫"
+   ],
+   "p": "Zhè běn shū hěn yǒu yìsi.",
+   "v": "Quyển sách này rất hay."
+  },
+  {
+   "q": "我来＿＿菜。",
+   "a": "点",
+   "o": [
+    "但是",
+    "虽然",
+    "有意思"
+   ],
+   "p": "Wǒ lái diǎn cài.",
+   "v": "Để tôi gọi món."
+  },
+  {
+   "q": "＿＿你忘了，但是我记得。",
+   "a": "虽然",
+   "o": [
+    "有意思",
+    "左边",
+    "爱情片"
+   ],
+   "p": "Suīrán nǐ wàng le, dànshì wǒ jìde.",
+   "v": "Tuy em quên rồi nhưng anh vẫn nhớ."
+  },
+  {
+   "q": "虽然你忘了，＿＿我记得。",
+   "a": "但是",
+   "o": [
+    "有意思",
+    "左边",
+    "爱情片"
+   ],
+   "p": "Suīrán nǐ wàng le, dànshì wǒ jìde.",
+   "v": "Tuy em quên rồi nhưng anh vẫn nhớ."
+  },
+  {
+   "q": "他很喜欢＿＿钱。",
+   "a": "花",
+   "o": [
+    "有意思",
+    "妻子",
+    "比"
+   ],
+   "p": "Tā hěn xǐhuan huā qián.",
+   "v": "Anh ấy rất thích tiêu tiền."
+  },
+  {
+   "q": "这是我的＿＿。",
+   "a": "妻子",
+   "o": [
+    "比",
+    "但是",
+    "有意思"
+   ],
+   "p": "Zhè shì wǒ de qīzi.",
+   "v": "Đây là vợ tôi."
+  },
+  {
+   "q": "这是我的＿＿。",
+   "a": "丈夫",
+   "o": [
+    "点",
+    "虽然",
+    "花"
+   ],
+   "p": "Zhè shì wǒ de zhàngfu.",
+   "v": "Đây là chồng tôi."
+  },
+  {
+   "q": "丈夫请妻子去＿＿吃饭。",
+   "a": "饭馆",
+   "o": [
+    "记得",
+    "点",
+    "有意思"
+   ],
+   "p": "Zhàngfu qǐng qīzi qù fànguǎn chī fàn.",
+   "v": "Người chồng mời vợ đi quán ăn."
+  }
+ ]
+}

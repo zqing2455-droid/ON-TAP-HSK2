@@ -1,0 +1,279 @@
+{
+ "so": 1,
+ "han": "她请我们吃了北京烤鸭",
+ "sub": "14 từ mới + 1 danh từ riêng",
+ "pool": [
+  {
+   "h": "就",
+   "p": "jiù",
+   "v": "chính là, đúng là; ngay",
+   "hv": "TỰU",
+   "loai": "phó từ"
+  },
+  {
+   "h": "给",
+   "p": "gěi",
+   "v": "cho, với (dẫn ra người nhận hành động)",
+   "hv": "CẤP",
+   "loai": "giới từ"
+  },
+  {
+   "h": "让",
+   "p": "ràng",
+   "v": "để, bảo, cho phép (ai làm gì)",
+   "hv": "NHƯỢNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "接",
+   "p": "jiē",
+   "v": "đón; nhận; nghe (điện thoại)",
+   "hv": "TIẾP",
+   "loai": "động từ"
+  },
+  {
+   "h": "次",
+   "p": "cì",
+   "v": "lần (số lần xảy ra của một việc)",
+   "hv": "THỨ",
+   "loai": "lượng từ"
+  },
+  {
+   "h": "旅游",
+   "p": "lǚyóu",
+   "v": "du lịch, đi chơi xa",
+   "hv": "LỮ DU",
+   "loai": "động từ"
+  },
+  {
+   "h": "帮忙",
+   "p": "bāngmáng",
+   "v": "giúp đỡ, giúp một tay",
+   "hv": "BANG MANG",
+   "loai": "động từ"
+  },
+  {
+   "h": "不好意思",
+   "p": "bù hǎoyìsi",
+   "v": "ngại quá, thấy ngại; xin lỗi",
+   "hv": "BẤT HẢO Ý TỨ",
+   "loai": "cụm cố định"
+  },
+  {
+   "h": "已经",
+   "p": "yǐjīng",
+   "v": "đã … rồi",
+   "hv": "DĨ KINH",
+   "loai": "phó từ"
+  },
+  {
+   "h": "那",
+   "p": "nà",
+   "v": "vậy thì, thế thì",
+   "hv": "NA",
+   "loai": "liên từ"
+  },
+  {
+   "h": "介绍",
+   "p": "jièshào",
+   "v": "giới thiệu",
+   "hv": "GIỚI THIỆU",
+   "loai": "động từ"
+  },
+  {
+   "h": "有时",
+   "p": "yǒushí",
+   "v": "có lúc, đôi khi",
+   "hv": "HỮU THỜI",
+   "loai": "phó từ"
+  },
+  {
+   "h": "懂",
+   "p": "dǒng",
+   "v": "hiểu, biết",
+   "hv": "ĐỔNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "意思",
+   "p": "yìsi",
+   "v": "ý, ý nghĩa",
+   "hv": "Ý TỨ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "北京烤鸭",
+   "p": "Běijīng kǎoyā",
+   "v": "vịt quay Bắc Kinh",
+   "hv": "BẮC KINH KHẢO ÁP",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "你们＿＿是她的学生吧？",
+   "a": "就",
+   "o": [
+    "帮忙",
+    "次",
+    "不好意思"
+   ],
+   "p": "Nǐmen jiù shì tā de xuésheng ba?",
+   "v": "Các em chính là học sinh của cô ấy phải không?"
+  },
+  {
+   "q": "一飞＿＿我打电话了。",
+   "a": "给",
+   "o": [
+    "次",
+    "帮忙",
+    "介绍"
+   ],
+   "p": "Yīfēi gěi wǒ dǎ diànhuà le.",
+   "v": "Nhất Phi đã gọi điện cho tôi."
+  },
+  {
+   "q": "她＿＿我来接你们。",
+   "a": "让",
+   "o": [
+    "北京烤鸭",
+    "已经",
+    "有时"
+   ],
+   "p": "Tā ràng wǒ lái jiē nǐmen.",
+   "v": "Cô ấy bảo tôi đến đón các bạn."
+  },
+  {
+   "q": "我去机场＿＿朋友。",
+   "a": "接",
+   "o": [
+    "意思",
+    "不好意思",
+    "已经"
+   ],
+   "p": "Wǒ qù jīchǎng jiē péngyou.",
+   "v": "Tôi đi sân bay đón bạn."
+  },
+  {
+   "q": "你们是第一＿＿来北京吗？",
+   "a": "次",
+   "o": [
+    "那",
+    "意思",
+    "接"
+   ],
+   "p": "Nǐmen shì dì-yī cì lái Běijīng ma?",
+   "v": "Các bạn lần đầu đến Bắc Kinh à?"
+  },
+  {
+   "q": "我们是来＿＿的。",
+   "a": "旅游",
+   "o": [
+    "意思",
+    "那",
+    "北京烤鸭"
+   ],
+   "p": "Wǒmen shì lái lǚyóu de.",
+   "v": "Chúng tôi đến đây để du lịch."
+  },
+  {
+   "q": "你有事可以叫李文＿＿。",
+   "a": "帮忙",
+   "o": [
+    "有时",
+    "就",
+    "那"
+   ],
+   "p": "Nǐ yǒu shì kěyǐ jiào Lǐ Wén bāngmáng.",
+   "v": "Bạn có việc gì thì có thể nhờ Lý Văn giúp."
+  },
+  {
+   "q": "＿＿，我已经到北京了。",
+   "a": "不好意思",
+   "o": [
+    "就",
+    "次",
+    "有时"
+   ],
+   "p": "Bù hǎoyìsi, wǒ yǐjīng dào Běijīng le.",
+   "v": "Ngại quá, tôi đã đến Bắc Kinh rồi."
+  },
+  {
+   "q": "我＿＿到北京了。",
+   "a": "已经",
+   "o": [
+    "意思",
+    "介绍",
+    "那"
+   ],
+   "p": "Wǒ yǐjīng dào Běijīng le.",
+   "v": "Tôi đã đến Bắc Kinh rồi."
+  },
+  {
+   "q": "＿＿我给他打个电话。",
+   "a": "那",
+   "o": [
+    "意思",
+    "次",
+    "旅游"
+   ],
+   "p": "Nà wǒ gěi tā dǎ ge diànhuà.",
+   "v": "Vậy thì tôi gọi điện cho anh ấy."
+  },
+  {
+   "q": "我给你＿＿一下，这是李文。",
+   "a": "介绍",
+   "o": [
+    "就",
+    "有时",
+    "已经"
+   ],
+   "p": "Wǒ gěi nǐ jièshào yíxià, zhè shì Lǐ Wén.",
+   "v": "Tôi giới thiệu với bạn một chút, đây là Lý Văn."
+  },
+  {
+   "q": "我＿＿不太懂她的意思。",
+   "a": "有时",
+   "o": [
+    "接",
+    "不好意思",
+    "次"
+   ],
+   "p": "Wǒ yǒushí bú tài dǒng tā de yìsi.",
+   "v": "Đôi khi tôi không hiểu lắm ý của cô ấy."
+  },
+  {
+   "q": "你＿＿我的意思吗？",
+   "a": "懂",
+   "o": [
+    "已经",
+    "北京烤鸭",
+    "就"
+   ],
+   "p": "Nǐ dǒng wǒ de yìsi ma?",
+   "v": "Bạn hiểu ý tôi không?"
+  },
+  {
+   "q": "这个词是什么＿＿？",
+   "a": "意思",
+   "o": [
+    "懂",
+    "旅游",
+    "接"
+   ],
+   "p": "Zhège cí shì shénme yìsi?",
+   "v": "Từ này nghĩa là gì?"
+  },
+  {
+   "q": "她请我们吃了＿＿。",
+   "a": "北京烤鸭",
+   "o": [
+    "帮忙",
+    "懂",
+    "接"
+   ],
+   "p": "Tā qǐng wǒmen chīle Běijīng kǎoyā.",
+   "v": "Cô ấy đã mời chúng tôi ăn vịt quay Bắc Kinh."
+  }
+ ]
+}

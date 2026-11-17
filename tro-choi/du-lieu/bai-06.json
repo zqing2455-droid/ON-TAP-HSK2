@@ -1,0 +1,261 @@
+{
+ "so": 6,
+ "han": "小雪，生日快乐！",
+ "sub": "14 từ mới",
+ "pool": [
+  {
+   "h": "生日",
+   "p": "shēngrì",
+   "v": "sinh nhật",
+   "hv": "SINH NHẬT",
+   "loai": "danh từ"
+  },
+  {
+   "h": "忘",
+   "p": "wàng",
+   "v": "quên",
+   "hv": "VONG",
+   "loai": "động từ"
+  },
+  {
+   "h": "画",
+   "p": "huà",
+   "v": "vẽ; bức tranh",
+   "hv": "HOẠ",
+   "loai": "động từ"
+  },
+  {
+   "h": "画笔",
+   "p": "huàbǐ",
+   "v": "bút vẽ, bút màu",
+   "hv": "HOẠ BÚT",
+   "loai": "danh từ"
+  },
+  {
+   "h": "蛋糕",
+   "p": "dàngāo",
+   "v": "bánh kem, bánh gato",
+   "hv": "ĐẢN CAO",
+   "loai": "danh từ"
+  },
+  {
+   "h": "快乐",
+   "p": "kuàilè",
+   "v": "vui vẻ, hạnh phúc",
+   "hv": "KHOÁI LẠC",
+   "loai": "tính từ"
+  },
+  {
+   "h": "打开",
+   "p": "dǎkāi",
+   "v": "mở ra",
+   "hv": "ĐẢ KHAI",
+   "loai": "động từ"
+  },
+  {
+   "h": "长",
+   "p": "cháng",
+   "v": "dài",
+   "hv": "TRƯỜNG",
+   "loai": "tính từ"
+  },
+  {
+   "h": "鱼",
+   "p": "yú",
+   "v": "cá",
+   "hv": "NGƯ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "肉",
+   "p": "ròu",
+   "v": "thịt",
+   "hv": "NHỤC",
+   "loai": "danh từ"
+  },
+  {
+   "h": "过",
+   "p": "guò",
+   "v": "mừng, đón (dịp lễ)",
+   "hv": "QUÁ",
+   "loai": "động từ"
+  },
+  {
+   "h": "地",
+   "p": "de",
+   "v": "(trợ từ nối trạng ngữ)",
+   "hv": "ĐỊA",
+   "loai": "trợ từ"
+  },
+  {
+   "h": "床",
+   "p": "chuáng",
+   "v": "giường",
+   "hv": "SÀNG",
+   "loai": "danh từ"
+  },
+  {
+   "h": "舒服",
+   "p": "shūfu",
+   "v": "thoải mái, dễ chịu",
+   "hv": "THƯ PHỤC",
+   "loai": "tính từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "过＿＿真好啊！",
+   "a": "生日",
+   "o": [
+    "舒服",
+    "画",
+    "忘"
+   ],
+   "p": "Guò shēngrì zhēn hǎo a!",
+   "v": "Được mừng sinh nhật thích thật đấy!"
+  },
+  {
+   "q": "你不说，我还真＿＿了。",
+   "a": "忘",
+   "o": [
+    "生日",
+    "鱼",
+    "长"
+   ],
+   "p": "Nǐ bù shuō, wǒ hái zhēn wàng le.",
+   "v": "Em không nói thì anh quên thật đấy."
+  },
+  {
+   "q": "＿＿我们的家！",
+   "a": "画",
+   "o": [
+    "快乐",
+    "长",
+    "鱼"
+   ],
+   "p": "Huà wǒmen de jiā!",
+   "v": "Con vẽ nhà mình!"
+  },
+  {
+   "q": "就送＿＿吧！",
+   "a": "画笔",
+   "o": [
+    "舒服",
+    "地",
+    "长"
+   ],
+   "p": "Jiù sòng huàbǐ ba!",
+   "v": "Vậy tặng bút vẽ đi!"
+  },
+  {
+   "q": "我再给她买个大大的生日＿＿。",
+   "a": "蛋糕",
+   "o": [
+    "忘",
+    "打开",
+    "长"
+   ],
+   "p": "Wǒ zài gěi tā mǎi ge dàdà de shēngrì dàngāo.",
+   "v": "Anh mua thêm cho con cái bánh sinh nhật thật to."
+  },
+  {
+   "q": "姐姐，生日＿＿！",
+   "a": "快乐",
+   "o": [
+    "打开",
+    "鱼",
+    "过"
+   ],
+   "p": "Jiějie, shēngrì kuàilè!",
+   "v": "Chị ơi, chúc mừng sinh nhật!"
+  },
+  {
+   "q": "快＿＿礼物吧！",
+   "a": "打开",
+   "o": [
+    "画笔",
+    "肉",
+    "快乐"
+   ],
+   "p": "Kuài dǎkāi lǐwù ba!",
+   "v": "Mau mở quà ra đi!"
+  },
+  {
+   "q": "这条路很＿＿。",
+   "a": "长",
+   "o": [
+    "肉",
+    "画",
+    "过"
+   ],
+   "p": "Zhè tiáo lù hěn cháng.",
+   "v": "Con đường này rất dài."
+  },
+  {
+   "q": "我很喜欢吃＿＿。",
+   "a": "鱼",
+   "o": [
+    "舒服",
+    "画",
+    "过"
+   ],
+   "p": "Wǒ hěn xǐhuan chī yú.",
+   "v": "Tôi rất thích ăn cá."
+  },
+  {
+   "q": "弟弟很喜欢吃＿＿。",
+   "a": "肉",
+   "o": [
+    "快乐",
+    "画",
+    "打开"
+   ],
+   "p": "Dìdi hěn xǐhuan chī ròu.",
+   "v": "Em trai rất thích ăn thịt."
+  },
+  {
+   "q": "＿＿生日真好啊！",
+   "a": "过",
+   "o": [
+    "舒服",
+    "肉",
+    "蛋糕"
+   ],
+   "p": "Guò shēngrì zhēn hǎo a!",
+   "v": "Được mừng sinh nhật thích thật!"
+  },
+  {
+   "q": "还要高高兴兴＿＿玩。",
+   "a": "地",
+   "o": [
+    "床",
+    "肉",
+    "舒服"
+   ],
+   "p": "Hái yào gāogāoxìngxìng de wán.",
+   "v": "Còn phải chơi cho thật vui nữa."
+  },
+  {
+   "q": "孩子们早早地就上＿＿了。",
+   "a": "床",
+   "o": [
+    "忘",
+    "舒服",
+    "过"
+   ],
+   "p": "Háizimen zǎozǎo de jiù shàng chuáng le.",
+   "v": "Bọn trẻ lên giường ngủ từ rất sớm."
+  },
+  {
+   "q": "这个房间很＿＿。",
+   "a": "舒服",
+   "o": [
+    "生日",
+    "画",
+    "画笔"
+   ],
+   "p": "Zhège fángjiān hěn shūfu.",
+   "v": "Căn phòng này rất thoải mái."
+  }
+ ]
+}

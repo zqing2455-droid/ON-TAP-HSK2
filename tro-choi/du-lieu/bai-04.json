@@ -1,0 +1,297 @@
+{
+ "so": 4,
+ "han": "你穿红色的很好看",
+ "sub": "16 từ mới",
+ "pool": [
+  {
+   "h": "过",
+   "p": "guo",
+   "v": "đã từng (trợ từ động thái)",
+   "hv": "QUÁ",
+   "loai": "trợ từ"
+  },
+  {
+   "h": "商场",
+   "p": "shāngchǎng",
+   "v": "trung tâm thương mại",
+   "hv": "THƯƠNG TRƯỜNG",
+   "loai": "danh từ"
+  },
+  {
+   "h": "进去",
+   "p": "jìnqù",
+   "v": "đi vào (bên trong)",
+   "hv": "TIẾN KHỨ",
+   "loai": "động từ"
+  },
+  {
+   "h": "条",
+   "p": "tiáo",
+   "v": "chiếc, con (vật dài)",
+   "hv": "ĐIỀU",
+   "loai": "lượng từ"
+  },
+  {
+   "h": "裤子",
+   "p": "kùzi",
+   "v": "quần",
+   "hv": "KHỐ TỬ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "白色",
+   "p": "báisè",
+   "v": "màu trắng",
+   "hv": "BẠCH SẮC",
+   "loai": "danh từ"
+  },
+  {
+   "h": "因为",
+   "p": "yīnwèi",
+   "v": "bởi vì",
+   "hv": "NHÂN VI",
+   "loai": "liên từ"
+  },
+  {
+   "h": "试",
+   "p": "shì",
+   "v": "thử",
+   "hv": "THÍ",
+   "loai": "động từ"
+  },
+  {
+   "h": "红色",
+   "p": "hóngsè",
+   "v": "màu đỏ",
+   "hv": "HỒNG SẮC",
+   "loai": "danh từ"
+  },
+  {
+   "h": "所以",
+   "p": "suǒyǐ",
+   "v": "cho nên, vì vậy",
+   "hv": "SỞ DĨ",
+   "loai": "liên từ"
+  },
+  {
+   "h": "书包",
+   "p": "shūbāo",
+   "v": "cặp sách, ba lô",
+   "hv": "THƯ BAO",
+   "loai": "danh từ"
+  },
+  {
+   "h": "过去",
+   "p": "guòqù",
+   "v": "đi qua (phía kia)",
+   "hv": "QUÁ KHỨ",
+   "loai": "động từ"
+  },
+  {
+   "h": "绿色",
+   "p": "lǜsè",
+   "v": "màu xanh lá",
+   "hv": "LỤC SẮC",
+   "loai": "danh từ"
+  },
+  {
+   "h": "黑色",
+   "p": "hēisè",
+   "v": "màu đen",
+   "hv": "HẮC SẮC",
+   "loai": "danh từ"
+  },
+  {
+   "h": "更",
+   "p": "gèng",
+   "v": "càng, hơn",
+   "hv": "CÁNH",
+   "loai": "phó từ"
+  },
+  {
+   "h": "颜色",
+   "p": "yánsè",
+   "v": "màu sắc",
+   "hv": "NHAN SẮC",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "我们来＿＿这家商场吗？",
+   "a": "过",
+   "o": [
+    "书包",
+    "红色",
+    "黑色"
+   ],
+   "p": "Wǒmen láiguo zhè jiā shāngchǎng ma?",
+   "v": "Mình đã đến trung tâm này bao giờ chưa?"
+  },
+  {
+   "q": "下午我们去＿＿吧。",
+   "a": "商场",
+   "o": [
+    "过去",
+    "进去",
+    "因为"
+   ],
+   "p": "Xiàwǔ wǒmen qù shāngchǎng ba.",
+   "v": "Chiều nay mình đi trung tâm thương mại nhé."
+  },
+  {
+   "q": "我们＿＿看看吧。",
+   "a": "进去",
+   "o": [
+    "白色",
+    "裤子",
+    "书包"
+   ],
+   "p": "Wǒmen jìnqù kànkan ba.",
+   "v": "Mình vào xem thử đi."
+  },
+  {
+   "q": "我想买一＿＿裤子。",
+   "a": "条",
+   "o": [
+    "商场",
+    "过去",
+    "更"
+   ],
+   "p": "Wǒ xiǎng mǎi yì tiáo kùzi.",
+   "v": "Con muốn mua một cái quần."
+  },
+  {
+   "q": "我们去买＿＿吧。",
+   "a": "裤子",
+   "o": [
+    "更",
+    "过去",
+    "过"
+   ],
+   "p": "Wǒmen qù mǎi kùzi ba.",
+   "v": "Mình đi mua quần nhé."
+  },
+  {
+   "q": "我想买这条＿＿的裤子。",
+   "a": "白色",
+   "o": [
+    "进去",
+    "过去",
+    "试"
+   ],
+   "p": "Wǒ xiǎng mǎi zhè tiáo báisè de kùzi.",
+   "v": "Con muốn mua cái quần màu trắng này."
+  },
+  {
+   "q": "＿＿是新开的，所以东西很便宜。",
+   "a": "因为",
+   "o": [
+    "书包",
+    "条",
+    "试"
+   ],
+   "p": "Yīnwèi shì xīn kāi de, suǒyǐ dōngxi hěn piányi.",
+   "v": "Vì mới khai trương nên đồ rất rẻ."
+  },
+  {
+   "q": "这件衣服我想＿＿一下。",
+   "a": "试",
+   "o": [
+    "商场",
+    "条",
+    "白色"
+   ],
+   "p": "Zhè jiàn yīfu wǒ xiǎng shì yíxià.",
+   "v": "Cái áo này tôi muốn thử một chút."
+  },
+  {
+   "q": "你试试那条＿＿的吧。",
+   "a": "红色",
+   "o": [
+    "因为",
+    "过",
+    "更"
+   ],
+   "p": "Nǐ shìshi nà tiáo hóngsè de ba.",
+   "v": "Con thử cái màu đỏ kia xem."
+  },
+  {
+   "q": "就是因为没穿过，＿＿要试试啊！",
+   "a": "所以",
+   "o": [
+    "书包",
+    "商场",
+    "条"
+   ],
+   "p": "Jiù shì yīnwèi méi chuānguo, suǒyǐ yào shìshi a!",
+   "v": "Chính vì chưa mặc bao giờ nên mới phải thử chứ!"
+  },
+  {
+   "q": "我想去买＿＿。",
+   "a": "书包",
+   "o": [
+    "过",
+    "试",
+    "过去"
+   ],
+   "p": "Wǒ xiǎng qù mǎi shūbāo.",
+   "v": "Con muốn đi mua cặp sách."
+  },
+  {
+   "q": "那边卖书包，我们＿＿看看。",
+   "a": "过去",
+   "o": [
+    "更",
+    "白色",
+    "所以"
+   ],
+   "p": "Nàbiān mài shūbāo, wǒmen guòqù kànkan.",
+   "v": "Bên kia bán cặp sách, mình qua xem thử."
+  },
+  {
+   "q": "我喜欢＿＿的。",
+   "a": "绿色",
+   "o": [
+    "因为",
+    "过去",
+    "条"
+   ],
+   "p": "Wǒ xǐhuan lǜsè de.",
+   "v": "Con thích cái màu xanh lá."
+  },
+  {
+   "q": "你已经有一条＿＿的了。",
+   "a": "黑色",
+   "o": [
+    "过去",
+    "因为",
+    "试"
+   ],
+   "p": "Nǐ yǐjīng yǒu yì tiáo hēisè de le.",
+   "v": "Con đã có một cái màu đen rồi mà."
+  },
+  {
+   "q": "我觉得绿色的＿＿好看。",
+   "a": "更",
+   "o": [
+    "进去",
+    "红色",
+    "所以"
+   ],
+   "p": "Wǒ juéde lǜsè de gèng hǎokàn.",
+   "v": "Mẹ thấy cái màu xanh lá đẹp hơn."
+  },
+  {
+   "q": "你喜欢什么＿＿？",
+   "a": "颜色",
+   "o": [
+    "试",
+    "条",
+    "因为"
+   ],
+   "p": "Nǐ xǐhuan shénme yánsè?",
+   "v": "Con thích màu gì?"
+  }
+ ]
+}

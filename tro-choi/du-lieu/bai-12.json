@@ -1,0 +1,207 @@
+{
+ "so": 12,
+ "han": "这里比北京冷多了",
+ "sub": "11 từ mới",
+ "pool": [
+  {
+   "h": "事情",
+   "p": "shìqing",
+   "v": "việc, chuyện",
+   "hv": "SỰ TÌNH",
+   "loai": "danh từ"
+  },
+  {
+   "h": "晴",
+   "p": "qíng",
+   "v": "nắng, quang mây",
+   "hv": "TÌNH",
+   "loai": "tính từ"
+  },
+  {
+   "h": "正",
+   "p": "zhèng",
+   "v": "đang (ngay lúc đó)",
+   "hv": "CHÍNH",
+   "loai": "phó từ"
+  },
+  {
+   "h": "外面",
+   "p": "wàimiàn",
+   "v": "bên ngoài",
+   "hv": "NGOẠI DIỆN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "阴",
+   "p": "yīn",
+   "v": "âm u, nhiều mây",
+   "hv": "ÂM",
+   "loai": "tính từ"
+  },
+  {
+   "h": "从小",
+   "p": "cóngxiǎo",
+   "v": "từ nhỏ",
+   "hv": "TÒNG TIỂU",
+   "loai": "phó từ"
+  },
+  {
+   "h": "地铁",
+   "p": "dìtiě",
+   "v": "tàu điện ngầm",
+   "hv": "ĐỊA THIẾT",
+   "loai": "danh từ"
+  },
+  {
+   "h": "楼",
+   "p": "lóu",
+   "v": "toà nhà; tầng",
+   "hv": "LÂU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "站",
+   "p": "zhàn",
+   "v": "bến, trạm, ga",
+   "hv": "TRẠM",
+   "loai": "danh từ"
+  },
+  {
+   "h": "小时候",
+   "p": "xiǎoshíhou",
+   "v": "hồi nhỏ",
+   "hv": "TIỂU THỜI HẬU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "好",
+   "p": "hǎo",
+   "v": "rất, … ghê",
+   "hv": "HẢO",
+   "loai": "phó từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "喂，家月，是你啊！有什么＿＿吗？",
+   "a": "事情",
+   "o": [
+    "正",
+    "好",
+    "从小"
+   ],
+   "p": "Wèi, Jiāyuè, shì nǐ a! Yǒu shénme shìqing ma?",
+   "v": "Alô, Gia Nguyệt à! Có chuyện gì không em?"
+  },
+  {
+   "q": "今天是个＿＿天，我们去跑步吧。",
+   "a": "晴",
+   "o": [
+    "站",
+    "事情",
+    "从小"
+   ],
+   "p": "Jīntiān shì ge qíngtiān, wǒmen qù pǎobù ba.",
+   "v": "Hôm nay trời nắng đẹp, mình đi chạy bộ đi."
+  },
+  {
+   "q": "外边还＿＿下着雪呢！",
+   "a": "正",
+   "o": [
+    "阴",
+    "站",
+    "地铁"
+   ],
+   "p": "Wàibian hái zhèng xiàzhe xuě ne!",
+   "v": "Bên ngoài còn đang có tuyết rơi nữa!"
+  },
+  {
+   "q": "天气不好，＿＿冷，多穿点儿衣服。",
+   "a": "外面",
+   "o": [
+    "晴",
+    "从小",
+    "正"
+   ],
+   "p": "Tiānqì bù hǎo, wàimiàn lěng, duō chuān diǎnr yīfu.",
+   "v": "Thời tiết xấu, bên ngoài lạnh, mặc thêm áo vào."
+  },
+  {
+   "q": "＿＿天下雪什么的就少出去吧。",
+   "a": "阴",
+   "o": [
+    "从小",
+    "楼",
+    "地铁"
+   ],
+   "p": "Yīntiān xià xuě shénmede jiù shǎo chūqù ba.",
+   "v": "Trời âm u hay có tuyết thì bớt ra ngoài đi."
+  },
+  {
+   "q": "我＿＿就经常跟爸爸跑步。",
+   "a": "从小",
+   "o": [
+    "地铁",
+    "事情",
+    "晴"
+   ],
+   "p": "Wǒ cóngxiǎo jiù jīngcháng gēn bàba pǎobù.",
+   "v": "Từ nhỏ tôi đã hay chạy bộ cùng bố."
+  },
+  {
+   "q": "我现在坐＿＿去找你。",
+   "a": "地铁",
+   "o": [
+    "晴",
+    "从小",
+    "阴"
+   ],
+   "p": "Wǒ xiànzài zuò dìtiě qù zhǎo nǐ.",
+   "v": "Giờ anh đi tàu điện ngầm tới chỗ em."
+  },
+  {
+   "q": "我现在坐地铁去找你，一会儿＿＿下见。",
+   "a": "楼",
+   "o": [
+    "好",
+    "正",
+    "阴"
+   ],
+   "p": "Wǒ xiànzài zuò dìtiě qù zhǎo nǐ, yíhuìr lóu xià jiàn.",
+   "v": "Giờ anh đi tàu điện tới chỗ em, lát nữa gặp dưới nhà."
+  },
+  {
+   "q": "地铁＿＿就在楼下。",
+   "a": "站",
+   "o": [
+    "从小",
+    "正",
+    "晴"
+   ],
+   "p": "Dìtiězhàn jiù zài lóu xià.",
+   "v": "Ga tàu điện ở ngay dưới nhà."
+  },
+  {
+   "q": "＿＿我经常跟爸爸跑步。",
+   "a": "小时候",
+   "o": [
+    "正",
+    "好",
+    "阴"
+   ],
+   "p": "Xiǎoshíhou wǒ jīngcháng gēn bàba pǎobù.",
+   "v": "Hồi nhỏ tôi hay chạy bộ cùng bố."
+  },
+  {
+   "q": "你看，前边的那个人＿＿高啊！",
+   "a": "好",
+   "o": [
+    "地铁",
+    "站",
+    "小时候"
+   ],
+   "p": "Nǐ kàn, qiánbian de nàge rén hǎo gāo a!",
+   "v": "Nhìn kìa, người phía trước cao ghê!"
+  }
+ ]
+}

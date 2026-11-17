@@ -1,0 +1,232 @@
+{
+ "so": 13,
+ "han": "我们爱上中文课",
+ "sub": "13 từ mới",
+ "pool": [
+  {
+   "h": "新年",
+   "p": "xīnnián",
+   "v": "năm mới",
+   "hv": "TÂN NIÊN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "教",
+   "p": "jiāo",
+   "v": "dạy",
+   "hv": "GIÁO",
+   "loai": "động từ"
+  },
+  {
+   "h": "花",
+   "p": "huā",
+   "v": "hoa",
+   "hv": "HOA",
+   "loai": "danh từ"
+  },
+  {
+   "h": "希望",
+   "p": "xīwàng",
+   "v": "hi vọng, mong",
+   "hv": "HI VỌNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "上面",
+   "p": "shàngmiàn",
+   "v": "bên trên, mặt trên",
+   "hv": "THƯỢNG DIỆN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "洗手间",
+   "p": "xǐshǒujiān",
+   "v": "nhà vệ sinh",
+   "hv": "TẨY THỦ GIAN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "里面",
+   "p": "lǐmiàn",
+   "v": "bên trong",
+   "hv": "LÝ DIỆN",
+   "loai": "danh từ"
+  },
+  {
+   "h": "笔",
+   "p": "bǐ",
+   "v": "nét (bút)",
+   "hv": "BÚT",
+   "loai": "lượng từ"
+  },
+  {
+   "h": "可能",
+   "p": "kěnéng",
+   "v": "có thể, có lẽ",
+   "hv": "KHẢ NĂNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "上网",
+   "p": "shàngwǎng",
+   "v": "lên mạng",
+   "hv": "THƯỢNG VÕNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "那样",
+   "p": "nàyàng",
+   "v": "như vậy, như thế",
+   "hv": "NA DẠNG",
+   "loai": "đại từ"
+  },
+  {
+   "h": "告诉",
+   "p": "gàosu",
+   "v": "nói cho biết, bảo",
+   "hv": "CÁO TỐ",
+   "loai": "động từ"
+  },
+  {
+   "h": "班",
+   "p": "bān",
+   "v": "lớp (tập thể học sinh)",
+   "hv": "BAN",
+   "loai": "danh từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "我们给她准备个＿＿礼物吧。",
+   "a": "新年",
+   "o": [
+    "教",
+    "那样",
+    "希望"
+   ],
+   "p": "Wǒmen gěi tā zhǔnbèi ge xīnnián lǐwù ba.",
+   "v": "Mình chuẩn bị cho cô ấy một món quà năm mới đi."
+  },
+  {
+   "q": "这一年王老师＿＿我们中文。",
+   "a": "教",
+   "o": [
+    "那样",
+    "花",
+    "里面"
+   ],
+   "p": "Zhè yì nián Wáng lǎoshī jiāo wǒmen Zhōngwén.",
+   "v": "Một năm nay cô Vương dạy chúng tôi tiếng Trung."
+  },
+  {
+   "q": "＿＿花店还有漂亮的花。",
+   "a": "希望",
+   "o": [
+    "那样",
+    "洗手间",
+    "里面"
+   ],
+   "p": "Xīwàng huādiàn hái yǒu piàoliang de huā.",
+   "v": "Mong là tiệm hoa vẫn còn hoa đẹp."
+  },
+  {
+   "q": "你们在本子＿＿写。",
+   "a": "上面",
+   "o": [
+    "可能",
+    "教",
+    "笔"
+   ],
+   "p": "Nǐmen zài běnzi shàngmiàn xiě.",
+   "v": "Các em viết vào trong vở nhé."
+  },
+  {
+   "q": "请问，＿＿在哪儿？",
+   "a": "洗手间",
+   "o": [
+    "希望",
+    "笔",
+    "那样"
+   ],
+   "p": "Qǐngwèn, xǐshǒujiān zài nǎr?",
+   "v": "Cho hỏi, nhà vệ sinh ở đâu ạ?"
+  },
+  {
+   "q": "“间”字的＿＿是“日”，不是“口”。",
+   "a": "里面",
+   "o": [
+    "希望",
+    "笔",
+    "教"
+   ],
+   "p": "“Jiān” zì de lǐmiàn shì “rì”, bú shì “kǒu”.",
+   "v": "Bên trong chữ 间 là chữ 日, không phải chữ 口."
+  },
+  {
+   "q": "“日”比“口”多一＿＿。",
+   "a": "笔",
+   "o": [
+    "可能",
+    "花",
+    "上网"
+   ],
+   "p": "“Rì” bǐ “kǒu” duō yì bǐ.",
+   "v": "Chữ 日 nhiều hơn chữ 口 một nét."
+  },
+  {
+   "q": "这么漂亮的本子，不＿＿贵一点儿吧？",
+   "a": "可能",
+   "o": [
+    "花",
+    "上面",
+    "里面"
+   ],
+   "p": "Zhème piàoliang de běnzi, bù kěnéng guì yìdiǎnr ba?",
+   "v": "Quyển vở đẹp thế này, không lẽ chỉ đắt hơn một chút thôi?"
+  },
+  {
+   "q": "我是＿＿买的，真没那么贵。",
+   "a": "上网",
+   "o": [
+    "花",
+    "洗手间",
+    "上面"
+   ],
+   "p": "Wǒ shì shàngwǎng mǎi de, zhēn méi nàme guì.",
+   "v": "Tớ mua trên mạng đấy, thật ra không đắt thế đâu."
+  },
+  {
+   "q": "＿＿我们就都有新年礼物了！",
+   "a": "那样",
+   "o": [
+    "班",
+    "教",
+    "笔"
+   ],
+   "p": "Nàyàng wǒmen jiù dōu yǒu xīnnián lǐwù le!",
+   "v": "Như vậy là cả hai đứa mình đều có quà năm mới!"
+  },
+  {
+   "q": "她＿＿我是在网上买的。",
+   "a": "告诉",
+   "o": [
+    "里面",
+    "洗手间",
+    "新年"
+   ],
+   "p": "Tā gàosu wǒ shì zài wǎngshang mǎi de.",
+   "v": "Bạn ấy bảo tớ là mua trên mạng."
+  },
+  {
+   "q": "我们＿＿同学也送了王老师花。",
+   "a": "班",
+   "o": [
+    "告诉",
+    "上网",
+    "可能"
+   ],
+   "p": "Wǒmen bān tóngxué yě sòngle Wáng lǎoshī huā.",
+   "v": "Các bạn lớp tôi cũng tặng hoa cho cô Vương."
+  }
+ ]
+}

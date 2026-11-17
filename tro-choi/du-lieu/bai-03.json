@@ -1,0 +1,279 @@
+{
+ "so": 3,
+ "han": "我想去西安旅游",
+ "sub": "15 từ mới",
+ "pool": [
+  {
+   "h": "回来",
+   "p": "huílái",
+   "v": "trở về, về đây",
+   "hv": "HỒI LAI",
+   "loai": "động từ"
+  },
+  {
+   "h": "这么",
+   "p": "zhème",
+   "v": "thế này, đến thế",
+   "hv": "GIÁ MA",
+   "loai": "đại từ"
+  },
+  {
+   "h": "完",
+   "p": "wán",
+   "v": "xong, hết",
+   "hv": "HOÀN",
+   "loai": "động từ"
+  },
+  {
+   "h": "一起",
+   "p": "yìqǐ",
+   "v": "cùng nhau",
+   "hv": "NHẤT KHỞI",
+   "loai": "phó từ"
+  },
+  {
+   "h": "出去",
+   "p": "chūqù",
+   "v": "đi ra ngoài",
+   "hv": "XUẤT KHỨ",
+   "loai": "động từ"
+  },
+  {
+   "h": "洗",
+   "p": "xǐ",
+   "v": "rửa, giặt",
+   "hv": "TẨY",
+   "loai": "động từ"
+  },
+  {
+   "h": "自己",
+   "p": "zìjǐ",
+   "v": "tự mình, chính mình",
+   "hv": "TỰ KỶ",
+   "loai": "đại từ"
+  },
+  {
+   "h": "拿",
+   "p": "ná",
+   "v": "cầm, lấy",
+   "hv": "NÃ",
+   "loai": "động từ"
+  },
+  {
+   "h": "手",
+   "p": "shǒu",
+   "v": "tay",
+   "hv": "THỦ",
+   "loai": "danh từ"
+  },
+  {
+   "h": "为什么",
+   "p": "wèi shénme",
+   "v": "vì sao, tại sao",
+   "hv": "VI THẬM MA",
+   "loai": "đại từ nghi vấn"
+  },
+  {
+   "h": "不错",
+   "p": "búcuò",
+   "v": "khá, được đấy",
+   "hv": "BẤT THÁC",
+   "loai": "tính từ"
+  },
+  {
+   "h": "送",
+   "p": "sòng",
+   "v": "đưa, tiễn; tặng",
+   "hv": "TỐNG",
+   "loai": "động từ"
+  },
+  {
+   "h": "回去",
+   "p": "huíqù",
+   "v": "quay về (chỗ kia)",
+   "hv": "HỒI KHỨ",
+   "loai": "động từ"
+  },
+  {
+   "h": "每",
+   "p": "měi",
+   "v": "mỗi, mọi",
+   "hv": "MỖI",
+   "loai": "đại từ"
+  },
+  {
+   "h": "累",
+   "p": "lèi",
+   "v": "mệt",
+   "hv": "LỤY",
+   "loai": "tính từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "你今天几点＿＿？",
+   "a": "回来",
+   "o": [
+    "不错",
+    "这么",
+    "累"
+   ],
+   "p": "Nǐ jīntiān jǐ diǎn huílái?",
+   "v": "Hôm nay mấy giờ anh về?"
+  },
+  {
+   "q": "今天回来＿＿晚啊！",
+   "a": "这么",
+   "o": [
+    "手",
+    "完",
+    "出去"
+   ],
+   "p": "Jīntiān huílái zhème wǎn a!",
+   "v": "Hôm nay về muộn thế!"
+  },
+  {
+   "q": "下班的时候没做＿＿。",
+   "a": "完",
+   "o": [
+    "手",
+    "不错",
+    "累"
+   ],
+   "p": "Xiàbān de shíhou méi zuòwán.",
+   "v": "Đến giờ tan làm vẫn chưa làm xong."
+  },
+  {
+   "q": "我们＿＿去旅游吧。",
+   "a": "一起",
+   "o": [
+    "不错",
+    "这么",
+    "送"
+   ],
+   "p": "Wǒmen yìqǐ qù lǚyóu ba.",
+   "v": "Mình cùng đi du lịch nhé."
+  },
+  {
+   "q": "吃完饭我们还要＿＿玩呢。",
+   "a": "出去",
+   "o": [
+    "为什么",
+    "每",
+    "累"
+   ],
+   "p": "Chīwán fàn wǒmen hái yào chūqù wán ne.",
+   "v": "Ăn cơm xong chúng tôi còn phải ra ngoài chơi nữa."
+  },
+  {
+   "q": "妈妈在＿＿衣服。",
+   "a": "洗",
+   "o": [
+    "每",
+    "不错",
+    "自己"
+   ],
+   "p": "Māma zài xǐ yīfu.",
+   "v": "Mẹ đang giặt quần áo."
+  },
+  {
+   "q": "都是我＿＿做的。",
+   "a": "自己",
+   "o": [
+    "拿",
+    "为什么",
+    "手"
+   ],
+   "p": "Dōu shì wǒ zìjǐ zuò de.",
+   "v": "Đều là tôi tự làm cả đấy."
+  },
+  {
+   "q": "你自己＿＿东西吧。",
+   "a": "拿",
+   "o": [
+    "一起",
+    "手",
+    "累"
+   ],
+   "p": "Nǐ zìjǐ ná dōngxi ba.",
+   "v": "Bạn tự lấy đồ nhé."
+  },
+  {
+   "q": "吃饭前要洗＿＿。",
+   "a": "手",
+   "o": [
+    "不错",
+    "一起",
+    "累"
+   ],
+   "p": "Chī fàn qián yào xǐ shǒu.",
+   "v": "Trước khi ăn phải rửa tay."
+  },
+  {
+   "q": "你＿＿不去？",
+   "a": "为什么",
+   "o": [
+    "出去",
+    "送",
+    "累"
+   ],
+   "p": "Nǐ wèi shénme bú qù?",
+   "v": "Sao bạn không đi?"
+  },
+  {
+   "q": "这个时候去西安很＿＿！",
+   "a": "不错",
+   "o": [
+    "为什么",
+    "一起",
+    "完"
+   ],
+   "p": "Zhège shíhou qù Xī'ān hěn búcuò!",
+   "v": "Thời điểm này đi Tây An khá đấy!"
+  },
+  {
+   "q": "早上刘明开车＿＿孩子去学校。",
+   "a": "送",
+   "o": [
+    "一起",
+    "这么",
+    "累"
+   ],
+   "p": "Zǎoshang Liú Míng kāichē sòng háizi qù xuéxiào.",
+   "v": "Buổi sáng Lưu Minh lái xe đưa con đi học."
+  },
+  {
+   "q": "医院让他＿＿上班。",
+   "a": "回去",
+   "o": [
+    "每",
+    "不错",
+    "累"
+   ],
+   "p": "Yīyuàn ràng tā huíqù shàngbān.",
+   "v": "Bệnh viện bảo anh ấy quay lại làm việc."
+  },
+  {
+   "q": "他这个月＿＿天都很累。",
+   "a": "每",
+   "o": [
+    "拿",
+    "一起",
+    "洗"
+   ],
+   "p": "Tā zhège yuè měi tiān dōu hěn lèi.",
+   "v": "Tháng này ngày nào anh ấy cũng rất mệt."
+  },
+  {
+   "q": "我觉得他每天都很＿＿。",
+   "a": "累",
+   "o": [
+    "为什么",
+    "拿",
+    "完"
+   ],
+   "p": "Wǒ juéde tā měi tiān dōu hěn lèi.",
+   "v": "Tôi thấy ngày nào anh ấy cũng rất mệt."
+  }
+ ]
+}

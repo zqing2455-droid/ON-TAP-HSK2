@@ -1,0 +1,279 @@
+{
+ "so": 7,
+ "han": "他篮球打得很好",
+ "sub": "15 từ mới",
+ "pool": [
+  {
+   "h": "从",
+   "p": "cóng",
+   "v": "từ (nơi nào, lúc nào)",
+   "hv": "TÒNG",
+   "loai": "giới từ"
+  },
+  {
+   "h": "往",
+   "p": "wǎng",
+   "v": "về phía, hướng",
+   "hv": "VÃNG",
+   "loai": "giới từ"
+  },
+  {
+   "h": "跑",
+   "p": "pǎo",
+   "v": "chạy",
+   "hv": "BÀO",
+   "loai": "động từ"
+  },
+  {
+   "h": "打",
+   "p": "dǎ",
+   "v": "chơi (bóng), đánh",
+   "hv": "ĐẢ",
+   "loai": "động từ"
+  },
+  {
+   "h": "篮球",
+   "p": "lánqiú",
+   "v": "bóng rổ",
+   "hv": "LAM CẦU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "运动",
+   "p": "yùndòng",
+   "v": "thể thao; vận động",
+   "hv": "VẬN ĐỘNG",
+   "loai": "danh từ"
+  },
+  {
+   "h": "踢",
+   "p": "tī",
+   "v": "đá",
+   "hv": "THÍCH",
+   "loai": "động từ"
+  },
+  {
+   "h": "足球",
+   "p": "zúqiú",
+   "v": "bóng đá",
+   "hv": "TÚC CẦU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "球",
+   "p": "qiú",
+   "v": "quả bóng",
+   "hv": "CẦU",
+   "loai": "danh từ"
+  },
+  {
+   "h": "得",
+   "p": "de",
+   "v": "(trợ từ nối bổ ngữ trạng thái)",
+   "hv": "ĐẮC",
+   "loai": "trợ từ"
+  },
+  {
+   "h": "跑步",
+   "p": "pǎobù",
+   "v": "chạy bộ",
+   "hv": "BÀO BỘ",
+   "loai": "động từ"
+  },
+  {
+   "h": "游泳",
+   "p": "yóuyǒng",
+   "v": "bơi",
+   "hv": "DU VỊNH",
+   "loai": "động từ"
+  },
+  {
+   "h": "游",
+   "p": "yóu",
+   "v": "bơi",
+   "hv": "DU",
+   "loai": "động từ"
+  },
+  {
+   "h": "爱好",
+   "p": "àihào",
+   "v": "sở thích",
+   "hv": "ÁI HẢO",
+   "loai": "danh từ"
+  },
+  {
+   "h": "开始",
+   "p": "kāishǐ",
+   "v": "bắt đầu",
+   "hv": "KHAI THUỶ",
+   "loai": "động từ"
+  }
+ ],
+ "cloze": [
+  {
+   "q": "你是什么时候＿＿北京回来的？",
+   "a": "从",
+   "o": [
+    "游",
+    "足球",
+    "打"
+   ],
+   "p": "Nǐ shì shénme shíhou cóng Běijīng huílái de?",
+   "v": "Cậu từ Bắc Kinh về lúc nào thế?"
+  },
+  {
+   "q": "你怎么一下课就＿＿外跑？",
+   "a": "往",
+   "o": [
+    "篮球",
+    "得",
+    "跑步"
+   ],
+   "p": "Nǐ zěnme yí xiàkè jiù wǎng wài pǎo?",
+   "v": "Sao vừa tan học cậu đã chạy ra ngoài thế?"
+  },
+  {
+   "q": "你＿＿得快不快？",
+   "a": "跑",
+   "o": [
+    "从",
+    "足球",
+    "球"
+   ],
+   "p": "Nǐ pǎo de kuài bu kuài?",
+   "v": "Cậu chạy có nhanh không?"
+  },
+  {
+   "q": "我跟同学说好了，一起去＿＿篮球。",
+   "a": "打",
+   "o": [
+    "往",
+    "运动",
+    "从"
+   ],
+   "p": "Wǒ gēn tóngxué shuōhǎo le, yìqǐ qù dǎ lánqiú.",
+   "v": "Tôi hẹn bạn học rồi, cùng đi chơi bóng rổ."
+  },
+  {
+   "q": "一起去打＿＿。",
+   "a": "篮球",
+   "o": [
+    "开始",
+    "跑步",
+    "踢"
+   ],
+   "p": "Yìqǐ qù dǎ lánqiú.",
+   "v": "Cùng đi chơi bóng rổ nào."
+  },
+  {
+   "q": "你还喜欢什么＿＿？",
+   "a": "运动",
+   "o": [
+    "往",
+    "从",
+    "跑"
+   ],
+   "p": "Nǐ hái xǐhuan shénme yùndòng?",
+   "v": "Cậu còn thích môn thể thao nào nữa?"
+  },
+  {
+   "q": "我还喜欢＿＿足球。",
+   "a": "踢",
+   "o": [
+    "往",
+    "运动",
+    "从"
+   ],
+   "p": "Wǒ hái xǐhuan tī zúqiú.",
+   "v": "Tôi còn thích đá bóng nữa."
+  },
+  {
+   "q": "我每个星期天去踢＿＿。",
+   "a": "足球",
+   "o": [
+    "从",
+    "游泳",
+    "游"
+   ],
+   "p": "Wǒ měi ge xīngqītiān qù tī zúqiú.",
+   "v": "Chủ nhật nào tôi cũng đi đá bóng."
+  },
+  {
+   "q": "我们下午去打＿＿吧。",
+   "a": "球",
+   "o": [
+    "游",
+    "跑",
+    "从"
+   ],
+   "p": "Wǒmen xiàwǔ qù dǎ qiú ba.",
+   "v": "Chiều nay mình đi chơi bóng nhé."
+  },
+  {
+   "q": "你跑＿＿快不快？",
+   "a": "得",
+   "o": [
+    "从",
+    "踢",
+    "跑步"
+   ],
+   "p": "Nǐ pǎo de kuài bu kuài?",
+   "v": "Cậu chạy có nhanh không?"
+  },
+  {
+   "q": "我每天早上去＿＿。",
+   "a": "跑步",
+   "o": [
+    "往",
+    "足球",
+    "球"
+   ],
+   "p": "Wǒ měi tiān zǎoshang qù pǎobù.",
+   "v": "Sáng nào tôi cũng đi chạy bộ."
+  },
+  {
+   "q": "那你喜欢＿＿吗？",
+   "a": "游泳",
+   "o": [
+    "往",
+    "从",
+    "得"
+   ],
+   "p": "Nà nǐ xǐhuan yóuyǒng ma?",
+   "v": "Vậy cậu có thích bơi không?"
+  },
+  {
+   "q": "你＿＿得快吗？",
+   "a": "游",
+   "o": [
+    "往",
+    "篮球",
+    "球"
+   ],
+   "p": "Nǐ yóu de kuài ma?",
+   "v": "Cậu bơi có nhanh không?"
+  },
+  {
+   "q": "我的＿＿是运动。",
+   "a": "爱好",
+   "o": [
+    "开始",
+    "跑步",
+    "从"
+   ],
+   "p": "Wǒ de àihào shì yùndòng.",
+   "v": "Sở thích của tôi là thể thao."
+  },
+  {
+   "q": "从上小学＿＿，我每天都跟爸爸去运动。",
+   "a": "开始",
+   "o": [
+    "得",
+    "球",
+    "往"
+   ],
+   "p": "Cóng shàng xiǎoxué kāishǐ, wǒ měi tiān dōu gēn bàba qù yùndòng.",
+   "v": "Từ hồi học tiểu học, ngày nào tôi cũng đi tập cùng bố."
+  }
+ ]
+}
