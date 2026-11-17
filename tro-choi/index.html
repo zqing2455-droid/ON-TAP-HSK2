@@ -94,7 +94,8 @@ footer{margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font
   <div class="eyebrow">《新 HSK 教程 2》</div>
   <h1>Trò chơi <span class="zh">游戏</span></h1>
   <p class="sub">Chọn loại trò chơi, rồi chọn bài. Trò luyện nói thì nhìn ảnh và nói thành câu;
-  trò ôn từ vựng dùng đúng bộ từ trong flashcard của từng bài. Máy nhớ giúp em kết quả của từng trò.</p>
+  trò ôn từ vựng dùng đúng bộ từ trong flashcard của từng bài; trò ngữ pháp giúp em phân biệt những chữ dễ nhầm.
+  Máy nhớ giúp em kết quả của từng trò.</p>
 </header>
 
 <h2 class="sec">Chọn trò chơi</h2>
@@ -113,6 +114,12 @@ footer{margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font
       <button class="tab" role="tab" data-k="bui-truc">Ai trốn sau bụi trúc?</button>
     </div>
   </div>
+  <div class="kgroup">
+    <div class="klabel">Ngữ pháp</div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-k="de-de-de">Câu cá <span class="zh">的 · 得 · 地</span></button>
+    </div>
+  </div>
 </div>
 
 <h2 class="sec" id="secTitle">Các bài</h2>
@@ -129,6 +136,8 @@ footer{margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font
    Luyện nói   · nhin-anh  → mỗi bài một file bai-NN.html trong thư mục này (nặng vì có ảnh).
    Ôn từ vựng  · cau-ca, duong-dua, bui-truc → dùng chung trang choi.html?tro=…&bai=N,
                  dữ liệu từng bài ở du-lieu/bai-NN.json (dựng bằng assets/dung-tro-choi.py).
+   Ngữ pháp    · de-de-de → mỗi trò là một trang riêng, không chia theo bài; khai trong mục `trang` của LOAI
+                 (file, chữ trên con dấu, tên, dòng mô tả, khoá lưu kết quả {best,total,done}).
    Trang tự dò file bài cho tới khi không thấy file tiếp theo — thêm bài mới không phải sửa trang này. */
 const NUM='零一二三四五六七八九十';
 const cn=n=> n<=10?NUM[n] : n<20?'十'+(n%10?NUM[n%10]:'') : NUM[Math.floor(n/10)]+'十'+(n%10?NUM[n%10]:'');
@@ -150,7 +159,13 @@ const LOAI={
     '<p>Câu điền từ lấy từ câu ví dụ trong flashcard. Trả lời xong, em đọc to cả câu theo phiên âm hiện ra.</p>'},
   'bui-truc':{ten:'Ai trốn sau bụi trúc?', tags:['Nhớ 6 thẻ từ','Nói thành tiếng','6 lượt'], how:
     '<p>Nhìn kỹ sáu thẻ từ (bấm vào thẻ để nghe), rồi bấm “Trốn đi!”. Các thẻ đổi chỗ và một thẻ trốn sau bụi trúc.</p>'+
-    '<p>Em <b>nói to</b> từ vừa trốn bằng tiếng Trung trước, rồi mới chọn chữ. Bí thì bấm “Gợi ý” để xem nghĩa.</p>'}
+    '<p>Em <b>nói to</b> từ vừa trốn bằng tiếng Trung trước, rồi mới chọn chữ. Bí thì bấm “Gợi ý” để xem nghĩa.</p>'},
+  'de-de-de':{ten:'Câu cá 的 · 得 · 地', tags:['Điền 的 / 得 / 地','10 câu','Ẩn / hiện phiên âm'],
+    trang:[{file:'cau-ca-de-de-de.html', dau:'的', han:'的 · 得 · 地', meta:'Ngữ pháp · phân biệt ba chữ cùng đọc “de”', key:'hsk2-tc-cau-ca-de'}],
+    how:
+    '<p>Ba chữ 的, 得, 地 đều đọc là “de”, nên em phải nhìn vị trí trong câu: <b>… 的 + danh từ</b>, <b>động từ + 得 + nhận xét</b>, <b>cách thức + 地 + động từ</b>.</p>'+
+    '<p>Đọc câu, rồi bấm con cá mang đúng chữ cần điền. Chọn sai thì máy nói vì sao chữ đó không hợp; chọn đúng thì có lời giải thích.</p>'+
+    '<p>Muốn thử sức hơn, em bấm “Ẩn phiên âm” rồi chơi lại. Mười câu đều là câu mới, ghép từ những từ em đã học.</p>'}
 };
 
 /* ── Luyện nói: đếm số mẫu câu đã chấm "Nói được rồi" (trò chơi lưu {thứ tự: 1|0}) ── */
@@ -197,15 +212,35 @@ async function chon(k){
   try{ localStorage.setItem('hsk2-tc-loai',k); }catch(e){}
   if(location.hash.slice(1)!==k) history.replaceState(null,'','#'+k);
   document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected', t.dataset.k===k?'true':'false'));
-  document.getElementById('secTitle').textContent='Các bài · '+LOAI[k].ten;
+  document.getElementById('secTitle').textContent=(LOAI[k].trang?'Trò chơi · ':'Các bài · ')+LOAI[k].ten;
   document.getElementById('how').innerHTML=LOAI[k].how;
   const list=document.getElementById('list');
   list.innerHTML='<p class="meta">Đang tải danh sách bài…</p>';
+  const tags=LOAI[k].tags.map(t=>'<span>'+esc(t)+'</span>').join('');
+  if(LOAI[k].trang){                           // trò ngữ pháp: mỗi trò một trang riêng, không dò theo bài
+    list.innerHTML='';
+    LOAI[k].trang.forEach(s=>{
+      let o=null; try{ o=JSON.parse(localStorage.getItem(s.key)||'null'); }catch(e){}
+      if(!o||typeof o!=='object'||!o.total) o=null;
+      const pct=!o?0:o.done?100:Math.round(o.best/o.total*100);
+      const a=document.createElement('a');
+      a.className='les'+(pct===100?' done':''); a.href=s.file;
+      a.innerHTML=
+        '<div class="seal">'+esc(s.dau)+'</div>'+
+        '<div class="body">'+
+          '<div class="meta">'+esc(s.meta)+'</div>'+
+          '<div class="ttl"><span class="zh">'+esc(s.han)+'</span></div>'+
+          '<div class="tags">'+tags+'</div>'+
+        '</div>'+
+        '<div class="prog">'+(!o?'Chưa chơi':(o.done?'✓ ':'')+'Tốt nhất '+o.best+'/'+o.total)+'<div class="bar"><i style="width:'+pct+'%"></i></div></div>';
+      list.append(a);
+    });
+    return;
+  }
   const found=await tim(k==='nhin-anh'?'noi':'tu');
   if(dang!==k) return;                         // em đã bấm sang trò khác trong lúc đang tải
   list.innerHTML='';
   if(!found.length){ list.innerHTML='<p class="meta">Chưa có bài nào cho trò chơi này.</p>'; return; }
-  const tags=LOAI[k].tags.map(t=>'<span>'+esc(t)+'</span>').join('');
   found.forEach(s=>{
     let href, meta, prog, pct;
     if(k==='nhin-anh'){
