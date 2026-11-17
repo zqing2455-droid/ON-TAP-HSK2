@@ -1,0 +1,138 @@
+/* ÔN TẬP HSK 2 — giao diện ba trò chơi ôn từ vựng (đi cùng assets/tro-choi.js).
+   Nạp SAU assets/giao-dien.css: dùng lại bảng màu --m-* và các lớp .card .btn .chip .opt .fb của Mầm xanh. */
+.g-switch{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
+.g-switch .chip,.g-tools .chip{font-size:13.5px;font-weight:700;padding:7px 14px;text-decoration:none;cursor:pointer;
+  border-radius:999px !important;line-height:1.4}
+.g-switch .chip.on,.g-tools .chip.on{background:var(--m-la) !important;color:#fff !important;border-color:var(--m-la) !important}
+.g-card{padding:18px}
+.g-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.g-pill{font-size:12.5px;font-weight:800;background:var(--m-la-nhat);color:var(--m-la);border-radius:999px;padding:4px 12px}
+.g-tools{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.g-lead{color:var(--m-chu-phu);font-size:14.5px;margin:0 0 12px}
+.g-card .btn{font-size:15px;padding:11px 20px;cursor:pointer;text-decoration:none;display:inline-block;line-height:1.3}
+.g-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.g-row .btn{flex:1 1 150px;text-align:center}
+.g-card .fb{margin-top:14px;padding:10px 14px;border:1.5px solid transparent;font-weight:700;font-size:15px;
+  min-height:44px;text-align:center}
+.g-card .fb:empty{visibility:hidden}
+.g-prompt{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--m-the-2);border:1.5px solid var(--m-vien);
+  border-radius:var(--m-bo-nho);padding:10px 14px;margin-bottom:10px;min-height:62px}
+.g-prompt .what{font-size:18px;font-weight:800;color:var(--m-la-dam);flex:1 1 200px;line-height:1.35}
+.g-pbtn{display:flex;gap:8px}
+.g-pbtn .btn{padding:8px 16px;font-size:14px}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{width:11px;height:11px;border-radius:50%;background:var(--m-vien)}
+.dots i.done{background:var(--m-la)}
+.dots i.cur{background:var(--m-vang);box-shadow:0 0 0 3px var(--m-vang-nhat)}
+
+/* --- 1. câu cá --- */
+.pond{position:relative;height:430px;border-radius:var(--m-bo);overflow:hidden;border:1.5px solid var(--m-vien);--rise:-300px;
+  background:linear-gradient(180deg,#F1F6EE 0,#F1F6EE 100px,#B5E0EE 100px,#74BCDD 100%);
+  touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.pond::before{content:"";position:absolute;left:0;right:0;top:100px;bottom:0;pointer-events:none;
+  background:repeating-linear-gradient(176deg,rgba(255,255,255,.2) 0 2px,transparent 2px 26px)}
+.deco{position:absolute;inset:0;pointer-events:none}
+.weed{position:absolute;bottom:14px;width:auto;transform-origin:50% 100%}
+.weed.far{opacity:.6;bottom:18px}
+.weed.sway{animation:gsway 4.5s ease-in-out infinite alternate}
+.sand{position:absolute;left:0;right:0;bottom:0;width:100%;height:34px}
+.bub{position:absolute;bottom:22px;border-radius:50%;border:2px solid rgba(255,255,255,.9);
+  background:rgba(255,255,255,.2);opacity:0;animation:gbub 7s linear infinite}
+@keyframes gsway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+@keyframes gbub{0%{transform:translateY(0);opacity:0}12%{opacity:1}85%{opacity:.9}100%{transform:translateY(var(--rise));opacity:0}}
+.bank{position:absolute;left:-40px;top:78px;width:196px;height:60px;background:var(--m-la-vua);border-radius:50%}
+.angler{position:absolute;left:8px;top:4px;width:96px;height:104px;z-index:1;transform-origin:0 0}
+.angler svg{position:absolute;inset:0;width:100%;height:100%}
+.angler-head{position:absolute;left:3px;top:0;width:86px;height:auto}
+.pond.sm .angler{transform:scale(.76)}
+.pond.sm .bank{width:150px;top:70px}
+.pond-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.rod{stroke:#8B5A2B;stroke-width:4;stroke-linecap:round}
+.fline{stroke:#55606E;stroke-width:1.5}
+#bob{fill:var(--m-hong);stroke:#fff;stroke-width:1.5}
+/* con cá kéo theo tấm biển chữ; .left = đang bơi sang trái */
+.fish{position:absolute;z-index:2;margin:0;padding:0;border:none;background:none;border-radius:0;cursor:pointer;
+  display:flex;align-items:center;flex-direction:row;font:inherit;-webkit-tap-highlight-color:transparent}
+.fish.left{flex-direction:row-reverse}
+.fish:focus-visible{outline:3px solid #fff;outline-offset:4px;border-radius:40px}
+.fimg{display:block;flex:none;filter:drop-shadow(0 3px 0 rgba(30,80,120,.2))}
+.fish.left .fimg{transform:scaleX(-1)}
+.fish:hover .fimg{filter:drop-shadow(0 3px 0 rgba(30,80,120,.2)) brightness(1.07)}
+.flabel{position:relative;z-index:1;background:#fff;border:1.5px solid rgba(47,58,51,.3);border-radius:999px;
+  padding:1px 12px;margin-right:-8px;white-space:nowrap;line-height:1.35;color:var(--m-chu);font-weight:600;
+  box-shadow:0 3px 0 rgba(30,80,120,.18)}
+.fish.left .flabel{margin-right:0;margin-left:-8px}
+.fish.no{opacity:.32;animation:gshake .4s;cursor:default}
+.fish.got{z-index:4}
+@keyframes gshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+/* --- 2. đường đua --- */
+.track{display:grid;gap:8px;margin:0 0 12px}
+.lane{border:1.5px solid var(--m-vien);border-radius:var(--m-bo-nho);padding:6px 12px 4px;background:var(--m-the-2)}
+.lane.on{border-color:var(--m-vang);background:var(--m-vang-nhat)}
+.lane .who{font-size:13px;font-weight:800;color:var(--m-chu-phu)}
+.lane.on .who{color:var(--m-la-dam)}
+.road{position:relative;height:54px;
+  background:repeating-linear-gradient(90deg,transparent 0 12px,#D9D2C3 12px 26px) left 30px/100% 3px no-repeat}
+.runner{position:absolute;top:3px;left:0;width:48px;height:48px;border-radius:50%;background:#fff;
+  border:3px solid var(--m-la);display:flex;align-items:center;justify-content:center;font-style:normal;
+  transition:left .7s cubic-bezier(.3,1.5,.5,1);z-index:1}
+#lane1 .runner{border-color:var(--m-hong)}
+.runner img{width:40px;height:40px;object-fit:contain}
+.goal{position:absolute;right:2px;top:2px;width:38px;height:50px}
+.qbox{border-radius:var(--m-bo-nho);background:var(--m-la-nhat);padding:14px 16px;text-align:center;min-height:150px;
+  display:flex;flex-direction:column;justify-content:center;gap:3px}
+.qtype{font-size:13px;color:var(--m-la);font-weight:800;letter-spacing:.04em}
+.qtext{font-size:34px;line-height:1.6;color:var(--m-la-dam);font-weight:600}
+.qpy{font-size:15px;color:var(--m-la);font-weight:700}
+.qmean{font-size:24px;font-weight:800;color:var(--m-la-dam);margin:6px 0;line-height:1.35}
+.qsub{font-size:15px;color:#55615A}
+.blank{display:inline-block;min-width:1.6em;border-bottom:4px solid var(--m-vang);color:var(--m-vang);margin:0 4px;line-height:1.2}
+.blank.fill{color:#2E5A3C;border-color:#8DB596}
+.g-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.g-opts.three{grid-template-columns:repeat(3,1fr);margin-top:16px}
+.g-opts:empty{display:none}
+.g-opts .opt{font-size:28px;font-weight:600;padding:14px 6px;cursor:pointer;white-space:nowrap;line-height:1.3}
+.g-opts .opt:disabled{cursor:default;opacity:1}
+
+/* --- 3. trốn sau bụi trúc --- */
+.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;transition:opacity .28s}
+.hgrid.out{opacity:0}
+.hcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:156px;
+  background:var(--m-the);border:1.5px solid var(--m-vien);border-radius:18px;padding:10px 8px;font:inherit;
+  color:var(--m-chu);cursor:pointer;text-align:center}
+.hp{color:#B8685C;font-weight:800;font-size:15.5px}
+.hh{font-size:44px;line-height:1.2;color:var(--m-la-dam);font-weight:600}
+.hv{font-size:13px;color:var(--m-chu-phu);font-weight:600;line-height:1.3;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hcard.bush{background:linear-gradient(180deg,#F1F6EE,var(--m-la-nhat));border-style:dashed;border-color:var(--m-la-vua);
+  padding:0;overflow:hidden;cursor:default}
+.hcard.bush svg{width:100%;height:153px;display:block}
+.hcard.found{background:#E4F0E5;border-color:#8DB596}
+
+/* --- kết quả --- */
+.g-card.score .big{font-size:54px;line-height:1.1;font-weight:700}
+.g-card.score .big small{font-size:.5em;color:var(--m-chu-phu)}
+.g-end{font-size:21px;margin:6px 0 4px}
+.g-card.score .g-lead{margin-bottom:6px}
+.g-card.score .g-row{justify-content:center}
+.g-more{font-size:13.5px;color:var(--m-chu-phu);margin:16px 0 0}
+
+@media(max-width:520px){
+  .g-card{padding:14px}
+  .pond{height:390px;--rise:-262px}
+  .g-prompt .what{font-size:16px}
+  .qtext{font-size:25px}
+  .qmean{font-size:19px}
+  .g-opts .opt{font-size:23px}
+  .g-opts.three{gap:8px}
+  .g-opts.three .opt{font-size:20px;padding:12px 2px}
+  .hgrid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .hcard{min-height:124px}
+  .hh{font-size:34px}
+  .hcard.bush svg{height:121px}
+}
+@media(prefers-reduced-motion:reduce){
+  .runner,.hgrid{transition:none}
+  .fish.no,.weed.sway,.bub{animation:none}
+}
