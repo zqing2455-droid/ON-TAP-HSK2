@@ -7,3 +7,5 @@ Giấy phép: Creative Commons Zero (CC0) — http://creativecommons.org/publicd
 Dùng tự do cho mục đích cá nhân, giáo dục và thương mại; không bắt buộc ghi nguồn.
 
 Các file SVG ở đây đã được cắt lại viewBox cho sát hình và đổi tên; nét vẽ giữ nguyên.
+
+Riêng trò tro-choi/lat-the-de.html nhúng thẳng 18 hình con vật (Animal Pack Remastered, thư mục "Round (outline)") vào trong file dưới dạng data URI, không dùng thư mục này.
