@@ -118,6 +118,7 @@ footer{margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font
     <div class="klabel">Ngữ pháp</div>
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" data-k="de-de-de">Câu cá <span class="zh">的 · 得 · 地</span></button>
+      <button class="tab" role="tab" data-k="lat-the-de">Lật thẻ ghép <span class="zh">得</span></button>
     </div>
   </div>
 </div>
@@ -165,7 +166,13 @@ const LOAI={
     how:
     '<p>Ba chữ 的, 得, 地 đều đọc là “de”, nên em phải nhìn vị trí trong câu: <b>… 的 + danh từ</b>, <b>động từ + 得 + nhận xét</b>, <b>cách thức + 地 + động từ</b>.</p>'+
     '<p>Đọc câu, rồi bấm con cá mang đúng chữ cần điền. Chọn sai thì máy nói vì sao chữ đó không hợp; chọn đúng thì có lời giải thích.</p>'+
-    '<p>Muốn thử sức hơn, em bấm “Ẩn phiên âm” rồi chơi lại. Mười câu đều là câu mới, ghép từ những từ em đã học.</p>'}
+    '<p>Muốn thử sức hơn, em bấm “Ẩn phiên âm” rồi chơi lại. Mười câu đều là câu mới, ghép từ những từ em đã học.</p>'},
+  'lat-the-de':{ten:'Lật thẻ ghép 得', tags:['Động từ + 得 + tính từ','Thường · li hợp · có tân ngữ','2 vòng × 6 cụm'],
+    trang:[{file:'lat-the-de.html', dau:'得', han:'跑得快 · 跑步跑得快 · 篮球打得好', meta:'Ngữ pháp · bổ ngữ trạng thái với 得', key:'hsk2-tc-lat-the-de'}],
+    how:
+    '<p>Lật một thẻ <b>động từ</b> và một thẻ <b>tính từ</b> bất kỳ, em được một cụm đi với nhau (跑 + 快). Máy đã chọn sẵn tính từ hợp với động từ, nên em chỉ lo đặt 得 cho đúng chỗ.</p>'+
+    '<p>Ghép câu là chọn câu đặt 得 đúng chỗ: động từ thường <b>跑得很快</b>, động từ li hợp lặp lại động từ <b>跑步跑得很快</b>, động từ có tân ngữ thì lặp động từ <b>打篮球打得很好</b> hoặc đưa tân ngữ lên trước <b>篮球打得很好</b>.</p>'+
+    '<p>Ở màn đầu em chọn được chỉ luyện một loại động từ, hoặc trộn cả ba.</p>'}
 };
 
 /* ── Luyện nói: đếm số mẫu câu đã chấm "Nói được rồi" (trò chơi lưu {thứ tự: 1|0}) ── */
